@@ -12,9 +12,9 @@ The augmented reality engine used is mixare, which can be found at http://www.mi
 
 Team
 =======
--Laurens De Graeve
--Dieter Beelaert
-With supervision of
--Jan Vansteenlandt
--Michael Vanderpoorten
+  Laurens De Graeve <br />
+  Dieter Beelaert <br />
+With supervision of <br />
+  Jan Vansteenlandt <br />
+  Michael Vanderpoorten <br />
 
