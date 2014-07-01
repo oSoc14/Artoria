@@ -14,7 +14,7 @@ public class LaunchActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
         String lang = settings.getString(getString(R.string.lang),null);
 
