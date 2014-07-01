@@ -8,8 +8,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LanguageChoice"
+            android:name=".activities.LanguageChoiceActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activities.LaunchActivity"
+            android:label="@string/title_activity_launch" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
