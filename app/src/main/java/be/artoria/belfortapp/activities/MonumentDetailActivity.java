@@ -15,6 +15,8 @@ import android.os.Build;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,6 +26,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Logger;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
@@ -81,28 +84,11 @@ public class MonumentDetailActivity extends ActionBarActivity {
             TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
             tv.setText(wp.name);
             tvs.setText(wp.name);
+            TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
+            desc.setText(wp.description);
 
             ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
-            try {
-                URL url = new URL(wp.url);
-                HttpGet httpRequest = null;
-                httpRequest = new HttpGet(url.toURI());
-
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = (HttpResponse) httpclient
-                        .execute(httpRequest);
-
-                HttpEntity entity = response.getEntity();
-                BufferedHttpEntity b_entity = new BufferedHttpEntity(entity);
-                InputStream input = b_entity.getContent();
-
-                Bitmap bitmap = BitmapFactory.decodeStream(input);
-
-                img.setImageBitmap(bitmap);
-
-            } catch (Exception ex) {
-                /* Lol hackathon */
-            }
+            Picasso.with(rootView.getContext()).load("http://i.imgur.com/DvpvklR.png").into(img);
 
             return rootView;
         }

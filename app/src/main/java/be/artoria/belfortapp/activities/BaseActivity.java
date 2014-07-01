@@ -24,9 +24,9 @@ public class BaseActivity extends ActionBarActivity {
         manager.wayPoints = new ArrayList<Waypoint>();
             /*Test data*/
         //id, lat, lon, name, desc
-        manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk",""));
-        manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt",""));
-        manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",""));
+        manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk","wow\nsuper"));
+        manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt","MAAAAAAAAAARKT"));
+        manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",":-)"));
     }
 
 
