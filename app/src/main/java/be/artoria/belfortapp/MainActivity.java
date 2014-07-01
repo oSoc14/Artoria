@@ -65,12 +65,15 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 /*Go to settings*/
+                Intent i = new Intent(MainActivity.this,LanguageChoice.class);
+                startActivity(i);
             }
         });
 
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*Go to the Artoria website*/
                 Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(webIntent);
