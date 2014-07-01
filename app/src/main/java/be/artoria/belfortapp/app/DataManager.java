@@ -5,12 +5,19 @@ package be.artoria.belfortapp.app;
  */
 public class DataManager {
 
+    /* Available languages*/
+    public enum Language{
+        DUTCH,FRENCH,ENGLISH
+    }
+
     private static final DataManager INSTANCE = new DataManager();
-    public static String language = null;
 
-    private DataManager(){};
+    public static Language lang = Language.DUTCH;
 
-    public DataManager getInstance(){
+    // Private constructor prevents instantiation from other classes
+    private DataManager() {}
+
+    public static DataManager getInstance() {
         return INSTANCE;
     }
 }

@@ -2,11 +2,13 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
 
 public class LaunchActivity extends BaseActivity {
 
@@ -15,16 +17,27 @@ public class LaunchActivity extends BaseActivity {
 
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
         String lang = settings.getString(getString(R.string.lang),null);
+
         Intent nextPage;
         if(lang == null){
             nextPage = new Intent(this, LanguageChoiceActivity.class);
         } else {
+            /* We can't switch on strings :( */
+            if(lang.equals(R.string.french)) {
+                DataManager.lang = DataManager.Language.FRENCH;
+            } else {
+                if (lang.equals(R.string.english)){
+                    DataManager.lang = DataManager.Language.FRENCH;
+                } else {
+                    DataManager.lang = DataManager.Language.DUTCH;
+                }
+            }
+
             nextPage = new Intent(this,MainActivity.class);
         }
 
-        boolean silent = settings.getBoolean("silentMode", false);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launch);
+        startActivity(nextPage);
+
     }
 
 
