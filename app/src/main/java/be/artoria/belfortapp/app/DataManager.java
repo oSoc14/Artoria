@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,11 @@ public class DataManager {
     public static Language lang = Language.DUTCH;
 
     /*The current route*/
-    public static List<String> wayPoints;
+    public static List<Waypoint> wayPoints;
 
+    /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
+    public static final double BELFORT_LON = 3.724833;
+    public static final double BELFORT_LAT = 51.053623;
     // Private constructor prevents instantiation from other classes
     private DataManager() {}
 

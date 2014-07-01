@@ -5,7 +5,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.Waypoint;
 
 public class BaseActivity extends ActionBarActivity {
 
@@ -13,6 +18,15 @@ public class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        /*Temporary !!*/
+        DataManager manager = DataManager.getInstance();
+        manager.wayPoints = new ArrayList<Waypoint>();
+            /*Test data*/
+        //id, lat, lon, name, desc
+        manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk",""));
+        manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt",""));
+        manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",""));
     }
 
 

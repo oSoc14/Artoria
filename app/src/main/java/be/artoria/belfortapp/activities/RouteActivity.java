@@ -2,7 +2,9 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,9 +16,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.Waypoint;
 
 public class RouteActivity extends BaseActivity {
     private ArrayAdapter<String> routeAdapter;
@@ -55,7 +59,7 @@ public class RouteActivity extends BaseActivity {
         Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
 
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
-        routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, DataManager.wayPoints);
+        routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
         lstRoute.setAdapter(routeAdapter);
 
         btnCalcRoute.setOnClickListener(new View.OnClickListener() {
@@ -63,14 +67,32 @@ public class RouteActivity extends BaseActivity {
             public void onClick(View view) {
                 /*Calculate route from belfort to these points*/
                 /*Google maps or open street map*/
-                // http://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA
-                Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
-    /*
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?saddr="+ String.valueOf(current_lattitude) +","+ String.valueOf(current_longitude) +"&daddr="+ String.valueOf(dest_lati) +","+ String.valueOf(dest_longi)));
-                startActivity(intent);*/
+                DataManager mgr = DataManager.getInstance();
 
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-                startActivity(mapIntent);
+                if(mgr.wayPoints != null) {
+                    if(!mgr.wayPoints.isEmpty()) {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("http://maps.google.com/maps?f=d&hl=en&saddr=");
+                        sb.append(mgr.BELFORT_LAT);
+                        sb.append(",");
+                        sb.append(mgr.BELFORT_LON);
+                        sb.append("&daddr=");
+                        sb.append(mgr.wayPoints.get(0).lat);
+                        sb.append(",");
+                        sb.append(mgr.wayPoints.get(0).lon);
+                        for(int i = 1; i < mgr.wayPoints.size();i++){
+                            sb.append("+to:");
+                            sb.append(mgr.wayPoints.get(i).lat);
+                            sb.append(",");
+                            sb.append(mgr.wayPoints.get(i).lon);
+                        }
+
+                        System.out.println("URL maps: " + sb.toString() );
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(sb.toString()));
+                        //intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
@@ -80,11 +102,20 @@ public class RouteActivity extends BaseActivity {
         DataManager manager = DataManager.getInstance();
         if(manager.wayPoints == null){
             /* Get the route from shared preferences */
-            manager.wayPoints = new ArrayList<String>();
+            manager.wayPoints = new ArrayList<Waypoint>();
             /*Test data*/
-            manager.wayPoints.add("Stadhuis Gent");
-            manager.wayPoints.add("Haven Gent");
-            manager.wayPoints.add("Boekentoren");
+            //id, lat, lon, name, desc
+            manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk",""));
+            manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt",""));
+            manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",""));
         }
+    }
+
+    private List<String> getWaypointsAsStringList(){
+      List<String> toReturn = new ArrayList<String>();
+      for(Waypoint w : DataManager.wayPoints){
+          toReturn.add(w.name);
+      }
+      return toReturn;
     }
 }

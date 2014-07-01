@@ -11,4 +11,12 @@ public class Waypoint {
     public String name;
     public String description;
 
+    public Waypoint(int id, double lat, double lon, String name,String description){
+        this.id = id;
+        this.lat = lat;
+        this.lon = lon;
+        this.name = name;
+        this.description = description;
+    }
+
 }
