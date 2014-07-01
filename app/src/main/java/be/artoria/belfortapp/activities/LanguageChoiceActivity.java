@@ -11,7 +11,7 @@ import android.view.View;
 import be.artoria.belfortapp.R;
 
 
-public class LanguageChoiceActivity extends ActionBarActivity {
+public class LanguageChoiceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
