@@ -8,7 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/lstMenu"/>
+        android:id="@+id/lstMenu"
+        android:clickable="true" />
 
     <Button android:layout_width="fill_parent"
         android:layout_height="wrap_content"

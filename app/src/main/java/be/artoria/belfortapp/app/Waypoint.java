@@ -10,6 +10,7 @@ public class Waypoint {
     public double lon;
     public String name;
     public String description;
+    public String url;
 
     public Waypoint(int id, double lat, double lon, String name,String description){
         this.id = id;
