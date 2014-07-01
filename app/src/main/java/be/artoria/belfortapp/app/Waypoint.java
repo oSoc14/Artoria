@@ -10,5 +10,6 @@ public class Waypoint {
     public double lon;
     public String name;
     public String description;
+    public String url;
 
 }

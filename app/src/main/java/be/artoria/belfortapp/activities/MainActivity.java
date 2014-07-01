@@ -58,7 +58,12 @@ public class MainActivity extends BaseActivity {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                /* The second item are the buildings */
+                if(i == 1){
+                    Intent intent = new Intent(MainActivity.this,MonumentDetailActivity.class);
+                    intent.putExtra("id",0);
+                    startActivity(intent);
+                }
             }
         });
 
