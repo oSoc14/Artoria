@@ -15,15 +15,18 @@
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
 
-
     <string-array name="lstMenu">
         <item>Panorama</item>
         <!-- Future dev ... -->
-        <!--<item>4de verdieping</item>
+        <!--
+        <item>4de verdieping</item>
         <item>3de verdieping</item>
         <item>2de verdieping</item>
         <item>1ste verdieping</item>
-        <item>gelijkvloers</item>-->
+        <item>gelijkvloers</item>
+        -->
     </string-array>
+
+    <string name="title_activity_monument_detail">MonumentDetailActivity</string>
 
 </resources>

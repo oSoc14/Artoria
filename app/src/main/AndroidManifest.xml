@@ -24,6 +24,10 @@
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name=".activities.MonumentDetailActivity"
+            android:label="@string/title_activity_monument_detail" >
+        </activity>
     </application>
 
 </manifest>
