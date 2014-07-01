@@ -15,7 +15,7 @@ Team
   Laurens De Graeve <br />
   Dieter Beelaert <br />
   
-With supervision of <br />
+With supervision by <br />
 
   Jan Vansteenlandt <br />
   Michael Vanderpoorten <br />
