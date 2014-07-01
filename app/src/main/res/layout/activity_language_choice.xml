@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="To"
-        android:id="@+id/textView3"
+        android:id="@+id/monument_name_smaller"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
@@ -71,7 +71,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Belfort"
         android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/monument_name_smaller"
         android:layout_centerHorizontal="true" />
 
     <TextView
