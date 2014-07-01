@@ -15,8 +15,11 @@
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
 
+    <string name="calcRoute">Bereken route</string>
+    <string name="view_route">Mijn route</string>
     <string-array name="lstMenu">
         <item>Panorama</item>
+        <item>Gebouwen</item>
         <!-- Future dev ... -->
         <!--
         <item>4de verdieping</item>
@@ -26,7 +29,7 @@
         <item>gelijkvloers</item>
         -->
     </string-array>
-
     <string name="title_activity_monument_detail">MonumentDetailActivity</string>
+    <string name="title_activity_route">RouteActivity</string>
 
 </resources>

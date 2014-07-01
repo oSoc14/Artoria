@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity {
         ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
         Button btnSettings = (Button)findViewById(R.id.btnSettings);
         Button btnAbout = (Button)findViewById(R.id.btnAbout);
+        Button btnRoute = (Button)findViewById(R.id.btnRoute);
 
 
         menuAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.lstMenu));
@@ -77,6 +78,15 @@ public class MainActivity extends BaseActivity {
                 Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(webIntent);
+            }
+        });
+
+        btnRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Go to the route overview*/
+                Intent i = new Intent(MainActivity.this,RouteActivity.class);
+                startActivity(i);
             }
         });
     }

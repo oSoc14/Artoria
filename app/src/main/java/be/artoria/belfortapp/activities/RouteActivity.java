@@ -1,6 +1,8 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -61,6 +63,14 @@ public class RouteActivity extends BaseActivity {
             public void onClick(View view) {
                 /*Calculate route from belfort to these points*/
                 /*Google maps or open street map*/
+                // http://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA
+                Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+    /*
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?saddr="+ String.valueOf(current_lattitude) +","+ String.valueOf(current_longitude) +"&daddr="+ String.valueOf(dest_lati) +","+ String.valueOf(dest_longi)));
+                startActivity(intent);*/
+
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
             }
         });
     }

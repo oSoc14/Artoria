@@ -28,6 +28,10 @@
             android:name=".activities.MonumentDetailActivity"
             android:label="@string/title_activity_monument_detail" >
         </activity>
+        <activity
+            android:name=".activities.RouteActivity"
+            android:label="@string/title_activity_route" >
+        </activity>
     </application>
 
 </manifest>
