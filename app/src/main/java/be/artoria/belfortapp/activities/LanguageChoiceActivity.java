@@ -55,7 +55,7 @@ public class LanguageChoiceActivity extends BaseActivity {
                 break;
         }
         /* Opening the Main screen */
-        Intent intent = new Intent(this,null);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }
