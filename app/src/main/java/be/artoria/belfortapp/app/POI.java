@@ -7,18 +7,28 @@ public class POI {
     public int id;
     public String lat;
     public String lon;
-    public String name;
-    public String image_url;
-    public String description;
+    public String NL_name;
+    public String FR_name;
+    public String ENG_name;
+    public String image_link;
+    public String NL_description;
+    public String FR_description;
+    public String ENG_description;
 
     public POI(int id, String lat, String lon, String name, String description, String image_url){
         this.id = id;
-        this.image_url = image_url;
+        this.image_link = image_url;
         this.lat = lat;
         this.lon = lon;
-        this.name = name;
-        this.description = description;
+        this.NL_name = name+ "NL";
+        this.FR_name = name + "FR";
+        this.ENG_name = name+ "ENG";
+        this.NL_description = description + "NL";
+        this.ENG_description = description + "ENG";
+        this.FR_description = description + "FR";
     }
+    /* Empty constructor needed by gson*/
+    public POI(){};
 
     @Override
     public boolean equals(Object o) {
@@ -26,5 +36,13 @@ public class POI {
         if(!( o instanceof POI)) return false;
         POI poi = (POI) o;
         return poi.id == this.id;
+    }
+
+    public String getName() {
+        return "LOCALIZED NAME";
+    }
+
+    public String getDescription() {
+        return "LOCALIZED DESCRIPTION";
     }
 }
