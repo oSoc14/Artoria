@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 /*Go to settings*/
-                Intent i = new Intent(MainActivity.this, LanguageChoiceActivity.class);
+                final Intent i = new Intent(MainActivity.this, LanguageChoiceActivity.class);
                 startActivity(i);
             }
         });
@@ -94,8 +94,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 /*Go to the Artoria website*/
-                Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
+                final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(webIntent);
             }
         });
@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 /*Go to the route overview*/
-                Intent i = new Intent(MainActivity.this,RouteActivity.class);
+                final Intent i = new Intent(MainActivity.this,RouteActivity.class);
                 startActivity(i);
             }
         });

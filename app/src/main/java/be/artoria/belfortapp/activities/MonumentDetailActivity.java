@@ -54,9 +54,11 @@ public class MonumentDetailActivity extends BaseActivity {
     }
 
     public void addToRoute(View view) {
+
     }
 
     public void prevDetail(View view) {
+
     }
 
     public void nextDetail(View view) {
