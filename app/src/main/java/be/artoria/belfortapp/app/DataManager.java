@@ -8,6 +8,10 @@ import java.util.List;
  * Created by Laurens on 01/07/2014.
  */
 public class DataManager {
+    public enum Language{
+        DUTCH,ENGLISH,FRENCH
+    }
+    private static final Language lang = null;
 
     private static final DataManager INSTANCE = new DataManager();
 
@@ -27,6 +31,11 @@ public class DataManager {
 
     // Private constructor prevents instantiation from other classes
     private DataManager() {}
+
+    public Language getCurrentLanguage(){
+
+        return Language.DUTCH;
+    }
 
     public static DataManager getInstance() {
         return INSTANCE;
