@@ -33,6 +33,7 @@
     <string name="title_activity_route">My route</string>
     <string name="firstTime">firstTime</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="main">Main</string>
 
 
 </resources>

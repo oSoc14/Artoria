@@ -10,7 +10,7 @@ public class DataManager {
 
     private static final DataManager INSTANCE = new DataManager();
 
-    private List<POI> poiList;
+    public List<POI> poiList;
 
     /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
     public static final double BELFORT_LON = 3.724833;
