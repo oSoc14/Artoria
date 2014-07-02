@@ -88,7 +88,7 @@ public class MonumentDetailActivity extends ActionBarActivity {
             desc.setText(wp.description);
 
             ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
-            Picasso.with(rootView.getContext()).load("http://i.imgur.com/DvpvklR.png").into(img);
+            Picasso.with(rootView.getContext()).load("http://www.sintniklaaskerk.be/media/photos/560/021f552775075dd9e053e30072ea21045d628ef3.jpg").into(img);
 
             return rootView;
         }
