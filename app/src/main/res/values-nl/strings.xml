@@ -13,6 +13,7 @@
     <string name="settings">Instellingen</string>
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
+    <string name="added_to_route">Toegevoegd aan mijn route</string>
 
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>
