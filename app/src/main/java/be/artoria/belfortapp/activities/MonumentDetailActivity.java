@@ -1,9 +1,6 @@
 package be.artoria.belfortapp.activities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,27 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.logging.Logger;
-
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
-import be.artoria.belfortapp.app.Waypoint;
 
 public class MonumentDetailActivity extends ActionBarActivity {
     static int id;
@@ -79,17 +63,19 @@ public class MonumentDetailActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             final RouteManager rm = RouteManager.getInstance();
-            final Waypoint wp = rm.getWaypoints().get(id);
+            final POI wp = rm.getWaypoints().get(id);
             final View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
             final TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
             final TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
+            final TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
+            final ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
+
+            /* Setting the correct data */
             tv.setText(wp.name);
             tvs.setText(wp.name);
-            final TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
             desc.setText(wp.description);
+            Picasso.with(rootView.getContext()).load(wp.image_url).into(img);
 
-            final ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
-            Picasso.with(rootView.getContext()).load("http://www.sintniklaaskerk.be/media/photos/560/021f552775075dd9e053e30072ea21045d628ef3.jpg").into(img);
 
             return rootView;
         }

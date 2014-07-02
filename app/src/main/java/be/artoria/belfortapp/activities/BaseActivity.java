@@ -1,16 +1,11 @@
 package be.artoria.belfortapp.activities;
 
-import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DataManager;
-import be.artoria.belfortapp.app.Waypoint;
 
 public class BaseActivity extends ActionBarActivity {
 
