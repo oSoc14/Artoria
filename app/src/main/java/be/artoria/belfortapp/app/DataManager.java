@@ -10,8 +10,7 @@ import java.util.List;
 public class DataManager {
 
     private static final DataManager INSTANCE = new DataManager();
-
-    public final List<POI> poiList = new ArrayList<POI>();
+    public static final List<POI> poiList = new ArrayList<POI>();
 
     /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
     public static final double BELFORT_LON = 3.724833;

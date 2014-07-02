@@ -31,6 +31,6 @@
     </string-array>
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">RouteActivity</string>
-    <string name="firstTime">firstTime</string>
+    <string name="main">Main</string>
 
 </resources>
