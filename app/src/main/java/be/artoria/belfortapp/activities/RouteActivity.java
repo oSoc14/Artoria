@@ -12,7 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
+import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +26,10 @@ import java.util.List;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.RouteManager;
 import be.artoria.belfortapp.app.Waypoint;
+
+
 
 public class RouteActivity extends BaseActivity {
     private ArrayAdapter<String> routeAdapter;
@@ -54,9 +63,16 @@ public class RouteActivity extends BaseActivity {
 
     /*Initialize GUI */
     private void initGUI(){
-        initData();
         ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
         Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
+        LinearLayout cntRouteList = (LinearLayout)findViewById(R.id.cntRouteList);
+        LinearLayout cntMapview = (LinearLayout)findViewById(R.id.cntMapview);
+        cntMapview.setVisibility(View.INVISIBLE);
+
+        MapView mapView = (MapView)findViewById(R.id.mapview);
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+        MapController mapCtrl = (MapController)mapView.getController();
+        mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
 
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
         routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
@@ -65,55 +81,20 @@ public class RouteActivity extends BaseActivity {
         btnCalcRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Calculate route from belfort to these points*/
-                /*Google maps or open street map*/
-                DataManager mgr = DataManager.getInstance();
+                /*TODO use osmdroid http://stackoverflow.com/questions/10104581/osmdroid-pathoverlay*/
+                LinearLayout cntRouteList = (LinearLayout)findViewById(R.id.cntRouteList);
+                LinearLayout cntMapview = (LinearLayout)findViewById(R.id.cntMapview);
+                cntRouteList.setVisibility(View.INVISIBLE);
+                cntMapview.setVisibility(View.VISIBLE);
 
-                if(mgr.wayPoints != null) {
-                    if(!mgr.wayPoints.isEmpty()) {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("http://maps.google.com/maps?f=d&hl=en&saddr=");
-                        sb.append(mgr.BELFORT_LAT);
-                        sb.append(",");
-                        sb.append(mgr.BELFORT_LON);
-                        sb.append("&daddr=");
-                        sb.append(mgr.wayPoints.get(0).lat);
-                        sb.append(",");
-                        sb.append(mgr.wayPoints.get(0).lon);
-                        for(int i = 1; i < mgr.wayPoints.size();i++){
-                            sb.append("+to:");
-                            sb.append(mgr.wayPoints.get(i).lat);
-                            sb.append(",");
-                            sb.append(mgr.wayPoints.get(i).lon);
-                        }
-
-                        System.out.println("URL maps: " + sb.toString() );
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(sb.toString()));
-                        //intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                        startActivity(intent);
-                    }
-                }
             }
         });
     }
 
-    /*Initialize route data*/
-    private void initData(){
-        DataManager manager = DataManager.getInstance();
-        if(manager.wayPoints == null){
-            /* Get the route from shared preferences */
-            manager.wayPoints = new ArrayList<Waypoint>();
-            /*Test data*/
-            //id, lat, lon, name, desc
-            manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk",""));
-            manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt",""));
-            manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",""));
-        }
-    }
 
     private List<String> getWaypointsAsStringList(){
       List<String> toReturn = new ArrayList<String>();
-      for(Waypoint w : DataManager.wayPoints){
+      for(Waypoint w : RouteManager.getInstance().getWaypoints()){
           toReturn.add(w.name);
       }
       return toReturn;

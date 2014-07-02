@@ -19,14 +19,7 @@ public class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        /*Temporary !!*/
-        DataManager manager = DataManager.getInstance();
-        manager.wayPoints = new ArrayList<Waypoint>();
-            /*Test data*/
-        //id, lat, lon, name, desc
-        manager.wayPoints.add(new Waypoint(0,51.053939, 3.722958,"Sint-Niklaaskerk",""));
-        manager.wayPoints.add(new Waypoint(0,51.053952, 3.722196,"Korenmarkt",""));
-        manager.wayPoints.add(new Waypoint(0,51.054562, 3.724862,"Stadhuis",""));
+
     }
 
 
