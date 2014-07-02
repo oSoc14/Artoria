@@ -58,8 +58,8 @@ public class MainActivity extends BaseActivity {
 
         lastd.add(Calendar.HOUR,12);
         /* We only download new information if the old info is older than 12 hours */
-        if(now.before(lastd)) return;
-
+        //if(now.before(lastd)) return;
+        System.err.println("Downloading!");
         /* Download information here */
         new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
 

@@ -8,8 +8,8 @@
     <string name="french">french</string>
     <string name="english">english</string>
     <string name="title_activity_launch">LaunchActivity</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="title_activity_main">Main</string>
+    <string name="title_activity_base">Belfort</string>
+    <string name="title_activity_main">Main menu</string>
     <string name="settings">Settings</string>
     <string name="about">About Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>

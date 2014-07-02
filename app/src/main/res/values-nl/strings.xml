@@ -7,9 +7,9 @@
     <string name="dutch">dutch</string>
     <string name="french">french</string>
     <string name="english">english</string>
-    <string name="title_activity_launch">LaunchActivity</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="title_activity_main">Main</string>
+    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_base">BelfortApp</string>
+    <string name="title_activity_main">Hoofdmenu</string>
     <string name="settings">Instellingen</string>
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
@@ -29,8 +29,7 @@
         -->
     </string-array>
     <string name="title_activity_monument_detail">Detail</string>
-    <string name="title_activity_route">RouteActivity</string>
-    <string name="firstTime">firstTime</string>
-    <string name="main">Main</string>
+    <string name="title_activity_route">Route</string>
+    <string name="main">Hoofdmenu</string>
 
 </resources>
