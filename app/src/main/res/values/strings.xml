@@ -34,6 +34,7 @@
     <string name="firstTime">firstTime</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="main">Main</string>
+    <string name="route">Route</string>
 
 
 </resources>

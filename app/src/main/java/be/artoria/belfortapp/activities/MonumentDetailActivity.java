@@ -18,18 +18,19 @@ import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
-public class MonumentDetailActivity extends ActionBarActivity {
-    static int id;
+public class MonumentDetailActivity extends BaseActivity {
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
+        initGui();
         id = (Integer) getIntent().getExtras().get("id");
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.container, new PlaceholderFragment())
+//                    .commit();
+//        }
     }
 
 
@@ -52,33 +53,37 @@ public class MonumentDetailActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
+    public void addToRoute(View view) {
+    }
 
-        public PlaceholderFragment() {
-        }
+    public void prevDetail(View view) {
+    }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            final DataManager rm = DataManager.getInstance();
-            final POI wp = rm.poiList.get(id);
-            final View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
-            final TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
-            final TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
-            final TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
-            final ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
+    public void nextDetail(View view) {
 
-            /* Setting the correct data */
-            tv.setText(wp.name);
-            tvs.setText(wp.name);
-            desc.setText(wp.description);
-            Picasso.with(rootView.getContext()).load(wp.image_url).into(img);
+    }
+
+    public void viewRoute(View view) {
+    }
+
+    public void returnToMain(View view) {
+    }
 
 
-            return rootView;
-        }
+    /*initialize the GUI content and clickhandlers*/
+    private void initGui(){
+        final DataManager rm = DataManager.getInstance();
+        final POI wp = rm.poiList.get(id);
+        final TextView tv =(TextView) findViewById(R.id.monument_name);
+        final TextView tvs =(TextView) findViewById(R.id.monument_name_smaller);
+        final TextView desc =(TextView)findViewById(R.id.monument_description);
+        final ImageView img = (ImageView) findViewById(R.id.imageView);
+
+        /* Setting the correct data */
+        tv.setText(wp.name);
+        tvs.setText(wp.name);
+        desc.setText(wp.description);
+        Picasso.with(this).load(wp.image_url).into(img);
+
     }
 }
