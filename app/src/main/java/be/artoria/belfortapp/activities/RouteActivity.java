@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
-import be.artoria.belfortapp.app.Waypoint;
-
 
 
 public class RouteActivity extends BaseActivity {
@@ -73,7 +72,7 @@ public class RouteActivity extends BaseActivity {
 
     private List<String> getWaypointsAsStringList(){
       final List<String> toReturn = new ArrayList<String>();
-      for(Waypoint w : RouteManager.getInstance().getWaypoints()){
+      for(POI w : RouteManager.getInstance().getWaypoints()){
           toReturn.add(w.name);
       }
       return toReturn;

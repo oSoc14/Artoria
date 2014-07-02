@@ -2,6 +2,7 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import be.artoria.belfortapp.R;
 
@@ -22,6 +31,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initGui();
+        downloadData();
+    }
+
+    private void downloadData() {
+
     }
 
 
@@ -59,9 +73,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 /* The second item are the buildings */
-                if(i == 1){
-                    final Intent intent = new Intent(MainActivity.this,MonumentDetailActivity.class);
-                    intent.putExtra("id",0);
+                if (i == 1) {
+                    final Intent intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
+                    intent.putExtra("id", 0);
                     startActivity(intent);
                 }
             }
@@ -71,7 +85,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 /*Go to settings*/
-                Intent i = new Intent(MainActivity.this,LanguageChoiceActivity.class);
+                Intent i = new Intent(MainActivity.this, LanguageChoiceActivity.class);
                 startActivity(i);
             }
         });
@@ -94,5 +108,35 @@ public class MainActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private class DownloadDataTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            for (String url : urls) {
+                DefaultHttpClient client = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(url);
+                try {
+                    HttpResponse execute = client.execute(httpGet);
+                    InputStream content = execute.getEntity().getContent();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
     }
 }
