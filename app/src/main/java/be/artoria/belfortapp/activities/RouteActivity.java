@@ -64,7 +64,6 @@ public class RouteActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent i = new Intent(RouteActivity.this,MapActivity.class);
                 startActivity(i);
-
             }
         });
     }
