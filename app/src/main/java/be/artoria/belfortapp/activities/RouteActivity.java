@@ -72,7 +72,7 @@ public class RouteActivity extends BaseActivity {
     private List<String> getWaypointsAsStringList(){
       final List<String> toReturn = new ArrayList<String>();
       for(POI w : RouteManager.getInstance().getWaypoints()){
-          toReturn.add(w.name);
+          toReturn.add(w.getName());
       }
       return toReturn;
     }

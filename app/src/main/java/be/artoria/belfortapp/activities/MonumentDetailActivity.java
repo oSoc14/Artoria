@@ -92,10 +92,11 @@ public class MonumentDetailActivity extends BaseActivity {
         final ImageView img = (ImageView) findViewById(R.id.imageView);
 
         /* Setting the correct data */
-        tv.setText(wp.name);
-        tvs.setText(wp.name);
-        desc.setText(wp.description);
-        Picasso.with(this).load(wp.image_url).into(img);
+        String name = wp.getName();
+        tv.setText(name);
+        tvs.setText(name);
+        desc.setText(wp.getDescription());
+        Picasso.with(this).load(wp.image_link).into(img);
 
     }
 
