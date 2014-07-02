@@ -26,5 +26,5 @@ public class POI {
         if(!( o instanceof POI)) return false;
         POI poi = (POI) o;
         return poi.id == this.id;
-    }   
+    }
 }

@@ -27,6 +27,7 @@ public class MonumentDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_monument_detail);
         initGui();
         id = (Integer) getIntent().getExtras().get("id");
+        System.err.println(id);
     }
 
 
@@ -57,14 +58,14 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public void prevDetail(View view) {
         final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
-        intent.putExtra("id", id - 1 % DataManager.getInstance().poiList.size());
+        intent.putExtra("id", (id - 1) % DataManager.getInstance().poiList.size());
         startActivity(intent);
 
     }
 
     public void nextDetail(View view) {
         final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
-        intent.putExtra("id", id + 1 % DataManager.getInstance().poiList.size());
+        intent.putExtra("id", (id + 1) % DataManager.getInstance().poiList.size());
         startActivity(intent);
 
     }
@@ -92,10 +93,16 @@ public class MonumentDetailActivity extends BaseActivity {
         final ImageView img = (ImageView) findViewById(R.id.imageView);
 
         /* Setting the correct data */
+        System.err.println(wp.name);
+        System.err.println(wp.description);
         tv.setText(wp.name);
         tvs.setText(wp.name);
         desc.setText(wp.description);
         Picasso.with(this).load(wp.image_url).into(img);
 
+    }
+
+    private static class newIntent{
+        static int id;
     }
 }

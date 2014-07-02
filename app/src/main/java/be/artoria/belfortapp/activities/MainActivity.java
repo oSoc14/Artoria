@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
                 /* The second item are the buildings */
                 if (i == 1) {
                     final Intent intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
-                    intent.putExtra("id", 0);
+                    intent.putExtra("id", 1);
                     startActivity(intent);
                 }
             }
