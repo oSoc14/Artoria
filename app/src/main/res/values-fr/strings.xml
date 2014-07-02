@@ -10,15 +10,15 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_main">Main</string>
-    <string name="settings">Settings</string>
-    <string name="about">About Artoria</string>
+    <string name="settings">Instellingen</string>
+    <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
 
-    <string name="calcRoute">Calculate route</string>
-    <string name="view_route">My route</string>
+    <string name="calcRoute">Bereken route</string>
+    <string name="view_route">Mijn route</string>
     <string-array name="lstMenu">
         <item>Panorama</item>
-        <item>Buildings</item>
+        <item>Gebouwen</item>
         <!-- Future dev ... -->
         <!--
         <item>4de verdieping</item>
