@@ -2,20 +2,19 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DataManager;
+
 
 public class LaunchActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        final SharedPreferences settings = getPreferences(MODE_PRIVATE);
         final boolean isFirstTime = settings.getBoolean(getString(R.string.firstTime),true);
 
         final Intent nextPage;

@@ -46,10 +46,10 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
-        Button btnSettings = (Button)findViewById(R.id.btnSettings);
-        Button btnAbout = (Button)findViewById(R.id.btnAbout);
-        Button btnRoute = (Button)findViewById(R.id.btnRoute);
+        final ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
+        final Button btnSettings = (Button)findViewById(R.id.btnSettings);
+        final Button btnAbout = (Button)findViewById(R.id.btnAbout);
+        final Button btnRoute = (Button)findViewById(R.id.btnRoute);
 
 
         menuAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.lstMenu));
@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 /* The second item are the buildings */
                 if(i == 1){
-                    Intent intent = new Intent(MainActivity.this,MonumentDetailActivity.class);
+                    final Intent intent = new Intent(MainActivity.this,MonumentDetailActivity.class);
                     intent.putExtra("id",0);
                     startActivity(intent);
                 }

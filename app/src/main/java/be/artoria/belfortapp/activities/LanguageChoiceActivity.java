@@ -44,7 +44,7 @@ public class LanguageChoiceActivity extends BaseActivity {
     }
 
     public void langSelected(View view) {
-        /* Setting the locale in response to a button click*/
+        /* Setting the locale in response to a button click */
         final Locale locale;
         switch (view.getId()) {
             case(R.id.english):

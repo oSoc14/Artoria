@@ -77,17 +77,17 @@ public class MonumentDetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            DataManager dm = DataManager.getInstance();
-            Waypoint wp = dm.wayPoints.get(id);
-            View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
-            TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
-            TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
+            final DataManager dm = DataManager.getInstance();
+            final Waypoint wp = dm.wayPoints.get(id);
+            final View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
+            final TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
+            final TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
             tv.setText(wp.name);
             tvs.setText(wp.name);
-            TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
+            final TextView desc =(TextView) rootView.findViewById(R.id.monument_description);
             desc.setText(wp.description);
 
-            ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
+            final ImageView img = (ImageView) rootView.findViewById(R.id.imageView);
             Picasso.with(rootView.getContext()).load("http://www.sintniklaaskerk.be/media/photos/560/021f552775075dd9e053e30072ea21045d628ef3.jpg").into(img);
 
             return rootView;

@@ -55,8 +55,8 @@ public class RouteActivity extends BaseActivity {
     /*Initialize GUI */
     private void initGUI(){
         initData();
-        ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
-        Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
+        final ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
+        final Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
 
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
         routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
@@ -112,7 +112,7 @@ public class RouteActivity extends BaseActivity {
     }
 
     private List<String> getWaypointsAsStringList(){
-      List<String> toReturn = new ArrayList<String>();
+      final List<String> toReturn = new ArrayList<String>();
       for(Waypoint w : DataManager.wayPoints){
           toReturn.add(w.name);
       }
