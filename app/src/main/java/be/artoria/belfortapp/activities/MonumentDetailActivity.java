@@ -25,9 +25,8 @@ public class MonumentDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
-        initGui();
         id = (Integer) getIntent().getExtras().get("id");
-        System.err.println(id);
+        initGui();
     }
 
 
