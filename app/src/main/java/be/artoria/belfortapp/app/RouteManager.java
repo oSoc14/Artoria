@@ -11,8 +11,6 @@ import java.util.List;
 public class RouteManager {
     private static RouteManager instance;
     private List<POI> waypoints;
-    private static final String MAP_QUEST_API_KEY = "Fmjtd%7Cluur206a2d%2C82%3Do5-9at0dr"; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
-    private static final String MAP_QUEST_URL_START = "http://open.mapquestapi.com/directions/v2/route?key=" + MAP_QUEST_API_KEY + "&unit=k&routeType=pedestrian&fullShape=true";
 
     private RouteManager(){
         /* get routes from storage ...*/
@@ -37,9 +35,5 @@ public class RouteManager {
     public void addWayPoint(POI wp){
         /*Save waypoints to shared preferences or sqllite ...*/
         waypoints.add(wp);
-    }
-
-    public List<GeoPoint> getDirections(){
-        return new ArrayList<GeoPoint>();
     }
 }
