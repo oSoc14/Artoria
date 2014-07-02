@@ -16,6 +16,7 @@ import org.osmdroid.views.overlay.PathOverlay;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.POI;
 
 public class MapActivity extends ActionBarActivity {
     public static final int DEFAULT_ZOOM = 20;
@@ -32,9 +33,17 @@ public class MapActivity extends ActionBarActivity {
         mapCtrl.setZoom(DEFAULT_ZOOM);
         mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
 
-
-        PathOverlay myPath = new PathOverlay(Color.RED, this);
-        
+        /*Example code how to draw a route on the osmdroid */
+        /*
+        DataManager mgr = DataManager.getInstance();
+        PathOverlay myPath = new PathOverlay(Color.BLUE, this);
+        myPath.addPoint(new GeoPoint(mgr.BELFORT_LAT,mgr.BELFORT_LON));
+        POI point = mgr.poiList.get(0);
+        myPath.addPoint(new GeoPoint(Double.parseDouble(point.lat),Double.parseDouble(point.lon)));
+        point = mgr.poiList.get(1);
+        myPath.addPoint(new GeoPoint(Double.parseDouble(point.lat),Double.parseDouble(point.lon)));
+        mapView.getOverlays().add(myPath);
+        */
 
     }
 

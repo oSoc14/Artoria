@@ -9,17 +9,18 @@ import java.util.List;
  * Created by Dieter Beelaert on 1/07/2014.
  */
 public class RouteManager {
-
     private static RouteManager instance;
     private List<POI> waypoints;
+    private static final String MAP_QUEST_API_KEY = "Fmjtd%7Cluur206a2d%2C82%3Do5-9at0dr"; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
+    private static final String MAP_QUEST_URL_START = "http://open.mapquestapi.com/directions/v2/route?key=" + MAP_QUEST_API_KEY + "&unit=k&routeType=pedestrian&fullShape=true";
 
     private RouteManager(){
         /* get routes from storage ...*/
         /* initialize test data */
         waypoints = new ArrayList<POI>();
-        waypoints.add(new POI(0,"51.053939", "3.722958","Sint-Niklaaskerk","SINT_NIKLAAS KERK WAUW","http://www.sintniklaaskerk.be/media/photos/560/021f552775075dd9e053e30072ea21045d628ef3.jpg"));
-        waypoints.add(new POI(1,"51.053952", "3.722196","Korenmarkt","YEEEEEEE","http://fideel.files.wordpress.com/2009/08/korenmarkt-ca-1910-2.jpg"));
-        waypoints.add(new POI(2,"51.054562", "3.724862","Stadhuis","WOOOHOOOOOOOOO HOOOO HOOOO","http://upload.wikimedia.org/wikipedia/commons/2/2c/Gent_stadhuis_belfort_1890-1900.jpg"));
+        DataManager mngr = DataManager.getInstance();
+        waypoints.add(mngr.poiList.get(0));
+        waypoints.add(mngr.poiList.get(1));
     }
 
     public static RouteManager getInstance(){
