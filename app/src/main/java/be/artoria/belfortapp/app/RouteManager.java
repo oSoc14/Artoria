@@ -1,5 +1,7 @@
 package be.artoria.belfortapp.app;
 
+import org.osmdroid.util.GeoPoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +36,9 @@ public class RouteManager {
     public void addWayPoint(Waypoint wp){
         /*Save waypoints to shared preferences or sqllite ...*/
         waypoints.add(wp);
+    }
+
+    public List<GeoPoint> getDirections(){
+        return new ArrayList<GeoPoint>();
     }
 }

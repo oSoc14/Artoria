@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.PathOverlay;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
@@ -29,6 +31,10 @@ public class MapActivity extends ActionBarActivity {
         MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
         mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
+
+
+        PathOverlay myPath = new PathOverlay(Color.RED, this);
+        
 
     }
 
