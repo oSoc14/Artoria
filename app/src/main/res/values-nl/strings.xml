@@ -28,7 +28,8 @@
         <item>gelijkvloers</item>
         -->
     </string-array>
-    <string name="title_activity_monument_detail">MonumentDetailActivity</string>
+    <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">RouteActivity</string>
+    <string name="firstTime">firstTime</string>
 
 </resources>

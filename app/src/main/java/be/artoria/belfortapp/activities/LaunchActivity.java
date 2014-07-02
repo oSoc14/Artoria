@@ -16,28 +16,15 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        String lang = settings.getString(getString(R.string.lang),null);
+        final boolean isFirstTime = settings.getBoolean(getString(R.string.firstTime),true);
 
-        Intent nextPage;
-        if(lang == null){
+        final Intent nextPage;
+        if(isFirstTime){
             nextPage = new Intent(this, LanguageChoiceActivity.class);
         } else {
-            /* We can't switch on strings :( */
-            if(lang.equals(R.string.french)) {
-                DataManager.lang = DataManager.Language.FRENCH;
-            } else {
-                if (lang.equals(R.string.english)){
-                    DataManager.lang = DataManager.Language.FRENCH;
-                } else {
-                    DataManager.lang = DataManager.Language.DUTCH;
-                }
-            }
-
             nextPage = new Intent(this,MainActivity.class);
         }
-
         startActivity(nextPage);
-
     }
 
 

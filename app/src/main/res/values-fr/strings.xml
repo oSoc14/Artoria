@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <!-- The French language settings file, Omelette du fromage -->
 <resources>
 
     <string name="app_name">BelfortApp</string>
@@ -7,9 +8,9 @@
     <string name="dutch">dutch</string>
     <string name="french">french</string>
     <string name="english">english</string>
-    <string name="title_activity_launch">LaunchActivity</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="title_activity_main">Main</string>
+    <string name="title_activity_launch">Omelette du fromage</string>
+    <string name="title_activity_base">Omelette du fromage</string>
+    <string name="title_activity_main">Omelette du fromage</string>
     <string name="settings">Instellingen</string>
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
@@ -18,7 +19,7 @@
     <string name="view_route">Mijn route</string>
     <string-array name="lstMenu">
         <item>Panorama</item>
-        <item>Gebouwen</item>
+        <item>Batiment</item>
         <!-- Future dev ... -->
         <!--
         <item>4de verdieping</item>
@@ -28,7 +29,8 @@
         <item>gelijkvloers</item>
         -->
     </string-array>
-    <string name="title_activity_monument_detail">MonumentDetailActivity</string>
+    <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">RouteActivity</string>
+    <string name="firstTime">firstTime</string>
 
 </resources>

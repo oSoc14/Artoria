@@ -8,14 +8,7 @@ import java.util.List;
  */
 public class DataManager {
 
-    /* Available languages*/
-    public enum Language{
-        DUTCH,FRENCH,ENGLISH
-    }
-
     private static final DataManager INSTANCE = new DataManager();
-
-    public static Language lang = Language.DUTCH;
 
     /*The current route*/
     public static List<Waypoint> wayPoints;

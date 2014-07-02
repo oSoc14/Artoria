@@ -1,12 +1,16 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.Locale;
 
 import be.artoria.belfortapp.R;
 
@@ -40,22 +44,38 @@ public class LanguageChoiceActivity extends BaseActivity {
     }
 
     public void langSelected(View view) {
-        /* Saving the language preference in response to a button click*/
-        SharedPreferences.Editor prefEditor = getPreferences(MODE_PRIVATE).edit();
+        /* Setting the locale in response to a button click*/
+        final Locale locale;
         switch (view.getId()) {
             case(R.id.english):
-                prefEditor.putString(getString(R.string.lang),getString(R.string.english));
+                locale = new Locale("en");
                 break;
             case(R.id.french):
-                prefEditor.putString(getString(R.string.lang),getString(R.string.french));
+                locale = new Locale("fr");
                 break;
             case(R.id.dutch):
             default:
-                prefEditor.putString(getString(R.string.lang),getString(R.string.dutch));
-                break;
+                /* Default case is dutch */
+                locale = new Locale("nl");
         }
+
+        Locale.setDefault(locale);
+        final Configuration config = new Configuration();
+        config.locale = locale;
+        view.getContext().getApplicationContext().getResources().updateConfiguration(config, null);
+        /* Saving preferences in the background */
+        new Thread(){
+            @Override
+            public void run() {
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(getString(R.string.firstTime), false);
+                editor.commit();
+            }
+        }.run();
+
         /* Opening the Main screen */
-        Intent intent = new Intent(this,MainActivity.class);
+        final Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }
