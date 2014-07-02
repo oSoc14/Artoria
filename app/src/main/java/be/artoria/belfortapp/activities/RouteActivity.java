@@ -65,14 +65,7 @@ public class RouteActivity extends BaseActivity {
     private void initGUI(){
         ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
         Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
-        LinearLayout cntRouteList = (LinearLayout)findViewById(R.id.cntRouteList);
-        LinearLayout cntMapview = (LinearLayout)findViewById(R.id.cntMapview);
-        cntMapview.setVisibility(View.INVISIBLE);
 
-        MapView mapView = (MapView)findViewById(R.id.mapview);
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
-        MapController mapCtrl = (MapController)mapView.getController();
-        mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
 
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
         routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
@@ -81,11 +74,8 @@ public class RouteActivity extends BaseActivity {
         btnCalcRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*TODO use osmdroid http://stackoverflow.com/questions/10104581/osmdroid-pathoverlay*/
-                LinearLayout cntRouteList = (LinearLayout)findViewById(R.id.cntRouteList);
-                LinearLayout cntMapview = (LinearLayout)findViewById(R.id.cntMapview);
-                cntRouteList.setVisibility(View.INVISIBLE);
-                cntMapview.setVisibility(View.VISIBLE);
+                Intent i = new Intent(RouteActivity.this,MapActivity.class);
+                startActivity(i);
 
             }
         });

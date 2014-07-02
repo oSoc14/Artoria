@@ -14,9 +14,9 @@
     <string name="settings">Instellingen</string>
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
-
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>
+
     <string-array name="lstMenu">
         <item>Panorama</item>
         <item>Gebouwen</item>
@@ -29,7 +29,9 @@
         <item>gelijkvloers</item>
         -->
     </string-array>
+
     <string name="title_activity_monument_detail">MonumentDetailActivity</string>
     <string name="title_activity_route">RouteActivity</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

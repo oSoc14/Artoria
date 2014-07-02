@@ -8,8 +8,7 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:id="@+id/cntRouteList"
-        tools:visibility="invisible">
+        android:id="@+id/cntRouteList">
        <ListView
            android:layout_width="wrap_content"
            android:layout_height="0dp"
@@ -21,17 +20,5 @@
             android:layout_height="wrap_content"
             android:text="@string/calcRoute"
             android:id="@+id/btnCalcRoute"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/cntMapview">
-
-        <org.osmdroid.views.MapView
-            android:id="@+id/mapview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            />
     </LinearLayout>
 </LinearLayout>
