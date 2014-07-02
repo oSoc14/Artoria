@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -26,11 +27,6 @@ public class MonumentDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_monument_detail);
         initGui();
         id = (Integer) getIntent().getExtras().get("id");
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container, new PlaceholderFragment())
-//                    .commit();
-//        }
     }
 
 
@@ -54,21 +50,35 @@ public class MonumentDetailActivity extends BaseActivity {
     }
 
     public void addToRoute(View view) {
-
+        final RouteManager rm = RouteManager.getInstance();
+        final DataManager dm = DataManager.getInstance();
+        rm.addWayPoint(dm.poiList.get(id));
     }
 
     public void prevDetail(View view) {
+        final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
+        intent.putExtra("id", id - 1 % DataManager.getInstance().poiList.size());
+        startActivity(intent);
 
     }
 
     public void nextDetail(View view) {
+        final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
+        intent.putExtra("id", id + 1 % DataManager.getInstance().poiList.size());
+        startActivity(intent);
 
     }
 
     public void viewRoute(View view) {
+        /*Go to the route overview*/
+        final Intent i = new Intent(MonumentDetailActivity.this,MapActivity.class);
+        startActivity(i);
     }
 
     public void returnToMain(View view) {
+        /*Go to the main page*/
+        final Intent i = new Intent(MonumentDetailActivity.this,MainActivity.class);
+        startActivity(i);
     }
 
 

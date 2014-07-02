@@ -33,6 +33,9 @@ public class RouteManager {
 
     public void addWayPoint(POI wp){
         /*Save waypoints to shared preferences or sqllite ...*/
-        waypoints.add(wp);
+        /* Only add waypoints that aren't in the list yet */
+        if(!waypoints.contains(wp)) {
+            waypoints.add(wp);
+        }
     }
 }

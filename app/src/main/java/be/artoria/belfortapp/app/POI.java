@@ -20,4 +20,11 @@ public class POI {
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if( o == null ) return false;
+        if(!( o instanceof POI)) return false;
+        POI poi = (POI) o;
+        return poi.id == this.id;
+    }   
 }
