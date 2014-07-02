@@ -184,7 +184,11 @@ public class MainActivity extends BaseActivity {
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
             if(list.isEmpty()) System.err.println("not good.");
             else {
-                DataManager.poiList.clear();
+                //DataManager.poiList.clear();
+                for(POI poi : list){
+                    System.out.println(poi.ENG_description);
+                    System.out.println(poi.id);
+                }
                 DataManager.poiList.addAll(list);
             }
         }
