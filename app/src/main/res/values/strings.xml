@@ -35,6 +35,7 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="main">Main</string>
     <string name="route">Route</string>
+    <string name="lastDownload">lastDownload</string>
 
 
 </resources>

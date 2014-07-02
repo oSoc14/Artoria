@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -20,8 +24,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.POI;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
@@ -35,9 +45,30 @@ public class MainActivity extends BaseActivity {
     }
 
     private void downloadData() {
+        final SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        final long lastDownload = settings.getLong(getString(R.string.lastDownload), 0l);
+
+        final Calendar lastd = new GregorianCalendar();
+        lastd.setTimeInMillis(lastDownload);
+
+        final Calendar now = new GregorianCalendar();
+        now.setTime(new Date());
+
+        lastd.add(Calendar.HOUR,12);
+        /* We only download new information if the old info is older than 12 hours */
+        if(now.before(lastd)) return;
+
+        /* Download information here */
+        new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
+
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        downloadData();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,19 +146,19 @@ public class MainActivity extends BaseActivity {
         protected String doInBackground(String... urls) {
             String response = "";
             for (String url : urls) {
-                DefaultHttpClient client = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(url);
+                final DefaultHttpClient client = new DefaultHttpClient();
+                final HttpGet httpGet = new HttpGet(url);
                 try {
-                    HttpResponse execute = client.execute(httpGet);
-                    InputStream content = execute.getEntity().getContent();
+                    final HttpResponse execute = client.execute(httpGet);
+                    final InputStream content = execute.getEntity().getContent();
 
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    final BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
                     String s = "";
                     while ((s = buffer.readLine()) != null) {
                         response += s;
                     }
 
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -136,7 +167,10 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(String result) {
-
+            final Gson gson = new Gson();
+            final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
+            DataManager.poiList.clear();
+            DataManager.poiList.addAll(list);
         }
     }
 }

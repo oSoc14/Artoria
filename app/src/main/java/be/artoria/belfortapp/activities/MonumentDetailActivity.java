@@ -92,8 +92,6 @@ public class MonumentDetailActivity extends BaseActivity {
         final ImageView img = (ImageView) findViewById(R.id.imageView);
 
         /* Setting the correct data */
-        System.err.println(wp.name);
-        System.err.println(wp.description);
         tv.setText(wp.name);
         tvs.setText(wp.name);
         desc.setText(wp.description);
