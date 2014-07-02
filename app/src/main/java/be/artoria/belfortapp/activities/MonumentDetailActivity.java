@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.RouteManager;
 import be.artoria.belfortapp.app.Waypoint;
 
 public class MonumentDetailActivity extends ActionBarActivity {
@@ -77,8 +78,8 @@ public class MonumentDetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final DataManager dm = DataManager.getInstance();
-            final Waypoint wp = dm.wayPoints.get(id);
+            final RouteManager rm = RouteManager.getInstance();
+            final Waypoint wp = rm.getWaypoints().get(id);
             final View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
             final TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
             final TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);

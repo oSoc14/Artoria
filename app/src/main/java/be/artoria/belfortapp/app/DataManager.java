@@ -1,7 +1,5 @@
 package be.artoria.belfortapp.app;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Laurens on 01/07/2014.
@@ -9,9 +7,6 @@ import java.util.List;
 public class DataManager {
 
     private static final DataManager INSTANCE = new DataManager();
-
-    /*The current route*/
-    public static List<Waypoint> wayPoints;
 
     /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
     public static final double BELFORT_LON = 3.724833;
