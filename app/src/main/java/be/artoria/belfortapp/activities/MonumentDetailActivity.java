@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
@@ -62,8 +63,8 @@ public class MonumentDetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final RouteManager rm = RouteManager.getInstance();
-            final POI wp = rm.getWaypoints().get(id);
+            final DataManager rm = DataManager.getInstance();
+            final POI wp = rm.poiList.get(id);
             final View rootView = inflater.inflate(R.layout.fragment_monument_detail, container, false);
             final TextView tv =(TextView) rootView.findViewById(R.id.monument_name);
             final TextView tvs =(TextView) rootView.findViewById(R.id.monument_name_smaller);
