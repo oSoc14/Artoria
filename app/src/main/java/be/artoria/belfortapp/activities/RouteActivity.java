@@ -10,9 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-
-import java.util.ArrayList;
-import java.util.List;
+import com.mobeta.android.dslv.DragSortListView;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
@@ -21,6 +19,71 @@ import be.artoria.belfortapp.app.RouteManager;
 
 
 public class RouteActivity extends BaseActivity {
+
+    DragSortListView listView;
+    ArrayAdapter<String> adapter;
+
+    private DragSortListView.DropListener onDrop = new DragSortListView.DropListener()
+    {
+        @Override
+        public void drop(int from, int to)
+        {
+            if (from != to)
+            {
+                String item = adapter.getItem(from);
+                adapter.remove(item);
+                adapter.insert(item, to);
+            }
+        }
+    };
+
+    private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener()
+    {
+        @Override
+        public void remove(int which)
+        {
+            adapter.remove(adapter.getItem(which));
+        }
+    };
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = (DragSortListView) findViewById(R.id.listview);
+        String[] names = getResources().getStringArray(R.array.random_names);
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(names));
+        adapter = new ArrayAdapter<String>(this,
+                R.layout.item_layout, R.id.textView1, list);
+        listView.setAdapter(adapter);
+        listView.setDropListener(onDrop);
+        listView.setRemoveListener(onRemove);
+
+        DragSortController controller = new DragSortController(listView);
+        controller.setDragHandleId(R.id.imageView1);
+        //controller.setClickRemoveId(R.id.);
+        controller.setRemoveEnabled(false);
+        controller.setSortEnabled(true);
+        controller.setDragInitMode(1);
+        //controller.setRemoveMode(removeMode);
+
+        listView.setFloatViewManager(controller);
+        listView.setOnTouchListener(controller);
+        listView.setDragEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
     private ArrayAdapter<POI> routeAdapter;
 
     @Override
@@ -63,7 +126,7 @@ public class RouteActivity extends BaseActivity {
         btnCalcRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RouteActivity.this,MapActivity.class);
+                final Intent i = new Intent(RouteActivity.this,MapActivity.class);
                 startActivity(i);
             }
         });
@@ -72,8 +135,8 @@ public class RouteActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //TODO: extract id from selected item (reverse lookup?)
-                POI poi = (POI)lstRoute.getSelectedItem();
-                int id = poi.id;
+                final POI poi = (POI)lstRoute.getSelectedItem();
+                final int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
