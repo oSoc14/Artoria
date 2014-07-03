@@ -3,6 +3,7 @@ package be.artoria.belfortapp.app;
 
 import android.content.res.Resources;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,12 +43,18 @@ public class DataManager {
     public static POI getPOIbyID(int id){
         /* poiList might very well be empty after resuming the app */
         if(poiList.isEmpty()){
+            try {
+                poidao.open();
+            } catch (SQLException e) {
+                // TODO catch exceptions in a sane manner.
+            }
             poiList.addAll(poidao.getAllComments());
             /* Worst case scenario, the local database is empty and we're asked for a poi */
             if(poiList.isEmpty()){
                 // TODO: download the new info now
             }
         }
+        poidao.close();
         return poiList.get(id);
     }
 

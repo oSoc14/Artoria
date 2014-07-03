@@ -21,7 +21,7 @@ public class POIDbHelper extends SQLiteOpenHelper {
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION_EN + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION_FR + TEXT_TYPE + COMMA_SEP +
-                    POIContract.POIEntry.COLUMN_NAME_IMAGE_URL + TEXT_TYPE + COMMA_SEP +
+                    POIContract.POIEntry.COLUMN_NAME_IMAGE_URL + TEXT_TYPE +
             " )";
 
     private static final String SQL_DELETE_ENTRIES =
