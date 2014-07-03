@@ -75,7 +75,7 @@ public class RouteActivity extends BaseActivity {
                 POI poi = (POI)lstRoute.getSelectedItem();
                 int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
-                intent.putExtra("id", (id - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });

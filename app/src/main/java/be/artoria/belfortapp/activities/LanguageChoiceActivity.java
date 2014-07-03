@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.PrefUtils;
 
 
 public class LanguageChoiceActivity extends BaseActivity {
@@ -67,16 +68,8 @@ public class LanguageChoiceActivity extends BaseActivity {
         final Configuration config = new Configuration();
         config.locale = locale;
         view.getContext().getApplicationContext().getResources().updateConfiguration(config, null);
-        /* Saving preferences in the background */
-        new Thread(){
-            @Override
-            public void run() {
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(getString(R.string.firstTime), false);
-                editor.commit();
-            }
-        }.run();
+        /* Saving preferences*/
+        PrefUtils.setNotFirstTime();
 
         /* Opening the Main screen */
         final Intent intent = new Intent(this,MainActivity.class);

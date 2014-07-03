@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.PrefUtils;
 
 
 public class LaunchActivity extends BaseActivity {
@@ -14,11 +15,8 @@ public class LaunchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        final boolean isFirstTime = settings.getBoolean(getString(R.string.firstTime),true);
-
         final Intent nextPage;
-        if(isFirstTime){
+        if(PrefUtils.isFirstTime()){
             nextPage = new Intent(this, LanguageChoiceActivity.class);
         } else {
             nextPage = new Intent(this,MainActivity.class);

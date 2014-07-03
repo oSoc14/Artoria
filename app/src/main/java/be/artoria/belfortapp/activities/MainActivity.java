@@ -1,13 +1,9 @@
 package be.artoria.belfortapp.activities;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,15 +23,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import be.artoria.belfortapp.BuildConfig;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
+import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
@@ -47,24 +40,18 @@ public class MainActivity extends BaseActivity {
         initGui();
         downloadData();
     }
+    private static boolean downloading = false;
 
     private void downloadData() {
-        final SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        final long lastDownload = settings.getLong(getString(R.string.lastDownload), 0l);
-
-        final Calendar lastd = new GregorianCalendar();
-        lastd.setTimeInMillis(lastDownload);
-
-        final Calendar now = new GregorianCalendar();
-        now.setTime(new Date());
-
-        lastd.add(Calendar.HOUR,12);
-        /* We only download new information if the old info is older than 12 hours */
-        //if(now.before(lastd)) return;
-        System.err.println("Downloading!");
-        /* Download information here */
-        new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
-
+        final long lastDownload = PrefUtils.getTimeStampDownloads();
+        final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
+        /* Either there is no last download ( case == 0)
+        *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
+        if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
+            downloading = true;
+            System.err.println("Downloading!");
+            new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
+        }
     }
 
     @Override
@@ -172,17 +159,13 @@ public class MainActivity extends BaseActivity {
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
+            downloading = false;
             if(list.isEmpty()){
                 System.err.println("not good.");
             }
             else {
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putLong(getString(R.string.lastDownload), System.currentTimeMillis());
-
-                editor.apply();
-
-                //DataManager.poiList.clear();
+                PrefUtils.saveTimeStampDownloads();
+                DataManager.poiList.clear();
                 for(POI poi : list){
                     System.out.println(poi.ENG_description);
                     System.out.println(poi.id);

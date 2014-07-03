@@ -34,7 +34,7 @@ import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
-public class MapActivity extends ActionBarActivity {
+public class    MapActivity extends ActionBarActivity {
     public static final int DEFAULT_ZOOM = 18;
     private static final String MAP_QUEST_API_KEY = "Fmjtd%7Cluur206a2d%2C82%3Do5-9at0dr"; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
