@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +54,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final RouteManager rm = RouteManager.getInstance();
         final DataManager dm = DataManager.getInstance();
         rm.addWayPoint(dm.poiList.get(id));
+        Toast.makeText(this,getString(R.string.added_to_route),Toast.LENGTH_SHORT).show();
     }
 
     public void prevDetail(View view) {

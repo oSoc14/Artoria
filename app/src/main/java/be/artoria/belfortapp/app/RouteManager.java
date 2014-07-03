@@ -10,15 +10,14 @@ import java.util.List;
  */
 public class RouteManager {
     private static RouteManager instance;
-    private List<POI> waypoints;
+    final private List<POI> waypoints = new ArrayList<POI>();
 
     private RouteManager(){
         /* get routes from storage ...*/
         /* initialize test data */
-        waypoints = new ArrayList<POI>();
-        DataManager mngr = DataManager.getInstance();
+        /*DataManager mngr = DataManager.getInstance();
         waypoints.add(mngr.poiList.get(0));
-        waypoints.add(mngr.poiList.get(1));
+        waypoints.add(mngr.poiList.get(1));*/
     }
 
     public static RouteManager getInstance(){

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
@@ -54,7 +56,6 @@ public class RouteActivity extends BaseActivity {
         final Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
 
 
-
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
         routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
         lstRoute.setAdapter(routeAdapter);
@@ -64,7 +65,16 @@ public class RouteActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent i = new Intent(RouteActivity.this,MapActivity.class);
                 startActivity(i);
+            }
+        });
 
+        lstRoute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //TODO: extract id from selected item (reverse lookup?)
+                final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
+                intent.putExtra("id", (i - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
+                startActivity(intent);
             }
         });
     }
