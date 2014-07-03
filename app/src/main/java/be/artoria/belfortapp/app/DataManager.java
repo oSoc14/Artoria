@@ -35,7 +35,13 @@ public class DataManager {
     }
 
     public Language getCurrentLanguage(){
+        if(lang == null) lang = PrefUtils.getLanguage();
+
         return lang;
+
+
+
+
     }
 
     public static DataManager getInstance() {

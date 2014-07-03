@@ -84,6 +84,7 @@ public class RouteActivity extends BaseActivity {
 
     /*Initialize GUI */
     private void initGUI(){
+        ///////// old code /////////
         //final ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
         //final Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
 
@@ -101,7 +102,7 @@ public class RouteActivity extends BaseActivity {
         listView.setDropListener(onDrop);
         listView.setRemoveListener(onRemove);
 
-        DragSortController controller = new DragSortController(listView);
+        final DragSortController controller = new DragSortController(listView);
         controller.setDragHandleId(R.id.drag_handler);
         //controller.setClickRemoveId(R.id.);
         controller.setRemoveEnabled(false);
@@ -116,7 +117,6 @@ public class RouteActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: extract id from selected item (reverse lookup?)
                 final POI poi = (POI)listView.getSelectedItem();
                 final int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);

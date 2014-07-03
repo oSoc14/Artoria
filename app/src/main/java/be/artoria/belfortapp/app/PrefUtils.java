@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 import be.artoria.belfortapp.R;
 
 /**
@@ -48,11 +51,6 @@ public class PrefUtils {
                 .apply();
     }
 
-    public static long getTimeStamp()
-    {
-        return getPrefs().getLong("test", 0);
-    }
-
     public static long getTimeStampDownloads()
     {
         return getPrefs().getLong(ARG_DOWNLOAD, 0);
@@ -74,4 +72,13 @@ public class PrefUtils {
         }
     }
 
+    public static DataManager.Language getLanguage() {
+        final Locale locale = getContext().getResources().getConfiguration().locale;
+        final String lang = locale.getLanguage();
+        if("en".equals(lang)){ return DataManager.Language.ENGLISH;}
+        if("fr".equals(lang)){ return DataManager.Language.FRENCH;}
+        /* default choice is dutch */
+        return DataManager.Language.DUTCH;
+
+    }
 }
