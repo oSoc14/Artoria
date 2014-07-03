@@ -31,3 +31,6 @@ Thumbs.db
 .gradle
 build/
 
+#File with API keys
+keys.xml
+

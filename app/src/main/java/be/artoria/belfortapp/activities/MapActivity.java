@@ -39,7 +39,7 @@ import be.artoria.belfortapp.app.ManeuverType;
 
 public class    MapActivity extends ActionBarActivity {
     public static final int DEFAULT_ZOOM = 18;
-    private static final String MAP_QUEST_API_KEY = "Fmjtd%7Cluur206a2d%2C82%3Do5-9at0dr"; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
+    private String MAP_QUEST_API_KEY; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
     public static final String LANG_NL = "nl_NL";
     private MapView mapView;
@@ -50,6 +50,7 @@ public class    MapActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mapView = (MapView)findViewById(R.id.mapview);
+        MAP_QUEST_API_KEY = getResources().getString(R.string.map_quest_api_key);
         initGUI();
     }
 
