@@ -42,7 +42,8 @@ public class POI {
 
     public String getName() {
         DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
-        if(lang == DataManager.Language.ENGLISH){
+        switch(lang){
+            case ENGLISH:
             return this.ENG_name;
         }else{
             /*Default is Dutch*/
