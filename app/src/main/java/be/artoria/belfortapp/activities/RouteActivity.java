@@ -103,9 +103,9 @@ public class RouteActivity extends BaseActivity {
         listView.setRemoveListener(onRemove);
 
         final DragSortController controller = new DragSortController(listView);
-        controller.setDragHandleId(R.id.drag_handler);
+        controller.setDragHandleId(R.id.lstRoute);
         //controller.setClickRemoveId(R.id.);
-        controller.setRemoveEnabled(false);
+        controller.setRemoveEnabled(true);
         controller.setSortEnabled(true);
         controller.setDragInitMode(1);
         //controller.setRemoveMode(removeMode);
