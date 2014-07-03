@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import be.artoria.belfortapp.BuildConfig;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
@@ -62,18 +64,6 @@ public class MainActivity extends BaseActivity {
         System.err.println("Downloading!");
         /* Download information here */
         new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
-
-        /* Updating the last downloadtime, we assume everything went alright */
-        new Thread(){
-            @Override
-            public void run() {
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putLong(getString(R.string.lastDownload), System.currentTimeMillis());
-                editor.commit();
-            }
-        }.run();
-
 
     }
 
@@ -182,8 +172,16 @@ public class MainActivity extends BaseActivity {
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
-            if(list.isEmpty()) System.err.println("not good.");
+            if(list.isEmpty()){
+                System.err.println("not good.");
+            }
             else {
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putLong(getString(R.string.lastDownload), System.currentTimeMillis());
+
+                editor.apply();
+
                 //DataManager.poiList.clear();
                 for(POI poi : list){
                     System.out.println(poi.ENG_description);
