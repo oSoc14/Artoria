@@ -56,16 +56,20 @@ public class MonumentDetailActivity extends BaseActivity {
     }
 
     public void prevDetail(View view) {
-        final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
+        /*final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
         intent.putExtra("id", (id - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
-        startActivity(intent);
+        startActivity(intent);*/
+        id = id == 0 ? (DataManager.getInstance().poiList.size() -1) : (id -1);
+        initGui();
 
     }
 
     public void nextDetail(View view) {
-        final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
+        /*final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
         intent.putExtra("id", (id + 1) % DataManager.getInstance().poiList.size());
-        startActivity(intent);
+        startActivity(intent);*/
+        id = (id +1) % DataManager.getInstance().poiList.size();
+        initGui();
 
     }
 
