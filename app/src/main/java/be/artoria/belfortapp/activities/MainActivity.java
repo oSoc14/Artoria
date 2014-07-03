@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initGui();
         downloadData();
+
     }
     private static boolean downloading = false;
 

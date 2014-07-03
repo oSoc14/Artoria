@@ -14,6 +14,9 @@
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
     <string name="added_to_route">Toegevoegd aan mijn route</string>
+    <string name="route_planning">Routeplanner</string>
+    <string name="route_desc">Route omschrijving</string>
+    <string name="show_map">Toon kaart</string>
 
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>
