@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import be.artoria.belfortapp.R;
+
 /**
  * Created by Michael Vanderpoorten
  * Adapted by Laurens De Graeve
@@ -13,6 +15,7 @@ public class PrefUtils {
 
     private static final String ARG_USER_KEY = "be.artoria.belfort";
     private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
+    private static final String ARG_FIRS_TTIME = "be.artoria.belfort.firstTime";
 
     private static Context CONTEXT;
 
@@ -31,6 +34,17 @@ public class PrefUtils {
         getPrefs()
                 .edit()
                 .putLong(ARG_DOWNLOAD, System.currentTimeMillis())
+                .apply();
+    }
+
+    public static boolean isFirstTime() {
+        return getPrefs().getBoolean(ARG_FIRS_TTIME, true);
+    }
+
+    public static void setNotFirstTime() {
+        getPrefs()
+                .edit()
+                .putBoolean(ARG_FIRS_TTIME, false)
                 .apply();
     }
 
@@ -59,4 +73,5 @@ public class PrefUtils {
             return CONTEXT.getSharedPreferences(ARG_USER_KEY, Context.MODE_PRIVATE);
         }
     }
+
 }
