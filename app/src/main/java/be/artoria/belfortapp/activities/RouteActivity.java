@@ -21,7 +21,7 @@ import be.artoria.belfortapp.app.RouteManager;
 
 
 public class RouteActivity extends BaseActivity {
-    private ArrayAdapter<String> routeAdapter;
+    private ArrayAdapter<POI> routeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class RouteActivity extends BaseActivity {
 
 
         /*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
-        routeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getWaypointsAsStringList());
+        routeAdapter = new ArrayAdapter<POI>(this,android.R.layout.simple_list_item_1, RouteManager.getInstance().getWaypoints());
         lstRoute.setAdapter(routeAdapter);
 
         btnCalcRoute.setOnClickListener(new View.OnClickListener() {
@@ -72,19 +72,12 @@ public class RouteActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //TODO: extract id from selected item (reverse lookup?)
+                POI poi = (POI)lstRoute.getSelectedItem();
+                int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
-                intent.putExtra("id", (i - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
+                intent.putExtra("id", (id - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
                 startActivity(intent);
             }
         });
-    }
-
-
-    private List<String> getWaypointsAsStringList(){
-      final List<String> toReturn = new ArrayList<String>();
-      for(POI w : RouteManager.getInstance().getWaypoints()){
-          toReturn.add(w.getName());
-      }
-      return toReturn;
     }
 }

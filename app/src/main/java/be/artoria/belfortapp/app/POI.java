@@ -1,5 +1,7 @@
 package be.artoria.belfortapp.app;
 
+import java.util.Locale;
+
 /**
  * Created by Laurens on 01/07/2014.
  */
@@ -39,10 +41,27 @@ public class POI {
     }
 
     public String getName() {
-        return "LOCALIZED NAME";
+        DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
+        if(lang == DataManager.Language.ENGLISH){
+            return this.ENG_name;
+        }else{
+            /*Default is Dutch*/
+            return this.NL_name;
+        }
     }
 
     public String getDescription() {
-        return "LOCALIZED DESCRIPTION";
+        DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
+        if(lang == DataManager.Language.ENGLISH){
+            return this.ENG_description;
+        }else{
+            /*Default is Dutch*/
+            return this.NL_description;
+        }
+    }
+
+    @Override
+    public String toString(){
+        return getName();
     }
 }
