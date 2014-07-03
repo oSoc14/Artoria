@@ -17,6 +17,7 @@ public class POI {
     public String FR_description;
     public String ENG_description;
 
+
     public POI(int id, String lat, String lon, String name, String description, String image_url){
         this.id = id;
         this.image_link = image_url;

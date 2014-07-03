@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.artoria.belfortapp" >
 
+
     <application
         android:name=".app.ArtoriaApp"
         android:allowBackup="true"
@@ -38,6 +39,13 @@
             android:label="@string/title_activity_map" >
         </activity>
     </application>
+
+    <provider
+        android:authorities="be.artoria.belfortapp.contentprovider"
+        android:name=".contentprovider.POIContentProvider"
+        android:exported="false"
+        android:multiprocess="true">
+    </provider>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

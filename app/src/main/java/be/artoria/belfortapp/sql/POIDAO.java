@@ -1,0 +1,98 @@
+package be.artoria.belfortapp.sql;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import be.artoria.belfortapp.sql.POIContract.POIEntry;
+import be.artoria.belfortapp.app.POI;
+
+/**
+ * Created by Laurens on 03/07/2014.
+ */
+public class POIDAO {
+
+    // Database fields
+    private SQLiteDatabase database;
+    private POIDbHelper dbHelper;
+    private String[] allColumns = {
+            POIEntry.COLUMN_NAME_ENTRY_ID ,
+            POIEntry.COLUMN_NAME_NAME ,
+            POIEntry.COLUMN_NAME_NAME_EN ,
+            POIEntry.COLUMN_NAME_NAME_FR ,
+            POIEntry.COLUMN_NAME_LAT ,
+            POIEntry.COLUMN_NAME_LON ,
+            POIEntry.COLUMN_NAME_DESCRIPTION ,
+            POIEntry.COLUMN_NAME_DESCRIPTION_EN ,
+            POIEntry.COLUMN_NAME_DESCRIPTION_FR ,
+            POIEntry.COLUMN_NAME_IMAGE_URL
+    };
+
+    public POIDAO(Context context) {
+        dbHelper = new POIDbHelper(context);
+    }
+
+    public void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbHelper.close();
+    }
+
+    public POI savePOI(POI poi) {
+        ContentValues values = new ContentValues();
+
+        values.put(POIEntry.COLUMN_NAME_ENTRY_ID, poi.id);
+        values.put(POIEntry.COLUMN_NAME_NAME, poi.NL_name);
+        values.put(POIEntry.COLUMN_NAME_NAME_EN, poi.ENG_name);
+        values.put(POIEntry.COLUMN_NAME_NAME_FR, poi.FR_name);
+        values.put(POIEntry.COLUMN_NAME_LAT, poi.lat);
+        values.put(POIEntry.COLUMN_NAME_LON, poi.lon);
+        values.put(POIEntry.COLUMN_NAME_DESCRIPTION, poi.NL_description);
+        values.put(POIEntry.COLUMN_NAME_DESCRIPTION_EN, poi.ENG_description);
+        values.put(POIEntry.COLUMN_NAME_DESCRIPTION_FR, poi.FR_description);
+        values.put(POIEntry.COLUMN_NAME_IMAGE_URL, poi.image_link);
+
+        database.insert(POIEntry.TABLE_NAME, null,
+                values);
+
+        return poi;
+    }
+
+    public List<POI> getAllComments() {
+        List<POI> pois = new ArrayList<POI>();
+
+        Cursor cursor = database.query(POIEntry.TABLE_NAME,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            POI poi = cursorToPOI(cursor);
+            pois.add(poi);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return pois;
+    }
+
+    private POI cursorToPOI(Cursor cursor) {
+        POI poi = new POI();
+        poi.id               = cursor.getInt  ( 1 );
+        poi.NL_name         = cursor.getString(2);
+        poi.ENG_name        = cursor.getString(3);
+        poi.FR_name         = cursor.getString(4);
+        poi.lat             = cursor.getString(5);
+        poi.lon             = cursor.getString(6);
+        poi.NL_description  = cursor.getString( 7 );
+        poi.ENG_description = cursor.getString( 8 );
+        poi.FR_description  = cursor.getString( 9 );
+        poi.image_link      = cursor.getString( 10);
+        return poi;
+    }
+}
