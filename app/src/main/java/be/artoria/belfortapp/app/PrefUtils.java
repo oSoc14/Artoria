@@ -39,9 +39,9 @@ public class PrefUtils {
         return getPrefs().getLong("test", 0);
     }
 
-    public static long getTimeStampDownloads(String args)
+    public static long getTimeStampDownloads()
     {
-        return getPrefs().getLong(args, 0);
+        return getPrefs().getLong(ARG_DOWNLOAD, 0);
     }
 
     public static void removeAll()

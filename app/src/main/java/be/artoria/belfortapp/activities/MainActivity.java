@@ -36,6 +36,7 @@ import be.artoria.belfortapp.BuildConfig;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
+import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
@@ -49,22 +50,14 @@ public class MainActivity extends BaseActivity {
     }
 
     private void downloadData() {
-        final SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        final long lastDownload = settings.getLong(getString(R.string.lastDownload), 0l);
-
-        final Calendar lastd = new GregorianCalendar();
-        lastd.setTimeInMillis(lastDownload);
-
-        final Calendar now = new GregorianCalendar();
-        now.setTime(new Date());
-
-        lastd.add(Calendar.HOUR,12);
-        /* We only download new information if the old info is older than 12 hours */
-        //if(now.before(lastd)) return;
-        System.err.println("Downloading!");
-        /* Download information here */
-        new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
-
+        final long lastDownload = PrefUtils.getTimeStampDownloads();
+        final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
+        /* Either there is no last download ( case == 0)
+        *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
+        if(lastDownload == 0 || timeSinceLastDownload > 43200000){
+            System.err.println("Downloading!");
+            new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
+        }
     }
 
     @Override
