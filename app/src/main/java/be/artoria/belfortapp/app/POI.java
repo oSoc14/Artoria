@@ -44,10 +44,10 @@ public class POI {
         DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
         switch(lang){
             case ENGLISH:
-            return this.ENG_name;
-        }else{
+                return this.ENG_name;
+            default:
             /*Default is Dutch*/
-            return this.NL_name;
+                return this.NL_name;
         }
     }
 

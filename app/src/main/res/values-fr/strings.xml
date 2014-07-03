@@ -15,6 +15,9 @@
     <string name="about">Over Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
     <string name="added_to_route">ommelette du fromage</string>
+    <string name="route_planning">planner la route</string>
+    <string name="route_desc">description de chemin</string>
+    <string name="show_map">montrer la carte</string>
 
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>

@@ -16,6 +16,9 @@
     <string name="calcRoute">Calculate route</string>
     <string name="view_route">My route</string>
     <string name="added_to_route">Added to my route</string>
+    <string name="route_planning">Trip planner</string>
+    <string name="route_desc">Route Description</string>
+    <string name="show_map">Show map</string>
 
     <string-array name="lstMenu">
         <item>Panorama</item>
