@@ -45,7 +45,10 @@ public class POI {
         switch(lang){
             case ENGLISH:
             return this.ENG_name;
-        }else{
+        case FRENCH:
+            return this.FR_name;
+        case DUTCH:
+        default:
             /*Default is Dutch*/
             return this.NL_name;
         }
@@ -53,11 +56,15 @@ public class POI {
 
     public String getDescription() {
         DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
-        if(lang == DataManager.Language.ENGLISH){
-            return this.ENG_description;
-        }else{
+        switch(lang){
+            case ENGLISH:
+                return this.ENG_description;
+            case FRENCH:
+                return this.FR_description;
+            case DUTCH:
+            default:
             /*Default is Dutch*/
-            return this.NL_description;
+                return this.NL_description;
         }
     }
 
