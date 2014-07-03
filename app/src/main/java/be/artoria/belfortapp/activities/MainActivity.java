@@ -40,13 +40,15 @@ public class MainActivity extends BaseActivity {
         initGui();
         downloadData();
     }
+    private static boolean downloading = false;
 
     private void downloadData() {
         final long lastDownload = PrefUtils.getTimeStampDownloads();
         final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-        if(lastDownload == 0 || timeSinceLastDownload > 43200000){
+        if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
+            downloading = true;
             System.err.println("Downloading!");
             new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
         }
@@ -157,6 +159,7 @@ public class MainActivity extends BaseActivity {
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
+            downloading = false;
             if(list.isEmpty()){
                 System.err.println("not good.");
             }
