@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
+import be.artoria.belfortapp.app.ManeuverType;
 
 public class    MapActivity extends ActionBarActivity {
     public static final int DEFAULT_ZOOM = 18;
@@ -143,16 +146,101 @@ public class    MapActivity extends ActionBarActivity {
 
     private void initRouteInstructions(Road road){
         if(road.mNodes != null) {
-            final TextView lblRouteDesc = (TextView)findViewById(R.id.lblRouteDesc);
-            StringBuilder sb = new StringBuilder();
+            LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
             for (RoadNode node : road.mNodes) {
-                //System.out.println(node.mInstructions);
-                sb.append(node.mInstructions);
-                sb.append("\r\n");
+
+                /*LinearLayout to add to the route description*/
+                LinearLayout toAdd = new LinearLayout(this);
+                toAdd.setOrientation(LinearLayout.HORIZONTAL);
+
+                /*Maneuver icon*/
+                ImageView img = new ImageView(this);
+                img.setImageDrawable(getIconForManeuver(node.mManeuverType));
+
+                /*Instruction*/
+                TextView txt = new TextView(this);
+                txt.setText(node.mInstructions);
+
+                toAdd.addView(img);
+                toAdd.addView(txt);
+
+                cntDesc.addView(toAdd);
             }
-            lblRouteDesc.setText(sb.toString());
         }
     }
+
+    /*Get the correct icon for each maneuver*/
+    private Drawable getIconForManeuver(int maneuver){
+        int toReturn = R.drawable.ic_empty;
+        switch(maneuver){
+            case ManeuverType.NONE:
+            case ManeuverType.TRANSIT_TAKE:
+            case ManeuverType.TRANSIT_TRANSFER:
+            case ManeuverType.TRANSIT_ENTER:
+            case ManeuverType.TRANSIT_EXIT:
+            case ManeuverType.TRANSIT_REMAIN_ON:
+            case ManeuverType.ENTERING:
+            case ManeuverType.BECOMES: toReturn = R.drawable.ic_empty;
+                break;
+
+            case ManeuverType.STRAIGHT:
+            case ManeuverType.MERGE_STRAIGHT:
+            case ManeuverType.RAMP_STRAIGHT:
+            case ManeuverType.STAY_STRAIGHT: toReturn = R.drawable.ic_continue;
+                break;
+
+            case ManeuverType.ROUNDABOUT1:
+            case ManeuverType.ROUNDABOUT2:
+            case ManeuverType.ROUNDABOUT3:
+            case ManeuverType.ROUNDABOUT4:
+            case ManeuverType.ROUNDABOUT5:
+            case ManeuverType.ROUNDABOUT6:
+            case ManeuverType.ROUNDABOUT7:
+            case ManeuverType.ROUNDABOUT8: toReturn = R.drawable.ic_roundabout;
+                break;
+
+            case ManeuverType.DESTINATION:
+            case ManeuverType.DESTINATION_RIGHT:
+            case ManeuverType.DESTINATION_LEFT: toReturn = R.drawable.ic_arrived;
+                break;
+
+            case ManeuverType.SLIGHT_LEFT:
+            case ManeuverType.EXIT_LEFT:
+            case ManeuverType.STAY_LEFT:
+            case ManeuverType.MERGE_LEFT: toReturn = R.drawable.ic_slight_left;
+                break;
+
+            case ManeuverType.SLIGHT_RIGHT:
+            case ManeuverType.EXIT_RIGHT:
+            case ManeuverType.STAY_RIGHT:
+            case ManeuverType.MERGE_RIGHT: toReturn = R.drawable.ic_slight_right;
+                break;
+
+            case ManeuverType.UTURN:
+            case ManeuverType.UTURN_LEFT:
+            case ManeuverType.UTURN_RIGHT: toReturn = R.drawable.ic_u_turn;
+                break;
+
+            case ManeuverType.RAMP_LEFT:
+            case ManeuverType.LEFT: toReturn = R.drawable.ic_turn_left;
+                break;
+
+            case ManeuverType.RAMP_RIGHT:
+            case ManeuverType.RIGHT: toReturn = R.drawable.ic_turn_right;
+                break;
+
+            case ManeuverType.SHARP_LEFT: toReturn = R.drawable.ic_sharp_left;
+                break;
+
+            case ManeuverType.SHARP_RIGHT : toReturn = R.drawable.ic_sharp_right;
+                break;
+
+        }
+        return getResources().getDrawable(toReturn);
+    }
+
+
+
 
 
     private void toggleMap(boolean showMap){
