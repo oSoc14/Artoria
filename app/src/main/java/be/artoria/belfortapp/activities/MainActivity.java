@@ -23,12 +23,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
+import be.artoria.belfortapp.sql.POIDAO;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
@@ -48,7 +50,10 @@ public class MainActivity extends BaseActivity {
         final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-        if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
+        System.out.println(downloading);
+        System.out.println(timeSinceLastDownload);
+          if((lastDownload == 0 || timeSinceLastDownload > 1000) && !downloading){
+          //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
             System.err.println("Downloading!");
             new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
@@ -166,12 +171,23 @@ public class MainActivity extends BaseActivity {
             }
             else {
                 PrefUtils.saveTimeStampDownloads();
-                DataManager.poiList.clear();
+                DataManager.clearpois();
+                try {
+                    DataManager.poidao.open();
+                    DataManager.poidao.clearTable();
+
                 for(POI poi : list){
                     System.out.println(poi.ENG_description);
                     System.out.println(poi.id);
+
+                    DataManager.poidao.savePOI(poi);
+
                 }
-                DataManager.poiList.addAll(list);
+                DataManager.addAll(list);
+                DataManager.poidao.close();
+                } catch (SQLException e) {
+                    //TODO sane error handling
+                }
             }
         }
     }

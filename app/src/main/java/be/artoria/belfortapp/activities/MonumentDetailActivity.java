@@ -51,13 +51,13 @@ public class MonumentDetailActivity extends BaseActivity {
     public void addToRoute(View view) {
         final RouteManager rm = RouteManager.getInstance();
         final DataManager dm = DataManager.getInstance();
-        rm.addWayPoint(dm.poiList.get(id));
+        rm.addWayPoint(dm.getPOIbyID(id));
         Toast.makeText(this,getString(R.string.added_to_route),Toast.LENGTH_SHORT).show();
     }
 
     public void prevDetail(View view) {
         /*final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
-        intent.putExtra("id", (id - 1 + DataManager.getInstance().poiList.size()) % DataManager.getInstance().poiList.size());
+        intent.putExtra("id", (id - 1 + DataManager.numberOfPOIs) % DataManager.numberOfPOIs);
         startActivity(intent);*/
         id = id == 0 ? (DataManager.getInstance().poiList.size() -1) : (id -1);
         initGui();
@@ -66,7 +66,7 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public void nextDetail(View view) {
         /*final Intent intent = new Intent(MonumentDetailActivity.this, MonumentDetailActivity.class);
-        intent.putExtra("id", (id + 1) % DataManager.getInstance().poiList.size());
+        intent.putExtra("id", (id + 1) % DataManager.numberOfPOIs);
         startActivity(intent);*/
         id = (id +1) % DataManager.getInstance().poiList.size();
         initGui();
@@ -88,8 +88,9 @@ public class MonumentDetailActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        final DataManager rm = DataManager.getInstance();
-        final POI wp = rm.poiList.get(id);
+        final DataManager dm = DataManager.getInstance();
+        final POI wp = dm.getPOIbyID(id);
+
         final TextView tv =(TextView) findViewById(R.id.monument_name);
         final TextView tvs =(TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc =(TextView)findViewById(R.id.monument_description);

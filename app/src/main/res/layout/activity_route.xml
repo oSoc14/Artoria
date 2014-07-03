@@ -18,7 +18,7 @@
            android:id="@+id/lstRoute"
            dslv:collapsed_height="2dp"
            dslv:drag_enabled="true"
-           dslv:drag_handle_id="@drawable/bg_handle"
+           dslv:drag_handle_id="@+id/lstRoute"
            dslv:drag_scroll_start="0.33"
            dslv:drag_start_mode="onMove"
            dslv:float_alpha="0.6"
@@ -29,15 +29,6 @@
            dslv:sort_enabled="true"
            dslv:track_drag_sort="false"
            dslv:use_default_controller="true"/>
-
-        <clip
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/drag_handler"
-            android:drawable="@color/blue"
-            android:clipOrientation="horizontal"
-            android:gravity="left|fill_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <Button
             android:layout_width="fill_parent"
