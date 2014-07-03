@@ -10,6 +10,7 @@ public class ArtoriaApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        PrefUtils.initialize(this);
 
     }
 

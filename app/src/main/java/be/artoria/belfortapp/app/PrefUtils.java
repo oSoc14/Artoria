@@ -7,10 +7,13 @@ import android.os.Build;
 
 /**
  * Created by Michael Vanderpoorten
+ * Adapted by Laurens De Graeve
  */
 public class PrefUtils {
 
     private static final String ARG_USER_KEY = "be.artoria.belfort";
+    private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
+
     private static Context CONTEXT;
 
     public static Context getContext()
@@ -23,11 +26,11 @@ public class PrefUtils {
         CONTEXT = application;
     }
 
-    public static void saveTimeStampDownloads(String args)
+    public static void saveTimeStampDownloads()
     {
         getPrefs()
                 .edit()
-                .putLong(args, System.currentTimeMillis())
+                .putLong(ARG_DOWNLOAD, System.currentTimeMillis())
                 .apply();
     }
 
