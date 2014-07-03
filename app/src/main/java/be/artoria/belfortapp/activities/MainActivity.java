@@ -23,6 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
@@ -50,7 +51,8 @@ public class MainActivity extends BaseActivity {
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
         System.out.println(downloading);
         System.out.println(timeSinceLastDownload);
-          if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
+          if((lastDownload == 0 || timeSinceLastDownload > 1000) && !downloading){
+          //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
             System.err.println("Downloading!");
             new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
@@ -169,13 +171,22 @@ public class MainActivity extends BaseActivity {
             else {
                 PrefUtils.saveTimeStampDownloads();
                 DataManager.clearpois();
+                try {
+                    DataManager.poidao.open();
+                    DataManager.poidao.clearTable();
 
                 for(POI poi : list){
                     System.out.println(poi.ENG_description);
                     System.out.println(poi.id);
+
                     DataManager.poidao.savePOI(poi);
+
                 }
                 DataManager.addAll(list);
+                DataManager.poidao.close();
+                } catch (SQLException e) {
+                    //TODO sane error handling
+                }
             }
         }
     }

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class POIDbHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
-    private static final String SQL_CREATE_ENTRIES =
+    public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + POIContract.POIEntry.TABLE_NAME + " (" +
                     POIContract.POIEntry.COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
@@ -24,7 +24,7 @@ public class POIDbHelper extends SQLiteOpenHelper {
                     POIContract.POIEntry.COLUMN_NAME_IMAGE_URL + TEXT_TYPE +
             " )";
 
-    private static final String SQL_DELETE_ENTRIES =
+    public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + POIContract.POIEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
@@ -43,5 +43,4 @@ public class POIDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
-
 }

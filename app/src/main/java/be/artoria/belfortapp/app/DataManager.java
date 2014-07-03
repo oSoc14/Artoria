@@ -1,14 +1,10 @@
 package be.artoria.belfortapp.app;
 
 
-import android.content.res.Resources;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.sql.POIDAO;
 
 /**
@@ -48,10 +44,10 @@ public class DataManager {
             } catch (SQLException e) {
                 // TODO catch exceptions in a sane manner.
             }
-            poiList.addAll(poidao.getAllComments());
+            poiList.addAll(poidao.getAllPOIs());
             /* Worst case scenario, the local database is empty and we're asked for a poi */
             if(poiList.isEmpty()){
-                // TODO: download the new info now
+
             }
         }
         poidao.close();

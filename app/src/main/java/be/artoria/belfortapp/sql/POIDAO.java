@@ -64,7 +64,12 @@ public class POIDAO {
         return poi;
     }
 
-    public List<POI> getAllComments() {
+    public void clearTable(){
+        database.execSQL(POIDbHelper.SQL_DELETE_ENTRIES);
+        database.execSQL(POIDbHelper.SQL_CREATE_ENTRIES);
+    }
+
+    public List<POI> getAllPOIs() {
         List<POI> pois = new ArrayList<POI>();
 
         Cursor cursor = database.query(POIEntry.TABLE_NAME,
