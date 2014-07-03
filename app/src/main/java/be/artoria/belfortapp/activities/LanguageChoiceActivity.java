@@ -13,6 +13,7 @@ import android.view.View;
 import java.util.Locale;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
 
 
 public class LanguageChoiceActivity extends BaseActivity {
@@ -49,13 +50,16 @@ public class LanguageChoiceActivity extends BaseActivity {
         switch (view.getId()) {
             case(R.id.english):
                 locale = new Locale("en");
+                DataManager.lang = DataManager.Language.ENGLISH;
                 break;
             case(R.id.french):
                 locale = new Locale("fr");
+                DataManager.lang = DataManager.Language.FRENCH;
                 break;
             case(R.id.dutch):
             default:
                 /* Default case is dutch */
+                DataManager.lang = DataManager.Language.DUTCH;
                 locale = new Locale("nl");
         }
 

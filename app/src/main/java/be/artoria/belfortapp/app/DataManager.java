@@ -1,8 +1,11 @@
 package be.artoria.belfortapp.app;
 
 
+import android.content.res.Resources;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Laurens on 01/07/2014.
@@ -11,7 +14,7 @@ public class DataManager {
     public enum Language{
         DUTCH,ENGLISH,FRENCH
     }
-    private static final Language lang = null;
+    public static Language lang = null;
 
     private static final DataManager INSTANCE = new DataManager();
     public static final List<POI> poiList = new ArrayList<POI>();
@@ -29,8 +32,7 @@ public class DataManager {
     }
 
     public Language getCurrentLanguage(){
-
-        return Language.DUTCH;
+        return lang;
     }
 
     public static DataManager getInstance() {
