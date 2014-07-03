@@ -169,12 +169,7 @@ public class MainActivity extends BaseActivity {
                 System.err.println("not good.");
             }
             else {
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putLong(getString(R.string.lastDownload), System.currentTimeMillis());
-
-                editor.apply();
-
+                PrefUtils.saveTimeStampDownloads();
                 //DataManager.poiList.clear();
                 for(POI poi : list){
                     System.out.println(poi.ENG_description);
