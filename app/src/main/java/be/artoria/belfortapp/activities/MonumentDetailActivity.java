@@ -74,7 +74,7 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public void viewRoute(View view) {
         /*Go to the route overview*/
-        final Intent i = new Intent(MonumentDetailActivity.this,MapActivity.class);
+        final Intent i = new Intent(MonumentDetailActivity.this,RouteActivity.class);
         startActivity(i);
     }
 
