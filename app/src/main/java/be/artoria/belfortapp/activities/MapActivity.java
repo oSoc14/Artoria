@@ -267,6 +267,7 @@ public class MapActivity extends ActionBarActivity {
            System.out.println("network locations");
            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
+
         if(location != null){
             return new GeoPoint(location.getLatitude(),location.getLongitude());
         }else{

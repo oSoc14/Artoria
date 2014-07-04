@@ -50,6 +50,7 @@ public class DataManager {
                 // TODO catch exceptions in a sane manner.
             }
             poiList.addAll(poidao.getAllPOIs());
+            numberOfPOIs = poiList.size();
             /* Worst case scenario, the local database is empty and we're asked for a poi */
             if(poiList.isEmpty()){
 

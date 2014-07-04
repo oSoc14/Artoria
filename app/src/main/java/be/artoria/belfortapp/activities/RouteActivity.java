@@ -6,17 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
@@ -24,7 +19,7 @@ import be.artoria.belfortapp.app.RouteManager;
 public class RouteActivity extends BaseActivity {
 
     DragSortListView listView;
-    ArrayAdapter<POI> adapter;
+    DragSortAdapter adapter;
 
     private DragSortListView.DropListener onDrop = new DragSortListView.DropListener()
     {
@@ -82,8 +77,8 @@ public class RouteActivity extends BaseActivity {
     private void initGUI(){
 
         listView = (DragSortListView) findViewById(R.id.lstRoute);
-        adapter = new ArrayAdapter<POI>(this,
-                android.R.layout.simple_list_item_1,  RouteManager.getInstance().getWaypoints());
+        adapter = new DragSortAdapter(this,
+                R.layout.route_list_item,  RouteManager.getInstance().getWaypoints());
         listView.setAdapter(adapter);
         listView.setDropListener(onDrop);
         listView.setRemoveListener(onRemove);
@@ -91,9 +86,10 @@ public class RouteActivity extends BaseActivity {
         final DragSortController controller = new DragSortController(listView);
         controller.setDragHandleId(R.id.lstRoute);
         //controller.setClickRemoveId(R.id.);
-        controller.setRemoveEnabled(true);
+
+        controller.setRemoveEnabled(false);
         controller.setSortEnabled(true);
-        controller.setDragInitMode(1);
+        controller.setDragInitMode(DragSortController.ON_LONG_PRESS);
         //controller.setRemoveMode(removeMode);
 
 
