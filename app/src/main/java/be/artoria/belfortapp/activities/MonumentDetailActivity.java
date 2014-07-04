@@ -108,8 +108,9 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public static MonumentDetailActivity newIntent(int new_id)
     {
-        final Intent ;
+        //final Intent ;
         id = new_id;
+        return null;
 
     }
 }
