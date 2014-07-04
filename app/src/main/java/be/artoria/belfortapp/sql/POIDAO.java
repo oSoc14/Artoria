@@ -87,6 +87,8 @@ public class POIDAO {
     }
 
     private POI cursorToPOI(Cursor cursor) {
+        if(cursor == null ) return null;
+        System.err.println(cursor.getColumnCount());
         POI poi = new POI();
         poi.id               = cursor.getInt  ( 1 );
         poi.NL_name         = cursor.getString(2);

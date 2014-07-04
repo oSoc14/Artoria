@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 'android-L'
+    compileSdkVersion "android-20"
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "be.artoria.belfortapp"
         minSdkVersion 9
-        targetSdkVersion 'L'
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }

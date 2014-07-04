@@ -66,10 +66,6 @@ public class RouteActivity extends BaseActivity {
         return true;
     }
 
-
-    private ArrayAdapter<POI> routeAdapter;
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -84,16 +80,6 @@ public class RouteActivity extends BaseActivity {
 
     /*Initialize GUI */
     private void initGUI(){
-        ///////// old code /////////
-        //final ListView lstRoute = (ListView)findViewById(R.id.lstRoute);
-        //final Button btnCalcRoute = (Button)findViewById(R.id.btnCalcRoute);
-
-
-        ///*TODO make the list sortable, this might be interesting: http://jasonmcreynolds.com/?p=423 */
-        //routeAdapter = new ArrayAdapter<POI>(this,android.R.layout.simple_list_item_1, RouteManager.getInstance().getWaypoints());
-        //lstRoute.setAdapter(routeAdapter);
-
-        /* new code */
 
         listView = (DragSortListView) findViewById(R.id.lstRoute);
         adapter = new ArrayAdapter<POI>(this,
@@ -109,6 +95,7 @@ public class RouteActivity extends BaseActivity {
         controller.setSortEnabled(true);
         controller.setDragInitMode(1);
         //controller.setRemoveMode(removeMode);
+
 
         listView.setFloatViewManager(controller);
         listView.setOnTouchListener(controller);
