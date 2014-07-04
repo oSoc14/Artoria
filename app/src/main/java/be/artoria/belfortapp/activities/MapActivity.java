@@ -58,7 +58,7 @@ public class MapActivity extends ActionBarActivity {
         /*Setup map and draw route*/
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setBuiltInZoomControls(true);
-        mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
+        //mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
         MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
         mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
