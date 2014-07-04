@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import be.artoria.belfortapp.R;
@@ -42,8 +44,11 @@ public class MapActivity extends ActionBarActivity {
     private String MAP_QUEST_API_KEY; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
     public static final String LANG_NL = "nl_NL";
+    public static final int MAX_NUMBER_OF_TRIES = 5;
+    public static int numberOfTries = 0;
     private MapView mapView;
     private boolean showsMap = true;
+    //viewTreeObserver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +135,8 @@ public class MapActivity extends ActionBarActivity {
             //RoadManager roadManager = new OSRMRoadManager();
             roadManager.addRequestOption("routeType=pedestrian");
             String lang = DataManager.getInstance().getCurrentLanguage() == DataManager.Language.ENGLISH ? LANG_ENG : LANG_NL;
-            roadManager.addRequestOption("locale="+lang );
+            roadManager.addRequestOption("locale="+lang ); //display the directions in the selected language
+            roadManager.addRequestOption("unit=k"); //display the distance in kilometers
             Road road = roadManager.getRoad(getGeoPointsFromRoute());
             return road;
         }
@@ -140,6 +146,10 @@ public class MapActivity extends ActionBarActivity {
             Road road = (Road)result;
             Polyline routeOverlay = RoadManager.buildRoadOverlay(road, MapActivity.this);
             initRouteInstructions(road);
+            final TextView lblDistance = (TextView)findViewById(R.id.lblDistance);
+            lblDistance.setText(String.format("%.2f", road.mLength)  + "km");
+            final TextView lblTime = (TextView)findViewById(R.id.lblTime);
+            lblTime.setText(String.format("%.0f",(road.mDuration / 60)) + " " + getResources().getString(R.string.minutes)); //set estimated time in minutes
             mapView.getOverlays().add(routeOverlay);
             mapView.invalidate();
         }
@@ -167,6 +177,8 @@ public class MapActivity extends ActionBarActivity {
 
                 cntDesc.addView(toAdd);
             }
+        }else{
+            /* Try again*/
         }
     }
 
