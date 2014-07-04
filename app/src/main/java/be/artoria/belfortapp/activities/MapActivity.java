@@ -2,6 +2,8 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -121,7 +123,7 @@ public class MapActivity extends ActionBarActivity {
     /* Transfer the route to an ArrayList of GeoPoint objects */
     private ArrayList<GeoPoint> getGeoPointsFromRoute(){
         ArrayList<GeoPoint>toReturn = new ArrayList<GeoPoint>();
-        toReturn.add(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
+        toReturn.add(getCurrentLocation());
         for(POI poi : RouteManager.getInstance().getWaypoints()){
             toReturn.add(new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
         }
@@ -239,15 +241,30 @@ public class MapActivity extends ActionBarActivity {
         return getResources().getDrawable(toReturn);
     }
 
-
-
-
-
     private void toggleMap(boolean showMap){
         final MapView mapview = (MapView)findViewById(R.id.mapview);
         mapview.setVisibility( showMap ? View.VISIBLE :View.GONE);
         final ListView cntDesc = (ListView)findViewById(R.id.lstRouteDesc);
         cntDesc.setVisibility( showMap ? View.GONE : View.VISIBLE);
+    }
+
+    private GeoPoint getCurrentLocation(){
+        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getAllProviders();
+        Location location;
+        if(providers.contains(LocationManager.GPS_PROVIDER)){
+            System.out.println("gps location");
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }else{
+           System.out.println("network locations");
+           location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        if(location != null){
+            return new GeoPoint(location.getLatitude(),location.getLongitude());
+        }else{
+            return new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON);
+        }
+
     }
 
 }
