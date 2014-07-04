@@ -2,6 +2,7 @@ package be.artoria.belfortapp.app;
 
 import android.app.Application;
 
+import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.sql.POIDAO;
 
 /**
@@ -13,6 +14,8 @@ public class ArtoriaApp extends Application {
     public void onCreate() {
         super.onCreate();
         PrefUtils.initialize(this);
+        MainActivity.downloadData();
     }
+
 
 }

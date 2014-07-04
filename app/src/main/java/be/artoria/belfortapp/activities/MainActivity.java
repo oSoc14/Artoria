@@ -40,19 +40,16 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initGui();
-        downloadData();
-
     }
+
     private static boolean downloading = false;
 
-    private void downloadData() {
+    public static void downloadData() {
         final long lastDownload = PrefUtils.getTimeStampDownloads();
         final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-        System.out.println(downloading);
-        System.out.println(timeSinceLastDownload);
-          if((lastDownload == 0 || timeSinceLastDownload > 1000) && !downloading){
+          if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
           //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
             System.err.println("Downloading!");
@@ -63,7 +60,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        downloadData();
     }
 
     @Override
@@ -137,7 +133,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private class DownloadDataTask extends AsyncTask<String, Void, String> {
+    private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
