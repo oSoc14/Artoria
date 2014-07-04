@@ -107,7 +107,7 @@ public class RouteActivity extends BaseActivity {
                 final POI poi = adapter.getItem(i);
                 final int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra(MonumentDetailActivity.ARG_ID, id);
                 startActivity(intent);
             }
         });

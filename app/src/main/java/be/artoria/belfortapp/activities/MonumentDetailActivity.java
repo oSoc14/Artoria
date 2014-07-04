@@ -19,7 +19,7 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
 public class MonumentDetailActivity extends BaseActivity {
-    private final static String ARG_ID = "be.belfort.monumentid";
+    public final static String ARG_ID = "be.belfort.monumentid";
 
     private static int id;
     @Override
