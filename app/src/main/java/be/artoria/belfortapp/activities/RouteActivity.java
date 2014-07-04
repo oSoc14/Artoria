@@ -104,7 +104,7 @@ public class RouteActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final POI poi = (POI)listView.getSelectedItem();
+                final POI poi = adapter.getItem(i);
                 final int id = poi.id;
                 final Intent intent = new Intent(RouteActivity.this, MonumentDetailActivity.class);
                 intent.putExtra("id", id);

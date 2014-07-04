@@ -19,12 +19,14 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
 public class MonumentDetailActivity extends BaseActivity {
-    int id;
+    private final static String ARG_ID = "be.belfort.monumentid";
+
+    private static int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
-        id = (Integer) getIntent().getExtras().get("id");
+        id = (Integer) getIntent().getExtras().get(ARG_ID);
         initGui();
     }
 
@@ -104,7 +106,10 @@ public class MonumentDetailActivity extends BaseActivity {
 
     }
 
-    private static class newIntent{
-        static int id;
+    public static MonumentDetailActivity newIntent(int new_id)
+    {
+        final Intent ;
+        id = new_id;
+
     }
 }
