@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -32,6 +33,11 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.SimpleLocationOverlay;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,7 +113,51 @@ public class MapActivity extends BaseActivity {
             }
         });
 
+        /*Add markers on the map*/
+        ItemizedOverlayWithFocus<OverlayItem> overlay;
+        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+        POI belfort = new POI();
+        belfort.ENG_name = "Belfry";
+        belfort.ENG_description = "";
+        belfort.NL_name = "belfort";
+        belfort.NL_description = "";
+        belfort.lat = DataManager.BELFORT_LAT +"";
+        belfort.lon = DataManager.BELFORT_LON +"";
+        OverlayItem overlayItem = getOverlayItemFromPOI(belfort,getResources().getDrawable(R.drawable.castle));
+        items.add(overlayItem);
+
+        for(POI poi : RouteManager.getInstance().getWaypoints()){
+          OverlayItem item = getOverlayItemFromPOI(poi,null);
+          items.add(item);
+        }
+
+        overlay = new ItemizedOverlayWithFocus<OverlayItem>(this.getApplicationContext(), items,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+
+                    @Override
+                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                        return true; // We 'handled' this event.
+                    }
+
+                    @Override
+                    public boolean onItemLongPress(final int index, final OverlayItem item) {
+                        return false;
+                    }
+                });
+
+        mapView.getOverlays().add(overlay);
+        mapView.invalidate();
     }
+
+    private OverlayItem getOverlayItemFromPOI(POI poi,Drawable icon){
+        GeoPoint geoPoint = new GeoPoint(DataManager.BELFORT_LAT, DataManager.BELFORT_LON);
+        OverlayItem overlayItem = new OverlayItem(poi.getName(), poi.getDescription(), new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
+        if(icon != null) {
+            overlayItem.setMarker(icon);
+        }
+        return overlayItem;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
