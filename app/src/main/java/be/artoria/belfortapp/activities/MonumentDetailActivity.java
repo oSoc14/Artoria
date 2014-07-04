@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +102,7 @@ public class MonumentDetailActivity extends BaseActivity {
         String name = wp.getName();
         tv.setText(name);
         tvs.setText(name);
+        desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
         Picasso.with(this).load(wp.image_link).into(img);
 

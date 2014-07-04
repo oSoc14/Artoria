@@ -90,16 +90,16 @@ public class POIDAO {
         if(cursor == null ) return null;
         System.err.println(cursor.getColumnCount());
         POI poi = new POI();
-        poi.id               = cursor.getInt  ( 1 );
-        poi.NL_name         = cursor.getString(2);
-        poi.ENG_name        = cursor.getString(3);
-        poi.FR_name         = cursor.getString(4);
-        poi.lat             = cursor.getString(5);
-        poi.lon             = cursor.getString(6);
-        poi.NL_description  = cursor.getString( 7 );
-        poi.ENG_description = cursor.getString( 8 );
-        poi.FR_description  = cursor.getString( 9 );
-        poi.image_link      = cursor.getString( 10);
+        poi.id              = cursor.getInt(cursor.getColumnIndex(POIEntry.COLUMN_NAME_ENTRY_ID));
+        poi.NL_name         = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_NAME));
+        poi.ENG_name        = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_NAME_EN));
+        poi.FR_name         = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_NAME_FR));
+        poi.lat             = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_LAT));
+        poi.lon             = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_LON));
+        poi.NL_description  = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION));
+        poi.ENG_description = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_EN));
+        poi.FR_description  = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_FR));
+        poi.image_link      = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_IMAGE_URL));
         return poi;
     }
 }

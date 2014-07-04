@@ -55,6 +55,8 @@ android:textAppearance="?android:attr/textAppearanceLarge"
 android:id="@+id/monument_name"
 android:layout_alignParentTop="true"
 android:layout_centerHorizontal="true"
+android:scrollbars = "vertical"
+android:maxLines = "10000"
 tools:text="testtest"/>
 
 
