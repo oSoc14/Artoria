@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.osmdroid.bonuspack.overlays.Polyline;
@@ -31,11 +32,14 @@ import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.DescriptionRow;
 import be.artoria.belfortapp.app.POI;
+import be.artoria.belfortapp.app.RouteDescAdapter;
 import be.artoria.belfortapp.app.RouteManager;
 import be.artoria.belfortapp.app.ManeuverType;
 
@@ -44,11 +48,9 @@ public class MapActivity extends ActionBarActivity {
     private String MAP_QUEST_API_KEY; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
     public static final String LANG_NL = "nl_NL";
-    public static final int MAX_NUMBER_OF_TRIES = 5;
-    public static int numberOfTries = 0;
     private MapView mapView;
     private boolean showsMap = true;
-    //viewTreeObserver
+    //use viewTreeObserver to align the map according to the route issue: #24
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,28 +159,13 @@ public class MapActivity extends ActionBarActivity {
 
     private void initRouteInstructions(Road road){
         if(road.mNodes != null) {
-            LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
+            //LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
+            ListView lstRouteDesc = (ListView)findViewById(R.id.lstRouteDesc);
+            List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
             for (RoadNode node : road.mNodes) {
-
-                /*LinearLayout to add to the route description*/
-                LinearLayout toAdd = new LinearLayout(this);
-                toAdd.setOrientation(LinearLayout.HORIZONTAL);
-
-                /*Maneuver icon*/
-                ImageView img = new ImageView(this);
-                img.setImageDrawable(getIconForManeuver(node.mManeuverType));
-
-                /*Instruction*/
-                TextView txt = new TextView(this);
-                txt.setText(node.mInstructions);
-
-                toAdd.addView(img);
-                toAdd.addView(txt);
-
-                cntDesc.addView(toAdd);
+                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),node.mInstructions));
             }
-        }else{
-            /* Try again*/
+            lstRouteDesc.setAdapter(new RouteDescAdapter(this,android.R.layout.simple_list_item_1,descriptions));
         }
     }
 
@@ -259,7 +246,7 @@ public class MapActivity extends ActionBarActivity {
     private void toggleMap(boolean showMap){
         final MapView mapview = (MapView)findViewById(R.id.mapview);
         mapview.setVisibility( showMap ? View.VISIBLE :View.GONE);
-        final LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
+        final ListView cntDesc = (ListView)findViewById(R.id.lstRouteDesc);
         cntDesc.setVisibility( showMap ? View.GONE : View.VISIBLE);
     }
 
