@@ -15,6 +15,7 @@ import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,13 +47,12 @@ import be.artoria.belfortapp.app.RouteManager;
 import be.artoria.belfortapp.app.ManeuverType;
 
 public class MapActivity extends ActionBarActivity {
-    public static final int DEFAULT_ZOOM = 18;
+    public static final int DEFAULT_ZOOM = 17;
     private String MAP_QUEST_API_KEY; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
     public static final String LANG_NL = "nl_NL";
     private MapView mapView;
     private boolean showsMap = true;
-    //use viewTreeObserver to align the map according to the route issue: #24
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class MapActivity extends ActionBarActivity {
         //mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
         MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
-        mapCtrl.setCenter(new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON));
         new RouteCalcTask().execute();
 
         /*Initially show map*/
@@ -96,6 +95,15 @@ public class MapActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MapActivity.this,RouteActivity.class);
                 startActivity(i);
+            }
+        });
+
+        /*Set center of map to current location of Bellfry*/
+        ViewTreeObserver vto = mapView.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mapView.getController().setCenter(getCurrentLocation());
             }
         });
 
