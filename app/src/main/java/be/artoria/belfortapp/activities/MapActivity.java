@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.ArtoriaOverlayItem;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.DescriptionRow;
 import be.artoria.belfortapp.app.POI;
@@ -141,6 +142,9 @@ public class MapActivity extends BaseActivity {
 
                     @Override
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                        ArtoriaOverlayItem overlayItem = (ArtoriaOverlayItem)item;
+                        Intent i = MonumentDetailActivity.newIntent(MapActivity.this,overlayItem.poi.id);
+                        startActivity(i);
                         return true; // We 'handled' this event.
                     }
 
@@ -155,7 +159,7 @@ public class MapActivity extends BaseActivity {
     }
 
     private OverlayItem getOverlayItemFromPOI(POI poi,Drawable icon){
-        OverlayItem overlayItem = new OverlayItem(poi.getName(), poi.getDescription(), new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
+        ArtoriaOverlayItem overlayItem = new ArtoriaOverlayItem(poi);
         if(icon != null) {
             overlayItem.setMarker(icon);
         }

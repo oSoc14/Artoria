@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -108,11 +109,11 @@ public class MonumentDetailActivity extends BaseActivity {
 
     }
 
-    public static MonumentDetailActivity newIntent(int new_id)
+    public static Intent newIntent(Context ctx, int new_id)
     {
-        //final Intent ;
-        id = new_id;
-        return null;
+        final Intent toReturn = new Intent(ctx,MonumentDetailActivity.class);
+        toReturn.putExtra(ARG_ID,new_id);
+        return toReturn;
 
     }
 }
