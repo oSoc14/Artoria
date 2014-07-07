@@ -59,6 +59,7 @@ public class MapActivity extends BaseActivity {
     public static final String LANG_NL = "nl_NL";
     private MapView mapView;
     private boolean showsMap = true;
+    private boolean firstStart = true; //to check when the mapview is loaded for the first time (this is for the ViewTreeObserver)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,11 @@ public class MapActivity extends BaseActivity {
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mapView.getController().setCenter(getCurrentLocation());
+                if(firstStart){
+                    mapView.getController().setCenter(getCurrentLocation());
+                    firstStart = false;
+                }
+
             }
         });
 
@@ -150,7 +155,6 @@ public class MapActivity extends BaseActivity {
     }
 
     private OverlayItem getOverlayItemFromPOI(POI poi,Drawable icon){
-        GeoPoint geoPoint = new GeoPoint(DataManager.BELFORT_LAT, DataManager.BELFORT_LON);
         OverlayItem overlayItem = new OverlayItem(poi.getName(), poi.getDescription(), new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
         if(icon != null) {
             overlayItem.setMarker(icon);
