@@ -150,7 +150,6 @@ public class MapActivity extends BaseActivity {
     }
 
     private OverlayItem getOverlayItemFromPOI(POI poi,Drawable icon){
-        GeoPoint geoPoint = new GeoPoint(DataManager.BELFORT_LAT, DataManager.BELFORT_LON);
         OverlayItem overlayItem = new OverlayItem(poi.getName(), poi.getDescription(), new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
         if(icon != null) {
             overlayItem.setMarker(icon);
