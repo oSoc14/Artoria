@@ -123,9 +123,10 @@ public class MapActivity extends BaseActivity {
         ItemizedOverlayWithFocus<OverlayItem> overlay;
         ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
         POI belfort = new POI();
+        belfort.id = -1; //used to disable the clickhandler for this poi
         belfort.ENG_name = "Belfry";
         belfort.ENG_description = "";
-        belfort.NL_name = "belfort";
+        belfort.NL_name = "Belfort";
         belfort.NL_description = "";
         belfort.lat = DataManager.BELFORT_LAT +"";
         belfort.lon = DataManager.BELFORT_LON +"";
@@ -142,9 +143,12 @@ public class MapActivity extends BaseActivity {
 
                     @Override
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        ArtoriaOverlayItem overlayItem = (ArtoriaOverlayItem)item;
-                        Intent i = MonumentDetailActivity.newIntent(MapActivity.this,overlayItem.poi.id);
-                        startActivity(i);
+                        final ArtoriaOverlayItem overlayItem = (ArtoriaOverlayItem)item;
+                        final POI selectedItem = ((ArtoriaOverlayItem) item).poi;
+                        if(selectedItem.id != -1) {
+                            Intent i = MonumentDetailActivity.newIntent(MapActivity.this, selectedItem.id);
+                            startActivity(i);
+                        }
                         return true; // We 'handled' this event.
                     }
 
