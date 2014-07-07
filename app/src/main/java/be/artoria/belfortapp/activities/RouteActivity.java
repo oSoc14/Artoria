@@ -87,7 +87,6 @@ public class RouteActivity extends BaseActivity {
         controller.setRemoveEnabled(true);
 
         listView.setFloatViewManager(controller);
-        listView.setOnTouchListener(controller);
         listView.setDragEnabled(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
