@@ -38,7 +38,7 @@ private class ViewHolder {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.route_list_item, null);
             holder = new ViewHolder();
-            holder.txtDesc = (TextView) convertView.findViewById(R.id.drag_handle);
+            holder.txtDesc = (TextView) convertView.findViewById(R.id.route_list_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

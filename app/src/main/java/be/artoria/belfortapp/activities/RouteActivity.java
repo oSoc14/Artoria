@@ -75,7 +75,6 @@ public class RouteActivity extends BaseActivity {
 
     /*Initialize GUI */
     private void initGUI(){
-
         listView = (DragSortListView) findViewById(R.id.lstRoute);
         adapter = new DragSortAdapter(this,
                 R.layout.route_list_item,  RouteManager.getInstance().getWaypoints());
@@ -84,13 +83,8 @@ public class RouteActivity extends BaseActivity {
         listView.setRemoveListener(onRemove);
 
         final DragSortController controller = new DragSortController(listView);
-        controller.setDragHandleId(R.id.lstRoute);
-        //controller.setClickRemoveId(R.id.);
 
-        controller.setRemoveEnabled(false);
-        controller.setSortEnabled(true);
-        controller.setDragInitMode(DragSortController.ON_LONG_PRESS);
-        //controller.setRemoveMode(removeMode);
+        controller.setRemoveEnabled(true);
 
 
         listView.setFloatViewManager(controller);
