@@ -498,25 +498,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	 * @param settings
 	 */
 	private void firstAccess(SharedPreferences settings) {
-		SharedPreferences.Editor editor = settings.edit();
-		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-		builder1.setMessage(getString(be.artoria.belfortapp.R.string.license));
-		builder1.setNegativeButton(getString(be.artoria.belfortapp.R.string.close_button),
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.dismiss();
-					}
-				});
-		AlertDialog alert1 = builder1.create();
-		alert1.setTitle(getString(be.artoria.belfortapp.R.string.license_title));
-		alert1.show();
-		editor.putBoolean("firstAccess", true);
-
-		// value for maximum POI for each selected OSM URL to be active by
-		// default is 5
-		editor.putInt("osmMaxObject", 5);
-		editor.commit();
-
 		// add the default datasources to the preferences file
 		DataSourceStorage.getInstance().fillDefaultDataSources();
 	}
