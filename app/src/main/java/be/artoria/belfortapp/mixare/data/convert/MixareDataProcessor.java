@@ -59,10 +59,11 @@ public class MixareDataProcessor extends DataHandler implements DataProcessor{
 		return true; //this datasources has no required type, it will always match.
 	}
 
+    //watch out this is broken, use ArtoriaDataProcessor instead ....
 	@Override
-	public List<Marker> load(String rawData, int taskId, int colour) throws JSONException {
+	public List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException {
 		List<Marker> markers = new ArrayList<Marker>();
-		JSONObject root = convertToJSON(rawData);
+		JSONObject root = null;//convertToJSON(rawData);
 		JSONArray dataArray = root.getJSONArray("results");
 		int top = Math.min(MAX_JSON_OBJECTS, dataArray.length());
 
