@@ -19,12 +19,13 @@
 package be.artoria.belfortapp.mixare.mgr.datasource;
 
 import java.util.Locale;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.MixContext;
 import be.artoria.belfortapp.mixare.data.DataSource;
-import be.artoria.belfortapp.mixare.data.DataSourceStorage;
 import be.artoria.belfortapp.mixare.mgr.downloader.DownloadRequest;
+
+
 
 class DataSourceMgrImpl implements DataSourceManager {
 
@@ -38,12 +39,7 @@ class DataSourceMgrImpl implements DataSourceManager {
 
 
 	public void refreshDataSources() {
-
-		DataSourceStorage.getInstance(ctx).fillData();
-
-			String fields[] = DataSourceStorage.getInstance().getFields();
-			dataSource = new DataSource(fields[0], fields[1],
-					fields[2], fields[3], fields[4]);
+        DataManager.refresh();
 	}
 
     @Override
@@ -54,11 +50,9 @@ class DataSourceMgrImpl implements DataSourceManager {
 
     public void requestDataFromAllActiveDataSource(double lat, double lon,
 			double alt, float radius) {
-
-				requestData(dataSource, lat, lon, alt, radius, Locale.getDefault()
-						.getLanguage());
-
-
+            // TODO use Datamanger.locale
+			requestData(dataSource, lat, lon, alt, radius, Locale.getDefault()
+					.getLanguage());
 
 	}
 
@@ -67,7 +61,6 @@ class DataSourceMgrImpl implements DataSourceManager {
 		DownloadRequest request = new DownloadRequest(datasource,
 				datasource.createRequestParams(lat, lon, alt, radius, locale));
 		ctx.getDownloadManager().submitJob(request);
-
 	}
 
 }

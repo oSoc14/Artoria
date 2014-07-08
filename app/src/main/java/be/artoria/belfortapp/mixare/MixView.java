@@ -34,9 +34,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import be.artoria.belfortapp.R.drawable;
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.data.DataHandler;
-import be.artoria.belfortapp.mixare.data.DataSourceList;
-import be.artoria.belfortapp.mixare.data.DataSourceStorage;
+
 import be.artoria.belfortapp.mixare.lib.gui.PaintScreen;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 import be.artoria.belfortapp.mixare.lib.render.Matrix;
@@ -136,7 +136,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			
 			/*check if the application is launched for the first time*/
 			if(settings.getBoolean("firstAccess",false)==false){
-                DataSourceStorage.getInstance().fillData();
+                //DataSourceStorage.getInstance().fillData();
+                // data is filled by the datamanager.
+                DataManager.refresh();
+
 			}
 
 		} catch (Exception ex) {
@@ -320,16 +323,14 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		}
 
 		Log.d("-------------------------------------------", "resume");
-		if (getDataView().isFrozen() && getMixViewData().getSearchNotificationTxt() == null) {
+		if (getDataView().isFrozen()
+                && getMixViewData().getSearchNotificationTxt() == null) {
 			getMixViewData().setSearchNotificationTxt(new TextView(this));
 			getMixViewData().getSearchNotificationTxt().setWidth(
 					getdWindow().getWidth());
 			getMixViewData().getSearchNotificationTxt().setPadding(10, 2, 0, 0);
-			getMixViewData().getSearchNotificationTxt().setText(
-					getString(be.artoria.belfortapp.R.string.search_active_1) + " "
-							+ DataSourceList.getDataSourcesStringList()
-							+ getString(be.artoria.belfortapp.R.string.search_active_2));
-			;
+			getMixViewData().getSearchNotificationTxt().setText("REMOVE ME");
+
 			getMixViewData().getSearchNotificationTxt().setBackgroundColor(
 					Color.DKGRAY);
 			getMixViewData().getSearchNotificationTxt().setTextColor(Color.WHITE);
@@ -407,6 +408,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	 * TODO refresh downloads
 	 */
 	private void refreshDownload(){
+        DataManager.refresh();
 //		try {
 //			if (getMixViewData().getDownloadThread() != null){
 //				if (!getMixViewData().getDownloadThread().isInterrupted()){
@@ -495,7 +497,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	 * hidden and not added to view, Caller needs to add the frameLayout to
 	 * view, and enable visibility when needed.
 	 * 
-	 * @param SharedPreference settings where setting is stored
+	 * @param
 	 * @return FrameLayout Hidden Zoom Bar
 	 */
 	private FrameLayout createZoomBar(SharedPreferences settings) {
@@ -555,10 +557,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		/* Data sources */
 		case 1:
 			if (!getDataView().isLauncherStarted()) {
-				Intent intent = new Intent(MixView.this, DataSourceList.class);
-				startActivityForResult(intent, 40);
+                Toast.makeText(this, "REMOVE THESE OPTIONS PLEASE", Toast.LENGTH_LONG)
+                        .show();
 			} else {
-				Toast.makeText(this, getString(be.artoria.belfortapp.R.string.no_website_available),
+				Toast.makeText(this, "THESE OPTIONS NEED TO GO, QUICKER + BETTER",
 						Toast.LENGTH_LONG).show();
 			}
 			break;
@@ -569,8 +571,8 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			 * empty
 			 */
 			if (getDataView().getDataHandler().getMarkerCount() > 0) {
-				Intent intent1 = new Intent(MixView.this, MixListView.class); 
-				startActivityForResult(intent1, 42);
+				//Intent intent1 = new Intent(MixView.this, MixListView.class);
+				//startActivityForResult(intent1, 42);
 			}
 			/* if the list is empty */
 			else {
@@ -821,22 +823,25 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	/* ************ Handlers *************/
 
 	public void doError(Exception ex1) {
-		if (!fError) {
-			fError = true;
+        // TODO fix me
+        if(false) {
+            if (!fError) {
+                fError = true;
 
-			setErrorDialog();
+                setErrorDialog();
 
-			ex1.printStackTrace();
-			try {
-			} catch (Exception ex2) {
-				ex2.printStackTrace();
-			}
-		}
+                ex1.printStackTrace();
+                try {
+                } catch (Exception ex2) {
+                    ex2.printStackTrace();
+                }
+            }
 
-		try {
-			augScreen.invalidate();
-		} catch (Exception ignore) {
-		}
+            try {
+                augScreen.invalidate();
+            } catch (Exception ignore) {
+            }
+        }
 	}
 
 	public void killOnError() throws Exception {
@@ -860,7 +865,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	private void doMixSearch(String query) {
 		DataHandler jLayer = getDataView().getDataHandler();
 		if (!getDataView().isFrozen()) {
-			MixListView.originalMarkerList = jLayer.getMarkerList();
+			//MixListView.originalMarkerList = jLayer.getMarkerList();
 			//MixMap.originalMarkerList = jLayer.getMarkerList();
 		}
 

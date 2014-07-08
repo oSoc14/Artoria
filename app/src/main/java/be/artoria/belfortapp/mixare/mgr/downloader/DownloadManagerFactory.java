@@ -31,6 +31,6 @@ public class DownloadManagerFactory {
 	 * @return DownloadManager
 	 */
 	public static DownloadManager makeDownloadManager(MixContext mixContext){
-		return new DownloadMgrImpl(mixContext);
+		return new DownloadMgrImpl();
 	}
 }

@@ -41,7 +41,7 @@ import android.widget.TextView;
  * @author Laurens De Graeve
  * 
  */
-public class DataSource extends Activity {
+public class DataSource {
 
 	private String name;
 	private String url;
@@ -57,83 +57,6 @@ public class DataSource extends Activity {
 	private DISPLAY display = DISPLAY.CIRCLE_MARKER;
     private TYPE type = TYPE.ARTORIA;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.datasourcedetails);
-		final EditText nameField = (EditText) findViewById(R.id.name);
-		final EditText urlField = (EditText) findViewById(R.id.url);
-		final Spinner typeSpinner = (Spinner) findViewById(R.id.type);
-		final Spinner displaySpinner = (Spinner) findViewById(R.id.displaytype);
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			if (extras.containsKey("DataSourceId")) {
-				String fields[] = DataSourceStorage.getInstance().getFields();
-				nameField.setText(fields[0], TextView.BufferType.EDITABLE);
-				urlField.setText(fields[1], TextView.BufferType.EDITABLE);
-				typeSpinner.setSelection(Integer.parseInt(fields[2]) - 3);
-				displaySpinner.setSelection(Integer.parseInt(fields[3]));
-			}
-		}
-
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			final EditText nameField = (EditText) findViewById(R.id.name);
-			String name = nameField.getText().toString();
-			final EditText urlField = (EditText) findViewById(R.id.url);
-			String url = urlField.getText().toString();
-			final Spinner typeSpinner = (Spinner) findViewById(R.id.type);
-			int typeId = (int) typeSpinner.getItemIdAtPosition(typeSpinner
-					.getSelectedItemPosition());
-			final Spinner displaySpinner = (Spinner) findViewById(R.id.displaytype);
-			int displayId = (int) displaySpinner
-					.getItemIdAtPosition(displaySpinner
-							.getSelectedItemPosition());
-
-			// TODO: fix the weird hack for type!
-			DataSource newDS = new DataSource(name, url, typeId + 3, displayId,
-					true);
-
-			int index = DataSourceStorage.getInstance().getSize();
-			Bundle extras = getIntent().getExtras();
-			if (extras != null) {
-				if (extras.containsKey("DataSourceId")) {
-					index = extras.getInt("DataSourceId");
-				}
-			}
-			DataSourceStorage.getInstance().add("DataSource",
-					newDS.serialize());
-		}
-
-		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	protected void onPause() {
-
-		super.onPause();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		int base = Menu.FIRST;
-		menu.add(base, base, base, R.string.cancel);
-		return super.onCreateOptionsMenu(menu);
-
-	}
-
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		switch (item.getItemId()) {
-		case Menu.FIRST:
-			finish();
-			break;
-		}
-		return super.onMenuItemSelected(featureId, item);
-	}
 
 	public DataSource() {
 

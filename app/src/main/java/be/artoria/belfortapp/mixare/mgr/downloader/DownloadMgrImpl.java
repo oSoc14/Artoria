@@ -36,18 +36,12 @@ import android.util.Log;
 class DownloadMgrImpl implements Runnable, DownloadManager {
 
 	private boolean stop = false;
-	private MixContext ctx;
 	private DownloadManagerState state = DownloadManagerState.Confused;
-	private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();
 	private DownloadResult result;
 	private Executor executor = Executors.newSingleThreadExecutor();
 	
 
-	public DownloadMgrImpl(MixContext ctx) {
-		if (ctx == null) {
-			throw new IllegalArgumentException("Mix Context IS NULL");
-		}
-		this.ctx = ctx;
+	public DownloadMgrImpl() {
 		state=DownloadManagerState.OffLine;
 	}
 
@@ -80,7 +74,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
     public void resetActivity() {
 
     }
-
+    private static final String jobId = "ArtoriaJob";
     /*
          * (non-Javadoc)
          *
@@ -89,16 +83,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
          * .DownloadRequest)
          */
 	public String submitJob(DownloadRequest job) {
-		String jobId = null;
-		if (job != null && job.getSource().isWellFormed()) {
-			ManagedDownloadRequest mJob;
-			if (!todoList.contains(job)) {
-				mJob = new ManagedDownloadRequest(job);
-				todoList.add(mJob);
-				Log.i(MixView.TAG, "Submitted " + job.toString());
-				jobId = mJob.getUniqueKey();
-			}
-		}
+        // jobID
 		return jobId;
 	}
 

@@ -13,6 +13,13 @@ public class DataManager {
 
     public static int numberOfPOIs = 0;
 
+    /* Check if the data should be refreshed after a resume or whatever,
+     * make sure the data exists is reasonably fresh.
+     */
+    public static void refresh() {
+        // TODO implement
+    }
+
     public enum Language{
         DUTCH,ENGLISH,FRENCH
     }
