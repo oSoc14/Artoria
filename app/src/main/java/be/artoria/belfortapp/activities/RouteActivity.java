@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
@@ -21,7 +23,7 @@ public class RouteActivity extends BaseActivity {
     DragSortListView listView;
     DragSortAdapter adapter;
 
-    private DragSortListView.DropListener onDrop = new DragSortListView.DropListener()
+    private final DragSortListView.DropListener onDrop = new DragSortListView.DropListener()
     {
         @Override
         public void drop(int from, int to)
@@ -35,7 +37,7 @@ public class RouteActivity extends BaseActivity {
         }
     };
 
-    private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener()
+    private final DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener()
     {
         @Override
         public void remove(int which)
@@ -43,7 +45,6 @@ public class RouteActivity extends BaseActivity {
             adapter.remove(adapter.getItem(which));
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,14 +84,10 @@ public class RouteActivity extends BaseActivity {
         listView.setRemoveListener(onRemove);
 
         final DragSortController controller = new DragSortController(listView);
-
         controller.setRemoveEnabled(true);
 
-
         listView.setFloatViewManager(controller);
-        listView.setOnTouchListener(controller);
         listView.setDragEnabled(true);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

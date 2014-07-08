@@ -172,7 +172,7 @@ public class MainActivity extends BaseActivity {
             final Gson gson = new Gson();
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
             downloading = false;
-            if(list.isEmpty()){
+            if(list == null || list.isEmpty()){
                 System.err.println("not good.");
             }
             else {
