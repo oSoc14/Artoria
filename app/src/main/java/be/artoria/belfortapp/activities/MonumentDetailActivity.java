@@ -3,10 +3,12 @@ package be.artoria.belfortapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -28,6 +30,7 @@ import be.artoria.belfortapp.app.RouteManager;
 
 public class MonumentDetailActivity extends BaseActivity {
     public final static String ARG_ID = "be.belfort.monumentid";
+    private GestureDetectorCompat gDetect;
 
     private static int id;
     @Override
@@ -36,6 +39,12 @@ public class MonumentDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_monument_detail);
         id = (Integer) getIntent().getExtras().get(ARG_ID);
         initGui();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gDetect.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
 
@@ -89,16 +98,16 @@ public class MonumentDetailActivity extends BaseActivity {
     }
 
     /*initialize the GUI content and clickhandlers*/
-    private void initGui(){
+    private void initGui() {
         final DataManager dm = DataManager.getInstance();
         final POI wp = dm.getPOIbyID(id);
 
-        final TextView tv =(TextView) findViewById(R.id.monument_name);
-        final TextView tvs =(TextView) findViewById(R.id.monument_name_smaller);
-        final TextView desc =(TextView)findViewById(R.id.monument_description);
+        final TextView tv = (TextView) findViewById(R.id.monument_name);
+        final TextView tvs = (TextView) findViewById(R.id.monument_name_smaller);
+        final TextView desc = (TextView) findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
-        final LinearLayout cntMonumentView = (LinearLayout)findViewById(R.id.cntMonumentView);
-        final RelativeLayout prgWait = (RelativeLayout)findViewById(R.id.prgWait);
+        final LinearLayout cntMonumentView = (LinearLayout) findViewById(R.id.cntMonumentView);
+        final RelativeLayout prgWait = (RelativeLayout) findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
         prgWait.setVisibility(View.VISIBLE);
 
@@ -108,7 +117,7 @@ public class MonumentDetailActivity extends BaseActivity {
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
-        Picasso.with(this).load(wp.image_link).into(img,new Callback() {
+        Picasso.with(this).load(wp.image_link).into(img, new Callback() {
             @Override
             public void onSuccess() {
                 switchImages();
@@ -121,11 +130,32 @@ public class MonumentDetailActivity extends BaseActivity {
                 System.out.println("Failed to load image");
             }
 
-            private void switchImages(){
+            private void switchImages() {
                 prgWait.setVisibility(View.GONE);
                 img.setVisibility(View.VISIBLE);
             }
         });
+
+        /*Add gesture listener so we can swipe left and right between POI's*/
+       gDetect = new GestureDetectorCompat(this,new GestureListener());
+    }
+
+    public class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onDown(MotionEvent e) {
+           return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            float horizontalDiff = e2.getX() - e1.getX();
+            if(horizontalDiff>0){
+                nextDetail(null);
+            }else {
+                prevDetail(null);
+            }
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
     }
 
     public static Intent newIntent(Context ctx, int new_id)
