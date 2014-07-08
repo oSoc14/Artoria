@@ -40,5 +40,5 @@ public interface DataProcessor {
 	
 	boolean matchesRequiredType(String type);
 	
-	List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException;
+	List<Marker> load(List<POI> rawData, int taskId, int colour);
 }
