@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.data.DataSource;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 import be.artoria.belfortapp.mixare.lib.reality.PhysicalPlace;
@@ -59,22 +61,10 @@ public class DataConvertor {
 		dataProcessors.remove(dataProcessor);
 	}
 	
-	public List<Marker> load(String url, String rawResult, DataSource ds){
-		DataProcessor dataProcessor = new ArtoriaDataProcessor();
-		if(dataProcessor == null){
-			dataProcessor = new MixareDataProcessor(); //using this as default if nothing is found.
-		}
+	public List<Marker> load(String url, List< POI > poiList, DataSource ds){
 		try {
-			return dataProcessor.load(rawResult, ds.getTaskId(), ds.getColor());
+            new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
 		} catch (JSONException e) {
-			/* Find Other Away to notify Error, for now Hide this error
-			 MixView.CONTEXT.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(MixView.CONTEXT, "Could not process the url data", Toast.LENGTH_LONG).show();
-				}
-			});
-			*/
 		}
 		return null;
 	}

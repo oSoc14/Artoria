@@ -26,6 +26,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.json.JSONException;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.NavigationMarker;
 import be.artoria.belfortapp.mixare.data.DataHandler;
@@ -65,7 +67,7 @@ public class OsmDataProcessor extends DataHandler implements DataProcessor {
 	}
 
 	@Override
-	public List<Marker> load(String rawData, int taskId, int colour)
+	public List<Marker> load(List<POI> rawData, int taskId, int colour)
 			throws JSONException {
 		Element root = convertToXmlDocument(rawData).getDocumentElement();
 

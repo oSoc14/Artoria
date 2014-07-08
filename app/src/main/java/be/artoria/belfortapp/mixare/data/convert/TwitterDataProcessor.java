@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.SocialMarker;
 import be.artoria.belfortapp.mixare.data.DataHandler;
@@ -63,7 +65,7 @@ public class TwitterDataProcessor extends DataHandler implements DataProcessor{
 	}
 
 	@Override
-	public List<Marker> load(String rawData, int taskId, int colour)
+	public List<Marker> load(List<POI> rawData, int taskId, int colour)
 			throws JSONException {
 		List<Marker> markers = new ArrayList<Marker>();
 		JSONObject root = convertToJSON(rawData);
