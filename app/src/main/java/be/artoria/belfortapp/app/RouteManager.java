@@ -18,6 +18,7 @@ public class RouteManager {
         /*DataManager mngr = DataManager.getInstance();
         waypoints.add(mngr.poiList.get(0));
         waypoints.add(mngr.poiList.get(1));*/
+        waypoints.addAll(PrefUtils.getSavedRoute());
     }
 
     public static RouteManager getInstance(){
@@ -36,6 +37,7 @@ public class RouteManager {
         /* Only add waypoints that aren't in the list yet */
         if(!waypoints.contains(wp)) {
             waypoints.add(wp);
+            PrefUtils.saveRoute(waypoints);
         }
     }
 }

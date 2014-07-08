@@ -15,6 +15,7 @@ import com.mobeta.android.dslv.DragSortListView;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
+import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;
 
 
@@ -43,6 +44,7 @@ public class RouteActivity extends BaseActivity {
         public void remove(int which)
         {
             adapter.remove(adapter.getItem(which));
+            PrefUtils.saveRoute(RouteManager.getInstance().getWaypoints());
         }
     };
 
