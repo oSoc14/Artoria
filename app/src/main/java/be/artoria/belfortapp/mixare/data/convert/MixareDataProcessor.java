@@ -60,7 +60,7 @@ public class MixareDataProcessor extends DataHandler implements DataProcessor{
 	}
 
 	@Override
-	public List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException {
+	public List<Marker> load(String rawData, int taskId, int colour) throws JSONException {
 		List<Marker> markers = new ArrayList<Marker>();
 		JSONObject root = convertToJSON(rawData);
 		JSONArray dataArray = root.getJSONArray("results");
