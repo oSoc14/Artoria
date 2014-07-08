@@ -38,6 +38,7 @@ import android.widget.TextView;
  * place can be found.
  * 
  * @author hannes
+ * @author Laurens De Graeve
  * 
  */
 public class DataSource extends Activity {
@@ -45,12 +46,16 @@ public class DataSource extends Activity {
 	private String name;
 	private String url;
 
-	public enum DISPLAY {
+    public enum TYPE {
+        WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARTORIA
+    };
+       	public enum DISPLAY {
 		CIRCLE_MARKER, NAVIGATION_MARKER, IMAGE_MARKER
 	};
 
 	private boolean enabled;
-	private DISPLAY display;
+	private DISPLAY display = DISPLAY.CIRCLE_MARKER;
+    private TYPE type = TYPE.ARTORIA;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +68,7 @@ public class DataSource extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			if (extras.containsKey("DataSourceId")) {
-				String fields[] = DataSourceStorage.getInstance().getFields(
-						extras.getInt("DataSourceId"));
+				String fields[] = DataSourceStorage.getInstance().getFields();
 				nameField.setText(fields[0], TextView.BufferType.EDITABLE);
 				urlField.setText(fields[1], TextView.BufferType.EDITABLE);
 				typeSpinner.setSelection(Integer.parseInt(fields[2]) - 3);
@@ -100,7 +104,7 @@ public class DataSource extends Activity {
 					index = extras.getInt("DataSourceId");
 				}
 			}
-			DataSourceStorage.getInstance().add("DataSource" + index,
+			DataSourceStorage.getInstance().add("DataSource",
 					newDS.serialize());
 		}
 
@@ -202,7 +206,7 @@ public class DataSource extends Activity {
 						+ Double.toString(radius);
 				break;
 
-			case ARENA:
+			case ARTORIA:
 				ret += "&lat=" + Double.toString(lat) + "&lng="
 						+ Double.toString(lon);
 				break;
@@ -229,7 +233,7 @@ public class DataSource extends Activity {
 		case WIKIPEDIA:
 			ret = Color.RED;
 			break;
-		case ARENA:
+		case ARTORIA:
 			ret = Color.RED;
 			break;
 		default:
@@ -254,7 +258,7 @@ public class DataSource extends Activity {
 		case WIKIPEDIA:
 			ret = R.drawable.wikipedia;
 			break;
-		case ARENA:
+		case ARTORIA:
 			ret = R.drawable.arena;
 			break;
 		default:
