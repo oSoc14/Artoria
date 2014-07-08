@@ -24,6 +24,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.MixContext;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.data.convert.DataConvertor;
@@ -96,7 +97,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 			if (pageContent != null) {
 				// try loading Marker data
 				List<Marker> markers = DataConvertor.getInstance().load(
-						request.getSource().getUrl(), pageContent,
+						request.getSource().getUrl(), DataManager.getAll(),
 						request.getSource());
 				result.setAccomplish(mRequest.getUniqueKey(), markers,
 						request.getSource());
