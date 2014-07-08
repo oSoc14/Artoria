@@ -16,7 +16,7 @@ import be.artoria.belfortapp.R;
 
 /**
  * Created by Michael Vanderpoorten
- * Adapted by Laurens De Graeve
+ * Adapted by Laurens De Graeve & Dieter Beelaert
  */
 public class PrefUtils {
 
@@ -105,7 +105,6 @@ public class PrefUtils {
     }
 
     public static void saveRoute(List<POI> route){
-        System.out.println("saving route ....");
         StringBuilder sb = new StringBuilder();
         for(POI poi : route){
             sb.append(poi.id + ",");
