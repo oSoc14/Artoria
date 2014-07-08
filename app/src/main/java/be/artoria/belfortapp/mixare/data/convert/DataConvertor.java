@@ -54,12 +54,8 @@ public class DataConvertor {
 		this.dataProcessor = dataProcessor;
 	}
 
-	public List<Marker> load(String url, List< POI > poiList, DataSource ds){
-		try {
-            new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
-		} catch (JSONException e) {
-		}
-		return null;
+	public List<Marker> load(List<POI> poiList){
+		return new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
 	}
 	
 	public static String getOSMBoundingBox(double lat, double lon, double radius) {

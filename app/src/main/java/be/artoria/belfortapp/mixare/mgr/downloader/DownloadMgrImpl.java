@@ -39,7 +39,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	private MixContext ctx;
 	private DownloadManagerState state = DownloadManagerState.Confused;
 	private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();
-	private ConcurrentHashMap<String, DownloadResult> doneList = new ConcurrentHashMap<String, DownloadResult>();
+	private DownloadResult result;
 	private Executor executor = Executors.newSingleThreadExecutor();
 	
 
@@ -57,75 +57,37 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	 * @see DownloadManager#run()
 	 */
 	public void run() {
-		ManagedDownloadRequest mRequest;
-		DownloadResult result;
 		stop = false;
 		while (!stop) {
-			state=DownloadManagerState.OnLine;
-			// Wait for proceed
-			while (!stop) {
-				try {
-					mRequest = todoList.take();
-					state=DownloadManagerState.Downloading;
-					result = processRequest(mRequest);
-				} catch (InterruptedException e) {
-					result = new DownloadResult();
-					result.setError(e, null);
-				}
-				doneList.put(result.getIdOfDownloadRequest(), result);
-				state=DownloadManagerState.OnLine;
+            state=DownloadManagerState.Downloading;
+            result = processRequest();
 			}
-		}
 		state=DownloadManagerState.OffLine;
 	}
 
-	private DownloadResult processRequest(ManagedDownloadRequest mRequest) {
-		DownloadRequest request = mRequest.getOriginalRequest();
+
+	private DownloadResult processRequest() {
 		final DownloadResult result = new DownloadResult();
-		try {
-			if (request == null) {
-				throw new Exception("Request is null");
-			}
-			
-			if (!request.getSource().isWellFormed()) {
-				throw new Exception("Datasource in not WellFormed");
-			}
 
-			String pageContent = HttpTools.getPageContent(request,
-                    ctx.getContentResolver());
+        // load Marker data
+        List<Marker> markers = DataConvertor.getInstance().load(DataManager.getAll());
+        result.setAccomplish(markers);
 
-			if (pageContent != null) {
-				// try loading Marker data
-				List<Marker> markers = DataConvertor.getInstance().load(
-						request.getSource().getUrl(), DataManager.getAll(),
-						request.getSource());
-				result.setAccomplish(mRequest.getUniqueKey(), markers,
-						request.getSource());
-			}
-		} catch (Exception ex) {
-			result.setError(ex, request);
-			Log.w(MixContext.TAG, "ERROR ON DOWNLOAD REQUEST", ex);
-		}
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DownloadManager#purgeLists()
-	 */
-	public synchronized void resetActivity() {
-		todoList.clear();
-		doneList.clear();
-	}
+    @Override
+    public void resetActivity() {
+        
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * DownloadManager#submitJob(org.be.artoria.belfortapp.mixare.mgr.downloader
-	 * .DownloadRequest)
-	 */
+    /*
+         * (non-Javadoc)
+         *
+         * @see
+         * DownloadManager#submitJob(org.be.artoria.belfortapp.mixare.mgr.downloader
+         * .DownloadRequest)
+         */
 	public String submitJob(DownloadRequest job) {
 		String jobId = null;
 		if (job != null && job.getSource().isWellFormed()) {
@@ -146,9 +108,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	 * @see
 	 * DownloadManager#getReqResult(java.lang.String)
 	 */
-	public DownloadResult getReqResult(String jobId) {
-		DownloadResult result = doneList.get(jobId);
-		doneList.remove(jobId);
+	public DownloadResult getReqResult() {
 		return result;
 	}
 
@@ -158,12 +118,6 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	 * @see DownloadManager#getNextResult()
 	 */
 	public synchronized DownloadResult getNextResult() {
-		DownloadResult result = null;
-		if (!doneList.isEmpty()) {
-			String nextId = doneList.keySet().iterator().next();
-			result = doneList.get(nextId);
-			doneList.remove(nextId);
-		}
 		return result;
 	}
 	
@@ -173,7 +127,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	 * @see DownloadManager#getResultSize()
 	 */
 	public int getResultSize(){
-		return doneList.size();
+		return result == null? 0 :1 ;
 	}
 
 	/*
@@ -182,7 +136,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	 * @see DownloadManager#isDone()
 	 */
 	public Boolean isDone() {
-		return todoList.isEmpty();
+		return result != null;
 	}
 
 	/*
@@ -206,7 +160,5 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 	public DownloadManagerState getState() {
 		return state;
 	}
-
-	
 
 }
