@@ -40,7 +40,7 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="mixare.MixView"
+            android:name=".mixare.MixView"
             android:label="@string/title_activity_panorama" >
         </activity>
     </application>
