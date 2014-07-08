@@ -30,7 +30,6 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
-import be.artoria.belfortapp.sql.POIDAO;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
@@ -95,13 +94,23 @@ public class MainActivity extends BaseActivity {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /* The second item are the buildings */
-                if (i == 1) {
-                    final Intent intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
-                    intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
-                    startActivity(intent);
+                final Intent intent;
+                switch (i) {
+                    /* The first item is the org.mixare panorama */
+                    case 0:
+                        intent = new Intent(MainActivity.this, org.mixare.MainActivity.class);
+                        startActivity(intent);
+                    break;
+                    /* The second item are the buildings */
+                    case 1:
+                        intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
+                        intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
+                        startActivity(intent);
+                    break;
                 }
             }
+
+
         });
 
         btnSettings.setOnClickListener(new View.OnClickListener() {
