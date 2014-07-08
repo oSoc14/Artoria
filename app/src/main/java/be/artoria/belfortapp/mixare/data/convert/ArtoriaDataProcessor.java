@@ -1,19 +1,10 @@
 package be.artoria.belfortapp.mixare.data.convert;
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.ArtoriaPOIMarker;
-import be.artoria.belfortapp.mixare.MixView;
-import be.artoria.belfortapp.mixare.POIMarker;
-import be.artoria.belfortapp.mixare.lib.HtmlUnescape;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 
 /**
