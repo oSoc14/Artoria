@@ -21,6 +21,8 @@ package be.artoria.belfortapp.mixare.data.convert;
 import java.util.List;
 
 import org.json.JSONException;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 
 /**
@@ -38,5 +40,5 @@ public interface DataProcessor {
 	
 	boolean matchesRequiredType(String type);
 	
-	List<Marker> load(String rawData, int taskId, int colour) throws JSONException;
+	List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException;
 }

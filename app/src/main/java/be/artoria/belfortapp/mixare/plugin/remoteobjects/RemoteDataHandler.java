@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.json.JSONException;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 import be.artoria.belfortapp.mixare.data.convert.DataProcessor;
 import be.artoria.belfortapp.mixare.lib.marker.InitialMarkerData;
@@ -82,7 +84,7 @@ public class RemoteDataHandler extends DataHandler implements DataProcessor {
 	}
 
 	
-	public List<Marker> load(String rawData, int taskId, int colour) throws JSONException {
+	public List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException {
 		try {
 			List<InitialMarkerData> initialMarkerData = iDataHandlerService.load(dataHandlerName, rawData, taskId, colour);
 			return initializeMarkerData(initialMarkerData);

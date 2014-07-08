@@ -4,6 +4,7 @@ import org.json.JSONException;
 
 import java.util.List;
 
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 
 /**
@@ -26,7 +27,7 @@ public class ArtoriaDataProcessor implements DataProcessor {
     }
 
     @Override
-    public List<Marker> load(String rawData, int taskId, int colour) throws JSONException {
+    public List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException {
         return null;
     }
 }

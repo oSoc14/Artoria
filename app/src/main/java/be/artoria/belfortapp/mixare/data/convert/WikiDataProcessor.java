@@ -24,6 +24,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.POIMarker;
 import be.artoria.belfortapp.mixare.data.DataHandler;
@@ -62,7 +64,7 @@ public class WikiDataProcessor extends DataHandler implements DataProcessor{
 	}
 
 	@Override
-	public List<Marker> load(String rawData, int taskId, int colour) throws JSONException {
+	public List<Marker> load(List<POI> rawData, int taskId, int colour) throws JSONException {
 		List<Marker> markers = new ArrayList<Marker>();
 		JSONObject root = convertToJSON(rawData);
 		JSONArray dataArray = root.getJSONArray("geonames");
