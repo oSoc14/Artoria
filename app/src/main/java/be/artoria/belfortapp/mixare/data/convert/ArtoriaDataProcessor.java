@@ -41,6 +41,7 @@ public class ArtoriaDataProcessor implements DataProcessor {
         for (POI poi : rawData) {
             Marker ma = new ArtoriaPOIMarker(poi,taskId, colour);
             markers.add(ma);
+            System.err.println("MARKER GETS LOADED");
         }
         return markers;
     }

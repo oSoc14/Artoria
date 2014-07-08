@@ -41,7 +41,8 @@
         </activity>
         <activity
             android:name=".mixare.MixView"
-            android:label="@string/title_activity_panorama" >
+            android:label="@string/title_activity_panorama"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
