@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import be.artoria.belfortapp.mixare.MixView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -96,9 +97,9 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Intent intent;
                 switch (i) {
-                    /* The first item is the org.mixare panorama */
+                    /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        intent = new Intent(MainActivity.this, org.mixare.MainActivity.class);
+                        intent = new Intent(MainActivity.this, MixView.class);
                         startActivity(intent);
                     break;
                     /* The second item are the buildings */
