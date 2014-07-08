@@ -2,6 +2,7 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
@@ -103,9 +105,20 @@ public class MonumentDetailActivity extends BaseActivity {
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
-        Picasso.with(this).load(wp.image_link).into(img);
-        prgWait.setVisibility(View.GONE);
-        img.setVisibility(View.VISIBLE);
+        Picasso.with(this).load(wp.image_link).into(img,new Callback() {
+            @Override
+            public void onSuccess() {
+                prgWait.setVisibility(View.GONE);
+                img.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                //TODO get error image
+                System.out.println("Failed to load image");
+            }
+        });
+
 
     }
 
