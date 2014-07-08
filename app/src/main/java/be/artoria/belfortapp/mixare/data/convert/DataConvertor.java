@@ -60,7 +60,7 @@ public class DataConvertor {
 	}
 	
 	public List<Marker> load(String url, String rawResult, DataSource ds){
-		DataProcessor dataProcessor = searchForMatchingDataProcessors(url, rawResult, ds.getType());
+		DataProcessor dataProcessor = new ArtoriaDataProcessor();
 		if(dataProcessor == null){
 			dataProcessor = new MixareDataProcessor(); //using this as default if nothing is found.
 		}

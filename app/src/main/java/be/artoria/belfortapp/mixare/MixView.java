@@ -136,8 +136,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			
 			/*check if the application is launched for the first time*/
 			if(settings.getBoolean("firstAccess",false)==false){
-				firstAccess(settings);
-
+                DataSourceStorage.getInstance().fillData();
 			}
 
 		} catch (Exception ex) {
@@ -489,17 +488,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 
 		return myout;
-	}
-
-	/**
-	 * Handle First time users. It display license agreement and store user's
-	 * acceptance.
-	 * 
-	 * @param settings
-	 */
-	private void firstAccess(SharedPreferences settings) {
-		// add the default datasources to the preferences file
-		DataSourceStorage.getInstance().fillDefaultDataSources();
 	}
 
 	/**
@@ -1139,18 +1127,6 @@ class AugmentedView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		try {
-			// if (app.fError) {
-			//
-			// Paint errPaint = new Paint();
-			// errPaint.setColor(Color.RED);
-			// errPaint.setTextSize(16);
-			//
-			// /*Draws the Error code*/
-			// canvas.drawText("ERROR: ", 10, 20, errPaint);
-			// canvas.drawText("" + app.fErrorTxt, 10, 40, errPaint);
-			//
-			// return;
-			// }
 
 			app.killOnError();
 
@@ -1169,10 +1145,6 @@ class AugmentedView extends View {
 				String startKM, endKM;
 				endKM = "80km";
 				startKM = "0km";
-				/*
-				 * if(MixListView.getDataSource().equals("Twitter")){ startKM =
-				 * "1km"; }
-				 */
 				canvas.drawText(startKM, canvas.getWidth() / 100 * 4,
 						canvas.getHeight() / 100 * 85, zoomPaint);
 				canvas.drawText(endKM, canvas.getWidth() / 100 * 99 + 25,

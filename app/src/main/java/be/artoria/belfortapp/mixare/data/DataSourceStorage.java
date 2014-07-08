@@ -76,31 +76,31 @@ public class DataSourceStorage {
 		dataSourceEditor.commit();
 	}
 	
-	public void editVisibility(int i, boolean visible){
-		String[] fields = getFields(i);
+	public void editVisibility(boolean visible){
+		String[] fields = getFields();
 		if(fields.length == 5){
 			fields[4] = String.valueOf(visible);
 		
 			SharedPreferences.Editor dataSourceEditor = settings.edit();
-			dataSourceEditor.putString("DataSource"+i, 
+			dataSourceEditor.putString("DataSource",
 					fields[0] +"|"+ fields[1] +"|"+ fields[2] +"|"+ fields[3] +"|"+ fields[4]);
 			dataSourceEditor.commit();
 		}
 	}
 	
-	public void fillDefaultDataSources(){
-		String[] datasources = ctx.getResources().getStringArray(R.array.defaultdatasources);
+	public void fillData(){
+		 datasource = ctx.getResources().getStringArray(R.array.defaultdatasources);
 		if(datasources.length > getSize()){
 			for(int i = 0; i < datasources.length; i++){
 				int id = getSize();
-				add("DataSource"+ id, datasources[i]);
+				add("DataSource", datasources[i]);
 				onCustomDataSourceSelected(id);
 			}
 		}
 	}
 	
-	public String[] getFields(int i){
-		return settings.getString("DataSource"+i, "").split("\\|", -1);
+	public String[] getFields(){
+		return settings.getString("DataSource", "").split("\\|", -1);
 	}
 	
 	public int getSize(){

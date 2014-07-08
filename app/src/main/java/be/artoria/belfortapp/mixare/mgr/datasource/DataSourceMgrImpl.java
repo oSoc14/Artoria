@@ -28,44 +28,25 @@ import be.artoria.belfortapp.mixare.mgr.downloader.DownloadRequest;
 
 class DataSourceMgrImpl implements DataSourceManager {
 
-	private final ConcurrentLinkedQueue<DataSource> allDataSources=new ConcurrentLinkedQueue<DataSource>(); 
-	
+	private DataSource dataSource;
+
 	private final MixContext ctx;
 
 	public DataSourceMgrImpl(MixContext ctx) {
 		this.ctx = ctx;
 	}
 
-	@Override
-	public boolean isAtLeastOneDatasourceSelected() {
-		boolean atLeastOneDatasourceSelected = false;
-		for (DataSource ds : this.allDataSources) {
-			if (ds.getEnabled())
-				atLeastOneDatasourceSelected = true;
-		}
-		return atLeastOneDatasourceSelected;
-	}
-
-
-
-	public void setAllDataSourcesforLauncher(DataSource datasource) {
-		this.allDataSources.clear(); // TODO WHY? CLEAN ALL
-		this.allDataSources.add(datasource);
-	}
 
 	public void refreshDataSources() {
-		this.allDataSources.clear();
 
-		DataSourceStorage.getInstance(ctx).fillDefaultDataSources();
+		DataSourceStorage.getInstance(ctx).fillData();
 
-		int size = DataSourceStorage.getInstance().getSize();
 
-		// copy the value from shared preference to adapter
-		for (int i = 0; i < size; i++) {
-			String fields[] = DataSourceStorage.getInstance().getFields(i);
-			this.allDataSources.add(new DataSource(fields[0], fields[1],
-					fields[2], fields[3], fields[4]));
-		}
+
+			String fields[] = DataSourceStorage.getInstance().getFields();
+			dataSource = new DataSource(fields[0], fields[1],
+					fields[2], fields[3], fields[4]);
+
 	}
 
 	public void requestDataFromAllActiveDataSource(double lat, double lon,
