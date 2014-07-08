@@ -122,7 +122,7 @@ public class DownloadResult {
 	}
 	
 	
-	public void setAccomplish(String idOfDownloadRequest, List<Marker> markers, DataSource ds ) {
+	public void setAccomplish(List<Marker> markers) {
 		setIdOfDownloadRequest(idOfDownloadRequest);
 		setMarkers(markers);
 		setDataSource(ds);

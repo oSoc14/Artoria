@@ -36,63 +36,26 @@ import be.artoria.belfortapp.mixare.lib.reality.PhysicalPlace;
  */
 public class DataConvertor {
 	
-	private List<DataProcessor> dataProcessors = new ArrayList<DataProcessor>();
+	private DataProcessor dataProcessor = new ArtoriaDataProcessor();
 	
 	private static DataConvertor instance;
 	
 	public static DataConvertor getInstance(){
 		if(instance == null){
 			instance = new DataConvertor();
-			instance.addDefaultDataProcessors();
 		}
 		return instance;
 	}
 	
 	public void clearDataProcessors() {
-		dataProcessors.clear();
-		addDefaultDataProcessors();
 	}
 	
 	public void addDataProcessor(DataProcessor dataProcessor){
-		dataProcessors.add(dataProcessor);
+		this.dataProcessor = dataProcessor;
 	}
-	
-	public void removeDataProcessor(DataProcessor dataProcessor){
-		dataProcessors.remove(dataProcessor);
-	}
-	
-	public List<Marker> load(String url, List< POI > poiList, DataSource ds){
-		try {
-            new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
-		} catch (JSONException e) {
-		}
-		return null;
-	}
-	
-	private DataProcessor searchForMatchingDataProcessors(String url, String rawResult, DataSource.TYPE type){
-		for(DataProcessor dp : dataProcessors){
-			if(dp.matchesRequiredType(type.name())){
-				//checking if url matches any dataprocessor identifiers
-				for(String urlIdentifier : dp.getUrlMatch()){
-					if(url.toLowerCase().contains(urlIdentifier.toLowerCase())){
-						return dp;
-					}
-				}
-				//checking if data matches any dataprocessor identifiers
-				for(String dataIdentifier : dp.getDataMatch()){
-					if(rawResult.contains(dataIdentifier)){
-						return dp;
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
-	private void addDefaultDataProcessors(){
-		dataProcessors.add(new WikiDataProcessor());
-		dataProcessors.add(new TwitterDataProcessor());
-		dataProcessors.add(new OsmDataProcessor());
+
+	public List<Marker> load(List<POI> poiList){
+		return new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
 	}
 	
 	public static String getOSMBoundingBox(double lat, double lon, double radius) {
@@ -103,8 +66,6 @@ public class DataConvertor {
 		PhysicalPlace.calcDestination(lat, lon, 45, radius*1414, rt);
 		bbox+=lb.getLongitude()+","+lb.getLatitude()+","+rt.getLongitude()+","+rt.getLatitude()+"]";
 		return bbox;
-
-		//return "[bbox=16.365,48.193,16.374,48.199]";
 	}
 	
 }

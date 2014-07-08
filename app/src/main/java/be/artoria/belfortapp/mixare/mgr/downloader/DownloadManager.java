@@ -49,11 +49,10 @@ public interface DownloadManager {
 
 	/**
 	 * Get result of job if exist, null otherwise
-	 * 
-	 * @param jobId reference of Job
+	 *
 	 * @return result 
 	 */
-	DownloadResult getReqResult(String jobId);
+	DownloadResult getReqResult();
 
 	/**
 	 * Pseudo Iterator on results 

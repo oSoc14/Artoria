@@ -89,14 +89,15 @@ public class DataSourceStorage {
 	}
 	
 	public void fillData(){
-		 datasource = ctx.getResources().getStringArray(R.array.defaultdatasources);
-		if(datasources.length > getSize()){
-			for(int i = 0; i < datasources.length; i++){
-				int id = getSize();
-				add("DataSource", datasources[i]);
-				onCustomDataSourceSelected(id);
-			}
-		}
+
+//		datasource = ctx.getResources().getStringArray(R.array.defaultdatasources);
+//		if(datasources.length > getSize()){
+//			for(int i = 0; i < datasources.length; i++){
+//				int id = getSize();
+//				add("DataSource", datasources[i]);
+//				onCustomDataSourceSelected(id);
+//			}
+//		}
 	}
 	
 	public String[] getFields(){
@@ -111,8 +112,4 @@ public class DataSourceStorage {
 		this.customDataSourceSelected = customDataSourceSelected;
 	}
 		
-	private void onCustomDataSourceSelected(int id) {
-		// if a custom data source is selected, then hide the datasources
-		editVisibility(id, !customDataSourceSelected);
-	}
 }

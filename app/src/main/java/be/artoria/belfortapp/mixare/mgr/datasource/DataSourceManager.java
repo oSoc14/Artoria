@@ -27,13 +27,6 @@ import be.artoria.belfortapp.mixare.data.DataSource;
 public interface DataSourceManager {
 
 	/**
-	 * Is At Least One Datasource Selected
-	 * 
-	 * @return boolean
-	 */
-	boolean isAtLeastOneDatasourceSelected();
-
-	/**
 	 * Sync DataSouceManager with DataSourceStorage.
 	 */
 	void refreshDataSources();

@@ -41,26 +41,24 @@ class DataSourceMgrImpl implements DataSourceManager {
 
 		DataSourceStorage.getInstance(ctx).fillData();
 
-
-
 			String fields[] = DataSourceStorage.getInstance().getFields();
 			dataSource = new DataSource(fields[0], fields[1],
 					fields[2], fields[3], fields[4]);
-
 	}
 
-	public void requestDataFromAllActiveDataSource(double lat, double lon,
+    @Override
+    public void setAllDataSourcesforLauncher(DataSource source) {
+        dataSource = source;
+
+    }
+
+    public void requestDataFromAllActiveDataSource(double lat, double lon,
 			double alt, float radius) {
-		for (DataSource ds : allDataSources) {
-			/*
-			 * when type is OpenStreetMap iterate the URL list and for selected
-			 * URL send data request
-			 */
-			if (ds.getEnabled()) {
-				requestData(ds, lat, lon, alt, radius, Locale.getDefault()
+
+				requestData(dataSource, lat, lon, alt, radius, Locale.getDefault()
 						.getLanguage());
-			}
-		}
+
+
 
 	}
 
