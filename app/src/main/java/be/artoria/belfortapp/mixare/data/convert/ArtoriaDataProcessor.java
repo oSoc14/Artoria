@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.app.POI;
+import be.artoria.belfortapp.mixare.ArtoriaPOIMarker;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.POIMarker;
 import be.artoria.belfortapp.mixare.lib.HtmlUnescape;
@@ -38,14 +39,7 @@ public class ArtoriaDataProcessor implements DataProcessor {
     public List<Marker> load(List<POI> rawData, int taskId, int colour){
         List<Marker> markers = new ArrayList<Marker>();
         for (POI poi : rawData) {
-            Marker ma = new POIMarker(
-                    poi.id+"",
-                    poi.getName(),
-                    Double.parseDouble(poi.lat),
-                    Double.parseDouble(poi.lon),
-                    3,/*Height of Ghent*/
-                    "",
-                    taskId, colour);
+            Marker ma = new ArtoriaPOIMarker(poi,taskId, colour);
             markers.add(ma);
         }
         return markers;
