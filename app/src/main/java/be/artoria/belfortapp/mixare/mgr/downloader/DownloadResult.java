@@ -125,7 +125,7 @@ public class DownloadResult {
 	public void setAccomplish(List<Marker> markers) {
 		setIdOfDownloadRequest(idOfDownloadRequest);
 		setMarkers(markers);
-		setDataSource(ds);
+		setDataSource(dataSource);
 		setError(false);
 		errorMsg="NO ERROR";
 		errorRequest=null;

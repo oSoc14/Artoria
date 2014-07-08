@@ -18,6 +18,8 @@
  */
 package be.artoria.belfortapp.mixare.data.convert;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class DataConvertor {
 	}
 
 	public List<Marker> load(List<POI> poiList){
-		return new ArtoriaDataProcessor().load(poiList, ds.getTaskId(), ds.getColor());
+		return new ArtoriaDataProcessor().load(poiList, 0, Color.WHITE);
 	}
 	
 	public static String getOSMBoundingBox(double lat, double lon, double radius) {

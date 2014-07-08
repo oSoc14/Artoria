@@ -73,7 +73,7 @@ public class DataSourceList extends ListActivity {
 		// copy the value from shared preference to adapter
 		dataSourceAdapter = new DataSourceAdapter();
 		for (int i = 0; i < size; i++) {
-			String fields[] = DataSourceStorage.getInstance().getFields(i);
+			String fields[] = DataSourceStorage.getInstance().getFields();
 			dataSourceAdapter.addItem(new DataSource(fields[0], fields[1], fields[2], fields[3], fields[4]));
 		}
 		setListAdapter(dataSourceAdapter);

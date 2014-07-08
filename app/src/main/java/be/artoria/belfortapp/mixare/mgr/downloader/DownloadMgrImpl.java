@@ -78,7 +78,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 
     @Override
     public void resetActivity() {
-        
+
     }
 
     /*
