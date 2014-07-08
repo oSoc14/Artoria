@@ -1,19 +1,24 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
@@ -92,6 +97,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final TextView tvs =(TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc =(TextView)findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
+        final LinearLayout cntMonumentView = (LinearLayout)findViewById(R.id.cntMonumentView);
         final RelativeLayout prgWait = (RelativeLayout)findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
         prgWait.setVisibility(View.VISIBLE);
@@ -102,17 +108,31 @@ public class MonumentDetailActivity extends BaseActivity {
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
-        Picasso.with(this).load(wp.image_link).into(img);
-        prgWait.setVisibility(View.GONE);
-        img.setVisibility(View.VISIBLE);
+        Picasso.with(this).load(wp.image_link).into(img,new Callback() {
+            @Override
+            public void onSuccess() {
+                switchImages();
+            }
 
+            @Override
+            public void onError() {
+                img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
+                switchImages();
+                System.out.println("Failed to load image");
+            }
+
+            private void switchImages(){
+                prgWait.setVisibility(View.GONE);
+                img.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
-    public static MonumentDetailActivity newIntent(int new_id)
+    public static Intent newIntent(Context ctx, int new_id)
     {
-        //final Intent ;
-        id = new_id;
-        return null;
+        final Intent toReturn = new Intent(ctx,MonumentDetailActivity.class);
+        toReturn.putExtra(ARG_ID,new_id);
+        return toReturn;
 
     }
 }
