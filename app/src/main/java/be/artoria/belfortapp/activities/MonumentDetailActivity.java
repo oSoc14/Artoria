@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -95,6 +97,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final TextView tvs =(TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc =(TextView)findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
+        final LinearLayout cntMonumentView = (LinearLayout)findViewById(R.id.cntMonumentView);
         final RelativeLayout prgWait = (RelativeLayout)findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
         prgWait.setVisibility(View.VISIBLE);
@@ -108,18 +111,21 @@ public class MonumentDetailActivity extends BaseActivity {
         Picasso.with(this).load(wp.image_link).into(img,new Callback() {
             @Override
             public void onSuccess() {
-                prgWait.setVisibility(View.GONE);
-                img.setVisibility(View.VISIBLE);
+                switchImages();
             }
 
             @Override
             public void onError() {
-                //TODO get error image
+                img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
+                switchImages();
                 System.out.println("Failed to load image");
             }
+
+            private void switchImages(){
+                prgWait.setVisibility(View.GONE);
+                img.setVisibility(View.VISIBLE);
+            }
         });
-
-
     }
 
     public static Intent newIntent(Context ctx, int new_id)
