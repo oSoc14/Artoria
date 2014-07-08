@@ -66,7 +66,7 @@ public class DataSourceList extends ListActivity {
 	protected void onResume() {
 		super.onResume();
 
-		DataSourceStorage.getInstance().fillDefaultDataSources();
+		DataSourceStorage.getInstance().fillData();
 
 		int size = DataSourceStorage.getInstance().getSize();
 		

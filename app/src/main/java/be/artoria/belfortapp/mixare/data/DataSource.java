@@ -45,16 +45,11 @@ public class DataSource extends Activity {
 	private String name;
 	private String url;
 
-	public enum TYPE {
-		WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARENA
-	};
-
 	public enum DISPLAY {
 		CIRCLE_MARKER, NAVIGATION_MARKER, IMAGE_MARKER
 	};
 
 	private boolean enabled;
-	private TYPE type;
 	private DISPLAY display;
 
 	@Override
