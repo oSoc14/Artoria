@@ -111,7 +111,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			handleIntent(getIntent());
 
 			final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			getMixViewData().setmWakeLock(pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "My Tag"));
+			getMixViewData().setmWakeLock(pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag"));
 
 			killOnError();
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
