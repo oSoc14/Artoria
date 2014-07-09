@@ -1,9 +1,9 @@
 <resources>
 
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-         <!--Customize your theme here. -->
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <!--Customize your theme here. -->
         <item name="android:buttonStyle">@style/ButtonStyle</item>
     </style>
 
@@ -13,12 +13,6 @@
     </style>
 
 
-    <!-- ActionBar styles -->
-    <style name="MyActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:background">@color/color1</item>
-        <!-- Support library compatibility -->
-        <item name="background">@color/color1</item>
-    </style>
 
     <style name="ButtonStyle">
         <item name="android:background">@color/green</item>

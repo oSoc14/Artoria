@@ -7,19 +7,6 @@
     android:orientation="vertical"
     tools:ignore="MergeRootFrame" >
 
-   <!-- <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            style="android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/route"
-            android:id="@+id/route"
-            android:onClick="viewRoute" />
-
-        </LinearLayout>-->
 
     <ImageView
         android:layout_width="wrap_content"
@@ -33,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        tools:visibility="gone"
         android:id="@+id/prgWait">
 
         <ProgressBar
@@ -77,6 +65,7 @@
             android:src="@drawable/ic_turn_left"
             android:id="@+id/prev"
             style="@style/lightButtonStyle"
+            android:layout_marginLeft="10dp"
             android:onClick="prevDetail"/>
 
         <Button
@@ -85,6 +74,8 @@
             android:text="@string/add_to_route"
             android:id="@+id/add_to_route"
             android:onClick="addToRoute"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             style="@style/ButtonStyle"
             android:layout_weight="1"/>
 
@@ -95,6 +86,7 @@
             android:onClick="nextDetail"
             style="@style/lightButtonStyle"
             android:src="@drawable/ic_turn_right"
+            android:layout_marginRight="10dp"
             />
 
         </LinearLayout>
