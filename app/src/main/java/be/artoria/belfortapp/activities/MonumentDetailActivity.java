@@ -41,7 +41,8 @@ public class MonumentDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
         id = (Integer) getIntent().getExtras().get(ARG_ID);
-        initGui(false);
+        fromPanorama = getIntent().getBooleanExtra(ARG_FROM_PANORAMA,false);
+        initGui(fromPanorama);
     }
 
     @Override
