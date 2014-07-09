@@ -7,29 +7,9 @@
     android:orientation="vertical"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-
-        <Button
-            style="android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main"
-            android:id="@+id/back"
-            android:layout_alignTop="@+id/monument_name"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="returnToMain" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/monument_name"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="testtest"/>
 
         <Button
             style="android:attr/buttonStyleSmall"
@@ -39,7 +19,7 @@
             android:id="@+id/route"
             android:onClick="viewRoute" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     <ImageView
         android:layout_width="wrap_content"
@@ -96,6 +76,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_turn_left"
             android:id="@+id/prev"
+            style="@style/lightButtonStyle"
             android:onClick="prevDetail"/>
 
         <Button
@@ -104,6 +85,7 @@
             android:text="@string/add_to_route"
             android:id="@+id/add_to_route"
             android:onClick="addToRoute"
+            style="@style/ButtonStyle"
             android:layout_weight="1"/>
 
         <ImageButton
@@ -111,6 +93,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/next"
             android:onClick="nextDetail"
+            style="@style/lightButtonStyle"
             android:src="@drawable/ic_turn_right"
             />
 

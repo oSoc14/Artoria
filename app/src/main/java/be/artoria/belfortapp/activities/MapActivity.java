@@ -149,7 +149,7 @@ public class MapActivity extends BaseActivity {
                         final ArtoriaOverlayItem overlayItem = (ArtoriaOverlayItem)item;
                         final POI selectedItem = ((ArtoriaOverlayItem) item).poi;
                         if(selectedItem.id != -1) {
-                            Intent i = MonumentDetailActivity.newIntent(MapActivity.this, selectedItem.id);
+                            Intent i = MonumentDetailActivity.newIntent(MapActivity.this, selectedItem.id,false);
                             startActivity(i);
                         }
                         return true; // We 'handled' this event.
