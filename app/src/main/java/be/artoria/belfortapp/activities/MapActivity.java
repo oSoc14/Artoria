@@ -237,7 +237,7 @@ public class MapActivity extends BaseActivity {
             for(int i = 0; i < road.mNodes.size(); i++){
                 RoadNode node = road.mNodes.get(i);
                 String instructions = node.mInstructions;
-                if(node.mInstructions.toUpperCase().contains(DataManager.getInstance().getDestinationName())){
+                if(node.mInstructions.toUpperCase().contains(getResources().getString(R.string.destination).toUpperCase())){
                     instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
                     waypoint++;
                 }

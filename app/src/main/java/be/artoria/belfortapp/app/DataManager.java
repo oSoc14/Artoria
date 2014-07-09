@@ -78,12 +78,4 @@ public class DataManager {
         numberOfPOIs = 0;
         poiList.clear();
     }
-
-    public String getDestinationName(){
-        if(getCurrentLanguage() == Language.DUTCH){
-            return "BESTEMMING";
-        }else{
-            return "DESTINATION";
-        }
-    }
 }

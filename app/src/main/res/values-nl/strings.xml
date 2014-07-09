@@ -19,6 +19,7 @@
     <string name="show_map">Toon kaart</string>
     <string name="minutes">minuten</string>
     <string name="add_to_route">Toevoegen aan route</string>
+    <string name="destination">bestemming</string>
 
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>

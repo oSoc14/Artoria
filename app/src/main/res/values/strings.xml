@@ -21,6 +21,7 @@
     <string name="show_map">Show map</string>
     <string name="minutes">minutes</string>
     <string name="add_to_route">Add to route</string>
+    <string name="destination">destination</string>
 
     <string-array name="lstMenu">
         <item>Panorama</item>
