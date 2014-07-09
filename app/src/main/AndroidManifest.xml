@@ -6,6 +6,7 @@
     <application
         android:name="be.artoria.belfortapp.app.ArtoriaApp"
         android:allowBackup="true"
+        android:logo="@drawable/ic_launcher"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >

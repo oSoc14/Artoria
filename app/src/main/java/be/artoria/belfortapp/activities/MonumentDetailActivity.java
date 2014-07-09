@@ -60,9 +60,9 @@ public class MonumentDetailActivity extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        id = item.getItemId();
+        if(id == R.id.btnRoute){
+           viewRoute();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -85,7 +85,7 @@ public class MonumentDetailActivity extends BaseActivity {
         initGui();
     }
 
-    public void viewRoute(View view) {
+    public void viewRoute() {
         /*Go to the route overview*/
         final Intent i = new Intent(MonumentDetailActivity.this,RouteActivity.class);
         startActivity(i);
@@ -102,7 +102,6 @@ public class MonumentDetailActivity extends BaseActivity {
         final DataManager dm = DataManager.getInstance();
         final POI wp = dm.getPOIbyID(id);
 
-        final TextView tv = (TextView) findViewById(R.id.monument_name);
         final TextView tvs = (TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc = (TextView) findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
@@ -113,7 +112,7 @@ public class MonumentDetailActivity extends BaseActivity {
 
         /* Setting the correct data */
         String name = wp.getName();
-        tv.setText(name);
+        getActionBar().setTitle(name);
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
