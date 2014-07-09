@@ -76,6 +76,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_turn_left"
             android:id="@+id/prev"
+            style="@style/lightButtonStyle"
             android:onClick="prevDetail"/>
 
         <Button
@@ -84,6 +85,7 @@
             android:text="@string/add_to_route"
             android:id="@+id/add_to_route"
             android:onClick="addToRoute"
+            style="@style/ButtonStyle"
             android:layout_weight="1"/>
 
         <ImageButton
@@ -91,6 +93,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/next"
             android:onClick="nextDetail"
+            style="@style/lightButtonStyle"
             android:src="@drawable/ic_turn_right"
             />
 
