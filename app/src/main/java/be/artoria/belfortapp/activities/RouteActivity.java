@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +23,14 @@ import be.artoria.belfortapp.app.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;
+import be.artoria.belfortapp.mixare.MixView;
 
 
 public class RouteActivity extends BaseActivity {
 
     DragSortListView listView;
     DragSortAdapter adapter;
+    LinearLayout cntNoRoute;
 
     private final DragSortListView.DropListener onDrop = new DragSortListView.DropListener()
     {
@@ -49,6 +53,7 @@ public class RouteActivity extends BaseActivity {
         {
             adapter.remove(adapter.getItem(which));
             PrefUtils.saveRoute(RouteManager.getInstance().getWaypoints());
+            routeIsEmpty();
         }
     };
 
@@ -104,11 +109,45 @@ public class RouteActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        cntNoRoute = (LinearLayout)findViewById(R.id.cntNoRoute);
+        cntNoRoute.setVisibility(View.GONE);
+        final Button btnBuilding = (Button)findViewById(R.id.btnBuildings);
+        btnBuilding.setText(getResources().getStringArray(R.array.lstMenu)[1]);
+        btnBuilding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = MonumentDetailActivity.newIntent(RouteActivity.this,1);
+                startActivity(i);
+            }
+        });
+
+        final Button btnPanorama = (Button)findViewById(R.id.btnPanorama);
+        btnPanorama.setText(getResources().getStringArray(R.array.lstMenu)[0]);
+
+        btnPanorama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(RouteActivity.this, MixView.class);
+                startActivity(i);
+            }
+        });
+
+        routeIsEmpty();
     }
 
     public void goToCalcRoute(View view) {
         final Intent i = new Intent(RouteActivity.this, MapActivity.class);
         startActivity(i);
+    }
+
+    private void routeIsEmpty(){
+        if(RouteManager.getInstance().getWaypoints().isEmpty()){
+            cntNoRoute.setVisibility(View.VISIBLE);
+            Toast.makeText(this,getResources().getString(R.string.no_route),Toast.LENGTH_LONG).show();
+        }else{
+            cntNoRoute.setVisibility(View.GONE);
+        }
     }
 
 }
