@@ -1,10 +1,9 @@
 package be.artoria.belfortapp.app;
 
-import android.content.res.Resources;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 import be.artoria.belfortapp.sql.POIDAO;
 
 /**
@@ -13,6 +12,13 @@ import be.artoria.belfortapp.sql.POIDAO;
 public class DataManager {
 
     public static int numberOfPOIs = 0;
+
+    /* Check if the data should be refreshed after a resume or whatever,
+     * make sure the data exists is reasonably fresh.
+     */
+    public static void refresh() {
+        // TODO implement
+    }
 
     public enum Language{
         DUTCH,ENGLISH,FRENCH
@@ -31,18 +37,13 @@ public class DataManager {
     // Private constructor prevents instantiation from other classes
     private DataManager() {    }
 
-    static {
-        //poiList.add(new POI(0,"51.053939", "3.722958","Sint-Niklaaskerk","SINT_NIKLAAS KERK WAUW","http://www.sintniklaaskerk.be/media/photos/560/021f552775075dd9e053e30072ea21045d628ef3.jpg"));
-        //poiList.add(new POI(1,"51.053952", "3.722196","Korenmarkt","YEEEEEEE","http://fideel.files.wordpress.com/2009/08/korenmarkt-ca-1910-2.jpg"));
-        //poiList.add(new POI(2,"51.054562", "3.724862","Stadhuis","WOOOHOOOOOOOOO HOOOO HOOOO","http://upload.wikimedia.org/wikipedia/commons/2/2c/Gent_stadhuis_belfort_1890-1900.jpg"));
-    }
-        public Language getCurrentLanguage(){
+    public Language getCurrentLanguage(){
         if(lang == null) lang = PrefUtils.getLanguage();
         return lang;
     }
-
-    public static POI getPOIbyID(int id){
-        /* poiList might very well be empty after resuming the app */
+    
+    public static List<POI> getAll(){
+                /* poiList might very well be empty after resuming the app */
         if(poiList.isEmpty()){
             try {
                 poidao.open();
@@ -53,11 +54,15 @@ public class DataManager {
             numberOfPOIs = poiList.size();
             /* Worst case scenario, the local database is empty and we're asked for a poi */
             if(poiList.isEmpty()){
-
+                // TODO worst case!
             }
         }
         poidao.close();
-        return poiList.get(id);
+        return poiList;
+    }
+
+    public static POI getPOIbyID(int id){
+        return getAll().get(id);
     }
 
     public static DataManager getInstance() {
