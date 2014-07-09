@@ -35,7 +35,7 @@ import android.location.Location;
  */
 public class NavigationMarker extends LocalMarker {
 	
-	public static final int MAX_OBJECTS=10;
+	public static final int MAX_OBJECTS=30;
 
 	public NavigationMarker(String id, String title, double latitude, double longitude,
 			double altitude, String URL, int type, int color) {

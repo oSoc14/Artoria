@@ -40,7 +40,6 @@ import android.location.Location;
 public class POIMarker extends LocalMarker {
 
 	public static final int MAX_OBJECTS = 20;
-	public static final int OSM_URL_MAX_OBJECTS = 5;
 
 	public POIMarker(String id, String title, double latitude, double longitude,
 			double altitude, String URL, int type, int color) {

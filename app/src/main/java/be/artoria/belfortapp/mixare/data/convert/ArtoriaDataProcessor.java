@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.mixare.ArtoriaPOIMarker;
+import be.artoria.belfortapp.mixare.NavigationMarker;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
 
 /**
@@ -32,6 +33,8 @@ public class ArtoriaDataProcessor implements DataProcessor {
         for (POI poi : rawData) {
             Marker ma = new ArtoriaPOIMarker(poi,taskId, colour);
             markers.add(ma);
+            Marker navMa = new NavigationMarker((poi.id+ rawData.size()) + "", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),3, "", taskId,  colour);
+            markers.add(navMa);
             System.err.println("MARKER GETS LOADED");
         }
         return markers;
