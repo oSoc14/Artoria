@@ -624,6 +624,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onTouchEvent(MotionEvent me) {
+        System.out.println("Touch event! ");
 		try {
 			killOnError();
 
