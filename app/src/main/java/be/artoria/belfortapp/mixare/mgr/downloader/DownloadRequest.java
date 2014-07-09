@@ -22,43 +22,21 @@ import be.artoria.belfortapp.mixare.data.DataSource;
 
 public class DownloadRequest {
 	private DataSource source;
-	private String params;
-	
-	public DownloadRequest(DataSource source) {
-		this(source, "");
-	}
 
-	public DownloadRequest(DataSource source, String params) {
-		super(); // WTF
+	public DownloadRequest(DataSource source) {
 		if (source==null){
 			throw new IllegalArgumentException("DataSource is NULL");
 		}
-
 		this.source = source;
-		this.params = params;
+
 	}
 
 	public DataSource getSource() {
 		return source;
 	}
 
-	public void setSource(DataSource source) {
-		this.source = source;
-	}
-
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
-	
 	public String toString(){
-		return " type: "
-				+ getSource().getType() + ", params: "
-				+ getParams();
-
+		return " Artoria download request";
 	}
 
 }

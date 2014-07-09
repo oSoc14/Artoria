@@ -29,7 +29,7 @@ import be.artoria.belfortapp.mixare.mgr.downloader.DownloadRequest;
 
 class DataSourceMgrImpl implements DataSourceManager {
 
-	private DataSource dataSource;
+	private DataSource dataSource = new DataSource();
 
 	private final MixContext ctx;
 
@@ -50,7 +50,6 @@ class DataSourceMgrImpl implements DataSourceManager {
 
     public void requestDataFromAllActiveDataSource(double lat, double lon,
 			double alt, float radius) {
-            // TODO use Datamanger.locale
 			requestData(dataSource, lat, lon, alt, radius, Locale.getDefault()
 					.getLanguage());
 
@@ -58,8 +57,7 @@ class DataSourceMgrImpl implements DataSourceManager {
 
 	private void requestData(DataSource datasource, double lat, double lon,
 			double alt, float radius, String locale) {
-		DownloadRequest request = new DownloadRequest(datasource,
-				null);
+		DownloadRequest request = new DownloadRequest(datasource);
 		ctx.getDownloadManager().submitJob(request);
 	}
 

@@ -19,19 +19,7 @@
 
 package be.artoria.belfortapp.mixare.data;
 
-import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.mixare.data.convert.DataConvertor;
-
-import android.app.Activity;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 /**
  * The DataSource class is able to create the URL where the information about a
@@ -48,11 +36,7 @@ public class DataSource {
     public enum TYPE {
         WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARTORIA
     };
-       	public enum DISPLAY {
-		CIRCLE_MARKER, NAVIGATION_MARKER, IMAGE_MARKER
-	};
 
-	private static final DISPLAY display = DISPLAY.CIRCLE_MARKER;
     private static final TYPE type = TYPE.ARTORIA;
 
 
@@ -74,7 +58,6 @@ public class DataSource {
 
 	@Override
 	public String toString() {
-		return "DataSource [name=" + name + ", enabled="
-				+  true + ", type=" + type + ", display=" + display + "]";
+		return "ARTORIA DataSource ";
 	}
 }

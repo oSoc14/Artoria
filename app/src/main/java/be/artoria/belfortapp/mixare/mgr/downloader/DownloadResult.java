@@ -41,7 +41,7 @@ public class DownloadResult {
 
 	public DownloadResult() {
 		super();
-		this.dataSource = null;
+		this.dataSource = new DataSource();
 		this.params = "";
 		this.markers = new ArrayList<Marker>();
 		this.error = true;

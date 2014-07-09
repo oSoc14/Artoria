@@ -311,7 +311,6 @@ public class DataView {
 			
 			if(!dRes.isError()) {
 				if(dRes.getMarkers() != null){
-					//jLayer = (DataHandler) dRes.obj;
 					Log.i(MixView.TAG,"Adding Markers");
 					markers.addAll(dRes.getMarkers());
                     System.out.println("Number of markers: " +dRes.getMarkers().size());
