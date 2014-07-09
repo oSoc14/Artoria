@@ -1,10 +1,13 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -22,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.osmdroid.bonuspack.overlays.Polyline;
 import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
@@ -78,8 +82,7 @@ public class MapActivity extends BaseActivity {
         //mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
         MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
-        new RouteCalcTask().execute();
-
+        calculateRoute();
         /*Initially show map*/
         toggleMap(true);
 
@@ -342,6 +345,21 @@ public class MapActivity extends BaseActivity {
             return new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON);
         }
 
+    }
+
+    private void calculateRoute(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info != null) {
+            if (info.isConnected()) {
+                new RouteCalcTask().execute();
+            }else{
+                Toast.makeText(this, "Please check your wireless connection and try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Please check your wireless connection and try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -1,6 +1,9 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
@@ -103,7 +107,8 @@ public class RouteActivity extends BaseActivity {
     }
 
     public void goToCalcRoute(View view) {
-        final Intent i = new Intent(RouteActivity.this,MapActivity.class);
+        final Intent i = new Intent(RouteActivity.this, MapActivity.class);
         startActivity(i);
     }
+
 }
