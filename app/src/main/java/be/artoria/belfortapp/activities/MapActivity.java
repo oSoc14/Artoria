@@ -1,10 +1,13 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -22,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.osmdroid.bonuspack.overlays.Polyline;
 import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
@@ -78,8 +82,7 @@ public class MapActivity extends BaseActivity {
         //mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
         MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
-        new RouteCalcTask().execute();
-
+        calculateRoute();
         /*Initially show map*/
         toggleMap(true);
 
@@ -231,11 +234,17 @@ public class MapActivity extends BaseActivity {
 
     private void initRouteInstructions(Road road){
         if(road.mNodes != null) {
-            //LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
             ListView lstRouteDesc = (ListView)findViewById(R.id.lstRouteDesc);
             List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
-            for (RoadNode node : road.mNodes) {
-                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),node.mInstructions));
+            int waypoint = 0;
+            for(int i = 0; i < road.mNodes.size(); i++){
+                RoadNode node = road.mNodes.get(i);
+                String instructions = node.mInstructions;
+                if(node.mInstructions.toUpperCase().contains(getResources().getString(R.string.destination).toUpperCase())){
+                    instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
+                    waypoint++;
+                }
+                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),instructions));
             }
             lstRouteDesc.setAdapter(new RouteDescAdapter(this,android.R.layout.simple_list_item_1,descriptions));
         }
@@ -336,6 +345,21 @@ public class MapActivity extends BaseActivity {
             return new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON);
         }
 
+    }
+
+    private void calculateRoute(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info != null) {
+            if (info.isConnected()) {
+                new RouteCalcTask().execute();
+            }else{
+                Toast.makeText(this, "Please check your wireless connection and try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Please check your wireless connection and try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
