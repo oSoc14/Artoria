@@ -22,7 +22,7 @@ public class ArtoriaPOIMarker extends POIMarker {
 
     public boolean onClick(float x, float y, Context ctx){
       if(super.isClickValid(x,y)){
-          Intent i = MonumentDetailActivity.newIntent(ctx,poi.id);
+          Intent i = MonumentDetailActivity.newIntent(ctx,poi.id,true);
           ctx.startActivity(i);
           return true;
       }

@@ -117,7 +117,7 @@ public class RouteActivity extends BaseActivity {
         btnBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = MonumentDetailActivity.newIntent(RouteActivity.this,1);
+                Intent i = MonumentDetailActivity.newIntent(RouteActivity.this,1,false);
                 startActivity(i);
             }
         });
