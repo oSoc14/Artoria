@@ -302,9 +302,6 @@ public class DataView {
 				retry++;
 				mixContext.getDownloadManager().submitJob(
 						dRes.getErrorRequest());
-				// Notification
-				// Toast.makeText(mixContext, dRes.errorMsg,
-				// Toast.LENGTH_SHORT).show();
 			}
 			
 			if(!dRes.isError()) {
