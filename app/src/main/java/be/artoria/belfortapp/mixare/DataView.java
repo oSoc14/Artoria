@@ -299,7 +299,7 @@ public class DataView {
 	
 	private List<Marker> downloadDrawResults(DownloadManager dm, DownloadResult dRes){
 		List<Marker> markers = new ArrayList<Marker>();
-		while ((dRes = dm.getNextResult()) != null) {
+		if((dRes = dm.getNextResult()) != null) {
 			if (dRes.isError() && retry < 3) {
 				retry++;
 				mixContext.getDownloadManager().submitJob(
@@ -311,9 +311,8 @@ public class DataView {
 			
 			if(!dRes.isError()) {
 				if(dRes.getMarkers() != null){
-					Log.i(MixView.TAG,"Adding Markers");
+					Log.v(MixView.TAG,"Adding Markers");
 					markers.addAll(dRes.getMarkers());
-                    System.out.println("Number of markers: " +dRes.getMarkers().size());
 
 					// Notification
 					Toast.makeText(

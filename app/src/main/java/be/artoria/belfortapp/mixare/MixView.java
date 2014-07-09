@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 
@@ -101,14 +102,13 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//MixView.CONTEXT = this;
 		try {
 						
 			handleIntent(getIntent());
 
 			final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-			//getMixViewData().setmWakeLock(pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag"));
+			getMixViewData().setmWakeLock(pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag"));
 
 			killOnError();
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -118,8 +118,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			maintainZoomBar();
 			
 			if (!isInited) {
-				//getMixViewData().setMixContext(new MixContext(this));
-				//getMixViewData().getMixContext().setDownloadManager(new DownloadManager(mixViewData.getMixContext()));
 				setdWindow(new PaintScreen());
 				setDataView(new DataView(getMixViewData().getMixContext()));
 
@@ -136,7 +134,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
                 //DataSourceStorage.getInstance().fillData();
                 // data is filled by the datamanager.
                 DataManager.refresh();
-
 			}
 
 		} catch (Exception ex) {
@@ -624,6 +621,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onTouchEvent(MotionEvent me) {
+        System.out.println("Touch event! ");
 		try {
 			killOnError();
 
@@ -641,33 +639,25 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		}
 	}
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        final Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         System.out.println("key Down! ");
-		try {
-			killOnError();
 
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (getDataView().isDetailsView()) {
-					getDataView().keyEvent(keyCode);
-					getDataView().setDetailsView(false);
-					return true;
-				} else {
-					//TODO handle keyback to finish app correctly
-					return super.onKeyDown(keyCode, event);
-				}
-			} else if (keyCode == KeyEvent.KEYCODE_MENU) {
-				return super.onKeyDown(keyCode, event);
-			} else {
-				getDataView().keyEvent(keyCode);
-				return false;
-			}
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return super.onKeyDown(keyCode, event);
-		}
-	}
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+            return true;
+
+        }
+        return false;
+    }
 
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD
