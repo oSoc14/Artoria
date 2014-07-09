@@ -59,7 +59,7 @@ class DataSourceMgrImpl implements DataSourceManager {
 	private void requestData(DataSource datasource, double lat, double lon,
 			double alt, float radius, String locale) {
 		DownloadRequest request = new DownloadRequest(datasource,
-				datasource.createRequestParams(lat, lon, alt, radius, locale));
+				null);
 		ctx.getDownloadManager().submitJob(request);
 	}
 

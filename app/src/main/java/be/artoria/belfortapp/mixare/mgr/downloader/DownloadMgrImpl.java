@@ -22,20 +22,18 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.MixContext;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.mixare.data.convert.DataConvertor;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
-import be.artoria.belfortapp.mixare.mgr.HttpTools;
+
 
 import android.util.Log;
 
 class DownloadMgrImpl implements Runnable, DownloadManager {
 
-	private boolean stop = false;
 	private DownloadManagerState state = DownloadManagerState.Confused;
 	private DownloadResult result;
 	private Executor executor = Executors.newSingleThreadExecutor();
@@ -134,11 +132,12 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 		}
 	}
 
-	public void switchOff() {
-		stop=true;
-	}
+    @Override
+    public void switchOff() {
+        // Nothing to be done
+    }
 
-	@Override
+    @Override
 	public DownloadManagerState getState() {
 		return state;
 	}

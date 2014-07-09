@@ -29,14 +29,11 @@ public class DownloadRequest {
 	}
 
 	public DownloadRequest(DataSource source, String params) {
-		super();
+		super(); // WTF
 		if (source==null){
 			throw new IllegalArgumentException("DataSource is NULL");
 		}
-		if (!source.isWellFormed()){
-			throw new IllegalArgumentException("DataSource is not well formed");
-		}
-		
+
 		this.source = source;
 		this.params = params;
 	}
@@ -60,8 +57,8 @@ public class DownloadRequest {
 	public String toString(){
 		return " type: "
 				+ getSource().getType() + ", params: "
-				+ getParams() + ", url: "
-				+ getSource().getUrl();
+				+ getParams();
+
 	}
 
 }

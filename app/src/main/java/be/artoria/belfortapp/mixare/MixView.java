@@ -29,11 +29,9 @@ package be.artoria.belfortapp.mixare;
 import static android.hardware.SensorManager.SENSOR_DELAY_GAME;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import be.artoria.belfortapp.R.drawable;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 
@@ -66,8 +64,6 @@ import android.util.FloatMath;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -111,6 +107,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 			handleIntent(getIntent());
 
 			final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
 			//getMixViewData().setmWakeLock(pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag"));
 
 			killOnError();
@@ -149,7 +146,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	public MixViewDataHolder getMixViewData() {
 		if (mixViewData==null){
-			// TODO: VERY inportant, only one!
 			mixViewData = new MixViewDataHolder(new MixContext(this));
 		}
 		return mixViewData;
@@ -356,7 +352,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		maintainCamera();
 		maintainAugmentR();
 		maintainZoomBar();
-		
 	}
 	
 	/* ********* Operators ***********/ 
@@ -518,129 +513,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	
 	/* ********* Operator - Menu ******/
 	
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		int base = Menu.FIRST;
-		/* define the first */
-		MenuItem item1 = menu.add(base, base, base,
-				getString(be.artoria.belfortapp.R.string.menu_item_1));
-		MenuItem item2 = menu.add(base, base + 1, base + 1,
-				getString(be.artoria.belfortapp.R.string.menu_item_2));
-		MenuItem item3 = menu.add(base, base + 2, base + 2,
-				getString(be.artoria.belfortapp.R.string.menu_item_3));
-		MenuItem item4 = menu.add(base, base + 3, base + 3,
-				getString(be.artoria.belfortapp.R.string.menu_item_4));
-		MenuItem item5 = menu.add(base, base + 4, base + 4,
-				getString(be.artoria.belfortapp.R.string.menu_item_5));
-		MenuItem item6 = menu.add(base, base + 5, base + 5,
-				getString(be.artoria.belfortapp.R.string.menu_item_6));
-		MenuItem item7 = menu.add(base, base + 6, base + 6,
-				getString(be.artoria.belfortapp.R.string.menu_item_7));
-
-		/* assign icons to the menu items */
-		item1.setIcon(drawable.icon_datasource);
-		item2.setIcon(android.R.drawable.ic_menu_view);
-		item3.setIcon(android.R.drawable.ic_menu_mapmode);
-		item4.setIcon(android.R.drawable.ic_menu_zoom);
-		item5.setIcon(android.R.drawable.ic_menu_search);
-		item6.setIcon(android.R.drawable.ic_menu_info_details);
-		item7.setIcon(android.R.drawable.ic_menu_share);
-
-		return true;
-	}
-
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		/* Data sources */
-		case 1:
-			if (!getDataView().isLauncherStarted()) {
-                Toast.makeText(this, "REMOVE THESE OPTIONS PLEASE", Toast.LENGTH_LONG)
-                        .show();
-			} else {
-				Toast.makeText(this, "THESE OPTIONS NEED TO GO, QUICKER + BETTER",
-						Toast.LENGTH_LONG).show();
-			}
-			break;
-		/* List view */
-		case 2:
-			/*
-			 * if the list of titles to show in alternative list view is not
-			 * empty
-			 */
-			if (getDataView().getDataHandler().getMarkerCount() > 0) {
-				//Intent intent1 = new Intent(MixView.this, MixListView.class);
-				//startActivityForResult(intent1, 42);
-			}
-			/* if the list is empty */
-			else {
-				Toast.makeText(this, be.artoria.belfortapp.R.string.empty_list, Toast.LENGTH_LONG)
-						.show();
-			}
-			break;
-		/* Map View */
-		case 3:
-			//Intent intent2 = new Intent(MixView.this, MixMap.class);
-			//startActivityForResult(intent2, 20);
-			break;
-		/* zoom level */
-		case 4:
-			getMixViewData().getMyZoomBar().setVisibility(View.VISIBLE);
-			getMixViewData().setZoomProgress(getMixViewData().getMyZoomBar()
-					.getProgress());
-			break;
-		/* Search */
-		case 5:
-			onSearchRequested();
-			break;
-		/* GPS Information */
-		case 6:
-			Location currentGPSInfo = getMixViewData().getMixContext().getLocationFinder().getCurrentLocation();
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(be.artoria.belfortapp.R.string.general_info_text) + "\n\n"
-					+ getString(be.artoria.belfortapp.R.string.longitude)
-					+ currentGPSInfo.getLongitude() + "\n"
-					+ getString(be.artoria.belfortapp.R.string.latitude)
-					+ currentGPSInfo.getLatitude() + "\n"
-					+ getString(be.artoria.belfortapp.R.string.altitude)
-					+ currentGPSInfo.getAltitude() + "m\n"
-					+ getString(be.artoria.belfortapp.R.string.speed) + currentGPSInfo.getSpeed()
-					+ "km/h\n" + getString(be.artoria.belfortapp.R.string.accuracy)
-					+ currentGPSInfo.getAccuracy() + "m\n"
-					+ getString(be.artoria.belfortapp.R.string.gps_last_fix)
-					+ new Date(currentGPSInfo.getTime()).toString() + "\n");
-			builder.setNegativeButton(getString(be.artoria.belfortapp.R.string.close_button),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.dismiss();
-						}
-					});
-			AlertDialog alert = builder.create();
-			alert.setTitle(getString(be.artoria.belfortapp.R.string.general_info_title));
-			alert.show();
-			break;
-		/* Case 6: license agreements */
-		case 7:
-			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-			builder1.setMessage(getString(be.artoria.belfortapp.R.string.license));
-			/* Retry */
-			builder1.setNegativeButton(getString(be.artoria.belfortapp.R.string.close_button),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.dismiss();
-						}
-					});
-			AlertDialog alert1 = builder1.create();
-			alert1.setTitle(getString(be.artoria.belfortapp.R.string.license_title));
-			alert1.show();
-			break;
-
-		}
-		return true;
-	}
-
 	/* ******** Operators - Sensors ****** */
 
 	private SeekBar.OnSeekBarChangeListener myZoomBarOnSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -685,6 +557,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 
 	public void onSensorChanged(SensorEvent evt) {
+        System.out.println("SENSOR CHANGED! ");
 		try {
 
 			if (evt.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -770,6 +643,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+        System.out.println("key Down! ");
 		try {
 			killOnError();
 
@@ -811,6 +685,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+        System.out.println("Touch! ");
 		getDataView().setFrozen(false);
 		if (getMixViewData().getSearchNotificationTxt() != null) {
 			getMixViewData().getSearchNotificationTxt().setVisibility(View.GONE);
@@ -823,6 +698,8 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	/* ************ Handlers *************/
 
 	public void doError(Exception ex1) {
+        System.out.println("Error : " + ex1.getMessage());
+        ex1.printStackTrace();
         // TODO fix me
         if(false) {
             if (!fError) {
@@ -864,6 +741,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	private void doMixSearch(String query) {
 		DataHandler jLayer = getDataView().getDataHandler();
+        System.out.println("Mix search");
 		if (!getDataView().isFrozen()) {
 			//MixListView.originalMarkerList = jLayer.getMarkerList();
 			//MixMap.originalMarkerList = jLayer.getMarkerList();
@@ -876,13 +754,12 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 				Marker ma = jLayer.getMarker(i);
 				if (ma.getTitle().toLowerCase().indexOf(query.toLowerCase()) != -1) {
 					searchResults.add(ma);
-					/* the website for the corresponding title */
 				}
 			}
 		}
 		if (searchResults.size() > 0) {
 			getDataView().setFrozen(true);
-			jLayer.setMarkerList(searchResults);
+			jLayer.addMarkers(searchResults);
 		} else
 			Toast.makeText(this,
 					getString(be.artoria.belfortapp.R.string.search_failed_notification),
@@ -980,6 +857,7 @@ class CameraSurface extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
+        System.out.println("Surface created");
 		try {
 			if (camera != null) {
 				try {
@@ -1034,6 +912,7 @@ class CameraSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        System.out.println("Surface changed");
 		try {
 			Camera.Parameters parameters = camera.getParameters();
 			try {
@@ -1132,6 +1011,7 @@ class AugmentedView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		try {
+            System.out.println("OnDraw called");
 
 			app.killOnError();
 
@@ -1141,10 +1021,12 @@ class AugmentedView extends View {
 			MixView.getdWindow().setCanvas(canvas);
 
 			if (!MixView.getDataView().isInited()) {
+                System.out.println("OnDraw: isInited = true");
 				MixView.getDataView().init(MixView.getdWindow().getWidth(),
 						MixView.getdWindow().getHeight());
 			}
 			if (app.isZoombarVisible()) {
+                System.out.println("OnDraw: zoombar is visible");
 				zoomPaint.setColor(Color.WHITE);
 				zoomPaint.setTextSize(14);
 				String startKM, endKM;

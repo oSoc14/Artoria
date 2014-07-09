@@ -173,9 +173,7 @@ public class DataView {
 	}
 
 	public void requestData(String url) {
-		DownloadRequest request = new DownloadRequest(new DataSource(
-				"LAUNCHER", url, DataSource.TYPE.MIXARE,
-				DataSource.DISPLAY.CIRCLE_MARKER, true));
+		DownloadRequest request = new DownloadRequest(new DataSource());
 		mixContext.getDataSourceManager().setAllDataSourcesforLauncher(
 				request.getSource());
 		mixContext.getDownloadManager().submitJob(request);
@@ -232,7 +230,7 @@ public class DataView {
 				}
 			}
 		}
-
+        System.out.println("Update markers");
 		// Update markers
 		dataHandler.updateActivationStatus(mixContext);
 		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
@@ -252,9 +250,11 @@ public class DataView {
 			}
 		}
 
+
+        System.out.println("Start draw Radar");
 		// Draw Radar
 		drawRadar(dw);
-
+        System.out.println("Radar got drawn");
 		// Get next event
 		UIEvent evt = null;
 		synchronized (uiEvents) {
@@ -314,6 +314,7 @@ public class DataView {
 					//jLayer = (DataHandler) dRes.obj;
 					Log.i(MixView.TAG,"Adding Markers");
 					markers.addAll(dRes.getMarkers());
+                    System.out.println("Number of markers: " +dRes.getMarkers().size());
 
 					// Notification
 					Toast.makeText(
@@ -331,7 +332,6 @@ public class DataView {
 
 	/**
 	 * Handles drawing radar and direction.
-	 * @param PaintScreen screen that radar will be drawn to
 	 */
 	private void drawRadar(PaintScreen dw) {
 		String dirTxt = "";
