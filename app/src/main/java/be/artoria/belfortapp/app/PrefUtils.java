@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.activities.LanguageChoiceActivity;
 
 /**
  * Created by Michael Vanderpoorten
@@ -24,6 +25,7 @@ public class PrefUtils {
     private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
     private static final String ARG_FIRS_TTIME = "be.artoria.belfort.firstTime";
     private static final String ARG_ROUTE = "be.artoria.belfort.route";
+    private static final String ARG_LANG = "be.artoria.belfort.lang";
 
     private static Context CONTEXT;
 
@@ -84,6 +86,19 @@ public class PrefUtils {
         if("fr".equals(lang)){ return DataManager.Language.FRENCH;}
         /* default choice is dutch */
         return DataManager.Language.DUTCH;
+    }
+
+    public static void saveLanguage(DataManager.Language lang){
+        String lng = "nl";//default dutch
+        if(lang == DataManager.Language.ENGLISH){lng="en";}
+        if(lang == DataManager.Language.FRENCH){lng = "fr";}
+        getPrefs().edit().putString(ARG_LANG,lng).apply();
+    }
+
+    public static void loadLanguage(Context context){
+        String lang = getPrefs().getString(ARG_LANG,"nl");/*Default dutch*/
+        Locale locale = new Locale(lang);
+        LanguageChoiceActivity.setLang(locale,context);
     }
 
     public static List<POI> getSavedRoute(){

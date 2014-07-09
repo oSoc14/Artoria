@@ -64,15 +64,20 @@ public class LanguageChoiceActivity extends BaseActivity {
                 locale = new Locale("nl");
         }
 
-        Locale.setDefault(locale);
-        final Configuration config = new Configuration();
-        config.locale = locale;
-        view.getContext().getApplicationContext().getResources().updateConfiguration(config, null);
+        setLang(locale,this);
         /* Saving preferences*/
         PrefUtils.setNotFirstTime();
 
         /* Opening the Main screen */
         final Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+    }
+
+    public static void setLang(Locale locale, Context ctx){
+        Locale.setDefault(locale);
+        final Configuration config = new Configuration();
+        config.locale = locale;
+        ctx.getApplicationContext().getResources().updateConfiguration(config, null);
+        PrefUtils.saveLanguage(DataManager.getInstance().getCurrentLanguage());
     }
 }

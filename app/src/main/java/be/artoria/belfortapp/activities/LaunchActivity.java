@@ -20,6 +20,7 @@ public class LaunchActivity extends BaseActivity {
             nextPage = new Intent(this, LanguageChoiceActivity.class);
         } else {
             nextPage = new Intent(this,MainActivity.class);
+            PrefUtils.loadLanguage(this);
         }
         startActivity(nextPage);
     }
