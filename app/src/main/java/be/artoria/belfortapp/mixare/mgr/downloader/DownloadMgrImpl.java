@@ -55,6 +55,7 @@ class DownloadMgrImpl implements Runnable, DownloadManager {
 		while (!stop) {
             state=DownloadManagerState.Downloading;
             result = processRequest();
+            stop = true ;
 			}
 		state=DownloadManagerState.OffLine;
 	}
