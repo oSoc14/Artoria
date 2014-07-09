@@ -554,7 +554,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 
 	public void onSensorChanged(SensorEvent evt) {
-        System.out.println("SENSOR CHANGED! ");
+        
 		try {
 
 			if (evt.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -621,7 +621,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onTouchEvent(MotionEvent me) {
-        System.out.println("Touch event! ");
+        
 		try {
 			killOnError();
 
@@ -648,7 +648,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-        System.out.println("key Down! ");
+        
 
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -675,7 +675,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-        System.out.println("Touch! ");
+        
 		getDataView().setFrozen(false);
 		if (getMixViewData().getSearchNotificationTxt() != null) {
 			getMixViewData().getSearchNotificationTxt().setVisibility(View.GONE);
@@ -688,7 +688,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	/* ************ Handlers *************/
 
 	public void doError(Exception ex1) {
-        System.out.println("Error : " + ex1.getMessage());
+        
         ex1.printStackTrace();
         // TODO fix me
         if(false) {
@@ -731,7 +731,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	private void doMixSearch(String query) {
 		DataHandler jLayer = getDataView().getDataHandler();
-        System.out.println("Mix search");
+        
 		if (!getDataView().isFrozen()) {
 			//MixListView.originalMarkerList = jLayer.getMarkerList();
 			//MixMap.originalMarkerList = jLayer.getMarkerList();
@@ -847,7 +847,7 @@ class CameraSurface extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
-        System.out.println("Surface created");
+
 		try {
 			if (camera != null) {
 				try {
@@ -902,7 +902,7 @@ class CameraSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        System.out.println("Surface changed");
+        
 		try {
 			Camera.Parameters parameters = camera.getParameters();
 			try {
@@ -1001,7 +1001,7 @@ class AugmentedView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		try {
-            System.out.println("OnDraw called");
+            
 
 			app.killOnError();
 
@@ -1011,12 +1011,12 @@ class AugmentedView extends View {
 			MixView.getdWindow().setCanvas(canvas);
 
 			if (!MixView.getDataView().isInited()) {
-                System.out.println("OnDraw: isInited = true");
+                
 				MixView.getDataView().init(MixView.getdWindow().getWidth(),
 						MixView.getdWindow().getHeight());
 			}
 			if (app.isZoombarVisible()) {
-                System.out.println("OnDraw: zoombar is visible");
+                
 				zoomPaint.setColor(Color.WHITE);
 				zoomPaint.setTextSize(14);
 				String startKM, endKM;

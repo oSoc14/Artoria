@@ -250,11 +250,9 @@ public class DataView {
 			}
 		}
 
-
-        System.out.println("Start draw Radar");
 		// Draw Radar
 		drawRadar(dw);
-        System.out.println("Radar got drawn");
+
 		// Get next event
 		UIEvent evt = null;
 		synchronized (uiEvents) {
@@ -310,19 +308,11 @@ public class DataView {
 			}
 			
 			if(!dRes.isError()) {
-				if(dRes.getMarkers() != null){
-					Log.v(MixView.TAG,"Adding Markers");
-					markers.addAll(dRes.getMarkers());
-
-					// Notification
-					Toast.makeText(
-							mixContext,
-							mixContext.getResources().getString(
-									R.string.download_received)
-									+ " " + dRes.getDataSource().getName(),
-							Toast.LENGTH_SHORT).show();
-				}
-			}
+                if (dRes.getMarkers() != null) {
+                    Log.v(MixView.TAG, "Adding Markers");
+                    markers.addAll(dRes.getMarkers());
+                }
+            }
 		}
 		return markers;
 	}
@@ -409,7 +399,7 @@ public class DataView {
 			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {
 				ArtoriaPOIMarker pm = (ArtoriaPOIMarker)dataHandler.getMarker(i);
 				//evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
-                evtHandled = pm.onClick(evt.x,evt.y,mixContext);
+                evtHandled = pm.onClick(evt.x, evt.y, mixContext);
 			}
 		}
 		return evtHandled;
