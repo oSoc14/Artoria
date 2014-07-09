@@ -231,11 +231,17 @@ public class MapActivity extends BaseActivity {
 
     private void initRouteInstructions(Road road){
         if(road.mNodes != null) {
-            //LinearLayout cntDesc = (LinearLayout)findViewById(R.id.cntRouteDesc);
             ListView lstRouteDesc = (ListView)findViewById(R.id.lstRouteDesc);
             List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
-            for (RoadNode node : road.mNodes) {
-                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),node.mInstructions));
+            int waypoint = 0;
+            for(int i = 0; i < road.mNodes.size(); i++){
+                RoadNode node = road.mNodes.get(i);
+                String instructions = node.mInstructions;
+                if(node.mInstructions.toUpperCase().contains(DataManager.getInstance().getDestinationName())){
+                    instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
+                    waypoint++;
+                }
+                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),instructions));
             }
             lstRouteDesc.setAdapter(new RouteDescAdapter(this,android.R.layout.simple_list_item_1,descriptions));
         }
