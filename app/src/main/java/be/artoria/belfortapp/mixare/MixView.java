@@ -34,6 +34,7 @@ import java.util.List;
 
 import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 
 import be.artoria.belfortapp.mixare.lib.gui.PaintScreen;
@@ -58,6 +59,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
@@ -73,6 +75,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,6 +102,8 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	/* string to name & access the preference file in the internal storage */
 	public static final String PREFS_NAME = "MyPrefsFileForMenuItems";
 
+    private boolean durationExpired = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,7 +120,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 			maintainCamera();
 			maintainAugmentR();
-			maintainZoomBar();
+			//maintainZoomBar();
 			
 			if (!isInited) {
 				setdWindow(new PaintScreen());
@@ -135,8 +140,32 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
                 // data is filled by the datamanager.
                 DataManager.refresh();
 			}
+            final View v;
+
+            final PopupWindow popupWindow = new PopupWindow(v, 280, 160, false);
+            popupWindow.showAtLocation(v, 17, 0, 0);
+            popupWindow.setTouchable(true);
+            popupWindow.setOutsideTouchable(true);
+
+            final Handler popupHandler = new Handler();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("run!","run");
+                    if (!durationExpired) {
+                        durationExpired = true;
+                        popupHandler.postDelayed(this, 2000);
+                    } else {
+                        popupWindow.dismiss();
+                        popupHandler.removeCallbacks(this);
+                        durationExpired = false;
+                    }
+                }
+            });
 
 		} catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e("bad","time#1");
 			doError(ex);
 		}
 	}
@@ -348,7 +377,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		super.onRestart();
 		maintainCamera();
 		maintainAugmentR();
-		maintainZoomBar();
+		//maintainZoomBar();
 	}
 	
 	/* ********* Operators ***********/ 
@@ -462,8 +491,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	
 	public float calcZoomLevel(){
+        return 0.04f;
 
-		int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
+        // what does this even mean?
+		/*int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
 		float myout = 5;
 
 		if (myZoomLevel <= 26) {
@@ -481,7 +512,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		}
 
 
-		return myout;
+		return myout; */
 	}
 
 	/**
@@ -811,7 +842,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 		getMixViewData().getMixContext().getDownloadManager().switchOn();
 
-	};
+	}
 
 }
 

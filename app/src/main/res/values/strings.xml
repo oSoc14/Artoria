@@ -152,5 +152,6 @@
 <string name="refreshing">Refreshing</string>
     <string name="title_activity_panorama">Panorama</string>
     <string name="unsupported">This device is not supported because it lacks gyroscopes. We are sorry for the inconvenience.</string>
+    <string name="calibrate">Please make sure your phone compass is calibrated, click here to find out how.</string>
 
 </resources>

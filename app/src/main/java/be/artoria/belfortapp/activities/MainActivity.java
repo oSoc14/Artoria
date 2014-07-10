@@ -2,9 +2,12 @@ package be.artoria.belfortapp.activities;
 
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -105,7 +109,7 @@ public class MainActivity extends BaseActivity {
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),R.string.unsupported, Toast.LENGTH_LONG).show();
+                            Toast.makeText(PrefUtils.getContext(),R.string.unsupported, Toast.LENGTH_LONG).show();
                         }
                     break;
                     /* The second item are the buildings */
@@ -150,7 +154,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private boolean deviceSupported() {
-        return false;
+        final SensorManager mSensorManager = (SensorManager) getSystemService(PrefUtils.getContext().SENSOR_SERVICE);
+        return mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
     }
 
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
