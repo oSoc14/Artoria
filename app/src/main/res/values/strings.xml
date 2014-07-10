@@ -151,8 +151,9 @@
 <string name="location_not_found">Location not found, make sure you enabled Wifi location or GPS in the settings.</string>
 <string name="refreshing">Refreshing</string>
     <string name="title_activity_panorama">Panorama</string>
-    <string name="unsupported">This device is not supported because it lacks gyroscopes. We are sorry for the inconvenience.</string>
+    <string name="unsupported">This device is not supported because it either lacks an accelerometer or magnetic field sensors. We are sorry for the inconvenience.</string>
     <string name="calibrate">Please make sure your phone compass is calibrated, click here to find out how.</string>
     <string name="calibrate_title">Calibration</string>
+    <string name="show_me_how">Show me how</string>
 
 </resources>

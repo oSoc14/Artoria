@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity {
 
     private boolean deviceSupported() {
         final SensorManager mSensorManager = (SensorManager) getSystemService(PrefUtils.getContext().SENSOR_SERVICE);
-        return mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
+        return mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null && mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
     }
 
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {

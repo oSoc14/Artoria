@@ -26,6 +26,7 @@ public class PrefUtils {
     private static final String ARG_FIRS_TTIME = "be.artoria.belfort.firstTime";
     private static final String ARG_ROUTE = "be.artoria.belfort.route";
     private static final String ARG_LANG = "be.artoria.belfort.lang";
+    private static final String ARG_FIRS_PANORAMA_TIME = "be.artoria.belfort.panorama_firstTime";
 
     private static Context CONTEXT;
 
@@ -130,5 +131,13 @@ public class PrefUtils {
         getPrefs().edit().putString(ARG_ROUTE,sb.toString()).apply();
     }
 
-
+    public static void setPanoramaNotFirstTime() {
+        getPrefs()
+                .edit()
+                .putBoolean(ARG_FIRS_PANORAMA_TIME, false)
+                .apply();
+    }
+    public static boolean isFirstPanoramaTime() {
+        return getPrefs().getBoolean(ARG_FIRS_PANORAMA_TIME, true);
+    }
 }
