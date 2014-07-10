@@ -179,7 +179,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 				getMixViewData().getMixContext().getDownloadManager().switchOff();
 
 				if (getDataView() != null) {
-					getDataView().cancelRefreshTimer();
+					//getDataView().cancelRefreshTimer();
 				}
 			} catch (Exception ignore) {
 			}
@@ -403,24 +403,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	 */
 	private void refreshDownload(){
         DataManager.refresh();
-//		try {
-//			if (getMixViewData().getDownloadThread() != null){
-//				if (!getMixViewData().getDownloadThread().isInterrupted()){
-//					getMixViewData().getDownloadThread().interrupt();
-//					getMixViewData().getMixContext().getDownloadManager().restart();
-//				}
-//			}else { //if no download thread found
-//				getMixViewData().setDownloadThread(new Thread(getMixViewData()
-//						.getMixContext().getDownloadManager()));
-//				//@TODO Syncronize DownloadManager, call Start instead of run.
-//				mixViewData.getMixContext().getDownloadManager().run();
-//			}
-//		}catch (Exception ex){
-//		}
 	}
 	
 	public void refresh(){
-		dataView.refresh();
+		//dataView.refresh();
 	}
 
 	public void setErrorDialog(){

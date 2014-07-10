@@ -58,407 +58,353 @@ import android.widget.Toast;
  */
 public class DataView {
 
-	/** current context */
-	private MixContext mixContext;
-	/** is the view Inited? */
-	private boolean isInit;
+    /**
+     * current context
+     */
+    private MixContext mixContext;
+    /**
+     * is the view Inited?
+     */
+    private boolean isInit;
 
-	/** width and height of the view */
-	private int width, height;
+    /**
+     * width and height of the view
+     */
+    private int width, height;
 
-	/**
-	 * _NOT_ the android camera, the class that takes care of the transformation
-	 */
-	private Camera cam;
+    /**
+     * _NOT_ the android camera, the class that takes care of the transformation
+     */
+    private Camera cam;
 
-	private MixState state = new MixState();
+    private MixState state = new MixState();
 
-	/** The view can be "frozen" for debug purposes */
-	private boolean frozen;
+    /**
+     * The view can be "frozen" for debug purposes
+     */
+    private boolean frozen;
 
-	/** how many times to re-attempt download */
-	private int retry;
+    /**
+     * how many times to re-attempt download
+     */
+    private int retry;
 
-	private Location curFix;
-	private DataHandler dataHandler = new DataHandler();
-	private float radius = 20;
+    private Location curFix;
+    private DataHandler dataHandler = new DataHandler();
+    private float radius = 20;
 
-	/** timer to refresh the browser */
-	private Timer refresh = null;
-	private final long refreshDelay = 45 * 1000; // refresh every 45 seconds
 
-	private boolean isLauncherStarted;
+    private boolean isLauncherStarted;
 
-	private ArrayList<UIEvent> uiEvents = new ArrayList<UIEvent>();
+    private ArrayList<UIEvent> uiEvents = new ArrayList<UIEvent>();
 
-	private RadarPoints radarPoints = new RadarPoints();
-	private ScreenLine lrl = new ScreenLine();
-	private ScreenLine rrl = new ScreenLine();
-	private float rx = 10, ry = 20;
-	private float addX = 0, addY = 0;
-	
-	private List<Marker> markers;
+    private RadarPoints radarPoints = new RadarPoints();
+    private ScreenLine lrl = new ScreenLine();
+    private ScreenLine rrl = new ScreenLine();
+    private float rx = 10, ry = 20;
+    private float addX = 0, addY = 0;
 
-	/**
-	 * Constructor
-	 */
-	public DataView(MixContext ctx) {
-		this.mixContext = ctx;
-	}
+    private List<Marker> markers;
 
-	public MixContext getContext() {
-		return mixContext;
-	}
+    /**
+     * Constructor
+     */
+    public DataView(MixContext ctx) {
+        this.mixContext = ctx;
+    }
 
-	public boolean isLauncherStarted() {
-		return isLauncherStarted;
-	}
+    public MixContext getContext() {
+        return mixContext;
+    }
 
-	public boolean isFrozen() {
-		return frozen;
-	}
+    public boolean isLauncherStarted() {
+        return isLauncherStarted;
+    }
 
-	public void setFrozen(boolean frozen) {
-		this.frozen = frozen;
-	}
+    public boolean isFrozen() {
+        return frozen;
+    }
 
-	public float getRadius() {
-		return radius;
-	}
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
 
-	public void setRadius(float radius) {
-		this.radius = radius;
-	}
+    public float getRadius() {
+        return radius;
+    }
 
-	public DataHandler getDataHandler() {
-		return dataHandler;
-	}
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
 
-	public boolean isDetailsView() {
-		return state.isDetailsView();
-	}
+    public DataHandler getDataHandler() {
+        return dataHandler;
+    }
 
-	public void setDetailsView(boolean detailsView) {
-		state.setDetailsView(detailsView);
-	}
+    public void doStart() {
+        state.nextLStatus = MixState.NOT_STARTED;
+        mixContext.getLocationFinder().setLocationAtLastDownload(curFix);
+    }
 
-	public void doStart() {
-		state.nextLStatus = MixState.NOT_STARTED;
-		mixContext.getLocationFinder().setLocationAtLastDownload(curFix);
-	}
+    public boolean isInited() {
+        return isInit;
+    }
 
-	public boolean isInited() {
-		return isInit;
-	}
+    public void init(int widthInit, int heightInit) {
+        try {
+            width = widthInit;
+            height = heightInit;
 
-	public void init(int widthInit, int heightInit) {
-		try {
-			width = widthInit;
-			height = heightInit;
+            cam = new Camera(width, height, true);
+            cam.setViewAngle(Camera.DEFAULT_VIEW_ANGLE);
 
-			cam = new Camera(width, height, true);
-			cam.setViewAngle(Camera.DEFAULT_VIEW_ANGLE);
+            lrl.set(0, -RadarPoints.RADIUS);
+            lrl.rotate(Camera.DEFAULT_VIEW_ANGLE / 2);
+            lrl.add(rx + RadarPoints.RADIUS, ry + RadarPoints.RADIUS);
+            rrl.set(0, -RadarPoints.RADIUS);
+            rrl.rotate(-Camera.DEFAULT_VIEW_ANGLE / 2);
+            rrl.add(rx + RadarPoints.RADIUS, ry + RadarPoints.RADIUS);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        frozen = false;
+        isInit = true;
+    }
 
-			lrl.set(0, -RadarPoints.RADIUS);
-			lrl.rotate(Camera.DEFAULT_VIEW_ANGLE / 2);
-			lrl.add(rx + RadarPoints.RADIUS, ry + RadarPoints.RADIUS);
-			rrl.set(0, -RadarPoints.RADIUS);
-			rrl.rotate(-Camera.DEFAULT_VIEW_ANGLE / 2);
-			rrl.add(rx + RadarPoints.RADIUS, ry + RadarPoints.RADIUS);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		frozen = false;
-		isInit = true;
-	}
+    public void requestData(String url) {
+        DownloadRequest request = new DownloadRequest(new DataSource());
+        mixContext.getDataSourceManager().setAllDataSourcesforLauncher(
+                request.getSource());
+        mixContext.getDownloadManager().submitJob(request);
+        state.nextLStatus = MixState.PROCESSING;
+    }
 
-	public void requestData(String url) {
-		DownloadRequest request = new DownloadRequest(new DataSource());
-		mixContext.getDataSourceManager().setAllDataSourcesforLauncher(
-				request.getSource());
-		mixContext.getDownloadManager().submitJob(request);
-		state.nextLStatus = MixState.PROCESSING;
-		}
+    public void draw(PaintScreen dw) {
+        mixContext.getRM(cam.transform);
+        curFix = mixContext.getLocationFinder().getCurrentLocation();
 
-	public void draw(PaintScreen dw) {
-		mixContext.getRM(cam.transform);
-		curFix = mixContext.getLocationFinder().getCurrentLocation();
+        state.calcPitchBearing(cam.transform);
 
-		state.calcPitchBearing(cam.transform);
+        // Load Layer
+        if (state.nextLStatus == MixState.NOT_STARTED && !frozen) {
+            loadDrawLayer();
+            markers = new ArrayList<Marker>();
+        } else if (state.nextLStatus == MixState.PROCESSING) {
+            DownloadManager dm = mixContext.getDownloadManager();
+            DownloadResult dRes = null;
 
-		// Load Layer
-		if (state.nextLStatus == MixState.NOT_STARTED && !frozen) {
-			loadDrawLayer();
-			markers = new ArrayList<Marker>();
-		}
-		else if (state.nextLStatus == MixState.PROCESSING) {
-			DownloadManager dm = mixContext.getDownloadManager();
-			DownloadResult dRes = null;
+            markers.addAll(downloadDrawResults(dm, dRes));
 
-			markers.addAll(downloadDrawResults(dm, dRes));
-			
-			if (dm.isDone()) {
-				retry = 0;
-				state.nextLStatus = MixState.DONE;
-				
-				dataHandler = new DataHandler();
-				dataHandler.addMarkers(markers);
-				dataHandler.onLocationChanged(curFix);
-								
-				if (refresh == null) { // start the refresh timer if it is null
-					refresh = new Timer(false);
-					Date date = new Date(System.currentTimeMillis()
-							+ refreshDelay);
-					refresh.schedule(new TimerTask() {
+            if (dm.isDone()) {
+                retry = 0;
+                state.nextLStatus = MixState.DONE;
 
-						@Override
-						public void run() {
-							callRefreshToast();
-							refresh();
-						}
-					}, date, refreshDelay);
-				}
-			}
-		}
-		// Update markers
-		dataHandler.updateActivationStatus(mixContext);
-		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
-			Marker ma = dataHandler.getMarker(i);
-			// if (ma.isActive() && (ma.getDistance() / 1000f < radius || ma
-			// instanceof NavigationMarker || ma instanceof SocialMarker)) {
-			if (ma.isActive() && (ma.getDistance() / 1000f < radius)) {
+                dataHandler = new DataHandler();
+                dataHandler.addMarkers(markers);
+                dataHandler.onLocationChanged(curFix);
+            }
+        }
+        // Update markers
+        dataHandler.updateActivationStatus(mixContext);
+        for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
+            Marker ma = dataHandler.getMarker(i);
+            // if (ma.isActive() && (ma.getDistance() / 1000f < radius || ma
+            // instanceof NavigationMarker || ma instanceof SocialMarker)) {
+            if (ma.isActive() && (ma.getDistance() / 1000f < radius)) {
 
-				// To increase performance don't recalculate position vector
-				// for every marker on every draw call, instead do this only
-				// after onLocationChanged and after downloading new marker
-				// if (!frozen)
-				// ma.update(curFix);
-				if (!frozen)
-					ma.calcPaint(cam, addX, addY);
-				ma.draw(dw);
-			}
-		}
+                // To increase performance don't recalculate position vector
+                // for every marker on every draw call, instead do this only
+                // after onLocationChanged and after downloading new marker
+                // if (!frozen)
+                // ma.update(curFix);
+                if (!frozen)
+                    ma.calcPaint(cam, addX, addY);
+                ma.draw(dw);
+            }
+        }
 
-		// Draw Radar
-		drawRadar(dw);
+        // Draw Radar
+        drawRadar(dw);
 
-		// Get next event
-		UIEvent evt = null;
-		synchronized (uiEvents) {
-			if (uiEvents.size() > 0) {
-				evt = uiEvents.get(0);
-				uiEvents.remove(0);
-			}
-		}
-		if (evt != null) {
-			switch (evt.type) {
-			case UIEvent.KEY:
-				handleKeyEvent((KeyEvent) evt);
-				break;
-			case UIEvent.CLICK:
-				handleClickEvent((ClickEvent) evt);
-				break;
-			}
-		}
-		state.nextLStatus = MixState.PROCESSING;
-	}
+        // Get next event
+        UIEvent evt = null;
+        synchronized (uiEvents) {
+            if (uiEvents.size() > 0) {
+                evt = uiEvents.get(0);
+                uiEvents.remove(0);
+            }
+        }
+        if (evt != null) {
+            switch (evt.type) {
+                case UIEvent.KEY:
+                    handleKeyEvent((KeyEvent) evt);
+                    break;
+                case UIEvent.CLICK:
+                    handleClickEvent((ClickEvent) evt);
+                    break;
+            }
+        }
+        state.nextLStatus = MixState.PROCESSING;
+    }
 
-	/**
-	 * Part of draw function, loads the layer.
-	 */
-	private void loadDrawLayer(){
-		if (mixContext.getStartUrl().length() > 0) {
-			requestData(mixContext.getStartUrl());
-			isLauncherStarted = true;
-		}
+    /**
+     * Part of draw function, loads the layer.
+     */
+    private void loadDrawLayer() {
+        if (mixContext.getStartUrl().length() > 0) {
+            requestData(mixContext.getStartUrl());
+            isLauncherStarted = true;
+        } else {
+            double lat = curFix.getLatitude(), lon = curFix.getLongitude(), alt = curFix
+                    .getAltitude();
+            state.nextLStatus = MixState.PROCESSING;
+            mixContext.getDataSourceManager().requestDataFromAllActiveDataSource(lat, lon, alt, radius);
+        }
 
-		else {
-			double lat = curFix.getLatitude(), lon = curFix.getLongitude(), alt = curFix
-					.getAltitude();
-			state.nextLStatus = MixState.PROCESSING;
-			mixContext.getDataSourceManager().requestDataFromAllActiveDataSource(lat, lon, alt,	radius);
-		}
+        // if no datasources are activated
+        if (state.nextLStatus == MixState.NOT_STARTED)
+            state.nextLStatus = MixState.DONE;
+    }
 
-		// if no datasources are activated
-		if (state.nextLStatus == MixState.NOT_STARTED)
-			state.nextLStatus = MixState.DONE;
-	}
-	
-	private List<Marker> downloadDrawResults(DownloadManager dm, DownloadResult dRes){
-		List<Marker> markers = new ArrayList<Marker>();
-		if((dRes = dm.getNextResult()) != null) {
-			if (dRes.isError() && retry < 3) {
-				retry++;
-				mixContext.getDownloadManager().submitJob(
-						dRes.getErrorRequest());
-			}
-			
-			if(!dRes.isError()) {
+    private List<Marker> downloadDrawResults(DownloadManager dm, DownloadResult dRes) {
+        List<Marker> markers = new ArrayList<Marker>();
+        if ((dRes = dm.getNextResult()) != null) {
+            if (dRes.isError() && retry < 3) {
+                retry++;
+                mixContext.getDownloadManager().submitJob(
+                        dRes.getErrorRequest());
+            }
+
+            if (!dRes.isError()) {
                 if (dRes.getMarkers() != null) {
                     Log.v(MixView.TAG, "Adding Markers");
                     markers.addAll(dRes.getMarkers());
                 }
             }
-		}
-		return markers;
-	}
-	
+        }
+        return markers;
+    }
 
-	/**
-	 * Handles drawing radar and direction.
-	 */
-	private void drawRadar(PaintScreen dw) {
-		String dirTxt = "";
-		int bearing = (int) state.getCurBearing();
-		int range = (int) (state.getCurBearing() / (360f / 16f));
-		// TODO: get strings from the values xml file
-		if (range == 15 || range == 0)
-			dirTxt = getContext().getString(R.string.N);
-		else if (range == 1 || range == 2)
-			dirTxt = getContext().getString(R.string.NE);
-		else if (range == 3 || range == 4)
-			dirTxt = getContext().getString(R.string.E);
-		else if (range == 5 || range == 6)
-			dirTxt = getContext().getString(R.string.SE);
-		else if (range == 7 || range == 8)
-			dirTxt = getContext().getString(R.string.S);
-		else if (range == 9 || range == 10)
-			dirTxt = getContext().getString(R.string.SW);
-		else if (range == 11 || range == 12)
-			dirTxt = getContext().getString(R.string.W);
-		else if (range == 13 || range == 14)
-			dirTxt = getContext().getString(R.string.NW);
 
-		radarPoints.view = this;
-		dw.paintObj(radarPoints, rx, ry, -state.getCurBearing(), 1);
-		dw.setFill(false);
-		dw.setColor(Color.argb(150, 0, 0, 220));
-		dw.paintLine(lrl.x, lrl.y, rx + RadarPoints.RADIUS, ry
-				+ RadarPoints.RADIUS);
-		dw.paintLine(rrl.x, rrl.y, rx + RadarPoints.RADIUS, ry
-				+ RadarPoints.RADIUS);
-		dw.setColor(Color.rgb(255, 255, 255));
-		dw.setFontSize(12);
+    /**
+     * Handles drawing radar and direction.
+     */
+    private void drawRadar(PaintScreen dw) {
+        String dirTxt = "";
+        int bearing = (int) state.getCurBearing();
+        int range = (int) (state.getCurBearing() / (360f / 16f));
+        if (range == 15 || range == 0)
+            dirTxt = getContext().getString(R.string.N);
+        else if (range == 1 || range == 2)
+            dirTxt = getContext().getString(R.string.NE);
+        else if (range == 3 || range == 4)
+            dirTxt = getContext().getString(R.string.E);
+        else if (range == 5 || range == 6)
+            dirTxt = getContext().getString(R.string.SE);
+        else if (range == 7 || range == 8)
+            dirTxt = getContext().getString(R.string.S);
+        else if (range == 9 || range == 10)
+            dirTxt = getContext().getString(R.string.SW);
+        else if (range == 11 || range == 12)
+            dirTxt = getContext().getString(R.string.W);
+        else if (range == 13 || range == 14)
+            dirTxt = getContext().getString(R.string.NW);
 
-		radarText(dw, MixUtils.formatDist(radius * 1000), rx
-				+ RadarPoints.RADIUS, ry + RadarPoints.RADIUS * 2 - 10, false);
-		radarText(dw, "" + bearing + ((char) 176) + " " + dirTxt, rx
-				+ RadarPoints.RADIUS, ry - 5, true);
-	}
+        radarPoints.view = this;
+        dw.paintObj(radarPoints, rx, ry, -state.getCurBearing(), 1);
+        dw.setFill(false);
+        dw.setColor(Color.argb(150, 0, 0, 220));
+        dw.paintLine(lrl.x, lrl.y, rx + RadarPoints.RADIUS, ry
+                + RadarPoints.RADIUS);
+        dw.paintLine(rrl.x, rrl.y, rx + RadarPoints.RADIUS, ry
+                + RadarPoints.RADIUS);
+        dw.setColor(Color.rgb(255, 255, 255));
+        dw.setFontSize(12);
 
-	private void handleKeyEvent(KeyEvent evt) {
-		/** Adjust marker position with keypad */
-		final float CONST = 10f;
-		switch (evt.keyCode) {
-		case KEYCODE_DPAD_LEFT:
-			addX -= CONST;
-			break;
-		case KEYCODE_DPAD_RIGHT:
-			addX += CONST;
-			break;
-		case KEYCODE_DPAD_DOWN:
-			addY += CONST;
-			break;
-		case KEYCODE_DPAD_UP:
-			addY -= CONST;
-			break;
-		case KEYCODE_DPAD_CENTER:
-			frozen = !frozen;
-			break;
-		case KEYCODE_CAMERA:
-			frozen = !frozen;
-			break; // freeze the overlay with the camera button
-		default: //if key is set, then ignore event
-				break;
-		}
-	}
+        radarText(dw, "" + bearing + ((char) 176) + " " + dirTxt, rx
+                + RadarPoints.RADIUS, ry - 5, true);
+    }
 
-	boolean handleClickEvent(ClickEvent evt) {
-		boolean evtHandled = false;
+    private void handleKeyEvent(KeyEvent evt) {
+        /** Adjust marker position with keypad */
+        final float CONST = 10f;
+        switch (evt.keyCode) {
+            case KEYCODE_DPAD_LEFT:
+                addX -= CONST;
+                break;
+            case KEYCODE_DPAD_RIGHT:
+                addX += CONST;
+                break;
+            case KEYCODE_DPAD_DOWN:
+                addY += CONST;
+                break;
+            case KEYCODE_DPAD_UP:
+                addY -= CONST;
+                break;
+            case KEYCODE_DPAD_CENTER:
+                frozen = !frozen;
+                break;
+            case KEYCODE_CAMERA:
+                frozen = !frozen;
+                break; // freeze the overlay with the camera button
+            default: //if key is set, then ignore event
+                break;
+        }
+    }
 
-		// Handle event
-		if (state.nextLStatus == MixState.DONE) {
-			// the following will traverse the markers in ascending order (by
-			// distance) the first marker that
-			// matches triggers the event.
-			//TODO handle collection of markers. (what if user wants the one at the back)
-			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {
-                System.out.println("click on: "  + evt.x + ":" + evt.y);
-				Marker pm = dataHandler.getMarker(i);
-                if(pm instanceof ArtoriaPOIMarker){
-                    ArtoriaPOIMarker mrkr = (ArtoriaPOIMarker)pm;
-                    evtHandled = mrkr.onClick(evt.x,evt.y,mixContext);
-                }else if(pm instanceof  ArtoriaNavigationMarker){
-                    ArtoriaNavigationMarker mrkr = (ArtoriaNavigationMarker)pm;
-                    evtHandled = mrkr.onClick(evt.x,evt.y,mixContext);
+    boolean handleClickEvent(ClickEvent evt) {
+        boolean evtHandled = false;
+
+        // Handle event
+        if (state.nextLStatus == MixState.DONE) {
+            // the following will traverse the markers in ascending order (by
+            // distance) the first marker that
+            // matches triggers the event.
+            //TODO handle collection of markers. (what if user wants the one at the back)
+            for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {
+                System.out.println("click on: " + evt.x + ":" + evt.y);
+                Marker pm = dataHandler.getMarker(i);
+                if (pm instanceof ArtoriaPOIMarker) {
+                    ArtoriaPOIMarker mrkr = (ArtoriaPOIMarker) pm;
+                    evtHandled = mrkr.onClick(evt.x, evt.y, mixContext);
+                } else if (pm instanceof ArtoriaNavigationMarker) {
+                    ArtoriaNavigationMarker mrkr = (ArtoriaNavigationMarker) pm;
+                    evtHandled = mrkr.onClick(evt.x, evt.y, mixContext);
                 }
-				//evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
+                //evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
                 //evtHandled = pm.onClick(evt.x, evt.y, mixContext);
-			}
-		}
-		return evtHandled;
-	}
+            }
+        }
+        return evtHandled;
+    }
 
-	private void radarText(PaintScreen dw, String txt, float x, float y, boolean bg) {
-		float padw = 4, padh = 2;
-		float w = dw.getTextWidth(txt) + padw * 2;
-		float h = dw.getTextAsc() + dw.getTextDesc() + padh * 2;
-		if (bg) {
-			dw.setColor(Color.rgb(0, 0, 0));
-			dw.setFill(true);
-			dw.paintRect(x - w / 2, y - h / 2, w, h);
-			dw.setColor(Color.rgb(255, 255, 255));
-			dw.setFill(false);
-			dw.paintRect(x - w / 2, y - h / 2, w, h);
-		}
-		dw.paintText(padw + x - w / 2, padh + dw.getTextAsc() + y - h / 2, txt,
-				false);
-	}
+    private void radarText(PaintScreen dw, String txt, float x, float y, boolean bg) {
+        float padw = 4, padh = 2;
+        float w = dw.getTextWidth(txt) + padw * 2;
+        float h = dw.getTextAsc() + dw.getTextDesc() + padh * 2;
+        if (bg) {
+            dw.setColor(Color.rgb(0, 0, 0));
+            dw.setFill(true);
+            dw.paintRect(x - w / 2, y - h / 2, w, h);
+            dw.setColor(Color.rgb(255, 255, 255));
+            dw.setFill(false);
+            dw.paintRect(x - w / 2, y - h / 2, w, h);
+        }
+        dw.paintText(padw + x - w / 2, padh + dw.getTextAsc() + y - h / 2, txt,
+                false);
+    }
 
-	public void clickEvent(float x, float y) {
-		synchronized (uiEvents) {
-			uiEvents.add(new ClickEvent(x, y));
-		}
-	}
+    public void clickEvent(float x, float y) {
+        synchronized (uiEvents) {
+            uiEvents.add(new ClickEvent(x, y));
+        }
+    }
 
-	public void keyEvent(int keyCode) {
-		synchronized (uiEvents) {
-			uiEvents.add(new KeyEvent(keyCode));
-		}
-	}
-
-	public void clearEvents() {
-		synchronized (uiEvents) {
-			uiEvents.clear();
-		}
-	}
-
-	public void cancelRefreshTimer() {
-		if (refresh != null) {
-			refresh.cancel();
-		}
-	}
-	
-	/**
-	 * Re-downloads the markers, and draw them on the map.
-	 */
-	public void refresh(){
-		state.nextLStatus = MixState.NOT_STARTED;
-	}
-	
-	private void callRefreshToast(){
-		mixContext.getActualMixView().runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				Toast.makeText(
-						mixContext,
-						mixContext.getResources()
-								.getString(R.string.refreshing),
-						Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
+    public void clearEvents() {
+        synchronized (uiEvents) {
+            uiEvents.clear();
+        }
+    }
 
 }
 

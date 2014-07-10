@@ -90,5 +90,6 @@ public class NavigationMarker extends LocalMarker {
 	public int getMaxObjects() {
 		return MAX_OBJECTS;
 	}
+
 	
 }
