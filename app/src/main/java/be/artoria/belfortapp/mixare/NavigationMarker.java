@@ -63,17 +63,17 @@ public class NavigationMarker extends LocalMarker {
 	
 	public void drawArrow(PaintScreen dw) {
 		if (isVisible) {
-			float currentAngle = MixUtils.getAngle(cMarker.x, cMarker.y, signMarker.x, signMarker.y);
-			float maxHeight = Math.round(dw.getHeight() / 10f) + 1;
+			final float currentAngle = MixUtils.getAngle(cMarker.x, cMarker.y, signMarker.x, signMarker.y);
+			final float maxHeight = Math.round(dw.getHeight() / 10f) + 1;
 
 			//dw.setColor(DataSource.getColor(type));
 			dw.setStrokeWidth(maxHeight / 10f);
 			dw.setFill(false);
 			
-			Path arrow = new Path();
-			float radius = maxHeight / 1.5f;
-			float x=0;
-			float y=0;
+			final Path arrow = new Path();
+			final float radius = maxHeight / 1.5f;
+			final float x=0;
+			final float y=0;
 			arrow.moveTo(x-radius/3, y+radius);
 			arrow.lineTo(x+radius/3, y+radius);
 			arrow.lineTo(x+radius/3, y);
@@ -82,8 +82,9 @@ public class NavigationMarker extends LocalMarker {
 			arrow.lineTo(x-radius, y);
 			arrow.lineTo(x-radius/3,y);
 			arrow.close();
-			dw.paintPath(arrow,cMarker.x,cMarker.y,radius*2,radius*2,currentAngle+90,1);			
-		}
+			dw.paintPath(arrow,cMarker.x,cMarker.y,radius*2,radius*2,currentAngle+90,1);
+
+        }
 	}
 
 	@Override
