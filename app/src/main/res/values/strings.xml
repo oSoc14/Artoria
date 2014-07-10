@@ -151,5 +151,6 @@
 <string name="location_not_found">Location not found, make sure you enabled Wifi location or GPS in the settings.</string>
 <string name="refreshing">Refreshing</string>
     <string name="title_activity_panorama">Panorama</string>
+    <string name="unsupported">This device is not supported because it lacks gyroscopes. We are sorry for the inconvenience.</string>
 
 </resources>

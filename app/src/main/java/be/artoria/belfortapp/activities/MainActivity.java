@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -99,8 +100,13 @@ public class MainActivity extends BaseActivity {
                 switch (i) {
                     /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        intent = new Intent(MainActivity.this, MixView.class);
-                        startActivity(intent);
+                        if(deviceSupported()) {
+                            intent = new Intent(MainActivity.this, MixView.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),R.string.unsupported, Toast.LENGTH_LONG).show();
+                        }
                     break;
                     /* The second item are the buildings */
                     case 1:
@@ -141,6 +147,10 @@ public class MainActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private boolean deviceSupported() {
+        return false;
     }
 
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {

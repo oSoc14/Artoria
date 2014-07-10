@@ -648,8 +648,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-        
-
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             onBackPressed();
@@ -690,7 +688,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	public void doError(Exception ex1) {
         
         ex1.printStackTrace();
-        // TODO fix me
+        // TODO fix me, We don't want error in our app!
         if(false) {
             if (!fError) {
                 fError = true;
@@ -741,7 +739,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		Log.d("SEARCH-------------------0", "" + query);
 		if (jLayer.getMarkerCount() > 0) {
 			for (int i = 0; i < jLayer.getMarkerCount(); i++) {
-				Marker ma = jLayer.getMarker(i);
+				final Marker ma = jLayer.getMarker(i);
 				if (ma.getTitle().toLowerCase().indexOf(query.toLowerCase()) != -1) {
 					searchResults.add(ma);
 				}
@@ -805,16 +803,11 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	}
 
 	private void setZoomLevel() {
-		float myout = calcZoomLevel();
+		final float myout = calcZoomLevel();
 
 		getDataView().setRadius(myout);
-		//caller has the to control of zoombar visibility, not setzoom
-		//mixViewData.getMyZoomBar().setVisibility(View.INVISIBLE);
-		mixViewData.setZoomLevel(String.valueOf(myout));
-		//setZoomLevel, caller has to call refreash download if needed.
-//		mixViewData.setDownloadThread(new Thread(mixViewData.getMixContext().getDownloadManager()));
-//		mixViewData.getDownloadThread().start();
 
+		mixViewData.setZoomLevel(String.valueOf(myout));
 
 		getMixViewData().getMixContext().getDownloadManager().switchOn();
 
