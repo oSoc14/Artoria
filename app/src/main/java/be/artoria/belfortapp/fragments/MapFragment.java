@@ -181,7 +181,6 @@ public class MapFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected void onPostExecute(Object result){
-            System.out.println("redrawing route");
             mapView.getOverlays().clear();
             drawMarkers();
             Road road = (Road)result;
