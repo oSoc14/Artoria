@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -54,10 +54,11 @@ public class MainActivity extends BaseActivity {
         final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-          if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
+        // TODO change this back!
+            if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
           //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
-            System.err.println("Downloading!");
+            Log.i(PrefUtils.TAG,"Started downloading in the background");
             new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
         }
     }
@@ -188,7 +189,7 @@ public class MainActivity extends BaseActivity {
             final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
             downloading = false;
             if(list == null || list.isEmpty()){
-                System.err.println("not good.");
+                Log.e(PrefUtils.TAG ,"Downloading failed");
             }
             else {
                 PrefUtils.saveTimeStampDownloads();

@@ -20,6 +20,7 @@ import be.artoria.belfortapp.activities.LanguageChoiceActivity;
  * Adapted by Laurens De Graeve & Dieter Beelaert
  */
 public class PrefUtils {
+    public static final String TAG = "Belfort";
 
     private static final String ARG_USER_KEY = "be.artoria.belfort";
     private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
@@ -140,4 +141,6 @@ public class PrefUtils {
     public static boolean isFirstPanoramaTime() {
         return getPrefs().getBoolean(ARG_FIRS_PANORAMA_TIME, true);
     }
+
+
 }

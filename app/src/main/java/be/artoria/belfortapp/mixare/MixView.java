@@ -114,8 +114,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 			maintainCamera();
 			maintainAugmentR();
-			//maintainZoomBar();
-			
+
 			if (!isInited) {
 				setdWindow(new PaintScreen());
 				setDataView(new DataView(getMixViewData().getMixContext()));
@@ -147,7 +146,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
             else {
                 //Toast.makeText(this,"Calibrate!",Toast.LENGTH_SHORT).show();
             }
-
+        /* Who does this?!? */
 		} catch (Exception ex) {
             ex.printStackTrace();
             Log.e("bad","time#1");
@@ -741,7 +740,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	}
 
 	private void setZoomLevel() {
-		final float myout = calcZoomLevel();
+		final float myout = 1f;
 
 		getDataView().setRadius(myout);
 
@@ -946,7 +945,8 @@ class AugmentedView extends View {
 				MixView.getDataView().init(MixView.getdWindow().getWidth(),
 						MixView.getdWindow().getHeight());
 			}
-			if (app.isZoombarVisible()) {
+            // I don't need no zoombar
+			if (app.isZoombarVisible() && false) {
                 
 				zoomPaint.setColor(Color.WHITE);
 				zoomPaint.setTextSize(14);

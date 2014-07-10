@@ -180,16 +180,6 @@ public class DataView {
 		state.nextLStatus = MixState.PROCESSING;
 		}
 
-
-//	public void requestData(DataSource datasource, double lat, double lon, double alt, float radius, String locale) {
-//		DownloadRequest request = new DownloadRequest();
-//		request.params = datasource.createRequestParams(lat, lon, alt, radius, locale);
-//		request.source = datasource;
-//		
-//		mixContext.getDownloadManager().submitJob(request);
-//		state.nextLStatus = MixState.PROCESSING;
-//	}
-
 	public void draw(PaintScreen dw) {
 		mixContext.getRM(cam.transform);
 		curFix = mixContext.getLocationFinder().getCurrentLocation();
@@ -230,7 +220,6 @@ public class DataView {
 				}
 			}
 		}
-        System.out.println("Update markers");
 		// Update markers
 		dataHandler.updateActivationStatus(mixContext);
 		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
