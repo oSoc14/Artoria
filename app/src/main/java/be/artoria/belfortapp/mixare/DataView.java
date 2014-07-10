@@ -394,9 +394,17 @@ public class DataView {
 			// matches triggers the event.
 			//TODO handle collection of markers. (what if user wants the one at the back)
 			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {
-				ArtoriaPOIMarker pm = (ArtoriaPOIMarker)dataHandler.getMarker(i);
+                System.out.println("click on: "  + evt.x + ":" + evt.y);
+				Marker pm = dataHandler.getMarker(i);
+                if(pm instanceof ArtoriaPOIMarker){
+                    ArtoriaPOIMarker mrkr = (ArtoriaPOIMarker)pm;
+                    evtHandled = mrkr.onClick(evt.x,evt.y,mixContext);
+                }else if(pm instanceof  ArtoriaNavigationMarker){
+                    ArtoriaNavigationMarker mrkr = (ArtoriaNavigationMarker)pm;
+                    evtHandled = mrkr.onClick(evt.x,evt.y,mixContext);
+                }
 				//evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
-                evtHandled = pm.onClick(evt.x, evt.y, mixContext);
+                //evtHandled = pm.onClick(evt.x, evt.y, mixContext);
 			}
 		}
 		return evtHandled;
