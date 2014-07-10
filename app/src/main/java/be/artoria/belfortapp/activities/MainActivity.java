@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 /*Go to the route overview*/
-                final Intent i = new Intent(MainActivity.this,RouteActivity.class);
+                final Intent i = new Intent(MainActivity.this,NewRouteActivity.class);
                 startActivity(i);
             }
         });
