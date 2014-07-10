@@ -1,6 +1,8 @@
 package be.artoria.belfortapp.activities;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +21,8 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import be.artoria.belfortapp.fragments.MapFragment;
 import be.artoria.belfortapp.mixare.MixView;
 
 import java.io.BufferedReader;

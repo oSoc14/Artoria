@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <fragment
+        android:name="be.artoria.belfortapp.fragments.MapFragment"
+        android:id="@+id/lm_fragment"
+        android:layout_weight="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
