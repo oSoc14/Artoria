@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.PrefUtils;
@@ -140,28 +141,11 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
                 // data is filled by the datamanager.
                 DataManager.refresh();
 			}
-            final View v;
-
-            final PopupWindow popupWindow = new PopupWindow(v, 280, 160, false);
-            popupWindow.showAtLocation(v, 17, 0, 0);
-            popupWindow.setTouchable(true);
-            popupWindow.setOutsideTouchable(true);
-
-            final Handler popupHandler = new Handler();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e("run!","run");
-                    if (!durationExpired) {
-                        durationExpired = true;
-                        popupHandler.postDelayed(this, 2000);
-                    } else {
-                        popupWindow.dismiss();
-                        popupHandler.removeCallbacks(this);
-                        durationExpired = false;
-                    }
-                }
-            });
+            final View v = getWindow().getDecorView();
+            final AlertDialog.Builder aDBuilder = new AlertDialog.Builder(PrefUtils.getContext());
+            aDBuilder.setTitle(R.string.calibrate_title);
+            aDBuilder.setMessage(R.string.calibrate);
+            aDBuilder.show();
 
 		} catch (Exception ex) {
             ex.printStackTrace();
@@ -491,7 +475,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	
 	public float calcZoomLevel(){
-        return 0.04f;
+        return 1f;
 
         // what does this even mean?
 		/*int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
