@@ -32,8 +32,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.activities.MainActivity;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 
 import be.artoria.belfortapp.mixare.lib.gui.PaintScreen;
@@ -57,7 +59,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
@@ -73,6 +77,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,13 +97,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	
 	// TAG for logging
 	public static final String TAG = "Mixare";
-
-	// why use Memory to save a state? MixContext? activity lifecycle?
-	//private static MixView CONTEXT;
-
-	/* string to name & access the preference file in the internal storage */
-	public static final String PREFS_NAME = "MyPrefsFileForMenuItems";
-
+    private static final String GPS_PACKAGE_NAME = "com.eclipsim.gpsstatus2";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,7 +114,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 			maintainCamera();
 			maintainAugmentR();
-			maintainZoomBar();
+			//maintainZoomBar();
 			
 			if (!isInited) {
 				setdWindow(new PaintScreen());
@@ -126,17 +125,32 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 				isInited = true;
 			}
 
-			/*Get the preference file PREFS_NAME stored in the internal memory of the phone*/
-			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-			
 			/*check if the application is launched for the first time*/
-			if(settings.getBoolean("firstAccess",false)==false){
-                //DataSourceStorage.getInstance().fillData();
-                // data is filled by the datamanager.
-                DataManager.refresh();
+			if(PrefUtils.isFirstPanoramaTime()){
+                PrefUtils.setPanoramaNotFirstTime();
+                final AlertDialog.Builder aDBuilder = new AlertDialog.Builder(this);
+                aDBuilder.setTitle(R.string.calibrate_title);
+                aDBuilder.setMessage(R.string.calibrate);
+                aDBuilder.setPositiveButton("OK", null);
+                aDBuilder.setNegativeButton(R.string.show_me_how, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + GPS_PACKAGE_NAME)));
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + GPS_PACKAGE_NAME)));
+                        }
+                    }
+                });
+                aDBuilder.show();
 			}
+            else {
+                //Toast.makeText(this,"Calibrate!",Toast.LENGTH_SHORT).show();
+            }
 
 		} catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e("bad","time#1");
 			doError(ex);
 		}
 	}
@@ -348,7 +362,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		super.onRestart();
 		maintainCamera();
 		maintainAugmentR();
-		maintainZoomBar();
 	}
 	
 	/* ********* Operators ***********/ 
@@ -384,17 +397,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	}
 	
-	/**
-	 * Creates a zoom bar and adds it to view.
-	 */
-	private void maintainZoomBar() {
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		FrameLayout frameLayout = createZoomBar(settings);
-		addContentView(frameLayout, new FrameLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
-				Gravity.BOTTOM));
-	}
-	
+
 	/**
 	 * Refreshes Download 
 	 * TODO refresh downloads
@@ -462,8 +465,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	
 	public float calcZoomLevel(){
+        return 1f;
 
-		int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
+        // what does this even mean?
+		/*int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
 		float myout = 5;
 
 		if (myZoomLevel <= 26) {
@@ -481,77 +486,10 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		}
 
 
-		return myout;
+		return myout; */
 	}
 
-	/**
-	 * Create zoom bar and returns FrameLayout. FrameLayout is created to be
-	 * hidden and not added to view, Caller needs to add the frameLayout to
-	 * view, and enable visibility when needed.
-	 * 
-	 * @param
-	 * @return FrameLayout Hidden Zoom Bar
-	 */
-	private FrameLayout createZoomBar(SharedPreferences settings) {
-		getMixViewData().setMyZoomBar(new SeekBar(this));
-		getMixViewData().getMyZoomBar().setMax(100);
-		getMixViewData().getMyZoomBar()
-				.setProgress(settings.getInt("zoomLevel", 65));
-		getMixViewData().getMyZoomBar().setOnSeekBarChangeListener(myZoomBarOnSeekBarChangeListener);
-		getMixViewData().getMyZoomBar().setVisibility(View.INVISIBLE);
-
-		FrameLayout frameLayout = new FrameLayout(this);
-
-		frameLayout.setMinimumWidth(3000);
-		frameLayout.addView(getMixViewData().getMyZoomBar());
-		frameLayout.setPadding(10, 0, 10, 10);
-		return frameLayout;
-	}
-	
-	/* ********* Operator - Menu ******/
-	
 	/* ******** Operators - Sensors ****** */
-
-	private SeekBar.OnSeekBarChangeListener myZoomBarOnSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
-		Toast t;
-
-		public void onProgressChanged(SeekBar seekBar, int progress,
-				boolean fromUser) {
-			float myout = calcZoomLevel();
-
-			getMixViewData().setZoomLevel(String.valueOf(myout));
-			getMixViewData().setZoomProgress(getMixViewData().getMyZoomBar()
-					.getProgress());
-
-			t.setText("Radius: " + String.valueOf(myout));
-			t.show();
-		}
-
-		public void onStartTrackingTouch(SeekBar seekBar) {
-			Context ctx = seekBar.getContext();
-			t = Toast.makeText(ctx, "Radius: ", Toast.LENGTH_LONG);
-			// zoomChanging= true;
-		}
-
-		public void onStopTrackingTouch(SeekBar seekBar) {
-			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-			SharedPreferences.Editor editor = settings.edit();
-			/* store the zoom range of the zoom bar selected by the user */
-			editor.putInt("zoomLevel", getMixViewData().getMyZoomBar().getProgress());
-			editor.commit();
-			getMixViewData().getMyZoomBar().setVisibility(View.INVISIBLE);
-			// zoomChanging= false;
-
-			getMixViewData().getMyZoomBar().getProgress();
-
-			t.cancel();
-			//repaint after zoom level changed.
-			repaint();
-			setZoomLevel();
-		}
-
-	};
-
 
 	public void onSensorChanged(SensorEvent evt) {
         
@@ -648,8 +586,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-        
-
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             onBackPressed();
@@ -690,7 +626,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	public void doError(Exception ex1) {
         
         ex1.printStackTrace();
-        // TODO fix me
+        // TODO fix me, We don't want error in our app!
         if(false) {
             if (!fError) {
                 fError = true;
@@ -741,7 +677,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		Log.d("SEARCH-------------------0", "" + query);
 		if (jLayer.getMarkerCount() > 0) {
 			for (int i = 0; i < jLayer.getMarkerCount(); i++) {
-				Marker ma = jLayer.getMarker(i);
+				final Marker ma = jLayer.getMarker(i);
 				if (ma.getTitle().toLowerCase().indexOf(query.toLowerCase()) != -1) {
 					searchResults.add(ma);
 				}
@@ -805,20 +741,15 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	}
 
 	private void setZoomLevel() {
-		float myout = calcZoomLevel();
+		final float myout = calcZoomLevel();
 
 		getDataView().setRadius(myout);
-		//caller has the to control of zoombar visibility, not setzoom
-		//mixViewData.getMyZoomBar().setVisibility(View.INVISIBLE);
-		mixViewData.setZoomLevel(String.valueOf(myout));
-		//setZoomLevel, caller has to call refreash download if needed.
-//		mixViewData.setDownloadThread(new Thread(mixViewData.getMixContext().getDownloadManager()));
-//		mixViewData.getDownloadThread().start();
 
+		mixViewData.setZoomLevel(String.valueOf(myout));
 
 		getMixViewData().getMixContext().getDownloadManager().switchOn();
 
-	};
+	}
 
 }
 

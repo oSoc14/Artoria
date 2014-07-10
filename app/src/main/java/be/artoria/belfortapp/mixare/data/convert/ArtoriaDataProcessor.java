@@ -1,5 +1,7 @@
 package be.artoria.belfortapp.mixare.data.convert;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +37,8 @@ public class ArtoriaDataProcessor implements DataProcessor {
             markers.add(ma);
             Marker navMa = new NavigationMarker((poi.id+ rawData.size()) + "", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),3, "", taskId,  colour);
             markers.add(navMa);
-            System.err.println("MARKER GETS LOADED");
         }
+        Log.v("Artoria", "Markers loaded");
         return markers;
     }
 }
