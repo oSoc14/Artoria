@@ -128,9 +128,13 @@
     <string name="location_not_found">Location not found, make sure you enabled Wifi location or GPS in the settings.</string>
     <string name="refreshing">Refreshing</string>
     <string name="title_activity_panorama">Panorama</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_mapp">MappActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_new_route">NewRouteActivity</string>
+    <string name="unsupported">This device is not supported because it either lacks an accelerometer or magnetic field sensors. We are sorry for the inconvenience.</string>
+    <string name="calibrate">Please make sure your phone compass is calibrated, click here to find out how.</string>
+    <string name="calibrate_title">Calibration</string>
+    <string name="show_me_how">Show me how</string>
+>>>>>>> dev
 
 </resources>

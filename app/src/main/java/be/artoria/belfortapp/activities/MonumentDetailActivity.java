@@ -72,8 +72,8 @@ public class MonumentDetailActivity extends BaseActivity {
         if(id == android.R.id.home){
            if(fromPanorama){
                backToPanorama();
+               return true;
            }
-           return true;
         }
         return super.onOptionsItemSelected(item);
     }

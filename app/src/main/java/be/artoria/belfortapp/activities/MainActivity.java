@@ -4,9 +4,12 @@ package be.artoria.belfortapp.activities;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -103,8 +108,13 @@ public class MainActivity extends BaseActivity {
                 switch (i) {
                     /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        intent = new Intent(MainActivity.this, MixView.class);
-                        startActivity(intent);
+                        if(deviceSupported()) {
+                            intent = new Intent(MainActivity.this, MixView.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(PrefUtils.getContext(),R.string.unsupported, Toast.LENGTH_LONG).show();
+                        }
                     break;
                     /* The second item are the buildings */
                     case 1:
@@ -145,6 +155,11 @@ public class MainActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private boolean deviceSupported() {
+        final SensorManager mSensorManager = (SensorManager) getSystemService(PrefUtils.getContext().SENSOR_SERVICE);
+        return mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null && mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
     }
 
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
