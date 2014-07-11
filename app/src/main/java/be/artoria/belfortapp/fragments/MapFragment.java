@@ -22,6 +22,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -295,7 +296,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     private void toggleMap(boolean showMap){
-        final MapView mapview = (MapView)getView().findViewById(R.id.mapview);
+        final RelativeLayout mapview = (RelativeLayout)getView().findViewById(R.id.mapContainer);
         mapview.setVisibility(showMap ? View.VISIBLE : View.GONE);
         final ListView cntDesc = (ListView)getView().findViewById(R.id.lstRouteDesc);
         cntDesc.setVisibility( showMap ? View.GONE : View.VISIBLE);
