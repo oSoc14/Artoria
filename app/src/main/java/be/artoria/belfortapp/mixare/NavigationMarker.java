@@ -92,5 +92,4 @@ public class NavigationMarker extends LocalMarker {
 		return MAX_OBJECTS;
 	}
 
-	
 }
