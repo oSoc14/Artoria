@@ -55,14 +55,5 @@
         dslv:remove_enabled="true"
         dslv:remove_mode="flingRemove"
         dslv:drag_start_mode="onMove"/>
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/calcRoute"
-        android:id="@+id/btnCalcRoute"
-        android:onClick="goToCalcRoute"
-        android:layout_alignParentBottom="true"/>
-
     </LinearLayout>
 </LinearLayout>

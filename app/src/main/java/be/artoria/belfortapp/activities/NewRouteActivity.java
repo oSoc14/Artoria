@@ -144,11 +144,6 @@ public class NewRouteActivity extends BaseActivity {
         routeIsEmpty();
     }
 
-    public void goToCalcRoute(View view) {
-        final Intent i = new Intent(NewRouteActivity.this, MapActivity.class);
-        startActivity(i);
-    }
-
     private void routeIsEmpty(){
         if(RouteManager.getInstance().getWaypoints().isEmpty()){
             cntNoRoute.setVisibility(View.VISIBLE);

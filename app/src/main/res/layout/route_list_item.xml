@@ -12,8 +12,8 @@
     <ImageView
         android:id="@+id/drag_handle"
         android:background="@drawable/drag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_weight="0" />
 
     <TextView
