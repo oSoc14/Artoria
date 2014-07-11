@@ -16,7 +16,7 @@ public class ArtoriaPOIMarker extends POIMarker {
 
 
     public ArtoriaPOIMarker(POI poi, int type, int color){
-        super( poi.id+"", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),3, "", type,  color);
+        super( poi.id+"", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),Integer.parseInt(poi.height), "", type,  color);
         this.poi = poi;
     }
 

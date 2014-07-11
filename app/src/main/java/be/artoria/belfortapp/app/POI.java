@@ -9,6 +9,7 @@ public class POI {
     public int id;
     public String lat;
     public String lon;
+    public String height;
     public String NL_name;
     public String FR_name;
     public String ENG_name;
@@ -18,11 +19,12 @@ public class POI {
     public String ENG_description;
 
 
-    public POI(int id, String lat, String lon, String name, String description, String image_url){
+    public POI(int id, String lat, String lon,String height, String name, String description, String image_url){
         this.id = id;
         this.image_link = image_url;
         this.lat = lat;
         this.lon = lon;
+        this.height = height;
         this.NL_name = name+ "NL";
         this.FR_name = name + "FR";
         this.ENG_name = name+ "ENG";

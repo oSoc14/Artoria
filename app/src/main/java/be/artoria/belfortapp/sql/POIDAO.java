@@ -26,6 +26,7 @@ public class POIDAO {
             POIEntry.COLUMN_NAME_NAME_FR ,
             POIEntry.COLUMN_NAME_LAT ,
             POIEntry.COLUMN_NAME_LON ,
+            POIEntry.COLUMN_NAME_HEIGHT ,
             POIEntry.COLUMN_NAME_DESCRIPTION ,
             POIEntry.COLUMN_NAME_DESCRIPTION_EN ,
             POIEntry.COLUMN_NAME_DESCRIPTION_FR ,
@@ -53,6 +54,7 @@ public class POIDAO {
         values.put(POIEntry.COLUMN_NAME_NAME_FR, poi.FR_name);
         values.put(POIEntry.COLUMN_NAME_LAT, poi.lat);
         values.put(POIEntry.COLUMN_NAME_LON, poi.lon);
+        values.put(POIEntry.COLUMN_NAME_HEIGHT, poi.height);
         values.put(POIEntry.COLUMN_NAME_DESCRIPTION, poi.NL_description);
         values.put(POIEntry.COLUMN_NAME_DESCRIPTION_EN, poi.ENG_description);
         values.put(POIEntry.COLUMN_NAME_DESCRIPTION_FR, poi.FR_description);
@@ -95,6 +97,7 @@ public class POIDAO {
         poi.FR_name         = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_NAME_FR));
         poi.lat             = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_LAT));
         poi.lon             = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_LON));
+        poi.height          = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_HEIGHT));
         poi.NL_description  = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION));
         poi.ENG_description = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_EN));
         poi.FR_description  = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_FR));

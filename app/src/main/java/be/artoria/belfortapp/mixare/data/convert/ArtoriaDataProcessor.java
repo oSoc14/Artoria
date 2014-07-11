@@ -35,7 +35,7 @@ public class ArtoriaDataProcessor implements DataProcessor {
         for (POI poi : rawData) {
             Marker ma = new ArtoriaPOIMarker(poi,taskId, colour);
             markers.add(ma);
-            Marker navMa = new NavigationMarker((poi.id+ rawData.size()) + "", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),3, "", taskId,  colour);
+            Marker navMa = new NavigationMarker((poi.id+ rawData.size()) + "", poi.getName(), Double.parseDouble(poi.lat), Double.parseDouble(poi.lon),0, "", taskId,  colour);
             markers.add(navMa);
         }
         Log.v("Artoria", "Markers loaded");

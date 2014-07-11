@@ -3,6 +3,7 @@ package be.artoria.belfortapp.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -159,7 +160,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private boolean deviceSupported() {
-        final SensorManager mSensorManager = (SensorManager) getSystemService(PrefUtils.getContext().SENSOR_SERVICE);
+        final SensorManager mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         return mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null && mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
     }
 
@@ -212,7 +213,7 @@ public class MainActivity extends BaseActivity {
                 DataManager.addAll(list);
                 DataManager.poidao.close();
                 } catch (SQLException e) {
-                    //TODO sane error handling
+                    e.printStackTrace();
                 }
             }
         }

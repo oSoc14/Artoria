@@ -18,6 +18,7 @@ public class POIDbHelper extends SQLiteOpenHelper {
                     POIContract.POIEntry.COLUMN_NAME_NAME_FR + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_LAT + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_LON + TEXT_TYPE + COMMA_SEP +
+                    POIContract.POIEntry.COLUMN_NAME_HEIGHT + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION_EN + TEXT_TYPE + COMMA_SEP +
                     POIContract.POIEntry.COLUMN_NAME_DESCRIPTION_FR + TEXT_TYPE + COMMA_SEP +

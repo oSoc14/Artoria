@@ -20,6 +20,7 @@ public final class POIContract {
             public static final String COLUMN_NAME_NAME_EN = "nameEN";
             public static final String COLUMN_NAME_LAT = "lat";
             public static final String COLUMN_NAME_LON = "lon";
+            public static final String COLUMN_NAME_HEIGHT = "height";
             public static final String COLUMN_NAME_DESCRIPTION = "description";
             public static final String COLUMN_NAME_DESCRIPTION_EN = "descriptionEN";
             public static final String COLUMN_NAME_DESCRIPTION_FR = "descriptionFR";
