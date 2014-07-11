@@ -120,7 +120,6 @@ public class MonumentDetailActivity extends BaseActivity {
         final TextView tvs = (TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc = (TextView) findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
-        final LinearLayout cntMonumentView = (LinearLayout) findViewById(R.id.cntMonumentView);
         final RelativeLayout prgWait = (RelativeLayout) findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
         prgWait.setVisibility(View.VISIBLE);
