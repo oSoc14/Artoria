@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -124,8 +125,19 @@ public class MapFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        final ImageButton btnFullScreen = (ImageButton)getView().findViewById(R.id.btnFullScreen);
+        btnFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),MapActivity.class);
+                getActivity().startActivity(i);
+            }
+        });
+
         if(!isFullscreen){
             btnTogglemap.setVisibility(View.GONE);
+        }else{
+            btnFullScreen.setVisibility(View.GONE);
         }
 
         /*Set center of map to current location or Bellfry*/
