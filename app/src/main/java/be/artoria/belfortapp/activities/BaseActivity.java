@@ -3,6 +3,7 @@ package be.artoria.belfortapp.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +13,7 @@ import android.view.Window;
 
 import be.artoria.belfortapp.R;
 
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
