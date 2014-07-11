@@ -1,8 +1,25 @@
 <resources>
 
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <!--Customize your theme here. -->
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+    </style>
+
+
+    <style name="LaunchTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+
+    <style name="ButtonStyle">
+        <item name="android:background">@color/green</item>
+    </style>
+
+    <style name="lightButtonStyle">
+        <item name="android:background">@color/lightGreen</item>
     </style>
 
 </resources>

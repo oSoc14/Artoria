@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/lstMenu"
+        android:clickable="true" />
+
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_route"
+        android:id="@+id/btnRoute"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:id="@+id/btnSettings"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_about"
+        android:text="@string/about"
+        android:id="@+id/btnAbout"/>
+</LinearLayout>

@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:dslv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.artoria.belfortapp.activities.RouteActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cntNoRoute">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="panorama"
+            android:layout_weight="1"
+            android:id="@+id/btnPanorama"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Buildings"
+            android:layout_weight="1"
+            android:id="@+id/btnBuildings"/>
+
+        </LinearLayout>
+
+
+        <com.mobeta.android.dslv.DragSortListView
+            android:id="@+id/lstRoute"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+           android:layout_weight="1"
+            android:fastScrollEnabled="true"
+            dslv:drag_handle_id="@+id/drag_handle"
+            dslv:remove_enabled="true"
+            dslv:remove_mode="flingRemove"
+            dslv:drag_start_mode="onMove"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calcRoute"
+        android:id="@+id/btnCalcRoute"
+        android:onClick="goToCalcRoute"
+        android:layout_alignParentBottom="true"/>
+</LinearLayout>
