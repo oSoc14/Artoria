@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -62,9 +63,10 @@ public class NewRouteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_route);
         initGUI();
-        mapFragment = new MapFragment();
-        mapFragment.isFullscreen = false;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         if (savedInstanceState == null) {
+            mapFragment = new MapFragment();
+            mapFragment.isFullscreen = false;
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, mapFragment)
                     .commit();
