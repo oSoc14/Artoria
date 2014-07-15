@@ -12,9 +12,9 @@
 
     <ImageView
         android:id="@+id/drag_handle"
-        android:background="@drawable/drag"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:background="@drawable/drag_default"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="fitXY"
         android:layout_weight="0" />
 
