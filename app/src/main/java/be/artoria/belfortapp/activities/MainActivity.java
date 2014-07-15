@@ -44,11 +44,13 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
     ArrayAdapter<String> menuAdapter;
+    private static String dataSetUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dataSetUrl = getResources().getString(R.string.dataset_url);
         initGui();
     }
 
@@ -64,7 +66,7 @@ public class MainActivity extends BaseActivity {
           //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
             Log.i(PrefUtils.TAG,"Started downloading in the background");
-            new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
+            new DownloadDataTask().execute(PrefUtils.DATASET_URL);
         }
     }
 

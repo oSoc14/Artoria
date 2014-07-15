@@ -23,6 +23,7 @@
     <string name="add_to_route">Add to route</string>
     <string name="destination">destination</string>
     <string name="no_route">There are no waypoints on your route, please add some waypoints to your route by tapping panorama or buildings</string>
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
 
     <string-array name="lstMenu">
         <item>Panorama</item>

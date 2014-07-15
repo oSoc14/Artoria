@@ -6,6 +6,10 @@ import java.util.Locale;
  * Created by Laurens on 01/07/2014.
  */
 public class POI {
+
+    public static final int TYPE_CHURCH = 1;
+    public static final int TYPE_CASTLE = 2;
+
     public int id;
     public String lat;
     public String lon;
@@ -17,9 +21,10 @@ public class POI {
     public String NL_description;
     public String FR_description;
     public String ENG_description;
+    public int type;
 
 
-    public POI(int id, String lat, String lon,String height, String name, String description, String image_url){
+    public POI(int id, String lat, String lon,String height, String name, String description, String image_url,int type){
         this.id = id;
         this.image_link = image_url;
         this.lat = lat;
@@ -31,6 +36,7 @@ public class POI {
         this.NL_description = description + "NL";
         this.ENG_description = description + "ENG";
         this.FR_description = description + "FR";
+        this.type = type;
     }
     /* Empty constructor needed by gson*/
     public POI(){};

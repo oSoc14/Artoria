@@ -30,7 +30,8 @@ public class POIDAO {
             POIEntry.COLUMN_NAME_DESCRIPTION ,
             POIEntry.COLUMN_NAME_DESCRIPTION_EN ,
             POIEntry.COLUMN_NAME_DESCRIPTION_FR ,
-            POIEntry.COLUMN_NAME_IMAGE_URL
+            POIEntry.COLUMN_NAME_IMAGE_URL,
+            POIEntry.COLUMN_NAME_TYPE
     };
 
     public POIDAO(Context context) {
@@ -59,6 +60,7 @@ public class POIDAO {
         values.put(POIEntry.COLUMN_NAME_DESCRIPTION_EN, poi.ENG_description);
         values.put(POIEntry.COLUMN_NAME_DESCRIPTION_FR, poi.FR_description);
         values.put(POIEntry.COLUMN_NAME_IMAGE_URL, poi.image_link);
+        values.put(POIEntry.COLUMN_NAME_TYPE,poi.type);
 
         database.insert(POIEntry.TABLE_NAME, null,
                 values);
@@ -102,6 +104,7 @@ public class POIDAO {
         poi.ENG_description = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_EN));
         poi.FR_description  = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_DESCRIPTION_FR));
         poi.image_link      = cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_IMAGE_URL));
+        poi.type            = Integer.parseInt(cursor.getString(cursor.getColumnIndex(POIEntry.COLUMN_NAME_TYPE)));
         return poi;
     }
 }
