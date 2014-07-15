@@ -1,6 +1,12 @@
 package be.artoria.belfortapp.app;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+
 import java.util.Locale;
+
+import be.artoria.belfortapp.R;
 
 /**
  * Created by Laurens on 01/07/2014.
@@ -80,5 +86,23 @@ public class POI {
     @Override
     public String toString(){
         return getName();
+    }
+
+
+    public static Drawable getTypeImg(int type,Context context){
+        return getTypeImage(type,context,false);
+    }
+
+    public static Drawable getTypePopupImg(int type, Context context){
+       return getTypeImage(type,context,true);
+    }
+
+    private static Drawable getTypeImage(int type, Context context, boolean popup){
+        Resources res = context.getResources();
+        switch(type){
+            case POI.TYPE_CASTLE: return popup ? res.getDrawable(R.drawable.popup_castle) : res.getDrawable(R.drawable.drag_castle);
+            case POI.TYPE_CHURCH: return popup ? res.getDrawable(R.drawable.popup_church) : res.getDrawable(R.drawable.drag_church);
+            default: return popup ? res.getDrawable(R.drawable.popup_default) : res.getDrawable(R.drawable.drag_default);
+        }
     }
 }

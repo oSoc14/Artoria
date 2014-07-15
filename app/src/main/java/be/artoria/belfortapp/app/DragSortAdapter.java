@@ -49,17 +49,8 @@ private class ViewHolder {
         }
 
         holder.txtDesc.setText(rowItem.getName());
-        holder.imgType.setImageDrawable(getTypeImg(rowItem.type));
+        holder.imgType.setImageDrawable(POI.getTypeImg(rowItem.type,context));
 
         return convertView;
-    }
-
-    private Drawable getTypeImg(int type){
-        Resources res = context.getResources();
-        switch(type){
-            case POI.TYPE_CASTLE: return res.getDrawable(R.drawable.drag_castle);
-            case POI.TYPE_CHURCH: return res.getDrawable(R.drawable.drag_church);
-            default: return res.getDrawable(R.drawable.drag_default);
-        }
     }
 }

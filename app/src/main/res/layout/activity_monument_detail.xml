@@ -7,18 +7,32 @@
     android:orientation="vertical"
     tools:ignore="MergeRootFrame" >
 
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_weight="1"
-        android:padding="0dp"
-        android:layout_gravity="center"/>
+        android:layout_height="0dp"
+        android:id="@+id/cntImage"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            tools:src="@drawable/img_not_found"
+            android:padding="0dp"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/imgType"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/popup_church"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         tools:visibility="gone"
         android:id="@+id/prgWait">
