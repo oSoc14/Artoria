@@ -120,16 +120,19 @@ public class MonumentDetailActivity extends BaseActivity {
         final TextView tvs = (TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc = (TextView) findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
+        final ImageView imgType = (ImageView)findViewById(R.id.imgType);
         final RelativeLayout prgWait = (RelativeLayout) findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
+        imgType.setVisibility(View.GONE);
         prgWait.setVisibility(View.VISIBLE);
-
+        desc.scrollTo(0,0);//Scroll back to the top of the view
         /* Setting the correct data */
         String name = wp.getName();
         getActionBar().setTitle(name);
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
+        imgType.setImageDrawable(POI.getTypePopupImg(wp.type,this));
         Picasso.with(this).load(wp.image_link).into(img, new Callback() {
             @Override
             public void onSuccess() {
@@ -146,6 +149,7 @@ public class MonumentDetailActivity extends BaseActivity {
             private void switchImages() {
                 prgWait.setVisibility(View.GONE);
                 img.setVisibility(View.VISIBLE);
+                imgType.setVisibility(View.VISIBLE);
             }
         });
 

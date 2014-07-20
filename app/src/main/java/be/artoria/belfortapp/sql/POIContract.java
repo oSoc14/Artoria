@@ -25,5 +25,6 @@ public final class POIContract {
             public static final String COLUMN_NAME_DESCRIPTION_EN = "descriptionEN";
             public static final String COLUMN_NAME_DESCRIPTION_FR = "descriptionFR";
             public static final String COLUMN_NAME_IMAGE_URL = "image_url";
+            public static final String COLUMN_NAME_TYPE = "type";
         }
     }
