@@ -13,8 +13,15 @@ import be.artoria.belfortapp.R;
  */
 public class POI {
 
-    public static final int TYPE_CHURCH = 1;
-    public static final int TYPE_CASTLE = 2;
+
+   private static final int BOAT      = 0;
+   private static final int CIVIL     = 1;
+   private static final int RELIGIOUS = 2;
+   private static final int TOWER     = 3;
+   private static final int THEATRE   = 4;
+   private static final int CASTLE    = 5;
+   private static final int MONUMENT  = 6;
+
 
     public int id;
     public String lat;
@@ -45,7 +52,7 @@ public class POI {
         this.type = type;
     }
     /* Empty constructor needed by gson*/
-    public POI(){};
+    public POI(){}
 
     @Override
     public boolean equals(Object o) {
@@ -100,9 +107,14 @@ public class POI {
     private static Drawable getTypeImage(int type, Context context, boolean popup){
         Resources res = context.getResources();
         switch(type){
-            case POI.TYPE_CASTLE: return popup ? res.getDrawable(R.drawable.popup_castle) : res.getDrawable(R.drawable.drag_castle);
-            case POI.TYPE_CHURCH: return popup ? res.getDrawable(R.drawable.popup_church) : res.getDrawable(R.drawable.drag_church);
-            default: return popup ? res.getDrawable(R.drawable.popup_default) : res.getDrawable(R.drawable.drag_default);
+            case BOAT:      return popup ? res.getDrawable(R.drawable.ic_boot_white) : res.getDrawable(R.drawable.ic_boot);
+            case CASTLE:    return popup ? res.getDrawable(R.drawable.ic_castle_white) : res.getDrawable(R.drawable.ic_castle);
+            case CIVIL:     return popup ? res.getDrawable(R.drawable.ic_city_white) : res.getDrawable(R.drawable.ic_city);
+            case MONUMENT:  return popup ? res.getDrawable(R.drawable.ic_monument_white) : res.getDrawable(R.drawable.ic_monument);
+            case RELIGIOUS: return popup ? res.getDrawable(R.drawable.ic_religion_white) : res.getDrawable(R.drawable.ic_religion);
+            case THEATRE:   return popup ? res.getDrawable(R.drawable.ic_theater_white) : res.getDrawable(R.drawable.ic_theater);
+            case TOWER:     return popup ? res.getDrawable(R.drawable.ic_skyscraper_white) : res.getDrawable(R.drawable.ic_skyscraper);
+            default:        return popup ? res.getDrawable(R.drawable.ic_monument_white) : res.getDrawable(R.drawable.ic_monument);
         }
     }
 }
