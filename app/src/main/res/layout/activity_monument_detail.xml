@@ -22,15 +22,30 @@
             android:scaleType="fitXY"
             android:layout_gravity="center"/>
 
-        <ImageView
-            android:id="@+id/imgType"
-            android:layout_width="50dp"
-            android:layout_height="100dp"
-            android:layout_alignBottom="@id/imageView"
-            android:scaleType="fitXY"
-            android:src="@drawable/popup_church"/>
+
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imgType"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/popup_church"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/monument_name_smaller"
+        tools:text="testtest"
+        android:layout_marginTop="-35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_horizontal" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,16 +63,12 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
         android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/monument_name_smaller"
-                tools:text="testtest" />
+
 
 
             <TextView
