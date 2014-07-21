@@ -70,5 +70,6 @@
     <string name="SW">ZW</string>
     <string name="W">W</string>
     <string name="NW">NW</string>
+    <string name="lang_choice">Choose your language</string>
 
 </resources>

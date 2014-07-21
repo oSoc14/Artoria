@@ -79,9 +79,9 @@ class LocationMgrImpl implements LocationFinder {
 		// fallback for the case where GPS and network providers are disabled
 		Location hardFix = new Location("reverseGeocoded");
 
-		// Belfort
-		hardFix.setLatitude(46.480302);
-		hardFix.setLongitude(11.296005);
+		// Belfort gent
+		hardFix.setLatitude(51.053642);
+		hardFix.setLongitude(3.724892);
 		hardFix.setAltitude(60);
 
 		try {
@@ -245,7 +245,7 @@ class LocationMgrImpl implements LocationFinder {
 				state=LocationFinderState.Active;
 			}
 			else{ //no location found
-							
+
 			}
 			
 			

@@ -68,6 +68,7 @@
     <string name="SO">SW</string>
     <string name="O">W</string>
     <string name="NO">NW</string>
+    <string name="lang_choice">Choisissez la langue</string>
 
 
 </resources>
