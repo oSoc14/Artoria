@@ -62,4 +62,13 @@
     <string name="calibrate_title">Kalibratie</string>
     <string name="show_me_how">Toon me hoe</string>
 
+    <string name="N">N</string>
+    <string name="NE">NO</string>
+    <string name="E">O</string>
+    <string name="SE">ZO</string>
+    <string name="S">Z</string>
+    <string name="SW">ZW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+
 </resources>

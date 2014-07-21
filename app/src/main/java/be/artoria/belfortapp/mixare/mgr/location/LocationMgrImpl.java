@@ -79,10 +79,10 @@ class LocationMgrImpl implements LocationFinder {
 		// fallback for the case where GPS and network providers are disabled
 		Location hardFix = new Location("reverseGeocoded");
 
-		// Frangart, Eppan, Bozen, Italy
+		// Belfort
 		hardFix.setLatitude(46.480302);
 		hardFix.setLongitude(11.296005);
-		hardFix.setAltitude(300);
+		hardFix.setAltitude(60);
 
 		try {
 			requestBestLocationUpdates();
@@ -91,8 +91,6 @@ class LocationMgrImpl implements LocationFinder {
 		} catch (Exception ex2) {
 			// ex2.printStackTrace();
 			curLoc = hardFix;
-			mixContext.doPopUp(R.string.connection_GPS_dialog_text);
-
 		}
 	}
 
@@ -138,12 +136,6 @@ class LocationMgrImpl implements LocationFinder {
 	 */
 	public Location getCurrentLocation() {
 		if (curLoc == null) {
-			MixView mixView = mixContext.getActualMixView();
-			Toast.makeText(
-					mixView,
-					mixView.getResources().getString(
-							R.string.location_not_found), Toast.LENGTH_LONG)
-					.show();
 			throw new RuntimeException("No GPS Found");
 		}
 		synchronized (curLoc) {
@@ -253,15 +245,7 @@ class LocationMgrImpl implements LocationFinder {
 				state=LocationFinderState.Active;
 			}
 			else{ //no location found
-				mixContext.getActualMixView().runOnUiThread(new Runnable() {					
-					@Override
-					public void run() {
-						Toast.makeText(mixContext.getActualMixView(), 
-								mixContext.getActualMixView().getResources().getString(
-								R.string.location_not_found), Toast.LENGTH_LONG);
-					}
-				});
-				
+							
 			}
 			
 			

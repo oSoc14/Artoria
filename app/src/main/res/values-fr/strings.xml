@@ -14,16 +14,16 @@
     <string name="settings">Paramètres</string>
     <string name="about">Sur Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
-    <string name="calcRoute">Calculer l'itinéraire</string>
+    <string name="calcRoute">Calculer l\'itinéraire</string>
     <string name="view_route">Mon itinéraire</string>
     <string name="added_to_route">Ajouté à mon itinéraire</string>
     <string name="route_planning">Planificateur de  planner</string>
     <string name="route_desc">Route Description</string>
     <string name="show_map">Voir la carte</string>
     <string name="minutes">minutes</string>
-    <string name="add_to_route">Ajouter à l'itinéraire</string>
+    <string name="add_to_route">Ajouter à l\'itinéraire</string>
     <string name="destination">destination</string>
-    <string name="no_route">Il n'y a pas de waypoints sur votre itinéraire, s'il vous plaît ajouter des waypoints à votre itinéraire en appuyant panorama ou bâtiments</string>
+    <string name="no_route">Il n\'y a pas de waypoints sur votre itinéraire, s\'il vous plaît ajouter des waypoints à votre itinéraire en appuyant panorama ou bâtiments</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
 
     <string-array name="lstMenu">
@@ -55,10 +55,19 @@
     <string name="title_activity_panorama">Panorama</string>
     <string name="title_activity_mapp">Carte</string>
     <string name="title_activity_new_route">Itinéraire</string>
-    <string name="unsupported">Cet appareil n'est pas pris en charge car il manque un capteur accéléromètre ou le champ magnétique nécessaire pour déterminer l'angle de votre appareil photo. Nous sommes désolés pour le désagrément.</string>
-    <string name="calibrate">S'il vous plaît assurez la boussole de votre appareil est calibré.</string>
+    <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un capteur accéléromètre ou le champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo. Nous sommes désolés pour le désagrément.</string>
+    <string name="calibrate">S\'il vous plaît assurez la boussole de votre appareil est calibré.</string>
     <string name="calibrate_title">Étalonnage</string>
     <string name="show_me_how">Montrez-moi</string>
+
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SO">SW</string>
+    <string name="O">W</string>
+    <string name="NO">NW</string>
 
 
 </resources>
