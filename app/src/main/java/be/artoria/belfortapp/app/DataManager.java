@@ -78,4 +78,6 @@ public class DataManager {
         numberOfPOIs = 0;
         poiList.clear();
     }
+
+    public static int lastViewedPOI = 1;
 }

@@ -35,6 +35,7 @@ import be.artoria.belfortapp.mixare.MixView;
 public class MonumentDetailActivity extends BaseActivity {
     public final static String ARG_ID = "be.belfort.monumentid";
     public final static String ARG_FROM_PANORAMA = "be.belfort.fromPanorama";
+    public final static String ARG_USER_INSTANTIATED = "be.belfort.userInstantiated"; //used to handle the tilting problem
     private GestureDetectorCompat gDetect;
     private boolean fromPanorama;
 
@@ -43,7 +44,8 @@ public class MonumentDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
-        id = (Integer) getIntent().getExtras().get(ARG_ID);
+        boolean userInstantiated = getIntent().getBooleanExtra(ARG_USER_INSTANTIATED,false);
+        id = userInstantiated ? (Integer) getIntent().getExtras().get(ARG_ID) : DataManager.lastViewedPOI;
         fromPanorama = getIntent().getBooleanExtra(ARG_FROM_PANORAMA,false);
         initGui(fromPanorama);
     }
@@ -93,12 +95,14 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public void prevDetail(View view) {
         id = id == 0 ? (DataManager.numberOfPOIs -1) : (id -1);
+        DataManager.lastViewedPOI = id;
         initGui(false);
 
     }
 
     public void nextDetail(View view) {
         id = (id +1) % DataManager.numberOfPOIs ;
+        DataManager.lastViewedPOI = id;
         initGui(false);
     }
 
@@ -189,6 +193,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final Intent toReturn = new Intent(ctx,MonumentDetailActivity.class);
         toReturn.putExtra(ARG_ID,new_id);
         toReturn.putExtra(ARG_FROM_PANORAMA,fromPanorama);
+        toReturn.putExtra(ARG_USER_INSTANTIATED,true);
         return toReturn;
 
     }
