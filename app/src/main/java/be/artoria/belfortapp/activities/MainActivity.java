@@ -206,11 +206,7 @@ public class MainActivity extends BaseActivity {
                     DataManager.poidao.clearTable();
 
                 for(POI poi : list){
-                    System.out.println(poi.ENG_description);
-                    System.out.println(poi.id);
-
                     DataManager.poidao.savePOI(poi);
-
                 }
                 DataManager.addAll(list);
                 DataManager.poidao.close();
