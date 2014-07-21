@@ -19,7 +19,7 @@
             tools:src="@drawable/img_not_found"
             android:padding="0dp"
             android:layout_alignParentTop="true"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             android:layout_gravity="center"/>
 
 
