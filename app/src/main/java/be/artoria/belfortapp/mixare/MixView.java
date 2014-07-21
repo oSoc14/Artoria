@@ -409,71 +409,6 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		//dataView.refresh();
 	}
 
-	public void setErrorDialog(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(be.artoria.belfortapp.R.string.connection_error_dialog));
-		builder.setCancelable(false);
-
-		/*Retry*/
-		builder.setPositiveButton(be.artoria.belfortapp.R.string.connection_error_dialog_button1, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				fError=false;
-				//TODO improve
-				try {
-					maintainCamera();
-					maintainAugmentR();
-					repaint();
-					setZoomLevel();
-				}
-				catch(Exception ex){
-					//Don't call doError, it will be a recursive call.
-					//doError(ex);
-				}
-			}
-		});
-		/*Open settings*/
-		builder.setNeutralButton(be.artoria.belfortapp.R.string.connection_error_dialog_button2, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				Intent intent1 = new Intent(Settings.ACTION_WIRELESS_SETTINGS); 
-				startActivityForResult(intent1, 42);
-			}
-		});
-		/*Close application*/
-		builder.setNegativeButton(be.artoria.belfortapp.R.string.connection_error_dialog_button3, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				System.exit(0); //wouldn't be better to use finish (to stop the app normally?)
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
-	}
-
-	
-	public float calcZoomLevel(){
-        return 1f;
-
-        // what does this even mean?
-		/*int myZoomLevel = getMixViewData().getMyZoomBar().getProgress();
-		float myout = 5;
-
-		if (myZoomLevel <= 26) {
-			myout = myZoomLevel / 25f;
-		} else if (25 < myZoomLevel && myZoomLevel < 50) {
-			myout = (1 + (myZoomLevel - 25)) * 0.38f;
-		} else if (25 == myZoomLevel) {
-			myout = 1;
-		} else if (50 == myZoomLevel) {
-			myout = 10;
-		} else if (50 < myZoomLevel && myZoomLevel < 75) {
-			myout = (10 + (myZoomLevel - 50)) * 0.83f;
-		} else {
-			myout = (30 + (myZoomLevel - 75) * 2f);
-		}
-
-
-		return myout; */
-	}
-
 	/* ******** Operators - Sensors ****** */
 
 	public void onSensorChanged(SensorEvent evt) {
@@ -611,25 +546,8 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 	public void doError(Exception ex1) {
         
         ex1.printStackTrace();
-        // TODO fix me, We don't want error in our app!
-        if(false) {
-            if (!fError) {
-                fError = true;
+        // TODO fix me, We don't want errors in our app!
 
-                setErrorDialog();
-
-                ex1.printStackTrace();
-                try {
-                } catch (Exception ex2) {
-                    ex2.printStackTrace();
-                }
-            }
-
-            try {
-                augScreen.invalidate();
-            } catch (Exception ignore) {
-            }
-        }
 	}
 
 	public void killOnError() throws Exception {
@@ -671,10 +589,7 @@ public class MixView extends Activity implements SensorEventListener, OnTouchLis
 		if (searchResults.size() > 0) {
 			getDataView().setFrozen(true);
 			jLayer.addMarkers(searchResults);
-		} else
-			Toast.makeText(this,
-					getString(be.artoria.belfortapp.R.string.search_failed_notification),
-					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	/* ******* Getter and Setters ********** */
