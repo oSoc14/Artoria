@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose your language"
+        android:text="@string/lang_choice"
         android:id="@+id/textView2"
         android:layout_above="@+id/dutch"
         android:layout_alignParentLeft="true"

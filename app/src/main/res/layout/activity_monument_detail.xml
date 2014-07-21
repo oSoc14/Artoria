@@ -16,9 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-            tools:src="@drawable/img_not_found"
             android:padding="0dp"
-            android:layout_gravity="center"/>
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            tools:src="@drawable/img_not_found"/>
 
         <ImageView
             android:id="@+id/imgType"
