@@ -3,6 +3,8 @@ package be.artoria.belfortapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -139,12 +141,23 @@ public class MonumentDetailActivity extends BaseActivity {
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
-        imgType.setImageDrawable(POI.getTypePopupImg(wp.type,this));
+
+        /*Set the correct type image according to the orientation of the device*/
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ){
+            imgType.setImageDrawable(POI.getTypePopupImg(wp.type, this));
+        }else{
+            imgType.setImageDrawable(POI.getTypePopupImgLandscape(wp.type,this));
+            if(!DataManager.shownMonumentDetailLandscapeMsg) {
+                Toast.makeText(this, getResources().getString(R.string.monument_landscape_msg), Toast.LENGTH_SHORT).show();
+                DataManager.shownMonumentDetailLandscapeMsg = true;
+            }
+        }
+
 
         /*if the device is a phone, the screen can't be tilted see #66 on GitHub*/
-        if(!ScreenUtils.isTablet(this)) {
+        /*if(!ScreenUtils.isTablet(this)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        }
+        }*/
 
         Picasso.with(this).load(wp.image_link).into(img, new Callback() {
             @Override

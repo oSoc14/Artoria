@@ -97,14 +97,18 @@ public class POI {
 
 
     public static Drawable getTypeImg(int type,Context context){
-        return getTypeImage(type,context,false);
+        return getTypeImage(type,context,DRAG_HANDLE);
     }
 
     public static Drawable getTypePopupImg(int type, Context context){
-       return getTypeImage(type,context,true);
+       return getTypeImage(type,context,POPUP_PORTRAIT);
     }
 
-    private static Drawable getTypeImage(int type, Context context, boolean popup){
+    public static Drawable getTypePopupImgLandscape(int type, Context context){
+       return getTypeImage(type,context,POPUP_LANDSCAPE);
+    }
+
+   /* private static Drawable getTypeImage(int type, Context context, boolean popup){
         Resources res = context.getResources();
         switch(type){
             case BOAT:      return popup ? res.getDrawable(R.drawable.popup_boat) : res.getDrawable(R.drawable.drag_boat);
@@ -115,6 +119,34 @@ public class POI {
             case THEATRE:   return popup ? res.getDrawable(R.drawable.popup_theater) : res.getDrawable(R.drawable.drag_theater);
             case TOWER:     return popup ? res.getDrawable(R.drawable.popup_skyscraper) : res.getDrawable(R.drawable.drag_skyscraper);
             default:        return popup ? res.getDrawable(R.drawable.popup_monument) : res.getDrawable(R.drawable.drag_monument);
+        }
+    }*/
+
+    private static final int DRAG_HANDLE = 0;
+    private static final int POPUP_PORTRAIT = 1;
+    private static final int POPUP_LANDSCAPE = 2;
+
+    private static Drawable getTypeImage(int type, Context context, int viewType){
+        Resources res = context.getResources();
+        switch(type){
+            case BOAT:      return res.getDrawable(getCorrectImageId(R.drawable.drag_boat,R.drawable.popup_boat,R.drawable.popup_default_land,viewType));
+            case CASTLE:    return res.getDrawable(getCorrectImageId(R.drawable.drag_castle,R.drawable.popup_castle,R.drawable.popup_default_land,viewType));
+            case CIVIL:     return res.getDrawable(getCorrectImageId(R.drawable.drag_city,R.drawable.popup_city,R.drawable.popup_default_land,viewType));
+            case MONUMENT:  return res.getDrawable(getCorrectImageId(R.drawable.drag_monument,R.drawable.popup_monument,R.drawable.popup_default_land,viewType));
+            case RELIGIOUS: return res.getDrawable(getCorrectImageId(R.drawable.drag_religion,R.drawable.popup_religion,R.drawable.popup_default_land,viewType));
+            case THEATRE:   return res.getDrawable(getCorrectImageId(R.drawable.drag_theater,R.drawable.popup_theater,R.drawable.popup_default_land,viewType));
+            case TOWER:     return res.getDrawable(getCorrectImageId(R.drawable.drag_skyscraper,R.drawable.popup_skyscraper,R.drawable.popup_default_land,viewType));
+            default:        return res.getDrawable(getCorrectImageId(R.drawable.drag_monument,R.drawable.popup_monument,R.drawable.popup_default_land,viewType));
+        }
+    }
+
+    private static int getCorrectImageId(int drag, int popupPortrait, int popupLandscape,int viewType){
+        if(viewType == DRAG_HANDLE){
+            return drag;
+        }else if(viewType == POPUP_PORTRAIT){
+            return popupPortrait;
+        }else{
+            return popupLandscape;
         }
     }
 }
