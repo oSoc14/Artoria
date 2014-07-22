@@ -87,6 +87,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        super.onCreateView(inflater,container,savedInstanceState);
         return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
