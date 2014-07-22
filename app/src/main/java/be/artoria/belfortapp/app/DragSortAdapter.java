@@ -50,6 +50,8 @@ private class ViewHolder {
 
         holder.txtDesc.setText(rowItem.getName());
         holder.imgType.setImageDrawable(POI.getTypeImg(rowItem.type,context));
+        holder.imgType.setScaleX(1.0f);
+        holder.imgType.setScaleY(1.0f);
 
         return convertView;
     }
