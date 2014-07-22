@@ -7,12 +7,10 @@
     android:orientation="horizontal"
     android:weightSum="2">
 
-    <fragment
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:name="be.artoria.belfortapp.fragments.MapFragment"
-        class="be.artoria.belfortapp.fragments.MapFragment"
         android:id="@+id/container"
         tools:layout="@layout/fragment_map" />
     <LinearLayout
