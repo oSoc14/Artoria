@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/monument_detail_image_height"
         tools:visibility="gone"
         android:id="@+id/prgWait">
 
@@ -23,7 +23,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/monument_detail_image_height"
         android:id="@+id/cntImage">
 
         <ImageView
@@ -59,9 +59,10 @@
         tools:text="testtest"
         android:layout_below="@+id/cntImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="5dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/imgType"/>
 
     <LinearLayout
         android:padding="5dp"
