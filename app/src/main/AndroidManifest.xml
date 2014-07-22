@@ -30,7 +30,8 @@
         android:installLocation="auto">
         <activity
             android:name=".activities.LanguageChoiceActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/LaunchTheme">
         </activity>
         <activity
             android:name=".activities.LaunchActivity"

@@ -1,8 +1,10 @@
 package be.artoria.belfortapp.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -17,13 +19,28 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class BaseActivity extends FragmentActivity {
+    protected static Typeface book;
+    protected static Typeface athelas;
+    protected static Typeface regular;
+    protected static Typeface semibold;
+    protected static Typeface bold;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.color2)));
+        ActionBar ab = getActionBar();
+        if(ab != null ) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.color2)));
+        }
         PrefUtils.loadLanguage(this);
+
+        athelas     = Typeface.createFromAsset(getAssets(), "fonts/Athelas.ttc");
+        regular     = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Regular.otf");
+        semibold    = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-SemiBold.otf");
+        bold        = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Bold.otf");
+        book        = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Book.otf");
     }
 
 
