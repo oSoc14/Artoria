@@ -18,15 +18,7 @@ How to run
 ========
 Import this project in Android studio, click run and you're good to go.
 
-Don't forget to request an API key from mapquest ( http://developer.mapquest.com/ ) and insert it in a keys.xml file in your res/values folder.
-
-This file should look like this:
-
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;resources&gt;
-    &lt;string name="map_quest_api_key"&gt; your_api_key&lt;/string&gt;
-&lt;/resources&gt;
-
+Don't forget to request an API key from mapquest ( http://developer.mapquest.com/ ) and insert it in res/values/keys.xml
 
 Team
 =======
