@@ -6,14 +6,15 @@
     xmlns:dslv="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/listItemBackColor"
     android:orientation="horizontal"
     dslv:drag_start_mode="onMove">
 
     <ImageView
         android:id="@+id/drag_handle"
-        android:background="@drawable/drag"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:background="@drawable/drag_default"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="fitXY"
         android:layout_weight="0" />
 
@@ -23,8 +24,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         tools:text="jeeej"
+        android:textColor="@color/fontColor1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_weight="1"
-        android:paddingLeft="8dp"
-        android:onClick="test"/>
+        android:paddingLeft="8dp"/>
 </LinearLayout>

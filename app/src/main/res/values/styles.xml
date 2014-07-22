@@ -4,7 +4,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Customize your theme here. -->
-        <item name="android:buttonStyle">@style/ButtonStyle</item>
+
+
     </style>
 
 
@@ -21,5 +22,10 @@
     <style name="lightButtonStyle">
         <item name="android:background">@color/lightGreen</item>
     </style>
+
+
+        <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+            <item name="android:background">@color/color2</item>
+        </style>
 
 </resources>

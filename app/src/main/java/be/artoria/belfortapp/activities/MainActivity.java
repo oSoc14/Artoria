@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.Uri;
@@ -28,6 +29,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import be.artoria.belfortapp.app.adapters.DescriptionRow;
+import be.artoria.belfortapp.app.adapters.MainAdapter;
 import be.artoria.belfortapp.fragments.MapFragment;
 import be.artoria.belfortapp.mixare.MixView;
 
@@ -35,6 +38,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
@@ -43,12 +47,14 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
-    ArrayAdapter<String> menuAdapter;
+    MainAdapter menuAdapter;
+    private static String dataSetUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dataSetUrl = getResources().getString(R.string.dataset_url);
         initGui();
     }
 
@@ -64,7 +70,7 @@ public class MainActivity extends BaseActivity {
           //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
             downloading = true;
             Log.i(PrefUtils.TAG,"Started downloading in the background");
-            new DownloadDataTask().execute("https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json");
+            new DownloadDataTask().execute(PrefUtils.DATASET_URL);
         }
     }
 
@@ -86,9 +92,6 @@ public class MainActivity extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,10 +100,20 @@ public class MainActivity extends BaseActivity {
         final ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
         final Button btnSettings = (Button)findViewById(R.id.btnSettings);
         final Button btnAbout = (Button)findViewById(R.id.btnAbout);
-        final Button btnRoute = (Button)findViewById(R.id.btnRoute);
+        String[] strings = getResources().getStringArray(R.array.lstMenu);
+        Drawable[] drawables = new Drawable[]{
+                getResources().getDrawable((R.drawable.panorama)),
+                getResources().getDrawable((R.drawable.menu)),
+                getResources().getDrawable((R.drawable.route))
+        };
+        List<DescriptionRow> list = new ArrayList<DescriptionRow>();
+        for (int i = 0; i < strings.length; i++) {
+            list.add(new DescriptionRow(drawables[i],strings[i]));
+        }
 
 
-        menuAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.lstMenu));
+
+        menuAdapter = new MainAdapter(this,R.layout.main_list_item,list);
         lstMenu.setAdapter(menuAdapter);
 
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,6 +137,11 @@ public class MainActivity extends BaseActivity {
                         intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
                         startActivity(intent);
                     break;
+                    /* The third item is my route */
+                    case 2:
+                        intent = new Intent(MainActivity.this,NewRouteActivity.class);
+                        startActivity(intent);
+                        break;
                 }
             }
 
@@ -149,14 +167,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        btnRoute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Go to the route overview*/
-                final Intent i = new Intent(MainActivity.this,NewRouteActivity.class);
-                startActivity(i);
-            }
-        });
     }
 
     private boolean deviceSupported() {
@@ -204,11 +214,7 @@ public class MainActivity extends BaseActivity {
                     DataManager.poidao.clearTable();
 
                 for(POI poi : list){
-                    System.out.println(poi.ENG_description);
-                    System.out.println(poi.id);
-
                     DataManager.poidao.savePOI(poi);
-
                 }
                 DataManager.addAll(list);
                 DataManager.poidao.close();

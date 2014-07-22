@@ -2,6 +2,7 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,11 +29,13 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
+import be.artoria.belfortapp.app.ScreenUtils;
 import be.artoria.belfortapp.mixare.MixView;
 
 public class MonumentDetailActivity extends BaseActivity {
     public final static String ARG_ID = "be.belfort.monumentid";
     public final static String ARG_FROM_PANORAMA = "be.belfort.fromPanorama";
+    public final static String ARG_USER_INSTANTIATED = "be.belfort.userInstantiated"; //used to handle the tilting problem
     private GestureDetectorCompat gDetect;
     private boolean fromPanorama;
 
@@ -40,7 +44,8 @@ public class MonumentDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument_detail);
-        id = (Integer) getIntent().getExtras().get(ARG_ID);
+        boolean userInstantiated = getIntent().getBooleanExtra(ARG_USER_INSTANTIATED,false);
+        id = userInstantiated ? (Integer) getIntent().getExtras().get(ARG_ID) : DataManager.lastViewedPOI;
         fromPanorama = getIntent().getBooleanExtra(ARG_FROM_PANORAMA,false);
         initGui(fromPanorama);
     }
@@ -90,12 +95,14 @@ public class MonumentDetailActivity extends BaseActivity {
 
     public void prevDetail(View view) {
         id = id == 0 ? (DataManager.numberOfPOIs -1) : (id -1);
+        DataManager.lastViewedPOI = id;
         initGui(false);
 
     }
 
     public void nextDetail(View view) {
         id = (id +1) % DataManager.numberOfPOIs ;
+        DataManager.lastViewedPOI = id;
         initGui(false);
     }
 
@@ -120,16 +127,25 @@ public class MonumentDetailActivity extends BaseActivity {
         final TextView tvs = (TextView) findViewById(R.id.monument_name_smaller);
         final TextView desc = (TextView) findViewById(R.id.monument_description);
         final ImageView img = (ImageView) findViewById(R.id.imageView);
+        final ImageView imgType = (ImageView)findViewById(R.id.imgType);
         final RelativeLayout prgWait = (RelativeLayout) findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
+        imgType.setVisibility(View.INVISIBLE);
         prgWait.setVisibility(View.VISIBLE);
-
+        desc.scrollTo(0,0);//Scroll back to the top of the view
         /* Setting the correct data */
         String name = wp.getName();
         getActionBar().setTitle(name);
         tvs.setText(name);
         desc.setMovementMethod(new ScrollingMovementMethod());
         desc.setText(wp.getDescription());
+        imgType.setImageDrawable(POI.getTypePopupImg(wp.type,this));
+
+        /*if the device is a phone, the screen can't be tilted see #66 on GitHub*/
+        if(!ScreenUtils.isTablet(this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        }
+
         Picasso.with(this).load(wp.image_link).into(img, new Callback() {
             @Override
             public void onSuccess() {
@@ -146,6 +162,7 @@ public class MonumentDetailActivity extends BaseActivity {
             private void switchImages() {
                 prgWait.setVisibility(View.GONE);
                 img.setVisibility(View.VISIBLE);
+                imgType.setVisibility(View.VISIBLE);
             }
         });
 
@@ -176,6 +193,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final Intent toReturn = new Intent(ctx,MonumentDetailActivity.class);
         toReturn.putExtra(ARG_ID,new_id);
         toReturn.putExtra(ARG_FROM_PANORAMA,fromPanorama);
+        toReturn.putExtra(ARG_USER_INSTANTIATED,true);
         return toReturn;
 
     }

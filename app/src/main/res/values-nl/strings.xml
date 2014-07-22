@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- The Dutch language settings file -->
 <resources>
 
+
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
+    <string name="title_activity_map">Kaart</string>
     <string name="app_name">BelfortApp</string>
-    <string name="action_settings">Settings</string>
-    <string name="lang">Language</string>
-    <string name="dutch">dutch</string>
-    <string name="french">french</string>
-    <string name="english">english</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="lang">Taal</string>
+    <string name="dutch">Nederlands</string>
+    <string name="french">Frans</string>
+    <string name="english">Engels</string>
     <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">BelfortApp</string>
     <string name="title_activity_main">Hoofdmenu</string>
@@ -27,6 +31,7 @@
     <string-array name="lstMenu">
         <item>Panorama</item>
         <item>Gebouwen</item>
+        <item>Mijn route</item>
         <!-- Future dev ... -->
         <!--
         <item>4de verdieping</item>
@@ -39,5 +44,33 @@
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">Route</string>
     <string name="main">Hoofdmenu</string>
+    <string name="route">Route</string>
+    <string name="license"><![CDATA[Copyright © 2010- Peer internet solutions
+            \n\nThis program is free software: 	you can redistribute it and/or modify it under the terms of the
+            GNU General Public License as published by the Free Software Foundation, either version 3 of the License,
+            or at your option) any later version.
+            \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+            the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
+            License for more details.
+            \n\n You should have received a copy of the GNU General Public License along with this program.
+            If not, see <http://www.gnu.org/licenses/>]]></string>
+
+    <string name="title_activity_panorama">Panorama</string>
+    <string name="title_activity_mapp">Kaart</string>
+    <string name="title_activity_new_route">Route</string>
+    <string name="unsupported">Dit toestel wordt niet ondersteund omdat de sensoren die nodig zijn om de stand van de camera te bepalen ontbreken. onze excuses voor het ongemak.</string>
+    <string name="calibrate">Vergewis uzelf ervan dat het kompas gekalibreerd is.</string>
+    <string name="calibrate_title">Kalibratie</string>
+    <string name="show_me_how">Toon me hoe</string>
+
+    <string name="N">N</string>
+    <string name="NE">NO</string>
+    <string name="E">O</string>
+    <string name="SE">ZO</string>
+    <string name="S">Z</string>
+    <string name="SW">ZW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Choose your language</string>
 
 </resources>

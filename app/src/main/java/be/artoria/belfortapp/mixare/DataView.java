@@ -18,24 +18,17 @@
  */
 package be.artoria.belfortapp.mixare;
 
-import static android.view.KeyEvent.KEYCODE_CAMERA;
-import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
-import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
-import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
-import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
-import static android.view.KeyEvent.KEYCODE_DPAD_UP;
+import android.graphics.Color;
+import android.location.Location;
+import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.mixare.data.DataHandler;
 import be.artoria.belfortapp.mixare.data.DataSource;
 import be.artoria.belfortapp.mixare.gui.RadarPoints;
-import be.artoria.belfortapp.mixare.lib.MixUtils;
 import be.artoria.belfortapp.mixare.lib.gui.PaintScreen;
 import be.artoria.belfortapp.mixare.lib.gui.ScreenLine;
 import be.artoria.belfortapp.mixare.lib.marker.Marker;
@@ -44,10 +37,12 @@ import be.artoria.belfortapp.mixare.mgr.downloader.DownloadManager;
 import be.artoria.belfortapp.mixare.mgr.downloader.DownloadRequest;
 import be.artoria.belfortapp.mixare.mgr.downloader.DownloadResult;
 
-import android.graphics.Color;
-import android.location.Location;
-import android.util.Log;
-import android.widget.Toast;
+import static android.view.KeyEvent.KEYCODE_CAMERA;
+import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
+import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
+import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
+import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
+import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 /**
  * This class is able to update the markers and the radar. It also handles some

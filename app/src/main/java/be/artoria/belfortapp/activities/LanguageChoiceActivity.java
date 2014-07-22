@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -23,6 +24,14 @@ public class LanguageChoiceActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_choice);
+        TextView tv = (TextView) findViewById(R.id.to);
+        tv.setTypeface(athelas);
+        TextView tv1 = (TextView) findViewById(R.id.string_welcome);
+        tv1.setTypeface(athelas);
+        TextView tv2 = (TextView) findViewById(R.id.string_belfry);
+        tv2.setTypeface(athelas);
+        TextView tv3 = (TextView) findViewById(R.id.string_choose_language);
+        tv3.setTypeface(athelas);
     }
 
 
@@ -38,10 +47,7 @@ public class LanguageChoiceActivity extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

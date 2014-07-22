@@ -3,5 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="font_size_about">12dp</dimen>
+    <dimen name="font_size_about">12sp</dimen>
+    <dimen name="monument_detail_image_height">180dp</dimen>
 </resources>

@@ -2,7 +2,6 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DragSortAdapter;
+import be.artoria.belfortapp.app.adapters.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;
@@ -63,7 +62,7 @@ public class NewRouteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_route);
         initGUI();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         if (savedInstanceState == null) {
             mapFragment = new MapFragment();
             mapFragment.isFullscreen = false;
@@ -86,10 +85,6 @@ public class NewRouteActivity extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
