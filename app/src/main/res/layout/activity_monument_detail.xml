@@ -97,6 +97,7 @@
             android:layout_height="50dp"
             android:src="@drawable/left"
             android:id="@+id/prev"
+            android:scaleType="centerCrop"
             style="@style/lightButtonStyle"
             android:layout_marginLeft="10dp"
             android:onClick="prevDetail"/>
@@ -147,6 +148,7 @@
             android:id="@+id/next"
             android:onClick="nextDetail"
             style="@style/lightButtonStyle"
+            android:scaleType="centerCrop"
             android:src="@drawable/right"
             android:layout_marginRight="10dp"
             />
