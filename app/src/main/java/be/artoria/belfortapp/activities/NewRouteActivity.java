@@ -2,7 +2,6 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DragSortAdapter;
+import be.artoria.belfortapp.app.adapters.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;

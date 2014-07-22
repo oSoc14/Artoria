@@ -44,6 +44,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
+            android:theme="@style/LaunchTheme"
             android:label="@string/title_activity_main" >
         </activity>
         <activity

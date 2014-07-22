@@ -1,25 +1,20 @@
 package be.artoria.belfortapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 
 import be.artoria.belfortapp.R;
-import be.artoria.belfortapp.app.DragSortAdapter;
+import be.artoria.belfortapp.app.adapters.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;
