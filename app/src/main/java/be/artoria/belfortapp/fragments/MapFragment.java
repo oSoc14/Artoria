@@ -14,8 +14,6 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -45,13 +43,12 @@ import java.util.List;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.activities.MapActivity;
 import be.artoria.belfortapp.activities.MonumentDetailActivity;
-import be.artoria.belfortapp.activities.RouteActivity;
 import be.artoria.belfortapp.app.ArtoriaOverlayItem;
 import be.artoria.belfortapp.app.DataManager;
-import be.artoria.belfortapp.app.DescriptionRow;
+import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.ManeuverType;
 import be.artoria.belfortapp.app.POI;
-import be.artoria.belfortapp.app.RouteDescAdapter;
+import be.artoria.belfortapp.app.adapters.RouteDescAdapter;
 import be.artoria.belfortapp.app.RouteManager;
 
 /**

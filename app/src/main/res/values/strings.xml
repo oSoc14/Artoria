@@ -28,6 +28,7 @@
     <string-array name="lstMenu">
         <item>Panorama</item>
         <item>Buildings</item>
+        <item>My route</item>
         <!-- Future dev ... -->
         <!--
         <item>4de verdieping</item>

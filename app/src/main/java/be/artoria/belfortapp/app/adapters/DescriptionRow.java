@@ -1,4 +1,4 @@
-package be.artoria.belfortapp.app;
+package be.artoria.belfortapp.app.adapters;
 
 import android.graphics.drawable.Drawable;
 

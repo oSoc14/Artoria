@@ -12,16 +12,17 @@
         android:id="@+id/lstMenu"
         android:clickable="true" />
 
-    <Button android:layout_width="fill_parent"
+    <!--<Button android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/view_route"
         android:background="@null"
-        android:id="@+id/btnRoute"/>
+        android:id="@+id/btnRoute"/> -->
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings"
+        android:textColor="@color/color2"
         android:background="@null"
         android:id="@+id/btnSettings"/>
 
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_size_about"
         android:text="@string/about"
+        android:textColor="@color/color2"
         android:background="@null"
         android:id="@+id/btnAbout"/>
 </LinearLayout>

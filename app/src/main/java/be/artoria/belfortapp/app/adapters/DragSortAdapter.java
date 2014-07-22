@@ -1,4 +1,4 @@
-package be.artoria.belfortapp.app;
+package be.artoria.belfortapp.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.POI;
 
 /**
  * Created by Laurens on 04/07/2014.
