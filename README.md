@@ -8,6 +8,8 @@ Mixare
 =======
 
 The augmented reality engine used is mixare, which can be found at http://www.mixare.org/download/
+The part used is the MixView, all other functionality was stripped.
+
 
 Open Street Map
 ===============
@@ -29,4 +31,18 @@ With supervision by <br />
 
   Jan Vansteenlandt <br />
   Michael Vanderpoorten <br />
+  
+  
+Shout-outs 
+========
+It wouldn't have been possible to build this app without these awesome libraries
+
+The best drag-sort-listview
+https://github.com/bauerca/drag-sort-listview
+
+Gson; painless json
+https://code.google.com/p/google-gson/
+
+Picasso; Awesome image loader
+https://github.com/square/picasso
 
