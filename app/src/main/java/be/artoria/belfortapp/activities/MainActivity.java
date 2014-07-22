@@ -105,9 +105,9 @@ public class MainActivity extends BaseActivity {
         final Button btnAbout = (Button)findViewById(R.id.btnAbout);
         String[] strings = getResources().getStringArray(R.array.lstMenu);
         Drawable[] drawables = new Drawable[]{
-                getResources().getDrawable((R.drawable.ic_monument)),
-                getResources().getDrawable((R.drawable.ic_monument)),
-                getResources().getDrawable((R.drawable.ic_monument)),
+                getResources().getDrawable((R.drawable.panorama)),
+                getResources().getDrawable((R.drawable.menu)),
+                getResources().getDrawable((R.drawable.route))
         };
         List<DescriptionRow> list = new ArrayList<DescriptionRow>();
         for (int i = 0; i < strings.length; i++) {
