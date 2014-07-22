@@ -62,7 +62,7 @@ public class NewRouteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_route);
         initGUI();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         if (savedInstanceState == null) {
             mapFragment = new MapFragment();
             mapFragment.isFullscreen = false;

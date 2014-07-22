@@ -138,7 +138,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
             btnFullScreen.setVisibility(View.GONE);
         }
 
-        /*Set center of map to current location or Bellfry*/
+        /*Set center of map to current location or Belfry*/
         ViewTreeObserver vto = mapView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -205,7 +205,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     private void initRouteInstructions(Road road){
-        if(road.mNodes != null) {
+        if(road != null && road.mNodes != null) {
             ListView lstRouteDesc = (ListView)getView().findViewById(R.id.lstRouteDesc);
             List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
             int waypoint = 0;

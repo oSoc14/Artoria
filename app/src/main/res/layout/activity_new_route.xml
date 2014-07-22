@@ -22,27 +22,27 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cntNoRoute"
-        android:weightSum="2">
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="panorama"
-            android:layout_weight="1"
-            android:id="@+id/btnPanorama"/>
+            android:id="@+id/cntNoRoute"
+            android:weightSum="2">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Buildings"
-            android:layout_weight="1"
-            android:id="@+id/btnBuildings"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="panorama"
+                android:layout_weight="1"
+                android:id="@+id/btnPanorama"/>
 
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Buildings"
+                android:layout_weight="1"
+                android:id="@+id/btnBuildings"/>
+
+        </LinearLayout>
 
 
     <com.mobeta.android.dslv.DragSortListView
