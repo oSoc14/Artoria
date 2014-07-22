@@ -107,14 +107,14 @@ public class POI {
     private static Drawable getTypeImage(int type, Context context, boolean popup){
         Resources res = context.getResources();
         switch(type){
-            case BOAT:      return popup ? res.getDrawable(R.drawable.ic_boot_white) : res.getDrawable(R.drawable.ic_boot);
-            case CASTLE:    return popup ? res.getDrawable(R.drawable.ic_castle_white) : res.getDrawable(R.drawable.ic_castle);
-            case CIVIL:     return popup ? res.getDrawable(R.drawable.ic_city_white) : res.getDrawable(R.drawable.ic_city);
-            case MONUMENT:  return popup ? res.getDrawable(R.drawable.ic_monument_white) : res.getDrawable(R.drawable.ic_monument);
-            case RELIGIOUS: return popup ? res.getDrawable(R.drawable.ic_religion_white) : res.getDrawable(R.drawable.ic_religion);
-            case THEATRE:   return popup ? res.getDrawable(R.drawable.ic_theater_white) : res.getDrawable(R.drawable.ic_theater);
-            case TOWER:     return popup ? res.getDrawable(R.drawable.ic_skyscraper_white) : res.getDrawable(R.drawable.ic_skyscraper);
-            default:        return popup ? res.getDrawable(R.drawable.ic_monument_white) : res.getDrawable(R.drawable.ic_monument);
+            case BOAT:      return popup ? res.getDrawable(R.drawable.popup_boat) : res.getDrawable(R.drawable.drag_boat);
+            case CASTLE:    return popup ? res.getDrawable(R.drawable.popup_castle) : res.getDrawable(R.drawable.drag_castle);
+            case CIVIL:     return popup ? res.getDrawable(R.drawable.popup_city) : res.getDrawable(R.drawable.drag_city);
+            case MONUMENT:  return popup ? res.getDrawable(R.drawable.popup_monument) : res.getDrawable(R.drawable.drag_monument);
+            case RELIGIOUS: return popup ? res.getDrawable(R.drawable.popup_religion) : res.getDrawable(R.drawable.drag_religion);
+            case THEATRE:   return popup ? res.getDrawable(R.drawable.popup_theater) : res.getDrawable(R.drawable.drag_theater);
+            case TOWER:     return popup ? res.getDrawable(R.drawable.popup_skyscraper) : res.getDrawable(R.drawable.drag_skyscraper);
+            default:        return popup ? res.getDrawable(R.drawable.popup_monument) : res.getDrawable(R.drawable.drag_monument);
         }
     }
 }
