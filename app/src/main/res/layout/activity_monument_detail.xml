@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cntMonumentView"
     android:layout_width="match_parent"
@@ -9,9 +9,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/cntImage"
-        android:layout_weight="1">
+        android:layout_height="180dp"
+        tools:visibility="gone"
+        android:id="@+id/prgWait">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:gravity="center"
+            android:padding="0dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:id="@+id/cntImage">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,12 +44,12 @@
         android:id="@+id/imgType"
         android:layout_width="50dp"
         android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/popup_church"
-        android:layout_alignParentBottom="true"
+        android:src="@drawable/popup_boat"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="-55dp" />
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="-3dp"
+        android:layout_below="@+id/cntImage"
+        android:layout_marginTop="-50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,33 +57,20 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/monument_name_smaller"
         tools:text="testtest"
-        android:layout_marginTop="-35dp"
+        android:layout_below="@+id/cntImage"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="center_horizontal" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:visibility="gone"
-        android:id="@+id/prgWait">
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:indeterminate="true"
-            android:gravity="center"
-            android:padding="0dp"/>
-    </RelativeLayout>
-
     <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
+        android:padding="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imgType"
+        android:layout_above="@+id/ftrMonument"
         android:minHeight="200dp"
         android:orientation="vertical">
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,8 +83,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:id="@+id/ftrMonument"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp">
 
@@ -149,4 +152,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

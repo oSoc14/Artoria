@@ -130,7 +130,7 @@ public class MonumentDetailActivity extends BaseActivity {
         final ImageView imgType = (ImageView)findViewById(R.id.imgType);
         final RelativeLayout prgWait = (RelativeLayout) findViewById(R.id.prgWait);
         img.setVisibility(View.GONE);
-        imgType.setVisibility(View.GONE);
+        imgType.setVisibility(View.INVISIBLE);
         prgWait.setVisibility(View.VISIBLE);
         desc.scrollTo(0,0);//Scroll back to the top of the view
         /* Setting the correct data */
