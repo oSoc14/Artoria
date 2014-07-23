@@ -67,10 +67,11 @@
     <string name="E">E</string>
     <string name="SE">SE</string>
     <string name="S">S</string>
-    <string name="SO">SW</string>
-    <string name="O">W</string>
-    <string name="NO">NW</string>
+    <string name="SW">SO</string>
+    <string name="W">O</string>
+    <string name="NW">NO</string>
     <string name="lang_choice">Choisissez la langue</string>
+    <string name="route">itinéraire</string>
 
 
 </resources>
