@@ -22,6 +22,12 @@ Import this project in Android studio, click run and you're good to go.
 
 Don't forget to request an API key from mapquest ( http://developer.mapquest.com/ ) and insert it in res/values/keys.xml
 
+How the application is build
+========
+Data is gotten from https://github.com/oSoc14/ArtoriaData, more information about the data format, etc can be found there.
+
+The code is pretty standard for an android app and self documenting. We tried to follow best practices whenever we were aware of any.
+
 Team
 =======
   Laurens De Graeve <br />
