@@ -18,7 +18,7 @@ import android.view.Window;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.PrefUtils;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends ActionBarActivity {
 
     protected static Typeface athelas;
 
