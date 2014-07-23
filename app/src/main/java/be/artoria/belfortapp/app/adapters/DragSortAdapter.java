@@ -34,10 +34,10 @@ private class ViewHolder {
 }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        POI rowItem = getItem(position);
+        final ViewHolder holder ;
+        final POI rowItem = getItem(position);
 
-        LayoutInflater mInflater = (LayoutInflater) context
+        final LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.route_list_item, null);

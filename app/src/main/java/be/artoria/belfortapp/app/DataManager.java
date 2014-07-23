@@ -26,8 +26,8 @@ public class DataManager {
     public static Language lang = null;
 
     private static final DataManager INSTANCE = new DataManager();
-    private static List<POI> poiList = new ArrayList<POI>();
-    public static POIDAO poidao = new POIDAO(PrefUtils.getContext());
+    private static final List<POI> poiList = new ArrayList<POI>();
+    public  static final POIDAO poidao = new POIDAO(PrefUtils.getContext());
 
 
     /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
@@ -43,7 +43,7 @@ public class DataManager {
     }
     
     public static List<POI> getAll(){
-                /* poiList might very well be empty after resuming the app */
+        /* poiList might very well be empty after resuming the app */
         if(poiList.isEmpty()){
             try {
                 poidao.open();

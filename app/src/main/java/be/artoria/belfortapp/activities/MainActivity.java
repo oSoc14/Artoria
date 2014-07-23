@@ -48,13 +48,11 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
     MainAdapter menuAdapter;
-    private static String dataSetUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataSetUrl = getResources().getString(R.string.dataset_url);
         initGui();
     }
 
@@ -66,8 +64,8 @@ public class MainActivity extends BaseActivity {
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
         // TODO change this back!
-            if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
-          //if((lastDownload == 0 || timeSinceLastDownload > 43200000) && !downloading){
+          //  if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
+          if((lastDownload == 0 || timeSinceLastDownload > 1000*60*60*6) && !downloading){
             downloading = true;
             Log.i(PrefUtils.TAG,"Started downloading in the background");
             new DownloadDataTask().execute(PrefUtils.DATASET_URL);
@@ -91,7 +89,6 @@ public class MainActivity extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
@@ -100,13 +97,13 @@ public class MainActivity extends BaseActivity {
         final ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
         final Button btnSettings = (Button)findViewById(R.id.btnSettings);
         final Button btnAbout = (Button)findViewById(R.id.btnAbout);
-        String[] strings = getResources().getStringArray(R.array.lstMenu);
-        Drawable[] drawables = new Drawable[]{
+        final String[] strings = getResources().getStringArray(R.array.lstMenu);
+        final Drawable[] drawables = new Drawable[]{
                 getResources().getDrawable((R.drawable.panorama)),
                 getResources().getDrawable((R.drawable.menu)),
                 getResources().getDrawable((R.drawable.route))
         };
-        List<DescriptionRow> list = new ArrayList<DescriptionRow>();
+        final List<DescriptionRow> list = new ArrayList<DescriptionRow>();
         for (int i = 0; i < strings.length; i++) {
             list.add(new DescriptionRow(drawables[i],strings[i]));
         }
@@ -177,7 +174,7 @@ public class MainActivity extends BaseActivity {
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            String response = "";
+            StringBuilder response = new StringBuilder();
             for (String url : urls) {
                 final DefaultHttpClient client = new DefaultHttpClient();
                 final HttpGet httpGet = new HttpGet(url);
@@ -186,16 +183,16 @@ public class MainActivity extends BaseActivity {
                     final InputStream content = execute.getEntity().getContent();
 
                     final BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
+                    String s;
                     while ((s = buffer.readLine()) != null) {
-                        response += s;
+                        response.append(s);
                     }
 
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
-            return response;
+            return response.toString();
         }
 
         @Override

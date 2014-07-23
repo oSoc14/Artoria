@@ -32,10 +32,10 @@ public class MainAdapter extends ArrayAdapter<DescriptionRow> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        DescriptionRow rowItem = getItem(position);
+        final ViewHolder holder;
+        final DescriptionRow rowItem = getItem(position);
 
-        LayoutInflater mInflater = (LayoutInflater) context
+        final LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.main_list_item, null);

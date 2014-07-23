@@ -18,8 +18,8 @@ public class POIDAO {
 
     // Database fields
     private SQLiteDatabase database;
-    private POIDbHelper dbHelper;
-    private String[] allColumns = {
+    private final POIDbHelper dbHelper;
+    private static final String[] allColumns = {
             POIEntry.COLUMN_NAME_ENTRY_ID ,
             POIEntry.COLUMN_NAME_NAME ,
             POIEntry.COLUMN_NAME_NAME_EN ,
@@ -47,7 +47,7 @@ public class POIDAO {
     }
 
     public POI savePOI(POI poi) {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
 
         values.put(POIEntry.COLUMN_NAME_ENTRY_ID, poi.id);
         values.put(POIEntry.COLUMN_NAME_NAME, poi.NL_name);
@@ -74,14 +74,14 @@ public class POIDAO {
     }
 
     public List<POI> getAllPOIs() {
-        List<POI> pois = new ArrayList<POI>();
+        final List<POI> pois = new ArrayList<POI>();
 
-        Cursor cursor = database.query(POIEntry.TABLE_NAME,
+        final Cursor cursor = database.query(POIEntry.TABLE_NAME,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            POI poi = cursorToPOI(cursor);
+            final POI poi = cursorToPOI(cursor);
             pois.add(poi);
             cursor.moveToNext();
         }

@@ -61,7 +61,8 @@ public class MapFragment extends android.support.v4.app.Fragment {
     public static final int DEFAULT_ZOOM = 17;
     private String MAP_QUEST_API_KEY; //TODO request key for Artoria, this key now is 'licensed' to Dieter Beelaert
     public static final String LANG_ENG = "en_GB";
-    public static final String LANG_NL = "nl_NL";
+    public static final String LANG_NL = "nl_BE";
+    public static final String LANG_FR = "fr_FR";
     private MapView mapView;
     private boolean showsMap = true;
     private boolean firstStart = true; //to check when the mapview is loaded for the first time (this is for the ViewTreeObserver)
@@ -103,8 +104,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
         /*Setup map and draw route*/
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setBuiltInZoomControls(true);
-        //mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //disable hardware acceleration, known issue of osmdroid bonus pack see: https://code.google.com/p/osmbonuspack/issues/detail?id=16
-        MapController mapCtrl = (MapController) mapView.getController();
+        final MapController mapCtrl = (MapController) mapView.getController();
         mapCtrl.setZoom(DEFAULT_ZOOM);
         calculateRoute();
         /*Initially show map*/
@@ -140,7 +140,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
         }
 
         /*Set center of map to current location or Belfry*/
-        ViewTreeObserver vto = mapView.getViewTreeObserver();
+        final ViewTreeObserver vto = mapView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -156,7 +156,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     private OverlayItem getOverlayItemFromPOI(POI poi,Drawable icon){
-        ArtoriaOverlayItem overlayItem = new ArtoriaOverlayItem(poi);
+        final ArtoriaOverlayItem overlayItem = new ArtoriaOverlayItem(poi);
         if(icon != null) {
             overlayItem.setMarker(icon);
         }
@@ -166,9 +166,9 @@ public class MapFragment extends android.support.v4.app.Fragment {
 
     /* Transfer the route to an ArrayList of GeoPoint objects */
     private ArrayList<GeoPoint> getGeoPointsFromRoute(){
-        ArrayList<GeoPoint>toReturn = new ArrayList<GeoPoint>();
+        final ArrayList<GeoPoint>toReturn = new ArrayList<GeoPoint>();
         toReturn.add(getCurrentLocation());
-        for(POI poi : RouteManager.getInstance().getWaypoints()){
+        for(final POI poi : RouteManager.getInstance().getWaypoints()){
             toReturn.add(new GeoPoint(Double.parseDouble(poi.lat),Double.parseDouble(poi.lon)));
         }
         return toReturn;
@@ -179,13 +179,19 @@ public class MapFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected Road doInBackground(Object[] objects) {
-            RoadManager roadManager = new MapQuestRoadManager(MAP_QUEST_API_KEY);
+            final RoadManager roadManager = new MapQuestRoadManager(MAP_QUEST_API_KEY);
             //RoadManager roadManager = new OSRMRoadManager();
             roadManager.addRequestOption("routeType=pedestrian");
-            String lang = DataManager.getInstance().getCurrentLanguage() == DataManager.Language.ENGLISH ? LANG_ENG : LANG_NL;
+            final String lang;
+            switch(DataManager.getInstance().getCurrentLanguage()){
+                case ENGLISH:lang = LANG_ENG; break;
+                case FRENCH: lang = LANG_FR;  break;
+                case DUTCH:
+                default:     lang = LANG_NL;
+            }
             roadManager.addRequestOption("locale="+lang ); //display the directions in the selected language
             roadManager.addRequestOption("unit=k"); //display the distance in kilometers
-            Road road = roadManager.getRoad(getGeoPointsFromRoute());
+            final Road road = roadManager.getRoad(getGeoPointsFromRoute());
             return road;
         }
 
@@ -193,8 +199,8 @@ public class MapFragment extends android.support.v4.app.Fragment {
         protected void onPostExecute(Object result){
             mapView.getOverlays().clear();
             drawMarkers();
-            Road road = (Road)result;
-            Polyline routeOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+            final Road road = (Road) result;
+            final Polyline routeOverlay = RoadManager.buildRoadOverlay(road, getActivity());
             initRouteInstructions(road);
             final TextView lblDistance = (TextView)getView().findViewById(R.id.lblDistance);
             lblDistance.setText(String.format("%.2f", road.mLength)  + "km");
@@ -207,11 +213,11 @@ public class MapFragment extends android.support.v4.app.Fragment {
 
     private void initRouteInstructions(Road road){
         if(road != null && road.mNodes != null) {
-            ListView lstRouteDesc = (ListView)getView().findViewById(R.id.lstRouteDesc);
-            List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
+            final ListView lstRouteDesc = (ListView)getView().findViewById(R.id.lstRouteDesc);
+            final List<DescriptionRow> descriptions = new ArrayList<DescriptionRow>();
             int waypoint = 0;
             for(int i = 0; i < road.mNodes.size(); i++){
-                RoadNode node = road.mNodes.get(i);
+                final RoadNode node = road.mNodes.get(i);
                 String instructions = node.mInstructions;
                 if(node.mInstructions.toUpperCase().contains(getResources().getString(R.string.destination).toUpperCase())){
                     instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
@@ -301,9 +307,9 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     private GeoPoint getCurrentLocation(){
-        LocationManager locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        List<String> providers = locationManager.getAllProviders();
-        Location location;
+        final LocationManager locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        final List<String> providers = locationManager.getAllProviders();
+        final Location location;
         if(providers.contains(LocationManager.GPS_PROVIDER)){
             System.out.println("gps location");
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -321,8 +327,8 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     public void calculateRoute(){
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
+        final ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null) {
             if (info.isConnected()) {
                 new RouteCalcTask().execute();
@@ -337,9 +343,9 @@ public class MapFragment extends android.support.v4.app.Fragment {
 
     private void drawMarkers(){
        /*Add markers on the map*/
-        ItemizedOverlayWithFocus<OverlayItem> overlay;
-        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-        POI belfort = new POI();
+        final ItemizedOverlayWithFocus<OverlayItem> overlay;
+        final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+        final POI belfort = new POI();
         belfort.id = -1; //used to disable the clickhandler for this poi
         belfort.ENG_name = "Belfry";
         belfort.ENG_description = "";
@@ -347,11 +353,11 @@ public class MapFragment extends android.support.v4.app.Fragment {
         belfort.NL_description = "";
         belfort.lat = DataManager.BELFORT_LAT +"";
         belfort.lon = DataManager.BELFORT_LON +"";
-        OverlayItem overlayItem = getOverlayItemFromPOI(belfort,getResources().getDrawable(R.drawable.castle));
+        final OverlayItem overlayItem = getOverlayItemFromPOI(belfort,getResources().getDrawable(R.drawable.castle));
         items.add(overlayItem);
 
         for(POI poi : RouteManager.getInstance().getWaypoints()){
-            OverlayItem item = getOverlayItemFromPOI(poi,null);
+            final OverlayItem item = getOverlayItemFromPOI(poi,null);
             items.add(item);
         }
 
