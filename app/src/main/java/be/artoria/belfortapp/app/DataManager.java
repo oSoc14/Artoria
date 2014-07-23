@@ -80,4 +80,7 @@ public class DataManager {
     }
 
     public static int lastViewedPOI = 1;
+
+    /*Only show the swipe... msg once*/
+    public static boolean shownMonumentDetailLandscapeMsg = false;
 }
