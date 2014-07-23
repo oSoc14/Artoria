@@ -18,7 +18,7 @@ import android.view.Window;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.PrefUtils;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends ActionBarActivity {
     protected static Typeface book;
     protected static Typeface athelas;
     protected static Typeface regular;
