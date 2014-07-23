@@ -1,9 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="be.artoria.belfortapp.activities.MonumentDetailActivity">
     <item android:id="@+id/btnRoute"
         android:title="@string/route"
         android:orderInCategory="100"
-        android:showAsAction="always" />
+        app:showAsAction="always"
+        android:showAsAction="always"/>
 </menu>
 
