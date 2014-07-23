@@ -108,20 +108,6 @@ public class POI {
        return getTypeImage(type,context,POPUP_LANDSCAPE);
     }
 
-   /* private static Drawable getTypeImage(int type, Context context, boolean popup){
-        Resources res = context.getResources();
-        switch(type){
-            case BOAT:      return popup ? res.getDrawable(R.drawable.popup_boat) : res.getDrawable(R.drawable.drag_boat);
-            case CASTLE:    return popup ? res.getDrawable(R.drawable.popup_castle) : res.getDrawable(R.drawable.drag_castle);
-            case CIVIL:     return popup ? res.getDrawable(R.drawable.popup_city) : res.getDrawable(R.drawable.drag_city);
-            case MONUMENT:  return popup ? res.getDrawable(R.drawable.popup_monument) : res.getDrawable(R.drawable.drag_monument);
-            case RELIGIOUS: return popup ? res.getDrawable(R.drawable.popup_religion) : res.getDrawable(R.drawable.drag_religion);
-            case THEATRE:   return popup ? res.getDrawable(R.drawable.popup_theater) : res.getDrawable(R.drawable.drag_theater);
-            case TOWER:     return popup ? res.getDrawable(R.drawable.popup_skyscraper) : res.getDrawable(R.drawable.drag_skyscraper);
-            default:        return popup ? res.getDrawable(R.drawable.popup_monument) : res.getDrawable(R.drawable.drag_monument);
-        }
-    }*/
-
     private static final int DRAG_HANDLE = 0;
     private static final int POPUP_PORTRAIT = 1;
     private static final int POPUP_LANDSCAPE = 2;
@@ -129,13 +115,13 @@ public class POI {
     private static Drawable getTypeImage(int type, Context context, int viewType){
         Resources res = context.getResources();
         switch(type){
-            case BOAT:      return res.getDrawable(getCorrectImageId(R.drawable.drag_boat,R.drawable.popup_boat,R.drawable.popup_default_land,viewType));
-            case CASTLE:    return res.getDrawable(getCorrectImageId(R.drawable.drag_castle,R.drawable.popup_castle,R.drawable.popup_default_land,viewType));
-            case CIVIL:     return res.getDrawable(getCorrectImageId(R.drawable.drag_city,R.drawable.popup_city,R.drawable.popup_default_land,viewType));
-            case MONUMENT:  return res.getDrawable(getCorrectImageId(R.drawable.drag_monument,R.drawable.popup_monument,R.drawable.popup_default_land,viewType));
-            case RELIGIOUS: return res.getDrawable(getCorrectImageId(R.drawable.drag_religion,R.drawable.popup_religion,R.drawable.popup_default_land,viewType));
-            case THEATRE:   return res.getDrawable(getCorrectImageId(R.drawable.drag_theater,R.drawable.popup_theater,R.drawable.popup_default_land,viewType));
-            case TOWER:     return res.getDrawable(getCorrectImageId(R.drawable.drag_skyscraper,R.drawable.popup_skyscraper,R.drawable.popup_default_land,viewType));
+            case BOAT:      return res.getDrawable(getCorrectImageId(R.drawable.drag_boat,R.drawable.popup_boat,R.drawable.popup_boat_land,viewType));
+            case CASTLE:    return res.getDrawable(getCorrectImageId(R.drawable.drag_castle,R.drawable.popup_castle,R.drawable.popup_castle_land,viewType));
+            case CIVIL:     return res.getDrawable(getCorrectImageId(R.drawable.drag_city,R.drawable.popup_city,R.drawable.popup_city_land,viewType));
+            case MONUMENT:  return res.getDrawable(getCorrectImageId(R.drawable.drag_monument,R.drawable.popup_monument,R.drawable.popup_monument_land,viewType));
+            case RELIGIOUS: return res.getDrawable(getCorrectImageId(R.drawable.drag_religion,R.drawable.popup_religion,R.drawable.popup_religion_land,viewType));
+            case THEATRE:   return res.getDrawable(getCorrectImageId(R.drawable.drag_theater,R.drawable.popup_theater,R.drawable.popup_theater_land,viewType));
+            case TOWER:     return res.getDrawable(getCorrectImageId(R.drawable.drag_skyscraper,R.drawable.popup_skyscraper,R.drawable.popup_skyscraper_land,viewType));
             default:        return res.getDrawable(getCorrectImageId(R.drawable.drag_monument,R.drawable.popup_monument,R.drawable.popup_default_land,viewType));
         }
     }
