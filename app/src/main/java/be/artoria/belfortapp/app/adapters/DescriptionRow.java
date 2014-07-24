@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable;
  * Created by Dieter Beelaert on 4/07/2014.
  */
 public class DescriptionRow {
-    public Drawable imageDescription;
-    public String description;
+    public final Drawable imageDescription;
+    public final String description;
 
     public DescriptionRow(Drawable imageDescription, String description){
         this.imageDescription = imageDescription;

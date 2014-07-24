@@ -18,29 +18,20 @@ import android.view.Window;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.PrefUtils;
 
-public class BaseActivity extends FragmentActivity {
-    protected static Typeface book;
-    protected static Typeface athelas;
-    protected static Typeface regular;
-    protected static Typeface semibold;
-    protected static Typeface bold;
+public class BaseActivity extends ActionBarActivity {
 
+    protected static Typeface athelas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar ab = getActionBar();
+        final ActionBar ab = getActionBar();
         if(ab != null ) {
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.color2)));
         }
         PrefUtils.loadLanguage(this);
-
         athelas     = Typeface.createFromAsset(getAssets(), "fonts/Athelas.ttc");
-        regular     = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Regular.otf");
-        semibold    = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-SemiBold.otf");
-        bold        = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Bold.otf");
-        book        = Typeface.createFromAsset(getAssets(), "fonts/Uni-Sans-Book.otf");
     }
 
 
@@ -58,7 +49,7 @@ public class BaseActivity extends FragmentActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id == android.R.id.home){
-            Intent i = new Intent(this,MainActivity.class);
+            final Intent i = new Intent(this,MainActivity.class);
             startActivity(i);
         }
 

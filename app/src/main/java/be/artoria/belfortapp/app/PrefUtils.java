@@ -94,25 +94,25 @@ public class PrefUtils {
     public static void saveLanguage(DataManager.Language lang){
         String lng = "nl";//default dutch
         if(lang == DataManager.Language.ENGLISH){lng="en";}
-        if(lang == DataManager.Language.FRENCH){lng = "fr";}
+        if(lang == DataManager.Language.FRENCH){lng ="fr";}
         getPrefs().edit().putString(ARG_LANG,lng).apply();
     }
 
     public static void loadLanguage(Context context){
-        String lang = getPrefs().getString(ARG_LANG,"nl");/*Default dutch*/
-        Locale locale = new Locale(lang);
+        final String lang = getPrefs().getString(ARG_LANG,"nl");/*Default dutch*/
+        final Locale locale = new Locale(lang);
         LanguageChoiceActivity.setLang(locale,context);
     }
 
     public static List<POI> getSavedRoute(){
-        String poiIds = getPrefs().getString(ARG_ROUTE,"");
-        List<POI> toReturn = new ArrayList<POI>();
+        final String poiIds = getPrefs().getString(ARG_ROUTE,"");
+        final List<POI> toReturn = new ArrayList<POI>();
         if(!poiIds.equals("")){
-            String[] splitted = poiIds.split(",");
+            final String[] splitted = poiIds.split(",");
             for(String s: splitted){
                 try {
-                    int id = Integer.parseInt(s);
-                    POI toAdd = DataManager.getPOIbyID(id);
+                    final int id = Integer.parseInt(s);
+                    final POI toAdd = DataManager.getPOIbyID(id);
                     toReturn.add(toAdd);
                 }catch(Exception ex){
                     //can't parse string to int ....
@@ -123,7 +123,7 @@ public class PrefUtils {
     }
 
     public static void saveRoute(List<POI> route){
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for(POI poi : route){
             sb.append(poi.id);
             sb.append(",");
@@ -143,6 +143,5 @@ public class PrefUtils {
     public static boolean isFirstPanoramaTime() {
         return getPrefs().getBoolean(ARG_FIRS_PANORAMA_TIME, true);
     }
-
 
 }

@@ -63,7 +63,7 @@ public class POI {
     }
 
     public String getName() {
-        DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
+        final DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
         switch(lang){
             case ENGLISH:
                 return this.ENG_name;
@@ -72,12 +72,12 @@ public class POI {
         case DUTCH:
         default:
             /*Default is Dutch*/
-                return this.NL_name;
+            return this.NL_name;
         }
     }
 
     public String getDescription() {
-        DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
+        final DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
         switch(lang){
             case ENGLISH:
                 return this.ENG_description;
@@ -113,7 +113,7 @@ public class POI {
     private static final int POPUP_LANDSCAPE = 2;
 
     private static Drawable getTypeImage(int type, Context context, int viewType){
-        Resources res = context.getResources();
+        final Resources res = context.getResources();
         switch(type){
             case BOAT:      return res.getDrawable(getCorrectImageId(R.drawable.drag_boat,R.drawable.popup_boat,R.drawable.popup_boat_land,viewType));
             case CASTLE:    return res.getDrawable(getCorrectImageId(R.drawable.drag_castle,R.drawable.popup_castle,R.drawable.popup_castle_land,viewType));

@@ -36,7 +36,7 @@ public class NewRouteActivity extends BaseActivity {
         {
             if (from != to)
             {
-                POI item = adapter.getItem(from);
+                final POI item = adapter.getItem(from);
                 adapter.remove(item);
                 adapter.insert(item, to);
                 //recalculate route
@@ -70,7 +70,7 @@ public class NewRouteActivity extends BaseActivity {
                     .add(R.id.container, mapFragment)
                     .commit();
         }else{
-           MapFragment mfrag = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+           final MapFragment mfrag = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.container);
             mfrag.isFullscreen = false;
         }
     }
