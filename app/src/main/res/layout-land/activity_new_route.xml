@@ -35,17 +35,24 @@
                 android:id="@+id/cntNoRoute" >
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Panorama"
-                    android:background="@null"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/color2"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/panorama"
                     android:id="@+id/btnPanorama"/>
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Buildings"
-                    android:background="@null"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/color2"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/menu"
+                    android:layout_marginTop="2dp"
                     android:id="@+id/btnBuildings"/>
 
         </LinearLayout>

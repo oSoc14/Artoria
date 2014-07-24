@@ -31,6 +31,9 @@
                 android:layout_height="wrap_content"
                 tools:text="panorama"
                 android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@color/color2"
+                android:drawableLeft="@drawable/panorama"
                 android:id="@+id/btnPanorama"/>
 
             <Button
@@ -38,6 +41,10 @@
                 android:layout_height="wrap_content"
                 tools:text="Buildings"
                 android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@color/color2"
+                android:drawableLeft="@drawable/menu"
+                android:layout_marginLeft="2dp"
                 android:id="@+id/btnBuildings"/>
 
         </LinearLayout>
