@@ -110,7 +110,7 @@ public class NewRouteActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final POI poi = adapter.getItem(i);
                 final int id = poi.id;
-                final Intent intent = new Intent(NewRouteActivity.this, MonumentDetailActivity.class);
+                final Intent intent = MonumentDetailActivity.newIntent(getBaseContext(),id,false);
                 intent.putExtra(MonumentDetailActivity.ARG_ID, id);
                 startActivity(intent);
             }
