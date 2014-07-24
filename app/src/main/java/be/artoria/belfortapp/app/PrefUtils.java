@@ -125,7 +125,8 @@ public class PrefUtils {
     public static void saveRoute(List<POI> route){
         final StringBuilder sb = new StringBuilder();
         for(POI poi : route){
-            sb.append(poi.id + ",");
+            sb.append(poi.id);
+            sb.append(",");
         }
         if(sb.length() > 0) {
             sb.delete(sb.length() - 1, sb.length());
