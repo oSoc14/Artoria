@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="map_quest_api_key">your_api_key</string>
+    <string translatable="false" name="map_quest_api_key">YOUR KEY HERE</string>
 </resources>
