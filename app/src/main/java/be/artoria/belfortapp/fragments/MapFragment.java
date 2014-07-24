@@ -5,6 +5,7 @@ package be.artoria.belfortapp.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -307,23 +308,19 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     private GeoPoint getCurrentLocation(){
+        // Get the location manager
         final LocationManager locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        final List<String> providers = locationManager.getAllProviders();
-        final Location location;
-        if(providers.contains(LocationManager.GPS_PROVIDER)){
-            System.out.println("gps location");
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        }else{
-            System.out.println("network locations");
-            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
+        // Define the criteria how to select the locatioin provider -> use
+        // default
+        final Criteria criteria = new Criteria();
+        final String provider = locationManager.getBestProvider(criteria, false);
+        final Location loc = locationManager.getLastKnownLocation(provider);
 
-        if(location != null){
-            return new GeoPoint(location.getLatitude(),location.getLongitude());
+        if(loc != null){
+            return new GeoPoint(loc.getLatitude(),loc.getLongitude());
         }else{
             return new GeoPoint(DataManager.BELFORT_LAT,DataManager.BELFORT_LON);
         }
-
     }
 
     public void calculateRoute(){
