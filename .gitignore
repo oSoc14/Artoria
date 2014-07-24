@@ -33,6 +33,9 @@ Thumbs.db
 .gradle
 build/
 
+#keys
+*keys.xml
+
 
 # old gitigore
 # .gradle
