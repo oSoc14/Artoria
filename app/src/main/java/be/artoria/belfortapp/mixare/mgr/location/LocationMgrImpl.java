@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.mixare.MixContext;
 import be.artoria.belfortapp.mixare.MixView;
 import be.artoria.belfortapp.R;
@@ -80,8 +81,8 @@ class LocationMgrImpl implements LocationFinder {
 		Location hardFix = new Location("reverseGeocoded");
 
 		// Belfort gent
-		hardFix.setLatitude(51.053642);
-		hardFix.setLongitude(3.724892);
+		hardFix.setLatitude(DataManager.BELFORT_LAT);
+		hardFix.setLongitude(DataManager.BELFORT_LON);
 		hardFix.setAltitude(60);
 
 		try {
