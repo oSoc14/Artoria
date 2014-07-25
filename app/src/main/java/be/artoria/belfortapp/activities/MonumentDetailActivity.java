@@ -192,9 +192,9 @@ public class MonumentDetailActivity extends BaseActivity {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float horizontalDiff = e2.getX() - e1.getX();
             if(horizontalDiff>0){
-                nextDetail(null);
-            }else {
                 prevDetail(null);
+            }else {
+                nextDetail(null);
             }
             return super.onFling(e1, e2, velocityX, velocityY);
         }
@@ -207,7 +207,6 @@ public class MonumentDetailActivity extends BaseActivity {
         toReturn.putExtra(ARG_FROM_PANORAMA,fromPanorama);
         toReturn.putExtra(ARG_USER_INSTANTIATED,true);
         return toReturn;
-
     }
 
     private void backToPanorama(){
