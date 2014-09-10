@@ -15,6 +15,7 @@ import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DragSortAdapter;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
@@ -134,8 +135,10 @@ public class NewRouteActivity extends BaseActivity {
         btnPanorama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NewRouteActivity.this, MixView.class);
-                startActivity(i);
+                if(SupportManager.isDeviceSupported()) {
+                    Intent i = new Intent(NewRouteActivity.this, MixView.class);
+                    startActivity(i);
+                }
             }
         });
 

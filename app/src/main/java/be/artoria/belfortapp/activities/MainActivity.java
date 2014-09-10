@@ -29,6 +29,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
 import be.artoria.belfortapp.fragments.MapFragment;
@@ -120,12 +121,9 @@ public class MainActivity extends BaseActivity {
                 switch (i) {
                     /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        if(deviceSupported()) {
+                        if(SupportManager.isDeviceSupported()) {
                             intent = new Intent(MainActivity.this, MixView.class);
                             startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(PrefUtils.getContext(),R.string.unsupported, Toast.LENGTH_LONG).show();
                         }
                     break;
                     /* The second item are the buildings */
@@ -164,11 +162,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-    }
-
-    private boolean deviceSupported() {
-        final SensorManager mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        return mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null && mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
     }
 
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
