@@ -26,6 +26,7 @@
     <string name="no_route">Il n\'y a pas de waypoints sur votre itinéraire, s\'il vous plaît ajouter des waypoints à votre itinéraire en appuyant panorama ou bâtiments</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
     <string name="monument_landscape_msg">Balayez vers la gauche ou la droite pour naviguer entre les bâtiments</string>
+    <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau.</string>
 
     <string-array name="lstMenu">
         <item>Panorama</item>

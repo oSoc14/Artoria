@@ -46,6 +46,7 @@ import be.artoria.belfortapp.activities.MapActivity;
 import be.artoria.belfortapp.activities.MonumentDetailActivity;
 import be.artoria.belfortapp.app.ArtoriaOverlayItem;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.ManeuverType;
 import be.artoria.belfortapp.app.POI;
@@ -324,7 +325,7 @@ public class MapFragment extends android.support.v4.app.Fragment {
     }
 
     public void calculateRoute(){
-        final ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        /*final ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null) {
             if (info.isConnected()) {
@@ -335,6 +336,9 @@ public class MapFragment extends android.support.v4.app.Fragment {
         }
         else {
             Toast.makeText(getActivity(), "Please check your wireless connection and try again.", Toast.LENGTH_SHORT).show();
+        }*/
+        if(SupportManager.haveNetworkConnection()){
+            new RouteCalcTask().execute();
         }
     }
 

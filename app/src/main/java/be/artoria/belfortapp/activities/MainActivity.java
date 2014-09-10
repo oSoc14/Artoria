@@ -128,9 +128,11 @@ public class MainActivity extends BaseActivity {
                     break;
                     /* The second item are the buildings */
                     case 1:
-                        intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
-                        intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
-                        startActivity(intent);
+                        if(SupportManager.haveNetworkConnection()) {
+                            intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
+                            intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
+                            startActivity(intent);
+                        }
                     break;
                     /* The third item is my route */
                     case 2:
