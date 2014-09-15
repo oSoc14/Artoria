@@ -26,7 +26,7 @@
     <string name="destination">bestemming</string>
     <string name="no_route">Er zijn nog geen bestemmingen in uw route, gelieve deze toe te voegen door te klikken op panorama of gebouwen</string>
     <string name="monument_landscape_msg">Veeg links of rechts om te navigeren tussen de gebouwen</string>
-    <string name="no_connection">Gelieve te controlleren als dit toestel verbonden is met het internet.</string>
+    <string name="no_connection">Gelieve te controleren als dit toestel verbonden is met het internet.</string>
 
     <string name="calcRoute">Bereken route</string>
     <string name="view_route">Mijn route</string>
