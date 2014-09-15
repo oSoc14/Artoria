@@ -21,7 +21,7 @@ public class DataManager {
     }
 
     public enum Language{
-        DUTCH,ENGLISH,FRENCH
+        DUTCH,ENGLISH,FRENCH,SPANISH,RUSSIAN,ITALIAN,GERMAN
     }
     public static Language lang = null;
 

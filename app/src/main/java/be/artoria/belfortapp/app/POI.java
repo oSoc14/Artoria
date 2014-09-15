@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
-import java.util.Locale;
-
 import be.artoria.belfortapp.R;
 
 /**
@@ -65,28 +63,27 @@ public class POI {
     public String getName() {
         final DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
         switch(lang){
+            case FRENCH:
+                return this.FR_name;
+            case DUTCH:
+                return this.NL_name;
             case ENGLISH:
+            default:
                 return this.ENG_name;
-        case FRENCH:
-            return this.FR_name;
-        case DUTCH:
-        default:
-            /*Default is Dutch*/
-            return this.NL_name;
+
         }
     }
 
     public String getDescription() {
         final DataManager.Language lang = DataManager.getInstance().getCurrentLanguage();
         switch(lang){
-            case ENGLISH:
-                return this.ENG_description;
             case FRENCH:
                 return this.FR_description;
             case DUTCH:
+                return this.NL_description
+            case ENGLISH:
             default:
-            /*Default is Dutch*/
-                return this.NL_description;
+                return this.ENG_description;
         }
     }
 

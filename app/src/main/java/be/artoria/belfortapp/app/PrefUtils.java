@@ -82,24 +82,55 @@ public class PrefUtils {
         }
     }
 
+    private static final HashMap<String,DataManager.Language> enumMap = new HashMap<String, DataManager.Language>();
+    static {
+        enumMap.put("fr",DataManager.Language.FRENCH);
+        enumMap.put("en",DataManager.Language.ENGLISH);
+        enumMap.put("de",DataManager.Language.GERMAN);
+        enumMap.put("nl",DataManager.Language.DUTCH);
+        enumMap.put("es",DataManager.Language.SPANISH);
+        enumMap.put("it",DataManager.Language.ITALIAN);
+        enumMap.put("ru",DataManager.Language.RUSSIAN);
+    }
+
+
     public static DataManager.Language getLanguage() {
         final Locale locale = getContext().getResources().getConfiguration().locale;
         final String lang = locale.getLanguage();
-        if("en".equals(lang)){ return DataManager.Language.ENGLISH;}
-        if("fr".equals(lang)){ return DataManager.Language.FRENCH;}
-        /* default choice is dutch */
-        return DataManager.Language.DUTCH;
+        return enumMap.get(lang) != null ? enumMap.get(lang) : DataManager.Language.ENGLISH;
     }
 
     public static void saveLanguage(DataManager.Language lang){
-        String lng = "nl";//default dutch
-        if(lang == DataManager.Language.ENGLISH){lng="en";}
-        if(lang == DataManager.Language.FRENCH){lng ="fr";}
+        String lng = "en";//default dutch
+        switch(lang){
+            case SPANISH:
+                lng = "es";
+                break;
+            case GERMAN:
+                lng = "de";
+                break;
+            case DUTCH:
+                lng = "nl";
+                break;
+            case FRENCH:
+                lng = "fr";
+                break;
+            case RUSSIAN:
+                lng = "ru";
+                break;
+            case ITALIAN:
+                lng = "it";
+                break;
+            case ENGLISH:
+            default:
+                lng = "en";
+                break;
+        }
         getPrefs().edit().putString(ARG_LANG,lng).apply();
     }
 
     public static void loadLanguage(Context context){
-        final String lang = getPrefs().getString(ARG_LANG,"nl");/*Default dutch*/
+        final String lang = getPrefs().getString(ARG_LANG,"en");/*Default english*/
         final Locale locale = new Locale(lang);
         LanguageChoiceActivity.setLang(locale,context);
     }
