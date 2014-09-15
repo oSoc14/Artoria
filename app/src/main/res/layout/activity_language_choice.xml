@@ -71,7 +71,7 @@
         android:id="@+id/bottom_row"
         android:layout_alignParentBottom="true">
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_de"
             android:id="@+id/german"
@@ -80,7 +80,7 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_es"
             android:background="@null"
@@ -89,7 +89,7 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_it"
             android:background="@null"
@@ -98,7 +98,7 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_ru"
             android:background="@null"
@@ -117,7 +117,7 @@
         android:layout_above="@id/bottom_row">
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_nl"
             android:id="@+id/dutch"
@@ -126,7 +126,7 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_fr"
             android:id="@+id/french"
@@ -136,7 +136,7 @@
             />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_en"
             android:background="@null"

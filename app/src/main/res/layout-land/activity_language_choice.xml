@@ -68,73 +68,79 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="7"
         android:id="@+id/bottom_row"
         android:layout_alignParentBottom="true">
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_nl"
         android:id="@+id/dutch"
         android:background="@null"
         android:onClick="langSelected"
-        android:layout_weight="1"/>
+/>
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_fr"
         android:id="@+id/french"
         android:background="@null"
         android:onClick="langSelected"
-        android:layout_weight="1"/>
+/>
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_en"
         android:background="@null"
         android:id="@+id/english"
         android:onClick="langSelected"
-        android:layout_weight="1"/>
+/>
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_de"
         android:id="@+id/german"
         android:background="@null"
         android:onClick="langSelected"
-        android:layout_weight="1"
+
         />
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_es"
         android:background="@null"
         android:id="@+id/spanish"
         android:onClick="langSelected"
-        android:layout_weight="1" />
+ />
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_it"
         android:background="@null"
         android:id="@+id/italian"
         android:onClick="langSelected"
-        android:layout_weight="1" />
+ />
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_lang_ru"
         android:background="@null"
         android:id="@+id/russian"
         android:onClick="langSelected"
-        android:layout_weight="1"/>
+/>
 
     </LinearLayout>
 </RelativeLayout>
