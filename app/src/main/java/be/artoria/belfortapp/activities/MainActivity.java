@@ -64,13 +64,13 @@ public class MainActivity extends BaseActivity {
         final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
         /* Either there is no last download ( case == 0)
         *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-        // TODO change this back!
-          //  if((lastDownload == 0 || timeSinceLastDownload > 5*60*1000) && !downloading){
           if((lastDownload == 0 || timeSinceLastDownload > 1000*60*60*6) && !downloading){
-            downloading = true;
-            Log.i(PrefUtils.TAG,"Started downloading in the background");
-            new DownloadDataTask().execute(PrefUtils.DATASET_URL);
-        }
+              if(SupportManager.haveNetworkConnection()) {
+                  downloading = true;
+                  Log.i(PrefUtils.TAG, "Started downloading in the background");
+                  new DownloadDataTask().execute(PrefUtils.DATASET_URL);
+              }
+          }
     }
 
     @Override
