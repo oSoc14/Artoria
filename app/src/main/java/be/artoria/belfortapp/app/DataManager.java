@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.artoria.belfortapp.sql.MuseumDAO;
 import be.artoria.belfortapp.sql.POIDAO;
 
 /**
@@ -29,6 +30,7 @@ public class DataManager {
     private static final List<POI> poiList = new ArrayList<POI>();
     private static final List<Floor> museumList = new ArrayList<Floor>();
     public  static final POIDAO poidao = new POIDAO(PrefUtils.getContext());
+    public static final MuseumDAO museumDAO = new MuseumDAO(PrefUtils.getContext());
 
 
     /*Route start point (belfort Ghent) needs to be replaced by current location in the future*/
@@ -70,15 +72,6 @@ public class DataManager {
         return INSTANCE;
     }
 
-    public static List<Floor> getFloorList(){
-        return museumList;
-    }
-
-    public static void setFloorList(List<Floor> list){
-        museumList.clear();
-        museumList.addAll(list);
-        //TODO insert the data into sql-lite db (use this static context for now)
-    }
 
     public static void addAll(List<POI> list) {
         numberOfPOIs += list.size() ;
@@ -89,6 +82,34 @@ public class DataManager {
         numberOfPOIs = 0;
         poiList.clear();
     }
+
+
+    public static List<Floor> getFloorList(){
+        if(museumList.isEmpty()) {
+            try {
+                museumDAO.open();
+                museumList.addAll(museumDAO.getAllFloors());
+                museumDAO.close();
+                return museumList;
+
+            }catch(SQLException ex){
+                System.out.println(ex);
+                return museumList; //return empty list ...
+            }
+        }else{
+            return museumList;
+        }
+    }
+
+    public static void setFloors(List<Floor> floors){
+        museumList.clear();
+        museumList.addAll(floors);
+    }
+
+    public static void clearFloors(){
+        museumList.clear();
+    }
+
 
     public static int lastViewedPOI = 1;
 

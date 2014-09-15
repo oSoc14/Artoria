@@ -71,5 +71,4 @@ public class MuseumActivity extends BaseActivity {
         i.putExtra(ARG_FLOOR,floor);
         return i;
     }
-
 }

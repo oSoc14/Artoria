@@ -51,4 +51,8 @@ public class SupportManager {
     public static boolean hasMonumentsInDatabase(){
         return DataManager.getAll().size() > 0;
     }
+
+    public static boolean hasMuseumDataInDatabase(){
+        return DataManager.getFloorList().size() > 0;
+    }
 }

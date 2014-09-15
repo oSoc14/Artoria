@@ -30,7 +30,7 @@ public class POIDbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + POIContract.POIEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Monument.db";
 
     public POIDbHelper(Context context) {

@@ -66,12 +66,11 @@ public class MainActivity extends BaseActivity {
             final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
             /* Either there is no last download ( case == 0)
             *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-            if ((lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6) && !downloading) {
-                downloading = true;
+            //if ((lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6) && !downloading) {
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
                 new DownloadMuseumData().execute(PrefUtils.MUSEUM_URL);
-            }
+            //}
         }
     }
 
@@ -147,24 +146,22 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     //4th floor
-                    case 3: startActivity(MuseumActivity.createIntent(MainActivity.this,4));
+                    case 3: startMuseumView(4);
                         break;
                     //3rd floor
-                    case 4: startActivity(MuseumActivity.createIntent(MainActivity.this,3));
+                    case 4: startMuseumView(3);
                         break;
                     //2nd floor
-                    case 5: startActivity(MuseumActivity.createIntent(MainActivity.this,2));
+                    case 5: startMuseumView(2);
                         break;
                     //1st floor
-                    case 6: startActivity(MuseumActivity.createIntent(MainActivity.this,1));
+                    case 6: startMuseumView(1);
                         break;
                     //ground floor
-                    case 7: startActivity(MuseumActivity.createIntent(MainActivity.this,0));
+                    case 7: startMuseumView(0);
                         break;
                 }
             }
-
-
         });
 
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -188,9 +185,15 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void startMuseumView(int floor){
+        if(SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()){
+            startActivity(MuseumActivity.createIntent(MainActivity.this,1));
+        }
+    }
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
+            downloading = true;
             StringBuilder response = new StringBuilder();
             for (String url : urls) {
                 final DefaultHttpClient client = new DefaultHttpClient();
@@ -234,7 +237,7 @@ public class MainActivity extends BaseActivity {
                 DataManager.poidao.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
-                }
+              }
             }
         }
     }
@@ -242,6 +245,7 @@ public class MainActivity extends BaseActivity {
     private static class DownloadMuseumData extends AsyncTask<String, Void, String>{
         @Override
         protected String doInBackground(String... urls) {
+            downloading = true;
             StringBuilder response = new StringBuilder();
             for (String url : urls) {
                 final DefaultHttpClient client = new DefaultHttpClient();
@@ -272,8 +276,19 @@ public class MainActivity extends BaseActivity {
                 Log.e(PrefUtils.TAG ,"Downloading failed");
             }
             else {
-                //Save list in database
-                DataManager.setFloorList(list);
+                PrefUtils.saveTimeStampDownloads();
+                DataManager.clearFloors();
+                DataManager.setFloors(list);
+                try {
+                    DataManager.museumDAO.open();
+                    for(Floor floor : list){
+                        DataManager.museumDAO.saveFloor(floor);
+                    }
+                    DataManager.museumDAO.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
