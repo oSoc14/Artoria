@@ -66,11 +66,11 @@ public class MainActivity extends BaseActivity {
             final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
             /* Either there is no last download ( case == 0)
             *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-            //if ((lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6) && !downloading) {
+            if ((lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6) && !downloading) {
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
                 new DownloadMuseumData().execute(PrefUtils.MUSEUM_URL);
-            //}
+            }
         }
     }
 
