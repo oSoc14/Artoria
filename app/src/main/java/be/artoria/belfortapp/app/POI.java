@@ -80,7 +80,7 @@ public class POI {
             case FRENCH:
                 return this.FR_description;
             case DUTCH:
-                return this.NL_description
+                return this.NL_description;
             case ENGLISH:
             default:
                 return this.ENG_description;
