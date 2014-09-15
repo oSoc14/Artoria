@@ -63,7 +63,41 @@
  />
 
     <!-- Start of flag layout -->
-    <!-- Bottom row DE SP IT RU -->
+    <!-- Single row, NL FR EN DE SP IT RU-->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_lang_nl"
+        android:id="@+id/dutch"
+        android:background="@null"
+        android:onClick="langSelected"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/french"
+        android:layout_toStartOf="@+id/french"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_lang_fr"
+        android:id="@+id/french"
+        android:background="@null"
+        android:onClick="langSelected"
+        android:layout_toLeftOf="@+id/english"
+        android:layout_toStartOf="@+id/english"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_lang_en"
+        android:background="@null"
+        android:id="@+id/english"
+        android:onClick="langSelected"
+        android:layout_toStartOf="@+id/german"
+        android:layout_toLeftOf="@+id/german"
+        android:layout_alignParentBottom="true"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -73,7 +107,8 @@
         android:background="@null"
         android:onClick="langSelected"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_centerHorizontal="true"
+        />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -107,42 +142,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <!-- Top row, NL FR EN-->
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_nl"
-        android:id="@+id/dutch"
-        android:background="@null"
-        android:onClick="langSelected"
-        android:layout_above="@+id/german"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/french"
-        android:layout_toLeftOf="@+id/french"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_fr"
-        android:id="@+id/french"
-        android:background="@null"
-        android:onClick="langSelected"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/dutch"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_en"
-        android:background="@null"
-        android:id="@+id/english"
-        android:onClick="langSelected"
-        android:layout_alignBottom="@+id/french"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/french"
-        android:layout_toRightOf="@+id/french"/>
 
 </RelativeLayout>
