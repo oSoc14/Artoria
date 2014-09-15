@@ -57,92 +57,94 @@
         android:text="@string/lang_choice"
         android:textColor="@color/white"
         android:id="@+id/string_choose_language"
-        android:layout_above="@+id/french"
+        android:layout_above="@+id/top_row"
         android:paddingBottom="1dp"
         android:layout_alignParentLeft="true"
  />
 
     <!-- Start of flag layout -->
     <!-- Bottom row DE SP IT RU -->
-
-    <ImageButton
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_de"
-        android:id="@+id/german"
-        android:background="@null"
-        android:onClick="langSelected"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:weightSum="4"
+        android:id="@+id/bottom_row"
+        android:layout_alignParentBottom="true">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_de"
+            android:id="@+id/german"
+            android:background="@null"
+            android:onClick="langSelected"
+            android:layout_weight="1" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_es"
-        android:background="@null"
-        android:id="@+id/spanish"
-        android:onClick="langSelected"
-        android:layout_toRightOf="@+id/german"
-        android:layout_toEndOf="@+id/german"
-        android:layout_alignParentBottom="true" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_es"
+            android:background="@null"
+            android:id="@+id/spanish"
+            android:onClick="langSelected"
+            android:layout_weight="1" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_it"
-        android:background="@null"
-        android:id="@+id/italian"
-        android:onClick="langSelected"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/russian"
-        android:layout_toLeftOf="@+id/russian" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_it"
+            android:background="@null"
+            android:id="@+id/italian"
+            android:onClick="langSelected"
+            android:layout_weight="1" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_ru"
-        android:background="@null"
-        android:id="@+id/russian"
-        android:onClick="langSelected"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_ru"
+            android:background="@null"
+            android:id="@+id/russian"
+            android:onClick="langSelected"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <!-- Top row, NL FR EN-->
-    <ImageButton
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_nl"
-        android:id="@+id/dutch"
-        android:background="@null"
-        android:onClick="langSelected"
-        android:layout_above="@+id/german"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/french"
-        android:layout_toLeftOf="@+id/french"/>
+        android:weightSum="3"
+        android:id="@+id/top_row"
+        android:layout_above="@id/bottom_row">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_fr"
-        android:id="@+id/french"
-        android:background="@null"
-        android:onClick="langSelected"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/dutch"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_nl"
+            android:id="@+id/dutch"
+            android:background="@null"
+            android:onClick="langSelected"
+            android:layout_weight="1" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_en"
-        android:background="@null"
-        android:id="@+id/english"
-        android:onClick="langSelected"
-        android:layout_alignBottom="@+id/french"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/french"
-        android:layout_toRightOf="@+id/french"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_fr"
+            android:id="@+id/french"
+            android:background="@null"
+            android:onClick="langSelected"
+            android:layout_weight="1"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lang_en"
+            android:background="@null"
+            android:id="@+id/english"
+            android:onClick="langSelected"
+            android:layout_weight="1"
+           />
+
+    </LinearLayout>
 
 </RelativeLayout>
