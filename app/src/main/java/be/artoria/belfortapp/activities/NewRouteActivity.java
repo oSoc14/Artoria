@@ -124,7 +124,7 @@ public class NewRouteActivity extends BaseActivity {
         btnBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SupportManager.haveNetworkConnection()) {
+                if(SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
                     Intent i = MonumentDetailActivity.newIntent(NewRouteActivity.this, 1, false);
                     startActivity(i);
                 }
