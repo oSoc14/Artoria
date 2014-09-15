@@ -186,10 +186,10 @@ public class MapFragment extends android.support.v4.app.Fragment {
             roadManager.addRequestOption("routeType=pedestrian");
             final String lang;
             switch(DataManager.getInstance().getCurrentLanguage()){
-                case ENGLISH:lang = LANG_ENG; break;
+                case DUTCH:  lang = LANG_NL;  break;
                 case FRENCH: lang = LANG_FR;  break;
-                case DUTCH:
-                default:     lang = LANG_NL;
+                case ENGLISH:
+                default:     lang = LANG_ENG; break;
             }
             roadManager.addRequestOption("locale="+lang ); //display the directions in the selected language
             roadManager.addRequestOption("unit=k"); //display the distance in kilometers

@@ -63,6 +63,22 @@ public class LanguageChoiceActivity extends BaseActivity {
                 locale = new Locale("fr");
                 DataManager.lang = DataManager.Language.FRENCH;
                 break;
+            case(R.id.german):
+                locale = new Locale("de");
+                DataManager.lang = DataManager.Language.GERMAN;
+                break;
+            case(R.id.spanish):
+                locale = new Locale("es");
+                DataManager.lang = DataManager.Language.SPANISH;
+                break;
+            case(R.id.italian):
+                locale = new Locale("it");
+                DataManager.lang = DataManager.Language.ITALIAN;
+                break;
+            case(R.id.russian):
+                locale = new Locale("ru");
+                DataManager.lang = DataManager.Language.RUSSIAN;
+                break;
             case(R.id.dutch):
             default:
                 /* Default case is dutch */
