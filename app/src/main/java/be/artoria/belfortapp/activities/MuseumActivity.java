@@ -17,6 +17,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends BaseActivity {
@@ -37,14 +39,12 @@ public class MuseumActivity extends BaseActivity {
 
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
-        setTitle(getResources().getStringArray(R.array.lstFloor)[floor]);
+        Floor fl = DataManager.getFloorList().get(floor);
+        setTitle(fl.getName());
 
-        //TODO get content from database or web ...
-        txtContent.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies dolor urna, ac dignissim nibh pharetra id. Pellentesque eu turpis pretium, eleifend purus eget, semper elit. Nulla fringilla lacinia urna, non mattis mauris suscipit ac. Cras velit nibh, tempor in dui in, efficitur suscipit nibh. Praesent quis tincidunt velit, sit amet commodo eros. Praesent scelerisque nulla id eros placerat sagittis ac a ex. Proin non magna ultricies, iaculis mauris eu, ultricies sapien. Aliquam eget neque vitae lectus tristique gravida in sed libero. Nullam sed tristique purus. Aenean iaculis lectus at lacus sodales dapibus. Sed at ante ipsum. Donec a nibh nibh. Nulla ut tincidunt tortor. Morbi suscipit imperdiet congue. Curabitur vel fermentum ligula.\n" +
-                "\n" +
-                "Curabitur feugiat molestie leo, commodo porta ligula porttitor sit amet. Nulla iaculis, orci in luctus pharetra, augue felis aliquam sapien, et molestie justo mi vel dui. Etiam odio augue, vehicula a erat porttitor, tristique accumsan lectus. Suspendisse semper fermentum dolor vitae commodo. Vestibulum posuere elementum sem et eleifend. Quisque nisl lorem, semper tempus facilisis eu, egestas eu enim. Aliquam elit turpis, pharetra in molestie quis, laoreet eget magna. Sed feugiat nisi ipsum, ac porttitor lectus tempor at.");
-
+        txtContent.setText(fl.getDescription());
         //TODO find more images online to use in the imageSwitcher
+
         is.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -52,7 +52,7 @@ public class MuseumActivity extends BaseActivity {
                 Picasso.with(PrefUtils.getContext()).load(TMP_IMG_LINK).into(toReturn, new Callback() {
                     @Override
                     public void onSuccess() {
-
+                        //feestjee
                     }
 
                     @Override

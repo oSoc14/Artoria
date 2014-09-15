@@ -29,6 +29,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity {
                 downloading = true;
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
+                new DownloadMuseumData().execute(PrefUtils.MUSEUM_URL);
             }
         }
     }
@@ -236,4 +238,45 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
+    private static class DownloadMuseumData extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder response = new StringBuilder();
+            for (String url : urls) {
+                final DefaultHttpClient client = new DefaultHttpClient();
+                final HttpGet httpGet = new HttpGet(url);
+                try {
+                    final HttpResponse execute = client.execute(httpGet);
+                    final InputStream content = execute.getEntity().getContent();
+
+                    final BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s;
+                    while ((s = buffer.readLine()) != null) {
+                        response.append(s);
+                    }
+
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return response.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            final Gson gson = new Gson();
+            final List<Floor> list = gson.fromJson(result, new TypeToken<List<Floor>>(){}.getType());
+            downloading = false;
+            if(list == null || list.isEmpty()){
+                Log.e(PrefUtils.TAG ,"Downloading failed");
+            }
+            else {
+                //Save list in database
+                DataManager.setFloorList(list);
+            }
+        }
+    }
+
+
 }

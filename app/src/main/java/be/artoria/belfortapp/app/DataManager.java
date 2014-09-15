@@ -27,6 +27,7 @@ public class DataManager {
 
     private static final DataManager INSTANCE = new DataManager();
     private static final List<POI> poiList = new ArrayList<POI>();
+    private static final List<Floor> museumList = new ArrayList<Floor>();
     public  static final POIDAO poidao = new POIDAO(PrefUtils.getContext());
 
 
@@ -67,6 +68,16 @@ public class DataManager {
 
     public static DataManager getInstance() {
         return INSTANCE;
+    }
+
+    public static List<Floor> getFloorList(){
+        return museumList;
+    }
+
+    public static void setFloorList(List<Floor> list){
+        museumList.clear();
+        museumList.addAll(list);
+        //TODO insert the data into sql-lite db (use this static context for now)
     }
 
     public static void addAll(List<POI> list) {

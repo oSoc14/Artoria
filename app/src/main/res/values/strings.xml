@@ -39,13 +39,6 @@
         <item>Ground floor</item>
     </string-array>
 
-    <string-array name="lstFloor">
-        <item>Ground floor</item>
-        <item>First floor</item>
-        <item>Second floor</item>
-        <item>Third floor</item>
-        <item>Fourth floor</item>
-    </string-array>
 
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">My route</string>
