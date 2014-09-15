@@ -102,6 +102,11 @@ public class MainActivity extends BaseActivity {
         final Drawable[] drawables = new Drawable[]{
                 getResources().getDrawable((R.drawable.panorama)),
                 getResources().getDrawable((R.drawable.menu)),
+                getResources().getDrawable((R.drawable.route)),
+                getResources().getDrawable((R.drawable.route)),
+                getResources().getDrawable((R.drawable.route)),
+                getResources().getDrawable((R.drawable.route)),
+                getResources().getDrawable((R.drawable.route)),
                 getResources().getDrawable((R.drawable.route))
         };
         final List<DescriptionRow> list = new ArrayList<DescriptionRow>();
@@ -138,6 +143,21 @@ public class MainActivity extends BaseActivity {
                     case 2:
                         intent = new Intent(MainActivity.this,NewRouteActivity.class);
                         startActivity(intent);
+                        break;
+                    //4th floor
+                    case 3: startActivity(MuseumActivity.createIntent(MainActivity.this,4));
+                        break;
+                    //3rd floor
+                    case 4: startActivity(MuseumActivity.createIntent(MainActivity.this,3));
+                        break;
+                    //2nd floor
+                    case 5: startActivity(MuseumActivity.createIntent(MainActivity.this,2));
+                        break;
+                    //1st floor
+                    case 6: startActivity(MuseumActivity.createIntent(MainActivity.this,1));
+                        break;
+                    //ground floor
+                    case 7: startActivity(MuseumActivity.createIntent(MainActivity.this,0));
                         break;
                 }
             }

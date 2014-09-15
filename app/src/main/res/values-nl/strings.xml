@@ -35,14 +35,23 @@
         <item>Gebouwen</item>
         <item>Mijn route</item>
         <!-- Future dev ... -->
-        <!--
         <item>4de verdieping</item>
         <item>3de verdieping</item>
         <item>2de verdieping</item>
         <item>1ste verdieping</item>
         <item>gelijkvloers</item>
-        -->
     </string-array>
+
+
+
+    <string-array name="lstFloor">
+        <item>Gelijkvloers</item>
+        <item>Eerste verdiep</item>
+        <item>Tweede verdiep</item>
+        <item>Derde verdiep</item>
+        <item>Vierde verdiep</item>
+    </string-array>
+
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">Route</string>
     <string name="main">Hoofdmenu</string>

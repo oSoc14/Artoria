@@ -32,14 +32,20 @@
         <item>Panorama</item>
         <item>Bâtiments</item>
         <item>Mon itinéraire</item>
-        <!-- Future dev ... -->
-        <!--
         <item>4de verdieping</item>
         <item>3de verdieping</item>
         <item>2de verdieping</item>
         <item>1ste verdieping</item>
         <item>gelijkvloers</item>
-        -->
+    </string-array>
+
+
+    <string-array name="lstFloor">
+        <item>Ground floor</item>
+        <item>First floor</item>
+        <item>Second floor</item>
+        <item>Third floor</item>
+        <item>Fourth floor</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Détail</string>
