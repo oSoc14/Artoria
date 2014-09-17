@@ -39,22 +39,10 @@
         <item>Ground floor</item>
     </string-array>
 
-
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">My route</string>
     <string name="title_activity_map">Map</string>
     <string name="route">Route</string>
-    <string name="license">
-<![CDATA[Copyright © 2010- Peer internet solutions
-            \n\nThis program is free software: 	you can redistribute it and/or modify it under the terms of the
-            GNU General Public License as published by the Free Software Foundation, either version 3 of the License,
-            or at your option) any later version.
-            \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-            the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
-            License for more details.
-            \n\n You should have received a copy of the GNU General Public License along with this program.
-            If not, see <http://www.gnu.org/licenses/>]]>
-    </string>
     <string name="title_activity_panorama">Panorama</string>
     <string name="title_activity_mapp">Map</string>
     <string name="title_activity_new_route">Route</string>
@@ -70,8 +58,7 @@
     <string name="SW">SW</string>
     <string name="W">W</string>
     <string name="NW">NW</string>
-    <string name="lang_choice">Kies uw taal</string>
-    <string name="title_activity_museum">MuseumActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="lang_choice">Choose your language</string>
+    <string name="title_activity_museum">Museum</string>
 
 </resources>
