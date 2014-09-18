@@ -5,12 +5,12 @@
     android:orientation="vertical"
     tools:context="be.artoria.belfortapp.activities.MuseumActivity">
 
-    <ImageSwitcher
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="40"
         android:id="@+id/imgContent">
-        </ImageSwitcher>
+        </ImageView>
 
     <TextView
         android:id="@+id/txtContent"
