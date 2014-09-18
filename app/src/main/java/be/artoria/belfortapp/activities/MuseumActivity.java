@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -33,6 +34,7 @@ public class MuseumActivity extends BaseActivity {
     private ImageView imgCnt;
     private int currentImage = 0;
     private Handler handler;
+    private boolean runSlideshow = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,11 @@ public class MuseumActivity extends BaseActivity {
         imgCnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                runSlideshow = false;
                 nextImage();
             }
         });
+
         handler = new Handler();
         handler.postDelayed(imageSwitcher,0);
     }
@@ -67,8 +71,10 @@ public class MuseumActivity extends BaseActivity {
     private Runnable imageSwitcher = new Runnable() {
         @Override
         public void run() {
-            nextImage();
-            handler.postDelayed(this,IMAGE_SWITCH_TIME);
+            if(runSlideshow) {
+                nextImage();
+                handler.postDelayed(this, IMAGE_SWITCH_TIME);
+            }
         }
     };
 
