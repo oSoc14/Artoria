@@ -2,14 +2,21 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
@@ -23,7 +30,13 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
-    public static final String TMP_IMG_LINK = "http://users.skynet.be/ovo/GentseDraak.jpg";
+    public static final long IMAGE_SWITCH_TIME = 5000;
+    private Floor currentFloor;
+    private ImageView imgCnt;
+    private ProgressBar prgWait;
+    private int currentImage = 0;
+    private Handler handler;
+    private boolean runSlideshow = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,37 +46,68 @@ public class MuseumActivity extends BaseActivity {
     }
 
     private void initGui(){
-        ImageSwitcher is = (ImageSwitcher)findViewById(R.id.imgContent);
         TextView txtContent = (TextView)findViewById(R.id.txtContent);
         txtContent.setMovementMethod(new ScrollingMovementMethod());
+        imgCnt = (ImageView)findViewById(R.id.imgContent);
+
+        prgWait = (ProgressBar)findViewById(R.id.prgWait);
+
 
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
-        Floor fl = DataManager.getFloorList().get(floor);
-        setTitle(fl.getName());
+        currentFloor = DataManager.getFloorList().get(floor);
+        setTitle(currentFloor.getName());
 
-        txtContent.setText(fl.getDescription());
-        //TODO find more images online to use in the imageSwitcher
+        txtContent.setText(currentFloor.getDescription());
 
-        is.setFactory(new ViewSwitcher.ViewFactory() {
+        imgCnt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public View makeView() {
-                final ImageView toReturn = new ImageView(PrefUtils.getContext());
-                Picasso.with(PrefUtils.getContext()).load(TMP_IMG_LINK).into(toReturn, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        //feestjee
-                    }
-
-                    @Override
-                    public void onError() {
-                        toReturn.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
-                        System.out.println("Failed to load image");
-                    }
-                });
-                return toReturn;
+            public void onClick(View view) {
+                runSlideshow = false;
+                nextImage();
             }
         });
+
+        handler = new Handler();
+        handler.postDelayed(imageSwitcher,0);
+    }
+
+    private Runnable imageSwitcher = new Runnable() {
+        @Override
+        public void run() {
+            if(runSlideshow) {
+                nextImage();
+                handler.postDelayed(this, IMAGE_SWITCH_TIME);
+            }
+        }
+    };
+
+    private void nextImage(){
+        setLoading();
+        Picasso.with(PrefUtils.getContext()).load(currentFloor.images[currentImage]).into(imgCnt,new Callback(){
+            @Override
+            public void onSuccess() {
+                setDoneLoading();
+                currentImage = (currentImage +1) % currentFloor.images.length;
+            }
+
+            @Override
+            public void onError() {
+                setDoneLoading();
+                System.err.println("Failed loading image ...");
+                imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
+            }
+        });
+    }
+
+    private void setLoading(){
+        imgCnt.setVisibility(View.GONE);
+        prgWait.setVisibility(View.VISIBLE);
+    }
+
+    private void setDoneLoading(){
+        prgWait.setVisibility(View.GONE);
+        imgCnt.setVisibility(View.VISIBLE);
     }
 
     public static Intent createIntent(Context ctx, int floor){
