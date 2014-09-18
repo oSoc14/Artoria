@@ -12,6 +12,16 @@
         android:id="@+id/imgContent">
         </ImageView>
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:indeterminate="true"
+        android:gravity="center"
+        android:padding="0dp"
+        android:visibility="gone"
+        android:id="@+id/prgWait"/>
+
     <TextView
         android:id="@+id/txtContent"
         android:scrollbars="vertical"

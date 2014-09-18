@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
@@ -32,6 +33,7 @@ public class MuseumActivity extends BaseActivity {
     public static final long IMAGE_SWITCH_TIME = 5000;
     private Floor currentFloor;
     private ImageView imgCnt;
+    private ProgressBar prgWait;
     private int currentImage = 0;
     private Handler handler;
     private boolean runSlideshow = true;
@@ -47,6 +49,8 @@ public class MuseumActivity extends BaseActivity {
         TextView txtContent = (TextView)findViewById(R.id.txtContent);
         txtContent.setMovementMethod(new ScrollingMovementMethod());
         imgCnt = (ImageView)findViewById(R.id.imgContent);
+
+        prgWait = (ProgressBar)findViewById(R.id.prgWait);
 
 
         Intent i = getIntent();
@@ -79,19 +83,31 @@ public class MuseumActivity extends BaseActivity {
     };
 
     private void nextImage(){
+        setLoading();
         Picasso.with(PrefUtils.getContext()).load(currentFloor.images[currentImage]).into(imgCnt,new Callback(){
             @Override
             public void onSuccess() {
+                setDoneLoading();
                 currentImage = (currentImage +1) % currentFloor.images.length;
             }
 
             @Override
             public void onError() {
+                setDoneLoading();
                 System.err.println("Failed loading image ...");
                 imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
             }
         });
+    }
 
+    private void setLoading(){
+        imgCnt.setVisibility(View.GONE);
+        prgWait.setVisibility(View.VISIBLE);
+    }
+
+    private void setDoneLoading(){
+        prgWait.setVisibility(View.GONE);
+        imgCnt.setVisibility(View.VISIBLE);
     }
 
     public static Intent createIntent(Context ctx, int floor){
