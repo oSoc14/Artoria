@@ -55,10 +55,7 @@ public class LanguageChoiceActivity extends BaseActivity {
         /* Setting the locale in response to a button click */
         final Locale locale;
         switch (view.getId()) {
-            case(R.id.english):
-                locale = new Locale("en");
-                DataManager.lang = DataManager.Language.ENGLISH;
-                break;
+
             case(R.id.french):
                 locale = new Locale("fr");
                 DataManager.lang = DataManager.Language.FRENCH;
@@ -80,10 +77,16 @@ public class LanguageChoiceActivity extends BaseActivity {
                 DataManager.lang = DataManager.Language.RUSSIAN;
                 break;
             case(R.id.dutch):
-            default:
-                /* Default case is dutch */
                 DataManager.lang = DataManager.Language.DUTCH;
                 locale = new Locale("nl");
+                break;
+            case(R.id.english):
+            default:
+                /* Default case is english */
+                locale = new Locale("en");
+                DataManager.lang = DataManager.Language.ENGLISH;
+                break;
+
         }
 
         setLang(locale,this);

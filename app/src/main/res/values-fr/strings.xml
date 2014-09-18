@@ -1,76 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <!-- The French language settings file -->
 <resources>
 
     <string name="app_name">BelfortApp</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="lang">LLangues</string>
-    <string name="dutch">Néerlandais</string>
-    <string name="french">Français</string>
-    <string name="english">Anglais</string>
+    <string name="action_settings">paramètres</string>
+    <string name="lang">langue</string>
+    <string name="dutch">néerlandais</string>
+    <string name="french">français</string>
+    <string name="english">anglais</string>
     <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
-    <string name="title_activity_main">Menu principal</string>
-    <string name="settings">Paramètres</string>
-    <string name="about">Sur Artoria</string>
+    <string name="title_activity_main">menu principal</string>
+    <string name="settings">paramètres</string>
+    <string name="about">À propos de Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
-    <string name="calcRoute">Calculer l\'itinéraire</string>
-    <string name="view_route">Mon itinéraire</string>
+    <string name="calcRoute">calculer l\'itinéraire</string>
+    <string name="view_route">mon parcours</string>
     <string name="added_to_route">Ajouté à mon itinéraire</string>
-    <string name="route_planning">Planificateur de  planner</string>
-    <string name="route_desc">Route Description</string>
+    <string name="route_planning">planificateur de voyage</string>
+    <string name="route_desc">itinéraire</string>
     <string name="show_map">Voir la carte</string>
-    <string name="minutes">minutes</string>
+    <string name="minutes">procès-verbal</string>
     <string name="add_to_route">Ajouter à l\'itinéraire</string>
     <string name="destination">destination</string>
-    <string name="no_route">Il n\'y a pas de waypoints sur votre itinéraire, s\'il vous plaît ajouter des waypoints à votre itinéraire en appuyant panorama ou bâtiments</string>
+    <string name="no_route">Il n\'y a pas de points sur votre itinéraire , s\'il vous plaît ajouter quelques points à votre itinéraire en appuyant panorama ou bâtiments</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
     <string name="monument_landscape_msg">Balayez vers la gauche ou la droite pour naviguer entre les bâtiments</string>
-    <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau.</string>
+    <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau .</string>
 
     <string-array name="lstMenu">
-        <item>Panorama</item>
-        <item>Bâtiments</item>
-        <item>Mon itinéraire</item>
-        <item>4de verdieping</item>
-        <item>3de verdieping</item>
-        <item>2de verdieping</item>
-        <item>1ste verdieping</item>
-        <item>gelijkvloers</item>
+        <item>panorama</item>
+        <item>bâtiments</item>
+        <item>mon parcours</item>
+
+        <item>4ème étage</item>
+        <item>3ème étage</item>
+        <item>deuxième étage</item>
+        <item>premier étage</item>
+        <item>Rez de chaussée</item>
     </string-array>
 
-
-    <string name="title_activity_monument_detail">Détail</string>
-    <string name="title_activity_route">Mon itinéraire</string>
-    <string name="title_activity_map">Carte</string>
-    <string name="license"><![CDATA[Copyright © 2010- Peer internet solutions
-            \n\nThis program is free software: 	you can redistribute it and/or modify it under the terms of the
-            GNU General Public License as published by the Free Software Foundation, either version 3 of the License,
-            or at your option) any later version.
-            \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-            the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
-            License for more details.
-            \n\n You should have received a copy of the GNU General Public License along with this program.
-            If not, see <http://www.gnu.org/licenses/>]]></string>
-
-    <string name="title_activity_panorama">Panorama</string>
-    <string name="title_activity_mapp">Carte</string>
-    <string name="title_activity_new_route">Itinéraire</string>
-    <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un capteur accéléromètre ou le champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo. Nous sommes désolés pour le désagrément.</string>
-    <string name="calibrate">S\'il vous plaît assurez la boussole de votre appareil est calibré.</string>
-    <string name="calibrate_title">Étalonnage</string>
-    <string name="show_me_how">Montrez-moi</string>
-
+    <string name="title_activity_monument_detail">détail</string>
+    <string name="title_activity_route">mon parcours</string>
+    <string name="title_activity_map">carte</string>
+    <string name="route">route</string>
+    <string name="title_activity_panorama">panorama</string>
+    <string name="title_activity_mapp">carte</string>
+    <string name="title_activity_new_route">route</string>
+    <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un accéléromètre ou un capteur de champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo \\ . </string>
+    <string name="calibrate">S\'il vous plaît assurez la boussole de votre appareil \\ est calibré .</string>
+    <string name="calibrate_title">étalonnage</string>
+    <string name="show_me_how">Montrez-moi comment</string>
     <string name="N">N</string>
     <string name="NE">NE</string>
     <string name="E">E</string>
     <string name="SE">SE</string>
     <string name="S">S</string>
-    <string name="SW">SO</string>
-    <string name="W">O</string>
-    <string name="NW">NO</string>
-    <string name="lang_choice">Choisissez la langue</string>
-    <string name="route">itinéraire</string>
-
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Choisissez votre langue</string>
+    <string name="title_activity_museum">musée</string>
 
 </resources>
+
