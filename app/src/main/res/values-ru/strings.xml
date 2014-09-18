@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BelfortApp</string>
+    <string name="action_settings">Настройки</string>
+    <string name="lang">Язык</string>
+    <string name="dutch">Голландский</string>
+    <string name="french">Французский</string>
+    <string name="english">Английский</string>
+    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_base">Белфорт</string>
+    <string name="title_activity_main">Главное меню</string>
+    <string name="settings">Настройки</string>
+    <string name="about">О Artoria</string>
+    <string name="artoria_url">http://www.artoria.be</string>
+    <string name="calcRoute">Рассчитать маршрут</string>
+    <string name="view_route">Мой маршрут</string>
+    <string name="added_to_route">Добавлено в моем маршруте</string>
+    <string name="route_planning">Планировщик путешествия</string>
+    <string name="route_desc">Описание маршрута</string>
+    <string name="show_map">Показать на карте</string>
+    <string name="minutes">минут</string>
+    <string name="add_to_route">Добавить к маршруту</string>
+    <string name="destination">назначения</string>
+    <string name="no_route">Там нет путевые на вашем маршруте , пожалуйста, добавьте несколько точек в маршруте , нажав панораму или здания</string>
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
+    <string name="monument_landscape_msg">Проведите пальцем влево или вправо для перехода между зданиями</string>
+    <string name="no_connection">Пожалуйста, проверьте настройки беспроводного подключения и повторите попытку.</string>
+
+    <string-array name="lstMenu">
+        <item>Панорама</item>
+        <item>Здания</item>
+        <item>Мой маршрут</item>
+
+        <item>4-й этаж</item>
+        <item>3-й этаж</item>
+        <item>Второй этаж</item>
+        <item>Первый этаж</item>
+        <item>Первый этаж</item>
+    </string-array>
+
+    <string name="title_activity_monument_detail">Подробно</string>
+    <string name="title_activity_route">Мой маршрут</string>
+    <string name="title_activity_map">Карта</string>
+    <string name="route">Маршрут</string>
+    <string name="title_activity_panorama">Панорама</string>
+    <string name="title_activity_mapp">Карта</string>
+    <string name="title_activity_new_route">Маршрут</string>
+    <string name="unsupported">Это устройство не поддерживается , потому что ему не хватает акселерометр или датчик магнитного поля , необходимую для определения угла вашей камеры \\ S . </string>
+    <string name="calibrate">Пожалуйста, убедитесь, что устройство \\ S компас откалиброван .</string>
+    <string name="calibrate_title">Калибровка</string>
+    <string name="show_me_how">Покажи мне, как</string>
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Выберите свой язык</string>
+    <string name="title_activity_museum">Музей</string>
+
+</resources>
+

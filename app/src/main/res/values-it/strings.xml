@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BelfortApp</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="lang">lingua</string>
+    <string name="dutch">olandese</string>
+    <string name="french">francese</string>
+    <string name="english">Inglese</string>
+    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_base">Belfort</string>
+    <string name="title_activity_main">Menu principale</string>
+    <string name="settings">Impostazioni</string>
+    <string name="about">Chi Artoria</string>
+    <string name="artoria_url">http://www.artoria.be</string>
+    <string name="calcRoute">Calcola percorso</string>
+    <string name="view_route">Il mio percorso</string>
+    <string name="added_to_route">Aggiunto a mio percorso</string>
+    <string name="route_planning">Trip planner</string>
+    <string name="route_desc">percorso Descrizione</string>
+    <string name="show_map">Visualizza mappa</string>
+    <string name="minutes">verbale</string>
+    <string name="add_to_route">Aggiungi all\'itinerario</string>
+    <string name="destination">destinazione</string>
+    <string name="no_route">Non ci sono tappe lungo il percorso , si prega di aggiungere alcuni waypoint alla rotta toccando panorama o edifici</string>
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
+    <string name="monument_landscape_msg">Swipe sinistra o destra per navigare tra gli edifici</string>
+    <string name="no_connection">Controlla la tua connessione wireless e riprovare .</string>
+
+    <string-array name="lstMenu">
+        <item>panorama</item>
+        <item>Edifici</item>
+        <item>Il mio percorso</item>
+
+        <item>4 ° piano</item>
+        <item>3 ° piano</item>
+        <item>secondo piano</item>
+        <item>primo piano</item>
+        <item>piano terra</item>
+    </string-array>
+
+    <string name="title_activity_monument_detail">dettaglio</string>
+    <string name="title_activity_route">Il mio percorso</string>
+    <string name="title_activity_map">mappa</string>
+    <string name="route">rotta</string>
+    <string name="title_activity_panorama">panorama</string>
+    <string name="title_activity_mapp">mappa</string>
+    <string name="title_activity_new_route">rotta</string>
+    <string name="unsupported">Questo dispositivo non è supportato perché manca un accelerometro o il sensore di campo magnetico necessario per determinare la vostra fotocamera \\ s angolo . </string>
+    <string name="calibrate">Assicurati che il tuo dispositivo \\ s bussola è calibrata .</string>
+    <string name="calibrate_title">taratura</string>
+    <string name="show_me_how">Mostrami come</string>
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Scegli la lingua</string>
+    <string name="title_activity_museum">museo</string>
+
+</resources>
+

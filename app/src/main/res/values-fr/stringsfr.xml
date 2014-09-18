@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BelfortApp</string>
+    <string name="action_settings">paramètres</string>
+    <string name="lang">langue</string>
+    <string name="dutch">néerlandais</string>
+    <string name="french">français</string>
+    <string name="english">anglais</string>
+    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_base">Belfort</string>
+    <string name="title_activity_main">menu principal</string>
+    <string name="settings">paramètres</string>
+    <string name="about">À propos de Artoria</string>
+    <string name="artoria_url">http://www.artoria.be</string>
+    <string name="calcRoute">calculer l\'itinéraire</string>
+    <string name="view_route">mon parcours</string>
+    <string name="added_to_route">Ajouté à mon itinéraire</string>
+    <string name="route_planning">planificateur de voyage</string>
+    <string name="route_desc">itinéraire</string>
+    <string name="show_map">Voir la carte</string>
+    <string name="minutes">procès-verbal</string>
+    <string name="add_to_route">Ajouter à l\'itinéraire</string>
+    <string name="destination">destination</string>
+    <string name="no_route">Il n\'y a pas de points sur votre itinéraire , s\'il vous plaît ajouter quelques points à votre itinéraire en appuyant panorama ou bâtiments</string>
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
+    <string name="monument_landscape_msg">Balayez vers la gauche ou la droite pour naviguer entre les bâtiments</string>
+    <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau .</string>
+
+    <string-array name="lstMenu">
+        <item>panorama</item>
+        <item>bâtiments</item>
+        <item>mon parcours</item>
+
+        <item>4ème étage</item>
+        <item>3ème étage</item>
+        <item>deuxième étage</item>
+        <item>premier étage</item>
+        <item>Rez de chaussée</item>
+    </string-array>
+
+    <string name="title_activity_monument_detail">détail</string>
+    <string name="title_activity_route">mon parcours</string>
+    <string name="title_activity_map">carte</string>
+    <string name="route">route</string>
+    <string name="title_activity_panorama">panorama</string>
+    <string name="title_activity_mapp">carte</string>
+    <string name="title_activity_new_route">route</string>
+    <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un accéléromètre ou un capteur de champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo \\ . </string>
+    <string name="calibrate">S\'il vous plaît assurez la boussole de votre appareil \\ est calibré .</string>
+    <string name="calibrate_title">étalonnage</string>
+    <string name="show_me_how">Montrez-moi comment</string>
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Choisissez votre langue</string>
+    <string name="title_activity_museum">musée</string>
+
+</resources>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BelfortApp</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="lang">Idioma</string>
+    <string name="dutch">Holandés</string>
+    <string name="french">francés</string>
+    <string name="english">Inglés</string>
+    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_base">Belfort</string>
+    <string name="title_activity_main">menú Principal</string>
+    <string name="settings">Ajustes</string>
+    <string name="about">Acerca Artoria</string>
+    <string name="artoria_url">http://www.artoria.be</string>
+    <string name="calcRoute">calcular ruta</string>
+    <string name="view_route">Mi ruta</string>
+    <string name="added_to_route">Añadido a mi ruta</string>
+    <string name="route_planning">planificador de viajes</string>
+    <string name="route_desc">Descripción de la ruta</string>
+    <string name="show_map">Ver mapa</string>
+    <string name="minutes">minutos</string>
+    <string name="add_to_route">Añadir a la ruta</string>
+    <string name="destination">destino</string>
+    <string name="no_route">No hay puntos de referencia en su ruta , por favor, añadir algunos puntos a su ruta tocando panorama o edificios</string>
+    <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
+    <string name="monument_landscape_msg">Pase a la izquierda oa la derecha para navegar entre los edificios</string>
+    <string name="no_connection">Por favor, compruebe su conexión inalámbrica y vuelva a intentarlo .</string>
+
+    <string-array name="lstMenu">
+        <item>Panorama</item>
+        <item>Edificios</item>
+        <item>Mi ruta</item>
+
+        <item>4 º piso</item>
+        <item>3 ª planta</item>
+        <item>Segunda planta</item>
+        <item>primera planta</item>
+        <item>planta baja</item>
+    </string-array>
+
+    <string name="title_activity_monument_detail">Detalle</string>
+    <string name="title_activity_route">Mi ruta</string>
+    <string name="title_activity_map">Mapa</string>
+    <string name="route">Ruta</string>
+    <string name="title_activity_panorama">Panorama</string>
+    <string name="title_activity_mapp">Mapa</string>
+    <string name="title_activity_new_route">Ruta</string>
+    <string name="unsupported">Este dispositivo no es compatible , ya que carece de un acelerómetro o sensor de campo magnético necesario para determinar el ángulo de la cámara \\ s . </string>
+    <string name="calibrate">Por favor, asegúrese de que su dispositivo \\ s brújula está calibrada.</string>
+    <string name="calibrate_title">calibración</string>
+    <string name="show_me_how">Muéstrame cómo</string>
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    <string name="lang_choice">Elija su idioma</string>
+    <string name="title_activity_museum">Museo</string>
+
+</resources>
+
