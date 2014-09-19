@@ -2,6 +2,7 @@ import urllib.request
 import urllib.parse
 import re
 
+
 def translate(text, source='en', destination='nl'):
     link = 'http://translate.google.com/translate_a/'
     escaped_text = urllib.parse.quote(text, encoding='utf-8')
@@ -23,6 +24,7 @@ def translate(text, source='en', destination='nl'):
 
     return response
 
+
 def get_list_to_translate():
     words_to_translate = []
     strings_file = open("strings.xml", mode='r', encoding='utf-8')
@@ -35,13 +37,14 @@ def get_list_to_translate():
     for line in lines:
         for pattern in [string_pattern, item_pattern]:
             match = pattern.search(line)
-            if match:                
+            if match:
                 words_to_translate.append([match.group(1), match.group(2)])
                 break
         else:
             words_to_translate.append([None, line])
 
     return words_to_translate
+
 
 def translate_and_write_file(tuples_to_translate, lang):
     indent = '    '
@@ -52,7 +55,7 @@ def translate_and_write_file(tuples_to_translate, lang):
         if not name:
             out_file.write(val + '\n')
             continue
-        translation = translate(val.replace("'",""),
+        translation = translate(val.replace("'", ""),
                                 source='en',
                                 destination=lang)
         if name == 'item':
@@ -62,8 +65,9 @@ def translate_and_write_file(tuples_to_translate, lang):
             out_string = string_format.format(space=indent,
                                               name=name,
                                               tr=translation)
-        out_file.write(out_string.replace("'","\\'"))
+        out_file.write(out_string.replace("'", "\\'"))
     out_file.close()
+
 
 if __name__ == "__main__":
     TUPLES = get_list_to_translate()

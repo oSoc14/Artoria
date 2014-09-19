@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
+import be.artoria.belfortapp.app.NavigationCircles;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends BaseActivity {
@@ -34,6 +35,7 @@ public class MuseumActivity extends BaseActivity {
     private Floor currentFloor;
     private ImageView imgCnt;
     private ProgressBar prgWait;
+    private NavigationCircles circles;
     private int currentImage = 0;
     private Handler handler;
     private boolean runSlideshow = true;
@@ -70,6 +72,10 @@ public class MuseumActivity extends BaseActivity {
 
         handler = new Handler();
         handler.postDelayed(imageSwitcher,0);
+
+        /* Adding the circles, circle representing current item is empty */
+        circles = (NavigationCircles) findViewById(R.id.circles);
+        circles.setNumberOfCircles(currentFloor.images.length);
     }
 
     private Runnable imageSwitcher = new Runnable() {
@@ -98,6 +104,7 @@ public class MuseumActivity extends BaseActivity {
                 imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
             }
         });
+        circles.setSelectedCircle((currentImage +1) % currentFloor.images.length);
     }
 
     private void setLoading(){
