@@ -17,10 +17,9 @@ import be.artoria.belfortapp.R;
  * TODO: document your custom view class.
  */
 public class NavigationCircles extends View {
-    private int selected_color = R.color.color1;
-    private int regular_color = R.color.color2;
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
-    private Drawable mExampleDrawable;
+    private int selected_color = R.color.color2;
+    private int regular_color = R.color.color1;
+    private float mExampleDimension = R.dimen.font_size_about;
     private ShapeDrawable circles[];
     private int selected = 0;
     private int numberOfCircles = 1;
@@ -56,10 +55,11 @@ public class NavigationCircles extends View {
                 mExampleDimension);
 
         a.recycle();
+        setBackgroundColor(0x00000000);
 
     }
-    int paddingLeft = getPaddingLeft();
-    int paddingTop = getPaddingTop();
+    int paddingLeft = getLeftPaddingOffset();
+    int paddingTop = getTopPaddingOffset();
     int paddingRight = getPaddingRight();
     int paddingBottom = getPaddingBottom();
     @Override
@@ -77,6 +77,10 @@ public class NavigationCircles extends View {
                 canvas.drawColor(this.regular_color);
             }
 
+            int paddingLeft = this.paddingLeft + i*single_width + i*PADDING;
+            circles[i].setBounds(paddingLeft, paddingTop,
+                    paddingLeft + single_width, paddingTop + HEIGHT);
+
             circles[i].draw(canvas);
         }
 
@@ -92,6 +96,7 @@ public class NavigationCircles extends View {
 
     public void setSelectedCircle(int selected){
         this.selected = selected;
+        refreshCircles();
     }
 
 
@@ -110,5 +115,6 @@ public class NavigationCircles extends View {
             circles[i].setBounds(paddingLeft, paddingTop,
                     paddingLeft + single_width, paddingTop + HEIGHT);
         }
+        invalidate();
     }
 }
