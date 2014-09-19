@@ -55,12 +55,6 @@ public class NavigationCircles extends View {
                 R.styleable.NavigationCircles_exampleDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.NavigationCircles_exampleDrawable)) {
-            mExampleDrawable = a.getDrawable(
-                    R.styleable.NavigationCircles_exampleDrawable);
-            mExampleDrawable.setCallback(this);
-        }
-
         a.recycle();
 
     }
