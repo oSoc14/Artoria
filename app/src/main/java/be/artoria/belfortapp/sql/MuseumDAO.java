@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.artoria.belfortapp.app.Floor;
+import be.artoria.belfortapp.app.FloorExhibit;
 
 
 /**
@@ -21,7 +22,7 @@ public class MuseumDAO {
     private final MuseumDbHelper dbHelper;
     private static final String[] allColumns = {
             MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR,
-            MuseumContract.MuseumEntry.COLUMN_NAME_IMAGES,
+            MuseumContract.MuseumEntry.COLUMN_NAME_IMAGE,
 
             MuseumContract.MuseumEntry.COLUMN_NAME_NL_NAME,
             MuseumContract.MuseumEntry.COLUMN_NAME_NL_DESC,
@@ -57,10 +58,10 @@ public class MuseumDAO {
         dbHelper.close();
     }
 
-    public Floor saveFloor(Floor floor) {
+    public FloorExhibit saveFloorExhibit(FloorExhibit floor) {
         final ContentValues values = new ContentValues();
         values.put(MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR,floor.floor);
-        values.put(MuseumContract.MuseumEntry.COLUMN_NAME_IMAGES,getImagesAsCSV(floor.images));
+        values.put(MuseumContract.MuseumEntry.COLUMN_NAME_IMAGE,floor.image);
 
         values.put(MuseumContract.MuseumEntry.COLUMN_NAME_NL_NAME,floor.NL_name);
         values.put(MuseumContract.MuseumEntry.COLUMN_NAME_NL_DESC,floor.NL_desc);
@@ -87,21 +88,6 @@ public class MuseumDAO {
                 values);
 
         return floor;
-    }
-
-    private String getImagesAsCSV(String[] images){
-        if(images.length > 0) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < images.length; i++) {
-                sb.append(images[i]);
-                sb.append(",");
-            }
-            String toReturn = sb.toString();
-            toReturn = toReturn.substring(0, toReturn.length() - 1);
-            return toReturn;
-        }else{
-            return "";
-        }
     }
 
     public final static String strSeparator = "__,__";
@@ -131,8 +117,16 @@ public class MuseumDAO {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            final Floor floor = cursorToFloor(cursor);
-            floors.add(floor);
+            final FloorExhibit floorExhibit = cursorToFloorExhibit(cursor);
+            final int floor = floorExhibit.floor;
+            if(floor >= floors.size()){
+                int highestFloor = floors.size() -1;
+                while( highestFloor < floor){
+                    floors.add(new Floor(highestFloor));
+                    highestFloor++;
+                }
+            }
+            floors.get(floor).exhibits.add(floorExhibit);
             cursor.moveToNext();
         }
         // make sure to close the cursor
@@ -140,11 +134,11 @@ public class MuseumDAO {
         return floors;
     }
 
-    private Floor cursorToFloor(Cursor cursor) {
+    private FloorExhibit cursorToFloorExhibit(Cursor cursor) {
         if(cursor == null ) return null;
-        Floor floor = new Floor();
+        final FloorExhibit floor = new FloorExhibit();
         floor.floor = cursor.getInt(cursor.getColumnIndex(MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR));
-        floor.images = cursor.getString(cursor.getColumnIndex(MuseumContract.MuseumEntry.COLUMN_NAME_IMAGES)).split(",");
+        floor.image = cursor.getString(cursor.getColumnIndex(MuseumContract.MuseumEntry.COLUMN_NAME_IMAGE));
 
         floor.NL_name = cursor.getString(cursor.getColumnIndex(MuseumContract.MuseumEntry.COLUMN_NAME_NL_NAME));
         floor.NL_desc = cursor.getString(cursor.getColumnIndex(MuseumContract.MuseumEntry.COLUMN_NAME_NL_DESC));

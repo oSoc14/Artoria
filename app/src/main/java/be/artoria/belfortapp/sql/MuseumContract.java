@@ -14,7 +14,7 @@ public class MuseumContract {
     public static abstract class MuseumEntry implements BaseColumns {
         public static final String TABLE_NAME = "floor";
         public static final String COLUMN_NAME_FLOOR = "floor";
-        public static final String COLUMN_NAME_IMAGES = "images";
+        public static final String COLUMN_NAME_IMAGE = "image";
 
         public static final String COLUMN_NAME_NL_NAME = "NL_name";
         public static final String COLUMN_NAME_NL_DESC = "NL_desc";
