@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
+import be.artoria.belfortapp.app.FloorExhibit;
 import be.artoria.belfortapp.app.NavigationCircles;
 import be.artoria.belfortapp.app.PrefUtils;
 
@@ -36,7 +37,8 @@ public class MuseumActivity extends BaseActivity {
     private ImageView imgCnt;
     private ProgressBar prgWait;
     private NavigationCircles circles;
-    private int currentImage = 0;
+    private FloorExhibit currentexhbit = null;
+    private int indexOfExhibit = 0;
     private Handler handler;
     private boolean runSlideshow = true;
 
@@ -58,9 +60,10 @@ public class MuseumActivity extends BaseActivity {
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
         currentFloor = DataManager.getFloorList().get(floor);
-        setTitle(currentFloor.getName());
+        currentexhbit = currentFloor.exhibits.get(indexOfExhibit);
+        setTitle(currentexhbit.getName());
 
-        txtContent.setText(currentFloor.getDescription());
+        txtContent.setText(currentexhbit.getDescription());
 
         imgCnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +78,7 @@ public class MuseumActivity extends BaseActivity {
 
         /* Adding the circles, circle representing current item is empty */
         circles = (NavigationCircles) findViewById(R.id.circles);
-        circles.setNumberOfCircles(currentFloor.images.length);
+        circles.setNumberOfCircles(currentFloor.exhibits.size());
     }
 
     private Runnable imageSwitcher = new Runnable() {
@@ -90,11 +93,11 @@ public class MuseumActivity extends BaseActivity {
 
     private void nextImage(){
         setLoading();
-        Picasso.with(PrefUtils.getContext()).load(currentFloor.images[currentImage]).into(imgCnt,new Callback(){
+        Picasso.with(PrefUtils.getContext()).load(currentexhbit.image).into(imgCnt, new Callback() {
             @Override
             public void onSuccess() {
                 setDoneLoading();
-                currentImage = (currentImage +1) % currentFloor.images.length;
+                indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
             }
 
             @Override
@@ -104,7 +107,7 @@ public class MuseumActivity extends BaseActivity {
                 imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
             }
         });
-        circles.setSelectedCircle((currentImage +1) % currentFloor.images.length);
+        circles.setSelectedCircle((indexOfExhibit +1) % currentFloor.exhibits.size());
     }
 
     private void setLoading(){
