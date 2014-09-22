@@ -104,6 +104,20 @@ public class MuseumDAO {
         }
     }
 
+    public final static String strSeparator = "__,__";
+
+    private String saveStringArray(String[] toSave){
+        if(toSave.length == 0) return "";
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < toSave.length; i++) {
+            sb.append(toSave[i]);
+            sb.append(strSeparator);
+        }
+        return sb.toString();
+    }
+
+
     public void clearTable(){
         database.execSQL(MuseumDbHelper.SQL_DELETE_ENTRIES);
         database.execSQL(MuseumDbHelper.SQL_CREATE_ENTRIES);

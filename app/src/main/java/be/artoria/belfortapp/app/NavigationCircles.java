@@ -47,6 +47,7 @@ public class NavigationCircles extends View {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.NavigationCircles, defStyle, 0);
+        
 
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
