@@ -13,7 +13,7 @@ public class MuseumDbHelper extends SQLiteOpenHelper{
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + MuseumContract.MuseumEntry.TABLE_NAME + " (" +
                     MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR + " INTEGER PRIMARY KEY" + COMMA_SEP +
-                    MuseumContract.MuseumEntry.COLUMN_NAME_IMAGES + TEXT_TYPE + COMMA_SEP +
+                    MuseumContract.MuseumEntry.COLUMN_NAME_IMAGE + TEXT_TYPE + COMMA_SEP +
 
                     MuseumContract.MuseumEntry.COLUMN_NAME_NL_NAME + TEXT_TYPE + COMMA_SEP +
                     MuseumContract.MuseumEntry.COLUMN_NAME_NL_DESC + TEXT_TYPE + COMMA_SEP +
