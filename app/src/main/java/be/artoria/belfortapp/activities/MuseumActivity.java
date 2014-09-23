@@ -65,20 +65,20 @@ public class MuseumActivity extends BaseActivity {
 
         txtContent.setText(currentexhbit.getDescription());
 
-        imgCnt.setOnClickListener(new View.OnClickListener() {
+        /*imgCnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 runSlideshow = false;
                 nextImage();
             }
-        });
+        }); */
 
-        handler = new Handler();
-        handler.postDelayed(imageSwitcher,0);
+        //handler = new Handler();
+        //handler.postDelayed(imageSwitcher,0);
 
         /* Adding the circles, circle representing current item is empty */
-        circles = (NavigationCircles) findViewById(R.id.circles);
-        circles.setNumberOfCircles(currentFloor.exhibits.size());
+        //circles = (NavigationCircles) findViewById(R.id.circles);
+        //circles.setNumberOfCircles(currentFloor.exhibits.size());
     }
 
     private Runnable imageSwitcher = new Runnable() {
@@ -107,7 +107,7 @@ public class MuseumActivity extends BaseActivity {
                 imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
             }
         });
-        circles.setSelectedCircle((indexOfExhibit +1) % currentFloor.exhibits.size());
+        circles.setSelectedCircle((indexOfExhibit + 1) % currentFloor.exhibits.size());
     }
 
     private void setLoading(){
