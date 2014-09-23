@@ -9,10 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MuseumDbHelper extends SQLiteOpenHelper{
     private static final String TEXT_TYPE = " TEXT";
+    private static final String INT_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + MuseumContract.MuseumEntry.TABLE_NAME + " (" +
-                    MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                    MuseumContract.MuseumEntry.COLUMN_NAME_FLOOR + INT_TYPE + COMMA_SEP +
                     MuseumContract.MuseumEntry.COLUMN_NAME_IMAGE + TEXT_TYPE + COMMA_SEP +
 
                     MuseumContract.MuseumEntry.COLUMN_NAME_NL_NAME + TEXT_TYPE + COMMA_SEP +
@@ -41,7 +42,7 @@ public class MuseumDbHelper extends SQLiteOpenHelper{
             "DROP TABLE IF EXISTS " + MuseumContract.MuseumEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "Museum.db";
 
     public MuseumDbHelper(Context context) {

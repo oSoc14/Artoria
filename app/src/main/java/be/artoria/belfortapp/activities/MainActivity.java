@@ -60,6 +60,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private static boolean downloading = false;
+    private static boolean downloadingMuseum = false;
 
     public static void downloadData() {
         if(SupportManager.haveNetworkConnection()) {
@@ -67,9 +68,14 @@ public class MainActivity extends BaseActivity {
             final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
             /* Either there is no last download ( case == 0)
             *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
-            if ((lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6) && !downloading) {
+            if (lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6 && !downloading ) {
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
+            }
+            final long lastMuseumDownload = PrefUtils.getTimeStampMuseumDownload();
+            final long timeSinceLastMuseumDownload = System.currentTimeMillis() - lastDownload;
+            if (lastMuseumDownload == 0 || timeSinceLastMuseumDownload > 1000 * 60 * 60 * 6 && ! downloadingMuseum) {
+                Log.i(PrefUtils.TAG, "Started museum download in the background");
                 new DownloadMuseumData().execute(PrefUtils.MUSEUM_URL);
             }
         }
@@ -188,7 +194,7 @@ public class MainActivity extends BaseActivity {
 
     private void startMuseumView(int floor){
         if(SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()){
-            startActivity(MuseumActivity.createIntent(MainActivity.this,1));
+            startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
         }
     }
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
@@ -246,7 +252,7 @@ public class MainActivity extends BaseActivity {
     private static class DownloadMuseumData extends AsyncTask<String, Void, String>{
         @Override
         protected String doInBackground(String... urls) {
-            downloading = true;
+            downloadingMuseum = true;
             StringBuilder response = new StringBuilder();
             for (String url : urls) {
                 final DefaultHttpClient client = new DefaultHttpClient();
@@ -271,21 +277,23 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
-            final List<Floor> list = gson.fromJson(result, new TypeToken<List<Floor>>(){}.getType());
-            downloading = false;
+            final List<FloorExhibit> list = gson.fromJson(result, new TypeToken<List<FloorExhibit>>(){}.getType());
+            downloadingMuseum = false;
+            System.out.println("size = " +list.size());
             if(list == null || list.isEmpty()){
                 Log.e(PrefUtils.TAG ,"Downloading failed");
             }
             else {
-                PrefUtils.saveTimeStampDownloads();
+                PrefUtils.saveTimeStampMuseumDownloads();
                 DataManager.clearFloors();
-                DataManager.setFloors(list);
+                DataManager.setFloors(exhibitsToFloors(list));
+
                 try {
                     DataManager.museumDAO.open();
-                    for(Floor floor : list) {
-                        for (FloorExhibit exhibit : floor.exhibits){
-                            DataManager.museumDAO.saveFloorExhibit(exhibit);
-                    }
+                    System.out.println("started saving to DB");
+                    for(FloorExhibit exhibit : list) {
+                        DataManager.museumDAO.saveFloorExhibit(exhibit);
+                        System.out.println("saved " + exhibit.getName());
                     }
                     DataManager.museumDAO.close();
                 } catch (SQLException e) {
@@ -293,6 +301,21 @@ public class MainActivity extends BaseActivity {
                 }
 
             }
+        }
+
+        private List<Floor> exhibitsToFloors(List<FloorExhibit> list) {
+            final List<Floor> result = new ArrayList<Floor>();
+            for(final FloorExhibit exhibit : list){
+                // This exhibit is on a floor higher than the current highest floor.
+                int highestFloor =  result.size() - 1;
+                if(exhibit.floor > highestFloor){
+                    // Deal with it.
+                    while(exhibit.floor > highestFloor )
+                        result.add(new Floor(highestFloor++));
+                }
+                result.get(exhibit.floor).exhibits.add(exhibit);
+            }
+            return result;
         }
     }
 

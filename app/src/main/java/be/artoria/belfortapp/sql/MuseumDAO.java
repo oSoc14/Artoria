@@ -118,6 +118,7 @@ public class MuseumDAO {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             final FloorExhibit floorExhibit = cursorToFloorExhibit(cursor);
+            System.out.println(floorExhibit.floor);
             final int floor = floorExhibit.floor;
             if(floor >= floors.size()){
                 int highestFloor = floors.size() - 1;
@@ -126,7 +127,7 @@ public class MuseumDAO {
                     highestFloor++;
                 }
             }
-            floors.get(floor).ehibits.add(floorExhibit);
+            floors.get(floor).exhibits.add(floorExhibit);
             cursor.moveToNext();
         }
         // make sure to close the cursor

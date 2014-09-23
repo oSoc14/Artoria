@@ -26,6 +26,7 @@ public class PrefUtils {
 
     private static final String ARG_USER_KEY = "be.artoria.belfort";
     private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
+    private static final String ARG_MUSEUM_DOWNLOAD = "be.artoria.belfort.museum_download_time";
     private static final String ARG_FIRS_TTIME = "be.artoria.belfort.firstTime";
     private static final String ARG_ROUTE = "be.artoria.belfort.route";
     private static final String ARG_LANG = "be.artoria.belfort.lang";
@@ -67,6 +68,17 @@ public class PrefUtils {
         return getPrefs().getLong(ARG_DOWNLOAD, 0);
     }
 
+    public static long getTimeStampMuseumDownload() {
+        return getPrefs().getLong(ARG_MUSEUM_DOWNLOAD, 0);
+    }
+
+    public static void saveTimeStampMuseumDownloads()
+    {
+        getPrefs()
+                .edit()
+                .putLong(ARG_DOWNLOAD, System.currentTimeMillis())
+                .apply();
+    }
     public static void removeAll()
     {
         getPrefs().edit().clear().apply();
@@ -93,7 +105,6 @@ public class PrefUtils {
         enumMap.put("it",DataManager.Language.ITALIAN);
         enumMap.put("ru",DataManager.Language.RUSSIAN);
     }
-
 
     public static DataManager.Language getLanguage() {
         final Locale locale = getContext().getResources().getConfiguration().locale;
@@ -175,5 +186,6 @@ public class PrefUtils {
     public static boolean isFirstPanoramaTime() {
         return getPrefs().getBoolean(ARG_FIRS_PANORAMA_TIME, true);
     }
+
 
 }

@@ -45,7 +45,7 @@ public class NavigationCircles extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
+       /* final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.NavigationCircles, defStyle, 0);
         
 
@@ -55,7 +55,7 @@ public class NavigationCircles extends View {
                 R.styleable.NavigationCircles_exampleDimension,
                 mExampleDimension);
 
-        a.recycle();
+        a.recycle();*/
         setBackgroundColor(0x00000000);
 
     }
