@@ -7,11 +7,12 @@ import java.util.List;
  * Created by Laurens on 22/09/2014.
  */
 public class Floor {
-    public List<FloorExhibit> exhibits;
-    public int floor;
+    public List<FloorExhibit> exhibits = new ArrayList<FloorExhibit>(5);
+    public int floor = 0;
+
+    public Floor(){}
 
     public Floor(int floor){
         this.floor = floor;
-        exhibits = new ArrayList<FloorExhibit>(5);
     }
 }
