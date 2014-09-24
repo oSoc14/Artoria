@@ -45,17 +45,17 @@ public class MuseumActivity extends BaseActivity {
     }
 
     private void initGui(){
-
+        /* Initialize the current floor */
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
-
         currentFloor = DataManager.getFloorList().get(floor);
-
-        txtContent = (TextView)findViewById(R.id.txtContent);
-        txtContent.setMovementMethod(new ScrollingMovementMethod());
 
         imgCnt = (ImageView)findViewById(R.id.imgContent);
         prgWait = (ProgressBar)findViewById(R.id.prgWait);
+        txtContent = (TextView)findViewById(R.id.txtContent);
+
+        /* Make the text scrollable */
+        txtContent.setMovementMethod(new ScrollingMovementMethod());
 
         /*Add gesture listener so we can swipe left and right between POI's*/
         gDetect = new GestureDetectorCompat(this,new GestureListener());
@@ -63,21 +63,20 @@ public class MuseumActivity extends BaseActivity {
         setContent();
     }
 
-
-    private void nextImage(){
+    /**
+     *
+     * @param direction -1 for previous, 1 for the next image
+     */
+    private void changeImage(int direction){
         setLoading();
-        indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
+        indexOfExhibit = (indexOfExhibit + direction) % currentFloor.exhibits.size();
         setContent();
         setDoneLoading();
     }
 
-    private void prevImage(){
-        setLoading();
-        indexOfExhibit = (indexOfExhibit - 1) % currentFloor.exhibits.size();
-        setContent();
-        setDoneLoading();
-    }
-
+    /**
+     * Updates this museumActivity to use the current exhibit
+     */
     private void setContent() {
         currentExhibit = currentFloor.exhibits.get(indexOfExhibit);
 
@@ -114,9 +113,9 @@ public class MuseumActivity extends BaseActivity {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float horizontalDiff = e2.getX() - e1.getX();
             if(horizontalDiff > 0){
-                prevImage();
+                changeImage(-1);
             }else {
-                nextImage();
+                changeImage(1);
             }
             return super.onFling(e1, e2, velocityX, velocityY);
         }
