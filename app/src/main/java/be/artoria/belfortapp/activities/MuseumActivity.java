@@ -2,112 +2,89 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
 import android.text.method.ScrollingMovementMethod;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
-import be.artoria.belfortapp.app.NavigationCircles;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
-    public static final long IMAGE_SWITCH_TIME = 5000;
     private Floor currentFloor;
     private ImageView imgCnt;
     private ProgressBar prgWait;
-    private NavigationCircles circles;
-    private FloorExhibit currentexhbit = null;
+    private TextView txtContent;
+    private FloorExhibit currentExhibit = null;
     private int indexOfExhibit = 0;
-    private Handler handler;
-    private boolean runSlideshow = true;
+    private GestureDetectorCompat gDetect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_museum);
+
         initGui();
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gDetect.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
     private void initGui(){
-        TextView txtContent = (TextView)findViewById(R.id.txtContent);
-        txtContent.setMovementMethod(new ScrollingMovementMethod());
-        imgCnt = (ImageView)findViewById(R.id.imgContent);
-
-        prgWait = (ProgressBar)findViewById(R.id.prgWait);
-
 
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
+
         currentFloor = DataManager.getFloorList().get(floor);
-        currentexhbit = currentFloor.exhibits.get(indexOfExhibit);
-        setTitle(currentexhbit.getName());
+        currentExhibit = currentFloor.exhibits.get(indexOfExhibit);
 
-        txtContent.setText(currentexhbit.getDescription());
+        txtContent = (TextView)findViewById(R.id.txtContent);
+        txtContent.setMovementMethod(new ScrollingMovementMethod());
 
-        /*imgCnt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runSlideshow = false;
-                nextImage();
-            }
-        }); */
+        imgCnt = (ImageView)findViewById(R.id.imgContent);
+        prgWait = (ProgressBar)findViewById(R.id.prgWait);
 
-        //handler = new Handler();
-        //handler.postDelayed(imageSwitcher,0);
+        /*Add gesture listener so we can swipe left and right between POI's*/
+        gDetect = new GestureDetectorCompat(this,new GestureListener());
 
-        /* Adding the circles, circle representing current item is empty */
-        //circles = (NavigationCircles) findViewById(R.id.circles);
-        //circles.setNumberOfCircles(currentFloor.exhibits.size());
+        setContent();
     }
 
-    private Runnable imageSwitcher = new Runnable() {
-        @Override
-        public void run() {
-            if(runSlideshow) {
-                nextImage();
-                handler.postDelayed(this, IMAGE_SWITCH_TIME);
-            }
-        }
-    };
 
     private void nextImage(){
         setLoading();
-        Picasso.with(PrefUtils.getContext()).load(currentexhbit.image).into(imgCnt, new Callback() {
-            @Override
-            public void onSuccess() {
-                setDoneLoading();
-                indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
-            }
+        indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
+        setContent();
+        setDoneLoading();
+    }
 
-            @Override
-            public void onError() {
-                setDoneLoading();
-                System.err.println("Failed loading image ...");
-                imgCnt.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
-            }
-        });
-        circles.setSelectedCircle((indexOfExhibit + 1) % currentFloor.exhibits.size());
+    private void prevImage(){
+        setLoading();
+        indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
+        setContent();
+        setDoneLoading();
+    }
+
+    private void setContent() {
+        setTitle(currentExhibit.getName());
+
+        txtContent.setText(currentExhibit.getDescription());
+
+        Picasso.with(PrefUtils.getContext()).load(currentExhibit.image).into(imgCnt);
     }
 
     private void setLoading(){
@@ -124,5 +101,23 @@ public class MuseumActivity extends BaseActivity {
         Intent i = new Intent(ctx,MuseumActivity.class);
         i.putExtra(ARG_FLOOR,floor);
         return i;
+    }
+
+    public class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            float horizontalDiff = e2.getX() - e1.getX();
+            if(horizontalDiff > 0){
+                prevImage();
+            }else {
+                nextImage();
+            }
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
     }
 }
