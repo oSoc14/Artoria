@@ -50,7 +50,6 @@ public class MuseumActivity extends BaseActivity {
         int floor = i.getIntExtra(ARG_FLOOR,0);
 
         currentFloor = DataManager.getFloorList().get(floor);
-        currentExhibit = currentFloor.exhibits.get(indexOfExhibit);
 
         txtContent = (TextView)findViewById(R.id.txtContent);
         txtContent.setMovementMethod(new ScrollingMovementMethod());
@@ -74,12 +73,14 @@ public class MuseumActivity extends BaseActivity {
 
     private void prevImage(){
         setLoading();
-        indexOfExhibit = (indexOfExhibit + 1) % currentFloor.exhibits.size();
+        indexOfExhibit = (indexOfExhibit - 1) % currentFloor.exhibits.size();
         setContent();
         setDoneLoading();
     }
 
     private void setContent() {
+        currentExhibit = currentFloor.exhibits.get(indexOfExhibit);
+
         setTitle(currentExhibit.getName());
 
         txtContent.setText(currentExhibit.getDescription());
@@ -103,7 +104,7 @@ public class MuseumActivity extends BaseActivity {
         return i;
     }
 
-    public class GestureListener extends GestureDetector.SimpleOnGestureListener {
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDown(MotionEvent e) {
             return true;
