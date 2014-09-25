@@ -22,9 +22,9 @@
     <string name="minutes">Protokoll</string>
     <string name="add_to_route">Zu Route hinzufügen</string>
     <string name="destination">Ziel</string>
-    <string name="no_route">Es sind keine Wegpunkte auf Ihrer Route , fügen Sie bitte einige Wegpunkte zu Ihrer Route durch Antippen Panorama oder Gebäude</string>
+    <string name="no_route">Es gibt keine Wegpunkte auf Ihrer Route , fügen Sie bitte einige Wegpunkte zu Ihrer Route durch Antippen Panorama oder Gebäude</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
-    <string name="monument_landscape_msg">Streichen Sie nach links oder rechts, um zwischen den Gebäuden navigieren</string>
+    <string name="monument_landscape_msg">Streichen Sie nach links oder rechts, zu zwischen den Gebäuden navigieren</string>
     <string name="no_connection">Bitte überprüfen Sie Ihre WLAN-Verbindung und versuchen Sie es erneut .</string>
 
     <string-array name="lstMenu">
@@ -46,7 +46,7 @@
     <string name="title_activity_panorama">Panorama</string>
     <string name="title_activity_mapp">Karte</string>
     <string name="title_activity_new_route">Route</string>
-    <string name="unsupported">Dieses Gerät wird nicht unterstützt, da es einen Beschleunigungsmesser oder Magnetfeldsensor benötigt, um Ihre Kamera \\ s Winkel zu bestimmen fehlt . </string>
+    <string name="unsupported">Dieses Gerät wird nicht unterstützt, da es einen Beschleunigungsmesser oder Magnetfeldsensor braucht, um Ihre Kamera \\ s Winkel zu bestimmen fehlt . </string>
     <string name="calibrate">Bitte stellen Sie sicher, dass Ihr Gerät \\ s Kompass kalibriert.</string>
     <string name="calibrate_title">Kalibrierung</string>
     <string name="show_me_how">Zeig mir, wie</string>
