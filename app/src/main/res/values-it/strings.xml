@@ -11,7 +11,7 @@
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Menù principale</string>
     <string name="settings">Impostazioni</string>
-    <string name="about">Che cos' è Artoria</string>
+    <string name="about">Che cos\' è Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
     <string name="calcRoute">Calcola percorso</string>
     <string name="view_route">Descrizione percorso</string>
@@ -20,7 +20,7 @@
     <string name="route_desc">percorso Descrizione</string>
     <string name="show_map">Visualizza mappa</string>
     <string name="minutes">verbale</string>
-    <string name="add_to_route">Aggiungi all 'itinerario</string>
+    <string name="add_to_route">Aggiungi all \'itinerario</string>
     <string name="destination">destinazione</string>
     <string name="no_route">Non ci sono tappe lungo il percorso , si prega di aggiungere alcuni waypoint alla rotta toccando panorama o edifici</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
