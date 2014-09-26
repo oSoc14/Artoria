@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-//import org.taptwo.android.widget.CircleFlowIndicator;
-
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
@@ -55,7 +53,6 @@ public class MuseumActivity extends BaseActivity {
         imgCnt = (ImageView)findViewById(R.id.imgContent);
         prgWait = (ProgressBar)findViewById(R.id.prgWait);
         txtContent = (TextView)findViewById(R.id.txtContent);
-        //CircleFlowIndicator indicator = (CircleFlowIndicator)findViewById(R.id.cfiMuseum);
 
         /* Make the text scrollable */
         txtContent.setMovementMethod(new ScrollingMovementMethod());

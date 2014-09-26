@@ -24,11 +24,6 @@
         android:id="@+id/circles"
         />        -->
 
-        <org.taptwo.android.widget.CircleFlowIndicator
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cfiMuseum"
-            />
 
     </RelativeLayout>
 
