@@ -70,6 +70,7 @@ public class MuseumActivity extends BaseActivity {
     private void changeImage(int direction){
         setLoading();
         indexOfExhibit = (indexOfExhibit + direction) % currentFloor.exhibits.size();
+        indexOfExhibit = indexOfExhibit == -1 ? currentFloor.exhibits.size() -1 : indexOfExhibit;
         setContent();
         setDoneLoading();
     }
