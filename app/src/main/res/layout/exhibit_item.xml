@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="be.artoria.belfortapp.activities.MuseumActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imgContent">
+        </ImageView>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:indeterminate="true"
+        android:gravity="center"
+        android:padding="0dp"
+        android:visibility="gone"
+        android:id="@+id/prgWait"/>
+
+    <TextView
+        android:id="@+id/txtContent"
+        android:scrollbars="vertical"
+        android:maxLines="120"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="60"/>
+
+</LinearLayout>
