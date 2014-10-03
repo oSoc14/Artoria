@@ -46,11 +46,14 @@ public class MuseumActivity extends BaseActivity {
 
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
         ExhibitAdapter adapter = new ExhibitAdapter(this,null,DataManager.getFloorList().get(floor).exhibits);
-        viewFlow.setAdapter(new ImageAdapter(this));
+        //viewFlow.setAdapter(new ImageAdapter(this));
+        viewFlow.setAdapter(adapter);
         CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         viewFlow.setFlowIndicator(indic);
         indic.setFillColor(Color.BLACK);
         indic.setStrokeColor(Color.BLACK);
+        indic.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        indic.setSoundEffectsEnabled(true);
     }
 
     @Override

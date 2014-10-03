@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,9 +30,6 @@ public class ExhibitAdapter extends BaseAdapter {
 
     public ExhibitAdapter(Context context, View convertView, List<FloorExhibit> exhibits) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if(convertView == null) {
-            this.convertView = mInflater.inflate(R.layout.exhibit_item, null);
-        }
         this.exhibits = exhibits;
     }
 
@@ -48,30 +46,41 @@ public class ExhibitAdapter extends BaseAdapter {
         return position;
     }
 
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.exhibit_item, null);
         }
-        getViews();
-        setContent(exhibits.get(position));
-        //((ImageView) convertView.findViewById(R.id.imgView)).setImageResource(ids[position]);
+        TextView txtContent =  ((TextView)convertView.findViewById(R.id.txtContent));
+        txtContent.setText(exhibits.get(position).getDescription());
+        txtContent.setMovementMethod(new ScrollingMovementMethod());
+
+        final ImageView imgCnt = (ImageView)convertView.findViewById(R.id.imgContent);
+        final ProgressBar prgWait = (ProgressBar)convertView.findViewById(R.id.prgWait);
+        setLoading(imgCnt,prgWait);
+       /* Picasso.with(PrefUtils.getContext()).load(exhibits.get(position).getImage()).into(imgCnt, new Callback() {
+            @Override
+            public void onSuccess() {
+                showImage(imgCnt,prgWait);
+                /*Image loaded*//*
+            }
+
+            @Override
+            public void onError() {
+                showImage(imgCnt,prgWait);
+                imgCnt.setImageDrawable(PrefUtils.getContext().getResources().getDrawable(R.drawable.img_not_found));
+            }
+        });*/
+
         return convertView;
     }
 
-    private void setContent(FloorExhibit currentExhibit){
-
-        txtContent.setText(currentExhibit.getDescription());
-        Picasso.with(PrefUtils.getContext()).load(currentExhibit.image).into(imgCnt);
+    private void setLoading(ImageView v, ProgressBar p){
+        v.setVisibility(View.GONE);
+        p.setVisibility(View.VISIBLE);
     }
 
-    private void getViews(){
-       /* Can't do this in the constructor :-( */
-        imgCnt = (ImageView)convertView.findViewById(R.id.imgContent);
-        prgWait = (ProgressBar)convertView.findViewById(R.id.prgWait);
-        txtContent = (TextView)convertView.findViewById(R.id.txtContent);
-        /* Make the text scrollable */
-        txtContent.setMovementMethod(new ScrollingMovementMethod());
+    private void showImage(ImageView v, ProgressBar p){
+        p.setVisibility(View.GONE);
+        v.setVisibility(View.VISIBLE);;
     }
-
 }

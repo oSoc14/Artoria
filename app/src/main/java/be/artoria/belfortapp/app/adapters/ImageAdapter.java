@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import be.artoria.belfortapp.R;
 
@@ -29,6 +30,8 @@ public class ImageAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private static final int[] ids = { R.drawable.cupcake, R.drawable.donut, R.drawable.eclair, R.drawable.froyo,
 			R.drawable.gingerbread, R.drawable.honeycomb, R.drawable.icecream };
+
+    private static final String[] TXT = {"one","two","three","four","five","six","seven"};
 
 	public ImageAdapter(Context context) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -55,6 +58,7 @@ public class ImageAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.image_item, null);
 		}
 		((ImageView) convertView.findViewById(R.id.imgView)).setImageResource(ids[position]);
+        ((TextView)convertView.findViewById(R.id.txtContent)).setText(TXT[position]);
 		return convertView;
 	}
 
