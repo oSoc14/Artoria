@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.app.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,9 @@ import be.artoria.belfortapp.app.PrefUtils;
 public class ExhibitAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ImageView imgCnt;
-    private ProgressBar prgWait;
-    private TextView txtContent;
-    private View convertView;
     private List<FloorExhibit> exhibits;
 
-    public ExhibitAdapter(Context context, View convertView, List<FloorExhibit> exhibits) {
+    public ExhibitAdapter(Context context, List<FloorExhibit> exhibits) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.exhibits = exhibits;
     }
@@ -50,26 +47,34 @@ public class ExhibitAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.exhibit_item, null);
         }
-        TextView txtContent =  ((TextView)convertView.findViewById(R.id.txtContent));
+        final TextView txtContent =  ((TextView)convertView.findViewById(R.id.txtContent));
         txtContent.setText(exhibits.get(position).getDescription());
         txtContent.setMovementMethod(new ScrollingMovementMethod());
 
         final ImageView imgCnt = (ImageView)convertView.findViewById(R.id.imgContent);
         final ProgressBar prgWait = (ProgressBar)convertView.findViewById(R.id.prgWait);
         setLoading(imgCnt,prgWait);
-       /* Picasso.with(PrefUtils.getContext()).load(exhibits.get(position).getImage()).into(imgCnt, new Callback() {
-            @Override
-            public void onSuccess() {
-                showImage(imgCnt,prgWait);
-                /*Image loaded*//*
-            }
 
-            @Override
-            public void onError() {
-                showImage(imgCnt,prgWait);
-                imgCnt.setImageDrawable(PrefUtils.getContext().getResources().getDrawable(R.drawable.img_not_found));
-            }
-        });*/
+        try {
+            Picasso.with(PrefUtils.getContext()).load(exhibits.get(position).getImage()).into(imgCnt, new Callback() {
+                @Override
+                public void onSuccess() {
+                    showImage(imgCnt, prgWait);
+                    System.out.println("image loaded ...");
+                /*Image loaded*/
+                }
+
+                @Override
+                public void onError() {
+                    setImageNotFound(imgCnt);
+                    showImage(imgCnt, prgWait);
+                }
+            });
+        }catch(Exception ex){
+            System.out.println(ex);
+            showImage(imgCnt,prgWait);
+            setImageNotFound(imgCnt);
+        }
 
         return convertView;
     }
@@ -82,5 +87,9 @@ public class ExhibitAdapter extends BaseAdapter {
     private void showImage(ImageView v, ProgressBar p){
         p.setVisibility(View.GONE);
         v.setVisibility(View.VISIBLE);;
+    }
+
+    private void setImageNotFound(ImageView img){
+        img.setImageDrawable(PrefUtils.getContext().getResources().getDrawable(R.drawable.img_not_found));
     }
 }
