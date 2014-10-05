@@ -152,20 +152,17 @@ public class MainActivity extends BaseActivity {
                         intent = new Intent(MainActivity.this,NewRouteActivity.class);
                         startActivity(intent);
                         break;
-                    //4th floor
-                    case 3: startMuseumView(4);
-                        break;
                     //3rd floor
-                    case 4: startMuseumView(3);
+                    case 3: startMuseumView(3);
                         break;
                     //2nd floor
-                    case 5: startMuseumView(2);
+                    case 4: startMuseumView(2);
                         break;
                     //1st floor
-                    case 6: startMuseumView(1);
+                    case 5: startMuseumView(1);
                         break;
                     //ground floor
-                    case 7: startMuseumView(0);
+                    case 6: startMuseumView(0);
                         break;
                 }
             }
