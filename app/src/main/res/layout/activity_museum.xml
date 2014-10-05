@@ -21,4 +21,10 @@
             android:id="@+id/viewflow">
             </be.artoria.belfortapp.viewflow.ViewFlow>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/imgPreload"/>
+
 </LinearLayout>

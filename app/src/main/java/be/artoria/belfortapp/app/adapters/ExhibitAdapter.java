@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
 import be.artoria.belfortapp.app.PrefUtils;
 
@@ -24,6 +26,10 @@ public class ExhibitAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<FloorExhibit> exhibits;
+    private static final int[] ids = { R.drawable.belfort3, R.drawable.lakenhalle,R.drawable.mammelokker,
+    R.drawable.belfort_feest,R.drawable.belfortbinnen032,R.drawable.belfortbinnen039,R.drawable.belfort,R.drawable.draak_enkel,
+    R.drawable.klokken_closeup,R.drawable.klokken,R.drawable.klokkenkamer,R.drawable.belfort2,R.drawable.trommel,
+    R.drawable.belfortbinnen147,R.drawable.img_not_found};
 
     public ExhibitAdapter(Context context, List<FloorExhibit> exhibits) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,49 +53,36 @@ public class ExhibitAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.exhibit_item, null);
         }
+        final TextView txtTitle = (TextView)convertView.findViewById(R.id.txtTitle);
+        txtTitle.setText(exhibits.get(position).getName());
+
         final TextView txtContent =  ((TextView)convertView.findViewById(R.id.txtContent));
         txtContent.setText(exhibits.get(position).getDescription());
         txtContent.setMovementMethod(new ScrollingMovementMethod());
 
         final ImageView imgCnt = (ImageView)convertView.findViewById(R.id.imgContent);
-        final ProgressBar prgWait = (ProgressBar)convertView.findViewById(R.id.prgWait);
-        setLoading(imgCnt,prgWait);
-
-        try {
-            Picasso.with(PrefUtils.getContext()).load(exhibits.get(position).getImage()).into(imgCnt, new Callback() {
-                @Override
-                public void onSuccess() {
-                    showImage(imgCnt, prgWait);
-                    System.out.println("image loaded ...");
-                /*Image loaded*/
-                }
-
-                @Override
-                public void onError() {
-                    setImageNotFound(imgCnt);
-                    showImage(imgCnt, prgWait);
-                }
-            });
-        }catch(Exception ex){
-            System.out.println(ex);
-            showImage(imgCnt,prgWait);
-            setImageNotFound(imgCnt);
-        }
+        imgCnt.setScaleType(ImageView.ScaleType.FIT_XY);
+        imgCnt.setImageResource(ids[getImageIndex(position)]);
 
         return convertView;
     }
 
-    private void setLoading(ImageView v, ProgressBar p){
-        v.setVisibility(View.GONE);
-        p.setVisibility(View.VISIBLE);
-    }
+   private int getImageIndex(int position){
+       if(!exhibits.isEmpty()){
+           int floor = exhibits.get(0).floor;
+           int toReturn = 0;
+           final List<Floor> floors = DataManager.getFloorList();
+           for(int i = 0; i < floor; i++){
+               toReturn += floors.get(i).exhibits.size();
+           }
+           toReturn += position;
+           if(toReturn < ids.length)
+                return toReturn;
+           else
+               return ids.length -1; /*invalid index, return not found */
+       }else{
+           return ids.length -1; /*last position is image not found ...*/
+       }
 
-    private void showImage(ImageView v, ProgressBar p){
-        p.setVisibility(View.GONE);
-        v.setVisibility(View.VISIBLE);;
-    }
-
-    private void setImageNotFound(ImageView img){
-        img.setImageDrawable(PrefUtils.getContext().getResources().getDrawable(R.drawable.img_not_found));
-    }
+   }
 }
