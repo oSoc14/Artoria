@@ -8,6 +8,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ public class MuseumActivity extends BaseActivity {
     private ImageView imgCnt;
     private ProgressBar prgWait;
     private TextView txtContent;
+    private ImageButton btnLeft;
+    private ImageButton btnRight;
     private FloorExhibit currentExhibit = null;
     private int indexOfExhibit = 0;
     private GestureDetectorCompat gDetect;
@@ -53,12 +57,28 @@ public class MuseumActivity extends BaseActivity {
         imgCnt = (ImageView)findViewById(R.id.imgContent);
         prgWait = (ProgressBar)findViewById(R.id.prgWait);
         txtContent = (TextView)findViewById(R.id.txtContent);
+        btnLeft = (ImageButton)findViewById(R.id.btnLeft);
+        btnRight = (ImageButton)findViewById(R.id.btnRight);
 
         /* Make the text scrollable */
         txtContent.setMovementMethod(new ScrollingMovementMethod());
 
         /*Add gesture listener so we can swipe left and right between POI's*/
         gDetect = new GestureDetectorCompat(this,new GestureListener());
+
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeImage(-1);
+            }
+        });
+
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeImage(1);
+            }
+        });
 
         setContent();
     }
