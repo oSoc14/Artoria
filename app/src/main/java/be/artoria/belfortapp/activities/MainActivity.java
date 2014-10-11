@@ -44,6 +44,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.Duration;
+
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
@@ -51,6 +53,8 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
     MainAdapter menuAdapter;
+    MainAdapter gentAdapter;
+    MainAdapter aboutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,92 +107,128 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        final ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
-        final Button btnSettings = (Button)findViewById(R.id.btnSettings);
-        final Button btnAbout = (Button)findViewById(R.id.btnAbout);
-        final String[] strings = getResources().getStringArray(R.array.lstMenu);
-        final Drawable[] drawables = new Drawable[]{
-                getResources().getDrawable((R.drawable.panorama)),
-                getResources().getDrawable((R.drawable.menu)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route))
-        };
+        final ListView lstMuseum = (ListView)findViewById(R.id.lstMuseum);
+        final ListView lstGent = (ListView)findViewById(R.id.lstgent);
+        final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
+       // final Button btnSettings = (Button)findViewById(R.id.btnSettings);
+       // final Button btnAbout = (Button)findViewById(R.id.btnAbout);
+
+        final String[] stringsMuseum = getResources().getStringArray(R.array.lstMuseum);
         final List<DescriptionRow> list = new ArrayList<DescriptionRow>();
-        for (int i = 0; i < strings.length; i++) {
-            list.add(new DescriptionRow(drawables[i],strings[i]));
+        for (int i = 0; i < stringsMuseum.length; i++) {
+            list.add(new DescriptionRow(getResources().getDrawable(R.drawable.route),stringsMuseum[i]));
         }
 
+        final Drawable[] gentDrawables = new Drawable[]{
+                getResources().getDrawable(R.drawable.panorama),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.menu)
+        };
 
+        final String[] stringsGent = getResources().getStringArray(R.array.lstGent);
+        final List<DescriptionRow> gentList = new ArrayList<DescriptionRow>();
+        for(int i = 0; i < stringsGent.length; i++){
+            gentList.add(new DescriptionRow(gentDrawables[i],stringsGent[i]));
+        }
+
+        final String[] stringsAbout = getResources().getStringArray(R.array.lstAbout);
+        final Drawable[] drawableAbout = new Drawable[]{
+                getResources().getDrawable(R.drawable.ic_draak_white_big),
+                getResources().getDrawable(R.drawable.menu)
+        };
+        final List<DescriptionRow> aboutList = new ArrayList<DescriptionRow>();
+        for(int i = 0; i < stringsAbout.length; i++){
+                aboutList.add(new DescriptionRow(drawableAbout[i],stringsAbout[i]));
+        }
 
         menuAdapter = new MainAdapter(this,R.layout.main_list_item,list);
-        lstMenu.setAdapter(menuAdapter);
+        lstMuseum.setAdapter(menuAdapter);
 
-        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gentAdapter = new MainAdapter(this,R.layout.main_list_item,gentList);
+        lstGent.setAdapter(gentAdapter);
+
+        aboutAdapter = new MainAdapter(this,R.layout.main_list_item,aboutList);
+        lstAbout.setAdapter(aboutAdapter);
+
+        lstMuseum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    switch(i){
+                    case 0:
+                        startMuseumView(3);
+                        break;
+                    case 1:
+                        startMuseumView(2);
+                        break;
+                    case 2:
+                        startMuseumView(1);
+                        break;
+                    case 3:
+                        startMuseumView(0);
+                        break;
+                }
+            }
+        });
+
+        lstGent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Intent intent;
                 switch (i) {
                     /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        if(SupportManager.isDeviceSupported()) {
+                        if (SupportManager.isDeviceSupported()) {
                             intent = new Intent(MainActivity.this, MixView.class);
                             startActivity(intent);
                         }
-                    break;
+                        break;
                     /* The second item are the buildings */
                     case 1:
-                        if(SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
+                        if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
                             intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
                             intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
                             startActivity(intent);
                         }
-                    break;
+                        break;
                     /* The third item is my route */
                     case 2:
-                        intent = new Intent(MainActivity.this,NewRouteActivity.class);
+                        intent = new Intent(MainActivity.this, NewRouteActivity.class);
                         startActivity(intent);
-                        break;
-                    //4th floor
-                    case 3: startMuseumView(4);
-                        break;
-                    //3rd floor
-                    case 4: startMuseumView(3);
-                        break;
-                    //2nd floor
-                    case 5: startMuseumView(2);
-                        break;
-                    //1st floor
-                    case 6: startMuseumView(1);
-                        break;
-                    //ground floor
-                    case 7: startMuseumView(0);
                         break;
                 }
             }
         });
 
+        lstAbout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i == 0){
+                  /*Go to the Artoria website*/
+                    final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
+                    final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                    startActivity(webIntent);
+
+                }else if(i == 1){
+                    /*go to settings*/
+                    final Intent intent = new Intent(MainActivity.this, LanguageChoiceActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    /*
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Go to settings*/
-                final Intent i = new Intent(MainActivity.this, LanguageChoiceActivity.class);
-                startActivity(i);
+
             }
         });
 
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Go to the Artoria website*/
-                final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
-                final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-                startActivity(webIntent);
+
             }
-        });
+        });*/
 
     }
 

@@ -120,7 +120,7 @@ public class NewRouteActivity extends BaseActivity {
         cntNoRoute = (LinearLayout)findViewById(R.id.cntNoRoute);
         cntNoRoute.setVisibility(View.GONE);
         final Button btnBuilding = (Button)findViewById(R.id.btnBuildings);
-        btnBuilding.setText(getResources().getStringArray(R.array.lstMenu)[1]);
+        btnBuilding.setText(getResources().getStringArray(R.array.lstGent)[1]);
         btnBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +132,7 @@ public class NewRouteActivity extends BaseActivity {
         });
 
         final Button btnPanorama = (Button)findViewById(R.id.btnPanorama);
-        btnPanorama.setText(getResources().getStringArray(R.array.lstMenu)[0]);
+        btnPanorama.setText(getResources().getStringArray(R.array.lstGent)[0]);
 
         btnPanorama.setOnClickListener(new View.OnClickListener() {
             @Override
