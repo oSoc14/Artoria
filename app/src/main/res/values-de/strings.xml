@@ -26,30 +26,18 @@
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
     <string name="monument_landscape_msg">Streichen Sie nach links oder rechts, zu zwischen den Gebäuden navigieren</string>
     <string name="no_connection">Bitte überprüfen Sie Ihre WLAN-Verbindung und versuchen Sie es erneut .</string>
-<!--
-    <string-array name="lstMenu">
-        <item>Panorama</item>
-        <item>Gebäude</item>
-        <item>Mein Weg</item>
 
-        <item>4. Stock</item>
+    <string-array name="lstMuseum">
         <item>3. Stock</item>
         <item>zweiter Stock</item>
         <item>Erdgeschoss</item>
-        <item>Erdgeschoss</item>
-    </string-array>-->
-
-    <string-array name="lstMuseum">
-        <item>3th floor</item>
-        <item>Second floor</item>
-        <item>First floor</item>
-        <item>Ground floor</item>
+        <item>Boden</item>
     </string-array>
 
     <string-array name="lstGent">
         <item>Panorama</item>
-        <item>Buildings</item>
-        <item>My route</item>
+        <item>Gebäude</item>
+        <item>Mein Weg</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Detail</string>
