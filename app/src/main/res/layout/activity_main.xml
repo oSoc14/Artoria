@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:padding="4dp"
         android:background="@color/background_menu_header">
         <ImageView
             android:layout_width="wrap_content"
@@ -30,22 +30,10 @@
             android:textColor="#FFFFFF"
             android:text="Museum"/>
         </LinearLayout>
-    <!-- old listview
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="10sp"
-        android:id="@+id/lstMenu"
-        android:clickable="true"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5.0sp"/>
-
-        -->
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="275dp"
+        android:layout_height="250dp"
         android:layout_gravity="center"
         android:paddingTop="10sp"
         android:id="@+id/lstMuseum"
@@ -57,7 +45,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:padding="4dp"
         android:id="@+id/lnrGhent"
         android:background="@color/background_menu_header">
         <ImageView
@@ -78,7 +66,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_gravity="center"
         android:paddingTop="10sp"
         android:id="@+id/lstgent"
@@ -86,21 +74,10 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="5.0sp"/>
 
-
-    <!--
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/draakske"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_draak_white_big"/>
-    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:padding="4dp"
         android:background="@color/background_menu_header">
         <ImageView
             android:layout_width="wrap_content"
@@ -117,23 +94,6 @@
             android:textColor="#FFFFFF"
             android:text="Over"/>
     </LinearLayout>
-
-    <!--<Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/about"
-        android:textColor="#FFFFFF"
-        android:background="@null"
-        android:id="@+id/btnAbout"/>
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_size_about"
-        android:text="@string/settings"
-        android:textColor="#FFFFFF"
-        android:background="@null"
-        android:id="@+id/btnSettings"/>-->
 
     <ListView
         android:layout_width="match_parent"
