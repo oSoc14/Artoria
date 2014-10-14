@@ -1,49 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
     android:orientation="vertical"
     android:background="@drawable/bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="@color/background_menu_header">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/museum"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="42dp"
+            android:textSize="@dimen/menu_header_size"
+            android:textColor="#FFFFFF"
+            android:text="Museum"/>
+        </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_gravity="center"
-        android:layout_weight="10"
         android:paddingTop="10sp"
-        android:id="@+id/lstMenu"
+        android:id="@+id/lstMuseum"
         android:clickable="true"
         android:divider="@android:color/transparent"
         android:dividerHeight="5.0sp"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/draakske"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_draak_white_big"/>
 
-    <Button
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/about"
-        android:textColor="#FFFFFF"
-        android:background="@null"
-        android:id="@+id/btnAbout"/>
+        android:padding="4dp"
+        android:id="@+id/lnrGhent"
+        android:background="@color/background_menu_header">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/gent"/>
 
-    <Button
-        android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="42dp"
+            android:textSize="@dimen/menu_header_size"
+            android:textColor="#FFFFFF"
+            android:text="Gent"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_gravity="center"
+        android:paddingTop="10sp"
+        android:id="@+id/lstgent"
+        android:clickable="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="@dimen/font_size_about"
-        android:text="@string/settings"
-        android:textColor="#FFFFFF"
-        android:background="@null"
-        android:id="@+id/btnSettings"/>
+        android:padding="4dp"
+        android:background="@color/background_menu_header">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/over"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="42dp"
+            android:textSize="@dimen/menu_header_size"
+            android:textColor="#FFFFFF"
+            android:text="Over"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:paddingTop="10sp"
+        android:id="@+id/lstAbout"
+        android:clickable="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp"/>
 
 </LinearLayout>
+</ScrollView>
 

@@ -5,4 +5,5 @@
 
     <dimen name="font_size_about">12sp</dimen>
     <dimen name="monument_detail_image_height">180dp</dimen>
+    <dimen name="menu_header_size">26dp</dimen>
 </resources>

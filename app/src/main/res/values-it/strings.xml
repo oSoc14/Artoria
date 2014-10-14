@@ -27,16 +27,17 @@
     <string name="monument_landscape_msg">Swipe sinistra o destra per navigare tra gli edifici</string>
     <string name="no_connection">Controlla la tua connessione wireless e riprovare .</string> <!-- According to correction we need to remove the 're' ?? -->
 
-    <string-array name="lstMenu">
-        <item>panorama</item>
-        <item>Edifici</item>
-        <item>Il mio percorso</item>
-
-        <item>4 ° piano</item>
+    <string-array name="lstMuseum">
         <item>3 ° piano</item>
         <item>secondo piano</item>
         <item>primo piano</item>
         <item>piano terra</item>
+    </string-array>
+
+    <string-array name="lstGent">
+        <item>panorama</item>
+        <item>Edifici</item>
+        <item>Il mio percorso</item>
     </string-array>
 
     <string name="title_activity_monument_detail">dettaglio</string>

@@ -27,16 +27,17 @@
     <string name="monument_landscape_msg">Проведите пальцем влево или вправо для перехода между зданиями</string>
     <string name="no_connection">Пожалуйста, проверьте настройки беспроводного подключения и повторите попытку.</string>
 
-    <string-array name="lstMenu">
-        <item>Панорама</item>
-        <item>Здания</item>
-        <item>Мой маршрут</item>
-
-        <item>4-й этаж</item>
+    <string-array name="lstMuseum">
         <item>3-й этаж</item>
         <item>Второй этаж</item>
         <item>Первый этаж</item>
         <item>Первый этаж</item>
+    </string-array>
+
+    <string-array name="lstGent">
+        <item>Панорама</item>
+        <item>Здания</item>
+        <item>Мой маршрут</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Подробно</string>

@@ -27,16 +27,22 @@
     <string name="monument_landscape_msg">Swipe left or right to navigate between the buildings</string>
     <string name="no_connection">Please check your wireless connection and try again.</string>
 
-    <string-array name="lstMenu">
-        <item>Panorama</item>
-        <item>Buildings</item>
-        <item>My route</item>
-
-        <item>4th floor</item>
+    <string-array name="lstMuseum">
         <item>3th floor</item>
         <item>Second floor</item>
         <item>First floor</item>
         <item>Ground floor</item>
+    </string-array>
+
+    <string-array name="lstGent">
+        <item>Panorama</item>
+        <item>Buildings</item>
+        <item>My route</item>
+    </string-array>
+
+    <string-array name="lstAbout">
+        <item>About Artoria</item>
+        <item>Settings</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Detail</string>

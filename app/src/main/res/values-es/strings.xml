@@ -27,16 +27,17 @@
     <string name="monument_landscape_msg">Pase a la izquierda oa la derecha para navegar entre los edificios</string>
     <string name="no_connection">Por favor, compruebe su conexión inalámbrica y vuelva a intentarlo .</string>
 
-    <string-array name="lstMenu">
-        <item>Panorama</item>
-        <item>Edificios</item>
-        <item>Mi ruta</item>
-
-        <item>4 º piso</item>
+    <string-array name="lstMuseum">
         <item>3 ª planta</item>
         <item>Segunda planta</item>
         <item>primera planta</item>
         <item>planta baja</item>
+    </string-array>
+
+    <string-array name="lstGent">
+        <item>Panorama</item>
+        <item>Edificios</item>
+        <item>Mi ruta</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Detalle</string>

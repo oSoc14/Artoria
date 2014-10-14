@@ -44,13 +44,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.Duration;
+
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
-    MainAdapter menuAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,93 +104,98 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        final ListView lstMenu = (ListView)findViewById(R.id.lstMenu);
-        final Button btnSettings = (Button)findViewById(R.id.btnSettings);
-        final Button btnAbout = (Button)findViewById(R.id.btnAbout);
-        final String[] strings = getResources().getStringArray(R.array.lstMenu);
-        final Drawable[] drawables = new Drawable[]{
-                getResources().getDrawable((R.drawable.panorama)),
-                getResources().getDrawable((R.drawable.menu)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route)),
-                getResources().getDrawable((R.drawable.route))
-        };
-        final List<DescriptionRow> list = new ArrayList<DescriptionRow>();
-        for (int i = 0; i < strings.length; i++) {
-            list.add(new DescriptionRow(drawables[i],strings[i]));
-        }
+        final ListView lstMuseum = (ListView)findViewById(R.id.lstMuseum);
+        final ListView lstGent = (ListView)findViewById(R.id.lstgent);
+        final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
+
+        //fill the museum list
+        lstMuseum.setAdapter(getAdapter(new Drawable[]{getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route)}
+
+                ,getResources().getStringArray(R.array.lstMuseum)));
+
+        //fill the Ghent list
+        lstGent.setAdapter(getAdapter(new Drawable[]{
+                getResources().getDrawable(R.drawable.panorama),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.menu)
+        },getResources().getStringArray(R.array.lstGent)));
 
 
+        //fill the About list
+        lstAbout.setAdapter(getAdapter(new Drawable[]{
+                getResources().getDrawable(R.drawable.ic_draak_white_big),
+                getResources().getDrawable(R.drawable.menu)
+        },getResources().getStringArray(R.array.lstAbout)));
 
-        menuAdapter = new MainAdapter(this,R.layout.main_list_item,list);
-        lstMenu.setAdapter(menuAdapter);
+        //add clickhandlers
+        lstMuseum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    switch(i){
+                    case 0:
+                        startMuseumView(3);
+                        break;
+                    case 1:
+                        startMuseumView(2);
+                        break;
+                    case 2:
+                        startMuseumView(1);
+                        break;
+                    case 3:
+                        startMuseumView(0);
+                        break;
+                }
+            }
+        });
 
-        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lstGent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Intent intent;
                 switch (i) {
                     /* The first item is the be.artoria.belfortapp.mixare panorama */
                     case 0:
-                        if(SupportManager.isDeviceSupported()) {
+                        if (SupportManager.isDeviceSupported()) {
                             intent = new Intent(MainActivity.this, MixView.class);
                             startActivity(intent);
                         }
-                    break;
+                        break;
                     /* The second item are the buildings */
                     case 1:
-                        if(SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
+                        if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
                             intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
                             intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
                             startActivity(intent);
                         }
-                    break;
+                        break;
                     /* The third item is my route */
                     case 2:
-                        intent = new Intent(MainActivity.this,NewRouteActivity.class);
+                        intent = new Intent(MainActivity.this, NewRouteActivity.class);
                         startActivity(intent);
-                        break;
-                    //4th floor
-                    case 3: startMuseumView(4);
-                        break;
-                    //3rd floor
-                    case 4: startMuseumView(3);
-                        break;
-                    //2nd floor
-                    case 5: startMuseumView(2);
-                        break;
-                    //1st floor
-                    case 6: startMuseumView(1);
-                        break;
-                    //ground floor
-                    case 7: startMuseumView(0);
                         break;
                 }
             }
         });
 
-        btnSettings.setOnClickListener(new View.OnClickListener() {
+        lstAbout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                /*Go to settings*/
-                final Intent i = new Intent(MainActivity.this, LanguageChoiceActivity.class);
-                startActivity(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i == 0){
+                  /*Go to the Artoria website*/
+                    final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
+                    final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                    startActivity(webIntent);
+
+                }else if(i == 1){
+                    /*go to settings*/
+                    final Intent intent = new Intent(MainActivity.this, LanguageChoiceActivity.class);
+                    startActivity(intent);
+                }
             }
         });
-
-        btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Go to the Artoria website*/
-                final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
-                final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-                startActivity(webIntent);
-            }
-        });
-
     }
 
     private void startMuseumView(int floor){
@@ -197,6 +203,7 @@ public class MainActivity extends BaseActivity {
             startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
         }
     }
+
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -319,5 +326,13 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private MainAdapter getAdapter(Drawable[] images,String[] names){
+        final List<DescriptionRow> descriptionRowList = new ArrayList<DescriptionRow>();
+        for(int i = 0; i < names.length; i++){
+            descriptionRowList.add(new DescriptionRow(images[i],names[i]));
+        }
+
+        return new MainAdapter(this,R.layout.main_list_item,descriptionRowList);
+    }
 
 }

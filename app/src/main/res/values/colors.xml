@@ -9,4 +9,5 @@
     <color name="fontColor1">#3C8BB9</color>
     <color name="green">#69B056</color>
     <color name="lightGreen">#B8DCAE</color>
+    <color name="background_menu_header">#1A000000</color>
 </resources>
