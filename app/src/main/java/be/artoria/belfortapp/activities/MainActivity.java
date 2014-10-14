@@ -52,9 +52,6 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
-    MainAdapter menuAdapter;
-    MainAdapter gentAdapter;
-    MainAdapter aboutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,46 +107,30 @@ public class MainActivity extends BaseActivity {
         final ListView lstMuseum = (ListView)findViewById(R.id.lstMuseum);
         final ListView lstGent = (ListView)findViewById(R.id.lstgent);
         final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
-       // final Button btnSettings = (Button)findViewById(R.id.btnSettings);
-       // final Button btnAbout = (Button)findViewById(R.id.btnAbout);
 
-        final String[] stringsMuseum = getResources().getStringArray(R.array.lstMuseum);
-        final List<DescriptionRow> list = new ArrayList<DescriptionRow>();
-        for (int i = 0; i < stringsMuseum.length; i++) {
-            list.add(new DescriptionRow(getResources().getDrawable(R.drawable.route),stringsMuseum[i]));
-        }
+        //fill the museum list
+        lstMuseum.setAdapter(getAdapter(new Drawable[]{getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route),
+                getResources().getDrawable(R.drawable.route)}
 
-        final Drawable[] gentDrawables = new Drawable[]{
+                ,getResources().getStringArray(R.array.lstMuseum)));
+
+        //fill the Ghent list
+        lstGent.setAdapter(getAdapter(new Drawable[]{
                 getResources().getDrawable(R.drawable.panorama),
                 getResources().getDrawable(R.drawable.route),
                 getResources().getDrawable(R.drawable.menu)
-        };
+        },getResources().getStringArray(R.array.lstGent)));
 
-        final String[] stringsGent = getResources().getStringArray(R.array.lstGent);
-        final List<DescriptionRow> gentList = new ArrayList<DescriptionRow>();
-        for(int i = 0; i < stringsGent.length; i++){
-            gentList.add(new DescriptionRow(gentDrawables[i],stringsGent[i]));
-        }
 
-        final String[] stringsAbout = getResources().getStringArray(R.array.lstAbout);
-        final Drawable[] drawableAbout = new Drawable[]{
+        //fill the About list
+        lstAbout.setAdapter(getAdapter(new Drawable[]{
                 getResources().getDrawable(R.drawable.ic_draak_white_big),
                 getResources().getDrawable(R.drawable.menu)
-        };
-        final List<DescriptionRow> aboutList = new ArrayList<DescriptionRow>();
-        for(int i = 0; i < stringsAbout.length; i++){
-                aboutList.add(new DescriptionRow(drawableAbout[i],stringsAbout[i]));
-        }
+        },getResources().getStringArray(R.array.lstAbout)));
 
-        menuAdapter = new MainAdapter(this,R.layout.main_list_item,list);
-        lstMuseum.setAdapter(menuAdapter);
-
-        gentAdapter = new MainAdapter(this,R.layout.main_list_item,gentList);
-        lstGent.setAdapter(gentAdapter);
-
-        aboutAdapter = new MainAdapter(this,R.layout.main_list_item,aboutList);
-        lstAbout.setAdapter(aboutAdapter);
-
+        //add clickhandlers
         lstMuseum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -215,21 +196,6 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
-    /*
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
-
     }
 
     private void startMuseumView(int floor){
@@ -237,6 +203,7 @@ public class MainActivity extends BaseActivity {
             startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
         }
     }
+
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -359,5 +326,13 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private MainAdapter getAdapter(Drawable[] images,String[] names){
+        final List<DescriptionRow> descriptionRowList = new ArrayList<DescriptionRow>();
+        for(int i = 0; i < names.length; i++){
+            descriptionRowList.add(new DescriptionRow(images[i],names[i]));
+        }
+
+        return new MainAdapter(this,R.layout.main_list_item,descriptionRowList);
+    }
 
 }
