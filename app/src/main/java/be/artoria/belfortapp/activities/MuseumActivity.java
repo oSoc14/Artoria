@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.text.method.ScrollingMovementMethod;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -25,29 +23,20 @@ import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
 import be.artoria.belfortapp.app.PrefUtils;
 
-public class MuseumActivity extends BaseActivity {
+public class MuseumActivity extends SwipeActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
     private static final int MUSEUM_TITLE_SIZE = 32;
     private static final int IMAGE_HEIGHT = 350;
     private Floor currentFloor;
     private int currentFloorIndex;
 
-    private GestureDetectorCompat gDetect;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_museum);
-
         initGui();
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        this.gDetect.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-
+    
     private void initGui(){
         /* Initialize the current floor */
         Intent i = getIntent();
@@ -69,14 +58,10 @@ public class MuseumActivity extends BaseActivity {
             }
         });
 
-        //TODO is not working fix this ...
-        /*Add gesture listener so we can swipe left and right between POI's*/
-        gDetect = new GestureDetectorCompat(this,new GestureListener());
-
         //set the title of the activity to the right floor name, strange way because the array is reversed ...
         String[] floorNames = getResources().getStringArray(R.array.lstMuseum);
         setTitle(floorNames[(floorNames.length -1) - currentFloorIndex]);
-        System.out.println((floorNames.length -1) - currentFloorIndex);
+        System.out.println((floorNames.length - 1) - currentFloorIndex);
     }
 
     public static Intent createIntent(Context ctx, int floor){
@@ -141,36 +126,31 @@ public class MuseumActivity extends BaseActivity {
         parent.addView(txtContent);
     }
 
+    @Override
+    protected void previous() {
+       previousFloor();
+    }
+
+    @Override
+    protected void next() {
+        nextFloor();
+    }
+
     private void nextFloor(){
         int next = (currentFloorIndex +1) % DataManager.getFloorList().size();
+        System.out.println("about to call to floor " + next);
         startNewMuseumActivity(next);
     }
 
     private void previousFloor(){
         int prev = (currentFloorIndex -1) % DataManager.getFloorList().size();
+        prev = prev == -1 ? DataManager.getFloorList().size() -1 : prev;
+        System.out.println("about to call to floor " + prev);
         startNewMuseumActivity(prev);
     }
 
     private void startNewMuseumActivity(int floor){
         Intent toStart = createIntent(this,floor);
         startActivity(toStart);
-    }
-
-    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            float horizontalDiff = e2.getX() - e1.getX();
-            if(horizontalDiff > 0){
-                previousFloor();
-            }else {
-                nextFloor();
-            }
-            return super.onFling(e1, e2, velocityX, velocityY);
-        }
     }
 }
