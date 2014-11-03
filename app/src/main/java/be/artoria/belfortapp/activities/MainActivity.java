@@ -297,6 +297,7 @@ public class MainActivity extends BaseActivity {
 
                 try {
                     DataManager.museumDAO.open();
+                    DataManager.museumDAO.clearTable();
                     System.out.println("started saving to DB");
                     for(FloorExhibit exhibit : list) {
                         DataManager.museumDAO.saveFloorExhibit(exhibit);

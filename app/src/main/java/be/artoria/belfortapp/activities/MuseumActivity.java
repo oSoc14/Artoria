@@ -2,6 +2,7 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.text.method.ScrollingMovementMethod;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import be.artoria.belfortapp.R;
@@ -24,14 +27,11 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
+    private static final int MUSEUM_TITLE_SIZE = 32;
+    private static final int IMAGE_HEIGHT = 350;
     private Floor currentFloor;
-    private ImageView imgCnt;
-    private ProgressBar prgWait;
-    private TextView txtContent;
-    private ImageButton btnLeft;
-    private ImageButton btnRight;
-    private FloorExhibit currentExhibit = null;
-    private int indexOfExhibit = 0;
+    private int currentFloorIndex;
+
     private GestureDetectorCompat gDetect;
 
     @Override
@@ -51,77 +51,109 @@ public class MuseumActivity extends BaseActivity {
     private void initGui(){
         /* Initialize the current floor */
         Intent i = getIntent();
-        int floor = i.getIntExtra(ARG_FLOOR,0);
-        currentFloor = DataManager.getFloorList().get(floor);
+        currentFloorIndex = i.getIntExtra(ARG_FLOOR,0);
+        currentFloor = DataManager.getFloorList().get(currentFloorIndex);
+        LinearLayout lnrMuseum = (LinearLayout)findViewById(R.id.lnrMuseum);
+        lnrMuseum.removeAllViews();
 
-        imgCnt = (ImageView)findViewById(R.id.imgContent);
-        prgWait = (ProgressBar)findViewById(R.id.prgWait);
-        txtContent = (TextView)findViewById(R.id.txtContent);
-        btnLeft = (ImageButton)findViewById(R.id.btnLeft);
-        btnRight = (ImageButton)findViewById(R.id.btnRight);
+        for(int j = 0; j < currentFloor.exhibits.size();j++){
+            addExhibit(currentFloor.exhibits.get(j),lnrMuseum,currentFloorIndex,j+1);
+        }
 
-        /* Make the text scrollable */
-        txtContent.setMovementMethod(new ScrollingMovementMethod());
+        //next floor button ...
+        final LinearLayout btnNextFloor = (LinearLayout)findViewById(R.id.btnNextFloor);
+        btnNextFloor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               nextFloor();
+            }
+        });
 
+        //TODO is not working fix this ...
         /*Add gesture listener so we can swipe left and right between POI's*/
         gDetect = new GestureDetectorCompat(this,new GestureListener());
 
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeImage(-1);
-            }
-        });
-
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeImage(1);
-            }
-        });
-
-        setContent();
-    }
-
-    /**
-     *
-     * @param direction -1 for previous, 1 for the next image
-     */
-    private void changeImage(int direction){
-        setLoading();
-        indexOfExhibit = (indexOfExhibit + direction) % currentFloor.exhibits.size();
-        indexOfExhibit = indexOfExhibit == -1 ? currentFloor.exhibits.size() -1 : indexOfExhibit;
-        setContent();
-        setDoneLoading();
-    }
-
-    /**
-     * Updates this museumActivity to use the current exhibit
-     */
-    private void setContent() {
-        currentExhibit = currentFloor.exhibits.get(indexOfExhibit);
-
-        setTitle(currentExhibit.getName());
-
-        txtContent.setText(currentExhibit.getDescription());
-
-        Picasso.with(PrefUtils.getContext()).load(currentExhibit.image).into(imgCnt);
-    }
-
-    private void setLoading(){
-        imgCnt.setVisibility(View.GONE);
-        prgWait.setVisibility(View.VISIBLE);
-    }
-
-    private void setDoneLoading(){
-        prgWait.setVisibility(View.GONE);
-        imgCnt.setVisibility(View.VISIBLE);
+        //set the title of the activity to the right floor name, strange way because the array is reversed ...
+        String[] floorNames = getResources().getStringArray(R.array.lstMuseum);
+        setTitle(floorNames[(floorNames.length -1) - currentFloorIndex]);
+        System.out.println((floorNames.length -1) - currentFloorIndex);
     }
 
     public static Intent createIntent(Context ctx, int floor){
         Intent i = new Intent(ctx,MuseumActivity.class);
         i.putExtra(ARG_FLOOR,floor);
         return i;
+    }
+
+    private void addExhibit(FloorExhibit ex, View parentView, int floor, int exhibit){
+        final LinearLayout parent = (LinearLayout) parentView;
+        final LinearLayout lnrTitle = new LinearLayout(this);
+        lnrTitle.setOrientation(LinearLayout.HORIZONTAL);
+
+        final ProgressBar prgWait = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
+        prgWait.setVisibility(View.VISIBLE);
+        prgWait.setMinimumHeight(IMAGE_HEIGHT);
+
+        final ImageView img = new ImageView(this);
+        img.setMaxHeight(IMAGE_HEIGHT);
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        img.setAdjustViewBounds(true);
+        img.setVisibility(View.GONE);
+
+
+        Picasso.with(this).load(ex.getImage()).into(img, new Callback() {
+            @Override
+            public void onSuccess() {
+                prgWait.setVisibility(View.GONE);
+                img.setVisibility(View.VISIBLE);
+                System.out.println("Image successfully loaded and displayed");
+            }
+
+            @Override
+            public void onError() {
+                prgWait.setVisibility(View.GONE);
+                img.setVisibility(View.VISIBLE);
+                img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
+            }
+        });
+
+        final TextView txtNumber = new TextView(this);
+        txtNumber.setTextSize(MUSEUM_TITLE_SIZE);
+        txtNumber.setTextColor(Color.GRAY);
+        txtNumber.setText(floor + "." + exhibit +"  ");
+
+        final TextView txtTitle = new TextView(this);
+        txtTitle.setTextSize(MUSEUM_TITLE_SIZE);
+        txtTitle.setText(ex.getName());
+
+        lnrTitle.addView(txtNumber);
+        lnrTitle.addView(txtTitle);
+
+        final TextView txtContent = new TextView(this);
+        txtContent.setText(ex.getDescription());
+        /*LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)txtContent.getLayoutParams();
+        params.setMargins(0, 0, 0, 20);
+        txtContent.setLayoutParams(params);*/
+
+        parent.addView(prgWait);
+        parent.addView(img);
+        parent.addView(lnrTitle);
+        parent.addView(txtContent);
+    }
+
+    private void nextFloor(){
+        int next = (currentFloorIndex +1) % DataManager.getFloorList().size();
+        startNewMuseumActivity(next);
+    }
+
+    private void previousFloor(){
+        int prev = (currentFloorIndex -1) % DataManager.getFloorList().size();
+        startNewMuseumActivity(prev);
+    }
+
+    private void startNewMuseumActivity(int floor){
+        Intent toStart = createIntent(this,floor);
+        startActivity(toStart);
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -134,9 +166,9 @@ public class MuseumActivity extends BaseActivity {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float horizontalDiff = e2.getX() - e1.getX();
             if(horizontalDiff > 0){
-                changeImage(-1);
+                previousFloor();
             }else {
-                changeImage(1);
+                nextFloor();
             }
             return super.onFling(e1, e2, velocityX, velocityY);
         }
