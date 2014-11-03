@@ -47,8 +47,7 @@
         android:id="@+id/draakske"
         android:src="@drawable/ic_draak_white_big"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/string_belfry"/>
+        android:layout_above="@+id/string_choose_language"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,6 +58,7 @@
         android:id="@+id/string_choose_language"
         android:layout_above="@+id/top_row"
         android:paddingBottom="1dp"
+        android:paddingTop="5dp"
         android:layout_alignParentLeft="true"
  />
 
@@ -73,7 +73,9 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lang_de"
+            android:src="@drawable/ic_lang_ge"
+            android:padding="@dimen/btn_lang_padding"
+            android:scaleType="fitCenter"
             android:id="@+id/german"
             android:background="@null"
             android:onClick="langSelected"
@@ -84,6 +86,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_es"
             android:background="@null"
+            android:padding="@dimen/btn_lang_padding"
+            android:scaleType="fitCenter"
             android:id="@+id/spanish"
             android:onClick="langSelected"
             android:layout_weight="1" />
@@ -93,6 +97,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_it"
             android:background="@null"
+            android:padding="@dimen/btn_lang_padding"
+            android:scaleType="fitCenter"
             android:id="@+id/italian"
             android:onClick="langSelected"
             android:layout_weight="1" />
@@ -102,6 +108,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_lang_ru"
             android:background="@null"
+            android:padding="@dimen/btn_lang_padding"
+            android:scaleType="fitCenter"
             android:id="@+id/russian"
             android:onClick="langSelected"
             android:layout_weight="1" />
