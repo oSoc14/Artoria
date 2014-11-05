@@ -2,9 +2,13 @@ package be.artoria.belfortapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import java.util.ResourceBundle;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
@@ -38,12 +44,16 @@ public class MuseumActivity extends SwipeActivity {
     }
     
     private void initGui(){
+        System.out.println("initgui ...");
         /* Initialize the current floor */
         Intent i = getIntent();
         currentFloorIndex = i.getIntExtra(ARG_FLOOR,0);
         currentFloor = DataManager.getFloorList().get(currentFloorIndex);
         LinearLayout lnrMuseum = (LinearLayout)findViewById(R.id.lnrMuseum);
         lnrMuseum.removeAllViews();
+
+        ImageView imgHeader = (ImageView) findViewById(R.id.imgHeader);
+        imgHeader.setImageDrawable(this.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
 
         for(int j = 0; j < currentFloor.exhibits.size();j++){
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,currentFloorIndex,j+1);
@@ -75,32 +85,6 @@ public class MuseumActivity extends SwipeActivity {
         final LinearLayout lnrTitle = new LinearLayout(this);
         lnrTitle.setOrientation(LinearLayout.HORIZONTAL);
 
-        final ProgressBar prgWait = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
-        prgWait.setVisibility(View.VISIBLE);
-        prgWait.setMinimumHeight(IMAGE_HEIGHT);
-
-        final ImageView img = new ImageView(this);
-        img.setMaxHeight(IMAGE_HEIGHT);
-        img.setScaleType(ImageView.ScaleType.FIT_START);
-        img.setAdjustViewBounds(true);
-        img.setVisibility(View.GONE);
-
-
-        Picasso.with(this).load(ex.getImage()).into(img, new Callback() {
-            @Override
-            public void onSuccess() {
-                prgWait.setVisibility(View.GONE);
-                img.setVisibility(View.VISIBLE);
-                System.out.println("Image successfully loaded and displayed");
-            }
-
-            @Override
-            public void onError() {
-                prgWait.setVisibility(View.GONE);
-                img.setVisibility(View.VISIBLE);
-                img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
-            }
-        });
 
         final TextView txtNumber = new TextView(this);
         txtNumber.setTextSize(MUSEUM_TITLE_SIZE);
@@ -116,14 +100,28 @@ public class MuseumActivity extends SwipeActivity {
 
         final TextView txtContent = new TextView(this);
         txtContent.setText(ex.getDescription());
-        /*LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)txtContent.getLayoutParams();
-        params.setMargins(0, 0, 0, 20);
-        txtContent.setLayoutParams(params);*/
+        if(exhibit != 1){
+            System.out.println(exhibit + " exhibit and I need to get image: " + ex.getImage() + ex.NL_name);
+            ImageView img = new ImageView(this);
+            Drawable drwb = this.getDrawableForId(Integer.parseInt(ex.getImage()));
+            if(drwb != null)
+                img.setImageDrawable(drwb);
+            img.setBackgroundColor(getResources().getColor(R.color.color2));
+            img.setMaxHeight(IMAGE_HEIGHT);
+            img.setMinimumHeight(IMAGE_HEIGHT);
+            img.setScaleType(ImageView.ScaleType.FIT_XY);
+            img.setMinimumWidth(getScreenWidth());
+            img.setAdjustViewBounds(true);
+            //img.setPadding(0,5,0,5);
 
-        parent.addView(prgWait);
-        parent.addView(img);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0, 20, 0, 20);
+            parent.addView(img,layoutParams);
+        }
         parent.addView(lnrTitle);
         parent.addView(txtContent);
+
     }
 
     @Override
@@ -152,5 +150,28 @@ public class MuseumActivity extends SwipeActivity {
     private void startNewMuseumActivity(int floor){
         Intent toStart = createIntent(this,floor);
         startActivity(toStart);
+    }
+
+    private Drawable getDrawableForId(int id){
+        Resources resources = getResources();
+        Drawable toReturn = null;
+        switch(id){
+            case 1: toReturn = resources.getDrawable(R.drawable.belfort);
+                break;
+            case 2: toReturn = resources.getDrawable(R.drawable.lakenhalle);
+                break;
+            case 3: toReturn = resources.getDrawable(R.drawable.mammelokker);
+                break;
+            case 4: toReturn = resources.getDrawable(R.drawable.unesco);
+                break;
+        }
+        return toReturn;
+    }
+
+    private int getScreenWidth(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x;
     }
 }
