@@ -27,6 +27,7 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
+import be.artoria.belfortapp.app.MuseumImageMapper;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MuseumActivity extends SwipeActivity {
@@ -53,7 +54,7 @@ public class MuseumActivity extends SwipeActivity {
         lnrMuseum.removeAllViews();
 
         ImageView imgHeader = (ImageView) findViewById(R.id.imgHeader);
-        imgHeader.setImageDrawable(this.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
+        imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
 
         for(int j = 0; j < currentFloor.exhibits.size();j++){
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,currentFloorIndex,j+1);
@@ -103,7 +104,7 @@ public class MuseumActivity extends SwipeActivity {
         if(exhibit != 1){
             System.out.println(exhibit + " exhibit and I need to get image: " + ex.getImage() + ex.NL_name);
             ImageView img = new ImageView(this);
-            Drawable drwb = this.getDrawableForId(Integer.parseInt(ex.getImage()));
+            Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));
             if(drwb != null)
                 img.setImageDrawable(drwb);
             img.setBackgroundColor(getResources().getColor(R.color.color2));
@@ -152,21 +153,7 @@ public class MuseumActivity extends SwipeActivity {
         startActivity(toStart);
     }
 
-    private Drawable getDrawableForId(int id){
-        Resources resources = getResources();
-        Drawable toReturn = null;
-        switch(id){
-            case 1: toReturn = resources.getDrawable(R.drawable.belfort);
-                break;
-            case 2: toReturn = resources.getDrawable(R.drawable.lakenhalle);
-                break;
-            case 3: toReturn = resources.getDrawable(R.drawable.mammelokker);
-                break;
-            case 4: toReturn = resources.getDrawable(R.drawable.unesco);
-                break;
-        }
-        return toReturn;
-    }
+
 
     private int getScreenWidth(){
         Display display = getWindowManager().getDefaultDisplay();
