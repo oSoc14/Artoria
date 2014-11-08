@@ -45,7 +45,6 @@ public class MuseumActivity extends SwipeActivity {
     }
     
     private void initGui(){
-        System.out.println("initgui ...");
         /* Initialize the current floor */
         Intent i = getIntent();
         currentFloorIndex = i.getIntExtra(ARG_FLOOR,0);
@@ -72,7 +71,7 @@ public class MuseumActivity extends SwipeActivity {
         //set the title of the activity to the right floor name, strange way because the array is reversed ...
         String[] floorNames = getResources().getStringArray(R.array.lstMuseum);
         setTitle(floorNames[(floorNames.length -1) - currentFloorIndex]);
-        System.out.println((floorNames.length - 1) - currentFloorIndex);
+        //System.out.println((floorNames.length - 1) - currentFloorIndex);
     }
 
     public static Intent createIntent(Context ctx, int floor){
@@ -102,7 +101,6 @@ public class MuseumActivity extends SwipeActivity {
         final TextView txtContent = new TextView(this);
         txtContent.setText(ex.getDescription());
         if(exhibit != 1){
-            System.out.println(exhibit + " exhibit and I need to get image: " + ex.getImage() + ex.NL_name);
             ImageView img = new ImageView(this);
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));
             if(drwb != null)
@@ -137,14 +135,14 @@ public class MuseumActivity extends SwipeActivity {
 
     private void nextFloor(){
         int next = (currentFloorIndex +1) % DataManager.getFloorList().size();
-        System.out.println("about to call to floor " + next);
+        //System.out.println("about to call to floor " + next);
         startNewMuseumActivity(next);
     }
 
     private void previousFloor(){
         int prev = (currentFloorIndex -1) % DataManager.getFloorList().size();
         prev = prev == -1 ? DataManager.getFloorList().size() -1 : prev;
-        System.out.println("about to call to floor " + prev);
+        //System.out.println("about to call to floor " + prev);
         startNewMuseumActivity(prev);
     }
 
