@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -38,9 +39,6 @@ import be.artoria.belfortapp.viewflow.ViewFlow;
 
 public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
-    private static final int MUSEUM_TITLE_SIZE = 32;
-    private static final int IMAGE_HEIGHT = 350;
-    private Integer currentFloorIndex;
     private ViewFlow viewFlow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +48,19 @@ public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
     }
     
     private void initGui(){
+        System.out.println("init museumactivity");
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
         ExhibitAdapter adapter = new ExhibitAdapter(this,DataManager.getFloorList().get(floor).exhibits);
-        //viewFlow.setAdapter(new ImageAdapter(this));
         viewFlow.setAdapter(adapter);
+        viewFlow.setSelection(floor);
         final CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         viewFlow.setFlowIndicator(indic);
-        indic.setFillColor(Color.BLACK);
-        indic.setStrokeColor(Color.BLACK);
+        indic.setFillColor(Color.WHITE);
+        indic.setStrokeColor(Color.WHITE);
         indic.setSoundEffectsEnabled(true);
     }
 
@@ -69,6 +70,7 @@ public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
         super.onConfigurationChanged(newConfig);
         viewFlow.onConfigurationChanged(newConfig);
     }
+
 
 
     public static Intent createIntent(Context ctx, int floor){

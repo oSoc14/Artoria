@@ -5,13 +5,21 @@
     android:orientation="vertical"
     tools:context="be.artoria.belfortapp.activities.MuseumActivity">
 
-
-    <be.artoria.belfortapp.viewflow.CircleFlowIndicator
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_gravity="center"
-        android:id="@+id/viewflowindic"/>
+        android:background="@color/color2"
+        android:orientation="vertical">
+
+        <be.artoria.belfortapp.viewflow.CircleFlowIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/viewflowindic"/>
+
+        </LinearLayout>
+
 
     <be.artoria.belfortapp.viewflow.ViewFlow
         android:layout_width="match_parent"

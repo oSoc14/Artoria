@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -55,6 +56,9 @@ public class ExhibitAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.exhibit_item, null);
         }
 
+        ScrollView scrMuseum = (ScrollView)convertView.findViewById(R.id.scrlMuseum);
+        scrMuseum.fullScroll(ScrollView.FOCUS_UP);
+
         Floor currentFloor = DataManager.getFloorList().get(position);
         LinearLayout lnrMuseum = (LinearLayout)convertView.findViewById(R.id.lnrMuseum);
         lnrMuseum.removeAllViews();
@@ -65,23 +69,6 @@ public class ExhibitAdapter extends BaseAdapter {
         for(int j = 0; j < currentFloor.exhibits.size();j++){
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,position,j+1);
         }
-
-
-        //TODO add clickhandler
-        //next floor button ...
-        /*final LinearLayout btnNextFloor = (LinearLayout)findViewById(R.id.btnNextFloor);
-        btnNextFloor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nextFloor();
-            }
-        });*/
-        //TODO set title of window
-        //set the title of the activity to the right floor name, strange way because the array is reversed ...
-        //String[] floorNames = PrefUtils.getContext().getResources().getStringArray(R.array.lstMuseum);
-       //setTitle(floorNames[(floorNames.length -1) - position]);
-        //System.out.println((floorNames.length - 1) - currentFloorIndex);
-
 
         return convertView;
     }
