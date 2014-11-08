@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -30,13 +32,13 @@ import be.artoria.belfortapp.app.FloorExhibit;
 import be.artoria.belfortapp.app.MuseumImageMapper;
 import be.artoria.belfortapp.app.PrefUtils;
 
-public class MuseumActivity extends SwipeActivity {
+public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
     private static final int MUSEUM_TITLE_SIZE = 32;
     private static final int IMAGE_HEIGHT = 350;
     private Floor currentFloor;
-    private int currentFloorIndex;
-
+    private Integer currentFloorIndex;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +47,16 @@ public class MuseumActivity extends SwipeActivity {
     }
     
     private void initGui(){
+        if(currentFloor == null || currentFloorIndex == null) {
         /* Initialize the current floor */
-        Intent i = getIntent();
-        currentFloorIndex = i.getIntExtra(ARG_FLOOR,0);
+            Intent i = getIntent();
+            currentFloorIndex = i.getIntExtra(ARG_FLOOR, 0);
+        }
+        scrollUp();
         currentFloor = DataManager.getFloorList().get(currentFloorIndex);
-        LinearLayout lnrMuseum = (LinearLayout)findViewById(R.id.lnrMuseum);
+        LinearLayout lnrMuseum = (LinearLayout) findViewById(R.id.lnrMuseum);
         lnrMuseum.removeAllViews();
+
 
         ImageView imgHeader = (ImageView) findViewById(R.id.imgHeader);
         imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
@@ -123,27 +129,31 @@ public class MuseumActivity extends SwipeActivity {
 
     }
 
-    @Override
+    /*@Override
     protected void previous() {
-       previousFloor();
+        previousFloor();
     }
 
     @Override
     protected void next() {
         nextFloor();
-    }
+    }*/
 
     private void nextFloor(){
-        int next = (currentFloorIndex +1) % DataManager.getFloorList().size();
+        //int next = (currentFloorIndex +1) % DataManager.getFloorList().size();
         //System.out.println("about to call to floor " + next);
-        startNewMuseumActivity(next);
+        //startNewMuseumActivity(next);
+        this.currentFloorIndex = (currentFloorIndex +1) % DataManager.getFloorList().size();
+        this.initGui();
     }
 
     private void previousFloor(){
         int prev = (currentFloorIndex -1) % DataManager.getFloorList().size();
         prev = prev == -1 ? DataManager.getFloorList().size() -1 : prev;
         //System.out.println("about to call to floor " + prev);
-        startNewMuseumActivity(prev);
+        //startNewMuseumActivity(prev);
+        this.currentFloorIndex = prev;
+        this.initGui();
     }
 
     private void startNewMuseumActivity(int floor){
@@ -151,6 +161,10 @@ public class MuseumActivity extends SwipeActivity {
         startActivity(toStart);
     }
 
+    private void scrollUp(){
+        ScrollView scrMuseum = (ScrollView)findViewById(R.id.scrlMuseum);
+       scrMuseum.fullScroll(ScrollView.FOCUS_UP);
+    }
 
 
     private int getScreenWidth(){
