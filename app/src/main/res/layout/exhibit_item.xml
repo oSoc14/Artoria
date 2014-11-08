@@ -21,20 +21,20 @@
                 android:layout_height="500dp"
                 />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/txtHoofdstuk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                android:text="Hoofdstuk 1"/>
+                android:text="Hoofdstuk 1"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_below="@+id/txtHoofdstuk"
                 android:textSize="32dp"
+                android:id="@+id/txtChapterTitle"
                 android:text="Het Belfort van Gent"/>
 
         </RelativeLayout>

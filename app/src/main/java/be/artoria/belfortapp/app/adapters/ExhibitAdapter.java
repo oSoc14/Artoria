@@ -66,6 +66,9 @@ public class ExhibitAdapter extends BaseAdapter {
         ImageView imgHeader = (ImageView)convertView.findViewById(R.id.imgHeader);
         imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
 
+        TextView txtTitle = (TextView)convertView.findViewById(R.id.txtChapterTitle);
+        txtTitle.setText(currentFloor.exhibits.get(0).getName());
+
         for(int j = 0; j < currentFloor.exhibits.size();j++){
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,position,j+1);
         }

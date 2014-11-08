@@ -64,14 +64,11 @@ public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
         indic.setSoundEffectsEnabled(true);
     }
 
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         viewFlow.onConfigurationChanged(newConfig);
     }
-
-
 
     public static Intent createIntent(Context ctx, int floor){
         Intent i = new Intent(ctx,MuseumActivity.class);
