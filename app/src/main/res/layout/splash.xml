@@ -12,8 +12,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:scaleType="fitStart"
         >
+        <!--android:scaleType="" -->
+
     </ImageView>
 
 </ScrollView>
