@@ -105,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_de"
+        android:src="@drawable/ic_lang_ge"
         android:id="@+id/german"
         android:background="@null"
         android:onClick="langSelected"
