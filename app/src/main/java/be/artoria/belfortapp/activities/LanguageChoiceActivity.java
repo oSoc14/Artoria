@@ -100,6 +100,8 @@ public class LanguageChoiceActivity extends BaseActivity {
     }
 
     public void scrollDown(View view) {
+        final ScrollView sv = (ScrollView) findViewById(R.id.scrollviewLang);
+        sv.fullScroll(ScrollView.FOCUS_DOWN);
         //getScrollView().fullScroll(ScrollView.FOCUS_DOWN);
     }
 

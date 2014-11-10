@@ -12,7 +12,7 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class LaunchActivity extends BaseActivity {
 
-    private static final int SPLASH_DISPLAY_TIME = 4000; // splash screen delay time
+    private static final int SPLASH_DISPLAY_TIME = 2000; // splash screen delay time
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
