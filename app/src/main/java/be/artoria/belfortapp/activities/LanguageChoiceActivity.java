@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -96,6 +97,12 @@ public class LanguageChoiceActivity extends BaseActivity {
         /* Opening the Main screen */
         final Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+    }
+
+    public void scrollDown(View view) {
+        final ScrollView sv = (ScrollView) findViewById(R.id.scrollviewLang);
+        sv.fullScroll(ScrollView.FOCUS_DOWN);
+        //getScrollView().fullScroll(ScrollView.FOCUS_DOWN);
     }
 
     public static void setLang(Locale locale, Context ctx){

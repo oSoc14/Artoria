@@ -1,9 +1,9 @@
 package be.artoria.belfortapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import be.artoria.belfortapp.R;
@@ -12,17 +12,35 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class LaunchActivity extends BaseActivity {
 
+    private static final int SPLASH_DISPLAY_TIME = 2000; // splash screen delay time
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent nextPage;
-        if(PrefUtils.isFirstTime()){
-            nextPage = new Intent(this, LanguageChoiceActivity.class);
-        } else {
-            nextPage = new Intent(this,MainActivity.class);
-            PrefUtils.loadLanguage(this);
-        }
-        startActivity(nextPage);
+        setContentView(R.layout.splash);
+
+        final Context cthis = this;
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+
+                Intent intent = new Intent();
+                if(PrefUtils.isFirstTime()){
+                    intent.setClass(LaunchActivity.this, LanguageChoiceActivity.class);
+                } else {
+                    PrefUtils.loadLanguage(cthis);
+                    intent.setClass(LaunchActivity.this, MainActivity.class);
+                }
+
+                LaunchActivity.this.startActivity(intent);
+                LaunchActivity.this.finish();
+                // transition from splash to main menu
+                overridePendingTransition(R.anim.activityfadein,
+                        R.anim.splashfadeout);
+
+            }
+        }, SPLASH_DISPLAY_TIME);
+
     }
 
 

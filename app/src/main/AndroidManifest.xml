@@ -32,10 +32,10 @@
         </activity>
         <activity
             android:name=".activities.LaunchActivity"
-            android:label="@string/title_activity_launch" >
+            android:label="@string/title_activity_launch"
+            android:theme="@style/LaunchTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
