@@ -138,8 +138,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/btn_lang_padding"
-            android:scaleType="fitCenter"
             android:id="@+id/spanish"
             android:text="Es"
             android:textAlignment="gravity"
@@ -162,8 +160,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/btn_lang_padding"
-            android:scaleType="fitCenter"
             android:id="@+id/italian"
             android:text="It"
             android:textAlignment="gravity"
@@ -186,8 +182,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/btn_lang_padding"
-            android:scaleType="fitCenter"
             android:id="@+id/russian"
             android:text="Ru"
             android:textAlignment="gravity"
