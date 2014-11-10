@@ -5,10 +5,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+
     tools:context=".LanguageChoice"
 
-    android:background="@drawable/not_bg">
+    android:background="@drawable/bg">
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,10 +55,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/lang_choice"
-        android:textColor="@color/white"
+        android:textColor="@color/color2"
         android:id="@+id/string_choose_language"
         android:layout_above="@id/bottom_row"
-        android:paddingBottom="1dp"
+        android:paddingBottom="5dp"
         android:layout_alignParentLeft="true"
  />
 
@@ -69,78 +69,176 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom_row"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:weightSum="7">
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_nl"
-        android:id="@+id/dutch"
-        android:background="@null"
-        android:onClick="langSelected"
-/>
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_fr"
-        android:id="@+id/french"
-        android:background="@null"
-        android:onClick="langSelected"
-/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" >
+        </View>
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_en"
-        android:background="@null"
-        android:id="@+id/english"
-        android:onClick="langSelected"
-/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dutch"
+            android:text="Nl"
+            android:textAlignment="gravity"
+            android:textColor="@color/artoria_lang_choice_text"
+            android:gravity="end|bottom"
+            android:textSize="17sp"
+            android:background="@drawable/ic_lang_nl"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:typeface="sans"
+            android:onClick="langSelected"
+            />
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_de"
-        android:id="@+id/german"
-        android:background="@null"
-        android:onClick="langSelected"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
 
-        />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/french"
+            android:text="Fr"
+            android:textAlignment="gravity"
+            android:textColor="@color/artoria_lang_choice_text"
+            android:gravity="end|bottom"
+            android:textSize="17sp"
+            android:background="@drawable/ic_lang_fr"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:typeface="sans"
+            android:onClick="langSelected"
+            />
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_es"
-        android:background="@null"
-        android:id="@+id/spanish"
-        android:onClick="langSelected"
- />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_it"
-        android:background="@null"
-        android:id="@+id/italian"
-        android:onClick="langSelected"
- />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/english"
+            android:text="En"
+            android:textAlignment="gravity"
+            android:textColor="@color/artoria_lang_choice_text"
+            android:gravity="end|bottom"
+            android:textSize="17sp"
+            android:background="@drawable/ic_lang_en"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:typeface="sans"
+            android:onClick="langSelected"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lang_ru"
-        android:background="@null"
-        android:id="@+id/russian"
-        android:onClick="langSelected"
-/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/german"
+            android:text="De"
+            android:textAlignment="gravity"
+            android:textColor="@color/artoria_lang_choice_text"
+            android:gravity="end|bottom"
+            android:textSize="17sp"
+            android:background="@drawable/ic_lang_de"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:typeface="sans"
+            android:onClick="langSelected"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/bg"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            />
+
+             <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" >
+            </View>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spanish"
+                android:text="Es"
+                android:textAlignment="gravity"
+                android:textColor="@color/artoria_lang_choice_text"
+                android:gravity="end|bottom"
+                android:textSize="17sp"
+                android:background="@drawable/ic_lang_es"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:typeface="sans"
+                android:onClick="langSelected"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" >
+            </View>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/italian"
+                android:text="It"
+                android:textAlignment="gravity"
+                android:textColor="@color/artoria_lang_choice_text"
+                android:gravity="end|bottom"
+                android:textSize="17sp"
+                android:background="@drawable/ic_lang_it"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:typeface="sans"
+                android:onClick="langSelected"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" >
+            </View>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/russian"
+                android:text="Ru"
+                android:textAlignment="gravity"
+                android:textColor="@color/artoria_lang_choice_text"
+                android:gravity="end|bottom"
+                android:textSize="17sp"
+                android:background="@drawable/ic_lang_ru"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:typeface="sans"
+                android:onClick="langSelected"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="0.5 " >
+            </View>
+
+
 
     </LinearLayout>
 </RelativeLayout>
