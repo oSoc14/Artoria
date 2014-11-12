@@ -22,7 +22,8 @@ import be.artoria.belfortapp.activities.LanguageChoiceActivity;
 public class PrefUtils {
     public static final String TAG = "Belfort";
     public static final String DATASET_URL = "https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json";
-    public static final String MUSEUM_URL =  "https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/museum.json";
+    //public static final String MUSEUM_URL =  "https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/museum.json";
+    public static final String MUSEUM_URL =  "https://raw.githubusercontent.com/oSoc14/ArtoriaData/dev/museum.json";
 
     private static final String ARG_USER_KEY = "be.artoria.belfort";
     private static final String ARG_DOWNLOAD = "be.artoria.belfort.downloadtimes";
