@@ -29,7 +29,7 @@
             android:layout_marginLeft="42dp"
             android:textSize="@dimen/menu_header_size"
             android:textColor="#FFFFFF"
-            android:text="Museum"/>
+            android:text="@string/title_activity_museum"/>
         </LinearLayout>
 
     <ListView
@@ -62,7 +62,7 @@
             android:layout_marginLeft="42dp"
             android:textSize="@dimen/menu_header_size"
             android:textColor="#FFFFFF"
-            android:text="Gent"/>
+            android:text="@string/gent"/>
     </LinearLayout>
 
     <ListView
@@ -93,7 +93,7 @@
             android:layout_marginLeft="42dp"
             android:textSize="@dimen/menu_header_size"
             android:textColor="#FFFFFF"
-            android:text="Over"/>
+            android:text="@string/more_info"/>
     </LinearLayout>
 
     <ListView

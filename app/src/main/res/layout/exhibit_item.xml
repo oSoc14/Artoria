@@ -63,13 +63,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/menu_header_size"
-                    android:text="Swipe naar links"
+                    android:text="@string/swipe_left"
                     android:textColor="@color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Om naar het volgende hoofdstuk te gaan"
+                    android:text="@string/next_chapter"
                     android:textColor="@color/white"/>
 
             </LinearLayout>

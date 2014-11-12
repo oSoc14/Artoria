@@ -56,4 +56,8 @@
     <string name="NW">NW</string>
     <string name="lang_choice">Выберите свой язык</string>
     <string name="title_activity_museum">Музей</string>
+    <string name="gent">Гент</string>
+    <string name="more_info">более</string>
+    <string name="swipe_left">Swipe left</string>
+    <string name="next_chapter">To go to the next chapter</string>
 </resources>

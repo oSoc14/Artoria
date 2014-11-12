@@ -61,6 +61,10 @@
     <string name="NW">NW</string>
     <string name="lang_choice">Choisissez votre langue</string>
     <string name="title_activity_museum">musée</string>
+    <string name="gent">Gand</string>
+    <string name="more_info">Plus</string>
+    <string name="swipe_left">Swipe left</string>
+    <string name="next_chapter">To go to the next chapter</string>
 
 </resources>
 
