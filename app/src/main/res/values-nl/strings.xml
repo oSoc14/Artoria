@@ -77,7 +77,7 @@
     <string name="lang_choice">Choose your language</string>
     <string name="gent">Gent</string>
     <string name="more_info">About</string>
-    <string name="swipe_left">Swipe left</string>
-    <string name="next_chapter">To go to the next chapter</string>
+    <string name="swipe_left">Swipe  naar links</string>
+    <string name="next_chapter">Om naar het volgende hoofdstuk te gaan</string>
 
 </resources>

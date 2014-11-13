@@ -37,7 +37,7 @@ import be.artoria.belfortapp.app.adapters.ExhibitAdapter;
 import be.artoria.belfortapp.viewflow.CircleFlowIndicator;
 import be.artoria.belfortapp.viewflow.ViewFlow;
 
-public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
+public class MuseumActivity extends BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
     private ViewFlow viewFlow;
     @Override
@@ -48,15 +48,14 @@ public class MuseumActivity extends /*SwipeActivity*/BaseActivity {
     }
     
     private void initGui(){
-        System.out.println("init museumactivity");
+
         ActionBar actionBar = getActionBar();
         actionBar.hide();
         Intent i = getIntent();
         int floor = i.getIntExtra(ARG_FLOOR,0);
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
-        ExhibitAdapter adapter = new ExhibitAdapter(this,DataManager.getFloorList().get(floor).exhibits);
-        viewFlow.setAdapter(adapter);
-        viewFlow.setSelection(floor);
+        ExhibitAdapter adapter = new ExhibitAdapter(this,DataManager.getFloorList().get(0).exhibits);
+        viewFlow.setAdapter(adapter,floor);
         final CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         viewFlow.setFlowIndicator(indic);
         indic.setFillColor(Color.WHITE);

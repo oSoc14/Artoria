@@ -86,6 +86,7 @@ public class ExhibitAdapter extends BaseAdapter {
         txtNumber.setTextSize(MUSEUM_TITLE_SIZE);
         txtNumber.setTextColor(Color.GRAY);
         txtNumber.setText(floor + "." + exhibit +"  ");
+        txtNumber.setPadding(10,0,0,0);
 
         final TextView txtTitle = new TextView(PrefUtils.getContext());
         txtTitle.setTextSize(MUSEUM_TITLE_SIZE);
@@ -96,6 +97,7 @@ public class ExhibitAdapter extends BaseAdapter {
 
         final TextView txtContent = new TextView(PrefUtils.getContext());
         txtContent.setText(ex.getDescription());
+        txtContent.setPadding(10,10,10,10);
         if(exhibit != 1){
             ImageView img = new ImageView(PrefUtils.getContext());
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));
