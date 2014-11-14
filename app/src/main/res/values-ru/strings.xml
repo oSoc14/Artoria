@@ -25,16 +25,25 @@
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
     <string name="monument_landscape_msg">Проведите пальцем влево или вправо для перехода между зданиями</string>
     <string name="no_connection">Пожалуйста, проверьте настройки беспроводного подключения и повторите попытку.</string>
-    <string-array name="lstMenu">
-        <item>Панорама</item>
-        <item>Здания</item>
-        <item>Мой маршрут</item>
-        <item>5-й этаж</item>
+
+    <string-array name="lstMuseum">
         <item>4-й этаж</item>
         <item>3-й этаж</item>
         <item>Второй этаж</item>
         <item>Первый этаж</item>
     </string-array>
+
+    <string-array name="lstAbout">
+        <item>About Artoria</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string-array name="lstGent">
+        <item>Панорама</item>
+        <item>Здания</item>
+        <item>Мой маршрут</item>
+    </string-array>
+
     <string name="title_activity_monument_detail">Детали</string>
     <string name="title_activity_route">Мой маршрут</string>
     <string name="title_activity_map">Карта</string>

@@ -40,6 +40,11 @@
         <item>Mi ruta</item>
     </string-array>
 
+    <string-array name="lstAbout">
+        <item>About Artoria</item>
+        <item>Settings</item>
+    </string-array>
+
     <string name="title_activity_monument_detail">Detalle</string>
     <string name="title_activity_route">Mi ruta</string>
     <string name="title_activity_map">Mapa</string>

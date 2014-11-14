@@ -44,6 +44,11 @@
         <item>Mijn route</item>
     </string-array>
 
+    <string-array name="lstAbout">
+        <item>About Artoria</item>
+        <item>Settings</item>
+    </string-array>
+
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">Route</string>
     <string name="main">Hoofdmenu</string>
@@ -74,7 +79,8 @@
     <string name="SW">ZW</string>
     <string name="W">W</string>
     <string name="NW">NW</string>
-    <string name="lang_choice">Choose your language</string>
+    <string name="lang_choice">Kies uw taal</string>
+    <string name="title_activity_museum">Museum</string>
     <string name="gent">Gent</string>
     <string name="more_info">About</string>
     <string name="swipe_left">Swipe  naar links</string>

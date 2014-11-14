@@ -40,6 +40,11 @@
         <item>Mein Weg</item>
     </string-array>
 
+    <string-array name="lstAbout">
+        <item>About Artoria</item>
+        <item>Settings</item>
+    </string-array>
+
     <string name="title_activity_monument_detail">Detail</string>
     <string name="title_activity_route">Mein Weg</string>
     <string name="title_activity_map">Karte</string>
