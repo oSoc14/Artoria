@@ -34,8 +34,8 @@
     </string-array>
 
     <string-array name="lstAbout">
-        <item>About Artoria</item>
-        <item>Settings</item>
+        <item>Настройки</item>
+        <item>Об Артории</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -67,6 +67,6 @@
     <string name="title_activity_museum">Музей</string>
     <string name="gent">Гент</string>
     <string name="more_info">более</string>
-    <string name="swipe_left">Swipe left</string>
-    <string name="next_chapter">To go to the next chapter</string>
+    <string name="swipe_left">Проведите пальцем влево</string>
+    <string name="next_chapter">чтобы перейти к следующей главе</string>
 </resources>

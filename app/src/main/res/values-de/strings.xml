@@ -41,8 +41,8 @@
     </string-array>
 
     <string-array name="lstAbout">
-        <item>About Artoria</item>
-        <item>Settings</item>
+        <item>Über Artoria</item>
+        <item>Einstellungen</item>
     </string-array>
 
     <string name="title_activity_monument_detail">Detail</string>
@@ -68,8 +68,8 @@
     <string name="title_activity_museum">Museum</string>
     <string name="gent">Gent</string>
     <string name="more_info">Mehr</string>
-    <string name="swipe_left">Swipe left</string>
-    <string name="next_chapter">To go to the next chapter</string>
+    <string name="swipe_left">Streichen Sie nach links</string>
+    <string name="next_chapter">Um zum nächsten Kapitel zu wechseln</string>
 
 </resources>
 

@@ -52,8 +52,8 @@
     <string name="title_activity_panorama">panorama</string>
     <string name="title_activity_mapp">mappa</string>
     <string name="title_activity_new_route">rotta</string>
-    <string name="unsupported">Questo dispositivo non è supportato perché manca un accelerometro o il sensore di campo magnetico necessario per determinare la vostra fotocamera s angolo . </string>
-    <string name="calibrate">Assicurati che il tuo dispositivo bussola è calibrata .</string>
+    <string name="unsupported">Questo dispositivo non è supportato perché manca un accelerometro o il sensore di campo magnetico necessario per determinare la vostra fotocamera s angolo. </string>
+    <string name="calibrate">Assicurati che il tuo dispositivo bussola è calibrata.</string>
     <string name="calibrate_title">taratura</string>
     <string name="show_me_how">Mostrami come</string>
     <string name="N">N</string>
@@ -68,8 +68,8 @@
     <string name="title_activity_museum">Museo</string>
     <string name="gent">Gand</string>
     <string name="more_info">Più</string>
-    <string name="swipe_left">Swipe left</string>
-    <string name="next_chapter">To go to the next chapter</string>
+    <string name="swipe_left">Scorri a sinistra</string>
+    <string name="next_chapter">Per andare al capitolo successivo</string>
 
 </resources>
 

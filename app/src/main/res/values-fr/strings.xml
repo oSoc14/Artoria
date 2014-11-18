@@ -10,7 +10,7 @@
     <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">menu principal</string>
-    <string name="settings">paramètres</string>
+    <string name="settings">Paramètres</string>
     <string name="about">À propos de Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
     <string name="calcRoute">calculer l\'itinéraire</string>
@@ -29,26 +29,26 @@
 
     <string-array name="lstMuseum">
         <item>3ème étage</item>
-        <item>deuxième étage</item>
-        <item>premier étage</item>
+        <item>Deuxième étage</item>
+        <item>Premier étage</item>
         <item>Rez de chaussée</item>
     </string-array>
 
     <string-array name="lstGent">
-        <item>panorama</item>
-        <item>bâtiments</item>
-        <item>mon parcours</item>
+        <item>Panorama</item>
+        <item>Bâtiments</item>
+        <item>Mon parcours</item>
     </string-array>
 
     <string-array name="lstAbout">
-        <item>About Artoria</item>
-        <item>Settings</item>
+        <item>À propos de Artoria</item>
+        <item>Paramètres</item>
     </string-array>
 
-    <string name="title_activity_monument_detail">détail</string>
+    <string name="title_activity_monument_detail">Détail</string>
     <string name="title_activity_route">mon parcours</string>
-    <string name="title_activity_map">carte</string>
-    <string name="route">route</string>
+    <string name="title_activity_map">Carte</string>
+    <string name="route">Route</string>
     <string name="title_activity_panorama">panorama</string>
     <string name="title_activity_mapp">carte</string>
     <string name="title_activity_new_route">route</string>
@@ -68,8 +68,8 @@
     <string name="title_activity_museum">musée</string>
     <string name="gent">Gand</string>
     <string name="more_info">Plus</string>
-    <string name="swipe_left">Swipe left</string>
-    <string name="next_chapter">To go to the next chapter</string>
+    <string name="swipe_left">Balayez vers la gauche</string>
+    <string name="next_chapter">Pour aller au chapitre suivant</string>
 
 </resources>
 
