@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity {
 
         //fill the About list
         lstAbout.setAdapter(getAdapter(new Drawable[]{
-                getResources().getDrawable(R.drawable.ic_draak_white_big),
+                getResources().getDrawable(R.drawable.ic_draak_white),
                 getResources().getDrawable(R.drawable.menu)
         },getResources().getStringArray(R.array.lstAbout)));
 
