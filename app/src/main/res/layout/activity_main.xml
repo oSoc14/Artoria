@@ -33,7 +33,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="270dp"
         android:layout_gravity="center"
         android:paddingTop="10sp"
         android:id="@+id/lstMuseum"
@@ -66,7 +66,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
         android:paddingTop="10sp"
         android:id="@+id/lstgent"

@@ -61,6 +61,7 @@ public class MuseumActivity extends BaseActivity {
         indic.setFillColor(Color.WHITE);
         indic.setStrokeColor(Color.WHITE);
         indic.setSoundEffectsEnabled(true);
+        
     }
 
     @Override
