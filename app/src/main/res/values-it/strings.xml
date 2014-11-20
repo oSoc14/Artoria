@@ -3,10 +3,10 @@
 
     <string name="app_name">BelfortApp</string>
     <string name="action_settings">Impostazioni</string>
-    <string name="lang">lingua</string>
-    <string name="dutch">olandese</string>
-    <string name="french">francese</string>
-    <string name="english">inglese</string>
+    <string name="lang">Lingua</string>
+    <string name="dutch">Olandese</string>
+    <string name="french">Francese</string>
+    <string name="english">Inglese</string>
     <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Menù principale</string>
@@ -29,32 +29,32 @@
 
     <string-array name="lstMuseum">
         <item>3 ° piano</item>
-        <item>secondo piano</item>
-        <item>primo piano</item>
-        <item>piano terra</item>
+        <item>Secondo piano</item>
+        <item>Primo piano</item>
+        <item>Piano terra</item>
     </string-array>
 
     <string-array name="lstGent">
-        <item>panorama</item>
+        <item>Panorama</item>
         <item>Edifici</item>
         <item>Il mio percorso</item>
     </string-array>
 
     <string-array name="lstAbout">
-        <item>About Artoria</item>
-        <item>Settings</item>
+        <item>Che cos\' è Artoria</item>
+        <item>Impostazioni</item>
     </string-array>
 
     <string name="title_activity_monument_detail">dettaglio</string>
     <string name="title_activity_route">Il mio percorso</string>
-    <string name="title_activity_map">mappa</string>
-    <string name="route">rotta</string>
-    <string name="title_activity_panorama">panorama</string>
-    <string name="title_activity_mapp">mappa</string>
+    <string name="title_activity_map">Mappa</string>
+    <string name="route">Rotta</string>
+    <string name="title_activity_panorama">Panorama</string>
+    <string name="title_activity_mapp">Mappa</string>
     <string name="title_activity_new_route">rotta</string>
     <string name="unsupported">Questo dispositivo non è supportato perché manca un accelerometro o il sensore di campo magnetico necessario per determinare la vostra fotocamera s angolo. </string>
     <string name="calibrate">Assicurati che il tuo dispositivo bussola è calibrata.</string>
-    <string name="calibrate_title">taratura</string>
+    <string name="calibrate_title">Taratura</string>
     <string name="show_me_how">Mostrami come</string>
     <string name="N">N</string>
     <string name="NE">NE</string>
