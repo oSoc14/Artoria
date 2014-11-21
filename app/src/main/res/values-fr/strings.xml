@@ -28,10 +28,10 @@
     <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau .</string>
 
     <string-array name="lstMuseum">
-        <item>3ème étage</item>
-        <item>Deuxième étage</item>
-        <item>Premier étage</item>
         <item>Rez de chaussée</item>
+        <item>Premier étage</item>
+        <item>Deuxième étage</item>
+        <item>3ème étage</item>
     </string-array>
 
     <string-array name="lstGent">

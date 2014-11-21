@@ -32,10 +32,10 @@
     <string name="view_route">Mijn route</string>
 
     <string-array name="lstMuseum">
-        <item>3de verdieping</item>
-        <item>2de verdieping</item>
+        <item>Gelijkvloers</item>
         <item>1ste verdieping</item>
-        <item>gelijkvloers</item>
+        <item>2de verdieping</item>
+        <item>3de verdieping</item>
     </string-array>
 
     <string-array name="lstGent">

@@ -28,10 +28,10 @@
     <string name="no_connection">Por favor, compruebe su conexión inalámbrica y vuelva a intentarlo .</string>
 
     <string-array name="lstMuseum">
-        <item>3 ª planta</item>
-        <item>Segunda planta</item>
-        <item>primera planta</item>
         <item>planta baja</item>
+        <item>primera planta</item>
+        <item>Segunda planta</item>
+        <item>3 ª planta</item>
     </string-array>
 
     <string-array name="lstGent">

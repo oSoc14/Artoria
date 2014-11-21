@@ -28,10 +28,10 @@
     <string name="no_connection">Bitte überprüfen Sie Ihre WLAN-Verbindung und versuchen Sie es erneut .</string>
 
     <string-array name="lstMuseum">
-        <item>3. Stock</item>
-        <item>zweiter Stock</item>
-        <item>Erdgeschoss</item>
         <item>Boden</item>
+        <item>Erdgeschoss</item>
+        <item>zweiter Stock</item>
+        <item>3. Stock</item>
     </string-array>
 
     <string-array name="lstGent">

@@ -28,10 +28,10 @@
     <string name="no_connection">Controlla la tua connessione wireless e riprovare .</string> <!-- According to correction we need to remove the 're' ?? -->
 
     <string-array name="lstMuseum">
-        <item>3 ° piano</item>
-        <item>Secondo piano</item>
-        <item>Primo piano</item>
         <item>Piano terra</item>
+        <item>Primo piano</item>
+        <item>Secondo piano</item>
+        <item>3 ° piano</item>
     </string-array>
 
     <string-array name="lstGent">

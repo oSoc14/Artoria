@@ -28,10 +28,10 @@
     <string name="no_connection">Please check your wireless connection and try again.</string>
 
     <string-array name="lstMuseum">
-        <item>3th floor</item>
-        <item>Second floor</item>
-        <item>First floor</item>
         <item>Ground floor</item>
+        <item>First floor</item>
+        <item>Second floor</item>
+        <item>3th floor</item>
     </string-array>
 
     <string-array name="lstGent">

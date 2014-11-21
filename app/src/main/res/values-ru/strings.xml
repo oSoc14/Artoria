@@ -27,10 +27,10 @@
     <string name="no_connection">Пожалуйста, проверьте настройки беспроводного подключения и повторите попытку.</string>
 
     <string-array name="lstMuseum">
-        <item>4-й этаж</item>
-        <item>3-й этаж</item>
-        <item>Второй этаж</item>
         <item>Первый этаж</item>
+        <item>Второй этаж</item>
+        <item>3-й этаж</item>
+        <item>4-й этаж</item>
     </string-array>
 
     <string-array name="lstAbout">

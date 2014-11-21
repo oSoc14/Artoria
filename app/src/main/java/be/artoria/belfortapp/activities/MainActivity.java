@@ -134,20 +134,7 @@ public class MainActivity extends BaseActivity {
         lstMuseum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    switch(i){
-                    case 0:
-                        startMuseumView(3);
-                        break;
-                    case 1:
-                        startMuseumView(2);
-                        break;
-                    case 2:
-                        startMuseumView(1);
-                        break;
-                    case 3:
-                        startMuseumView(0);
-                        break;
-                }
+                        startMuseumView(i);
             }
         });
 
