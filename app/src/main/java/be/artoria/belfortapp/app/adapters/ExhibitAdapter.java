@@ -3,14 +3,17 @@ package be.artoria.belfortapp.app.adapters;
 
 import android.content.Context;
 
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -79,6 +82,8 @@ public class ExhibitAdapter extends BaseAdapter {
     private void addExhibit(FloorExhibit ex, View parentView, int floor, int exhibit){
         final LinearLayout parent = (LinearLayout) parentView;
         final LinearLayout lnrTitle = new LinearLayout(PrefUtils.getContext());
+        final FrameLayout fmlImage = new FrameLayout(PrefUtils.getContext());
+        final View vwGradient = new View(PrefUtils.getContext());
         lnrTitle.setOrientation(LinearLayout.HORIZONTAL);
 
 
@@ -103,17 +108,21 @@ public class ExhibitAdapter extends BaseAdapter {
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));
             if(drwb != null)
                 img.setImageDrawable(drwb);
-            img.setBackgroundColor(PrefUtils.getContext().getResources().getColor(R.color.color2));
+            /*img.setBackgroundColor(PrefUtils.getContext().getResources().getColor(R.color.color2));*/
             img.setMaxHeight(IMAGE_HEIGHT);
             img.setMinimumHeight(IMAGE_HEIGHT);
             img.setScaleType(ImageView.ScaleType.FIT_XY);
             img.setAdjustViewBounds(true);
             //img.setPadding(0,5,0,5);
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(0, 20, 0, 20);
-            parent.addView(img,layoutParams);
+
+            //add the image to a framelayout together with the gradient.xml shape, this is only available from Android 4.2
+            fmlImage.addView(img);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                vwGradient.setBackground(PrefUtils.getContext().getResources().getDrawable(R.drawable.gradient));
+                fmlImage.addView(vwGradient);
+            }
+            parent.addView(fmlImage);
         }
         parent.addView(lnrTitle);
         parent.addView(txtContent);
