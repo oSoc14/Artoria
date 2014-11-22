@@ -33,7 +33,8 @@ public class ExhibitAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<FloorExhibit> exhibits;
-    private static final int MUSEUM_TITLE_SIZE = 32;
+    //private static final int MUSEUM_TITLE_SIZE = 32;
+    private static final int MUSEUM_TITLE_SIZE = 24;
     private static final int IMAGE_HEIGHT = 350;
 
     public ExhibitAdapter(Context context, List<FloorExhibit> exhibits) {
@@ -76,6 +77,12 @@ public class ExhibitAdapter extends BaseAdapter {
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,position,j+1);
         }
 
+        //if we're on the last page hide btnnextpage
+        if(position == DataManager.getFloorList().size() -1){
+            LinearLayout lnrNext = (LinearLayout)convertView.findViewById(R.id.btnNextFloor);
+            lnrNext.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -96,6 +103,7 @@ public class ExhibitAdapter extends BaseAdapter {
         final TextView txtTitle = new TextView(PrefUtils.getContext());
         txtTitle.setTextSize(MUSEUM_TITLE_SIZE);
         txtTitle.setText(ex.getName());
+        txtTitle.setTextColor(Color.GRAY);
 
         lnrTitle.addView(txtNumber);
         lnrTitle.addView(txtTitle);
