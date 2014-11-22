@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BelfortApp</string>
-    <string name="action_settings">paramètres</string>
+    <string name="app_name">Belfort</string>
+    <string name="action_settings">Paramètres</string>
     <string name="lang">langue</string>
     <string name="dutch">néerlandais</string>
     <string name="french">français</string>
     <string name="english">anglais</string>
     <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
-    <string name="title_activity_main">menu principal</string>
+    <string name="title_activity_main">Menu principal</string>
     <string name="settings">Paramètres</string>
     <string name="about">À propos de Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
-    <string name="calcRoute">calculer l\'itinéraire</string>
-    <string name="view_route">mon parcours</string>
+    <string name="calcRoute">Calculer l\'itinéraire</string>
+    <string name="view_route">Mon parcours</string>
     <string name="added_to_route">Ajouté à mon itinéraire</string>
-    <string name="route_planning">planificateur de voyage</string>
-    <string name="route_desc">itinéraire</string>
+    <string name="route_planning">Planificateur de voyage</string>
+    <string name="route_desc">Itinéraire</string>
     <string name="show_map">Voir la carte</string>
-    <string name="minutes">procès-verbal</string>
+    <string name="minutes">minutes</string>
     <string name="add_to_route">Ajouter à l\'itinéraire</string>
-    <string name="destination">destination</string>
+    <string name="destination">Destination</string>
     <string name="no_route">Il n\'y a pas de points sur votre itinéraire , s\'il vous plaît ajouter quelques points à votre itinéraire en appuyant panorama ou bâtiments</string>
     <string name="dataset_url">https://raw.githubusercontent.com/oSoc14/ArtoriaData/master/poi.json</string>
     <string name="monument_landscape_msg">Balayez vers la gauche ou la droite pour naviguer entre les bâtiments</string>
@@ -31,7 +31,7 @@
         <item>Rez de chaussée</item>
         <item>Premier étage</item>
         <item>Deuxième étage</item>
-        <item>3ème étage</item>
+        <item>Troisième étage</item>
     </string-array>
 
     <string-array name="lstGent">
