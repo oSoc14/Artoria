@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:scaleType="fitXY"
                 android:layout_height="500dp"
+                android:src="@drawable/belfort"
                 />
 
             <TextView
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="32dp"
+                android:fontFamily="Athelas"
                 android:id="@+id/txtChapterTitle"
                 android:text="Het Belfort van Gent"/>
 
