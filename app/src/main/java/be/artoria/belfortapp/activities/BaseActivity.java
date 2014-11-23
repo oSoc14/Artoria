@@ -22,6 +22,7 @@ public class BaseActivity extends ActionBarActivity {
 
     protected static Typeface athelas;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class BaseActivity extends ActionBarActivity {
         }
         PrefUtils.loadLanguage(this);
         athelas     = Typeface.createFromAsset(getAssets(), "fonts/Athelas.ttc");
-    }
+        }
 
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -32,10 +33,15 @@ public class ExhibitAdapter extends BaseAdapter {
     private List<FloorExhibit> exhibits;
     private static final int MUSEUM_TITLE_SIZE = 32;
     private static final int IMAGE_HEIGHT = 350;
+    protected static Typeface uniSansThin;
+    protected static Typeface uniSansHeavy;
 
     public ExhibitAdapter(Context context, List<FloorExhibit> exhibits) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.exhibits = exhibits;
+        uniSansThin = Typeface.createFromAsset(context.getAssets(), "fonts/Uni Sans Thin.ttf");
+        uniSansHeavy = Typeface.createFromAsset(context.getAssets(), "fonts/Uni Sans Heavy.ttf");
+
     }
 
     @Override
@@ -98,6 +104,7 @@ public class ExhibitAdapter extends BaseAdapter {
         final TextView txtContent = new TextView(PrefUtils.getContext());
         txtContent.setText(ex.getDescription());
         txtContent.setPadding(10,10,10,10);
+        txtContent.setTypeface(uniSansThin);
         if(exhibit != 1){
             ImageView img = new ImageView(PrefUtils.getContext());
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));

@@ -46,7 +46,7 @@
     </string-array>
 
     <string name="title_activity_monument_detail">Détail</string>
-    <string name="title_activity_route">mon parcours</string>
+    <string name="title_activity_route">Mon parcours</string>
     <string name="title_activity_map">Carte</string>
     <string name="route">Route</string>
     <string name="title_activity_panorama">panorama</string>
@@ -65,7 +65,7 @@
     <string name="W">W</string>
     <string name="NW">NW</string>
     <string name="lang_choice">Choisissez votre langue</string>
-    <string name="title_activity_museum">musée</string>
+    <string name="title_activity_museum">Musée</string>
     <string name="gent">Gand</string>
     <string name="more_info">Plus</string>
     <string name="swipe_left">Balayez vers la gauche</string>
