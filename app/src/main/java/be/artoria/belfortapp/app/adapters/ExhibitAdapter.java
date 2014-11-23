@@ -9,6 +9,9 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,15 +109,30 @@ public class ExhibitAdapter extends BaseAdapter {
         final TextView txtTitle = new TextView(PrefUtils.getContext());
         txtTitle.setTextSize(MUSEUM_TITLE_SIZE);
         txtTitle.setText(ex.getName());
-        txtTitle.setTextColor(Color.GRAY);
+        //txtTitle.setTextColor(Color.GRAY);
+        txtTitle.setTypeface(uniSansHeavy);
 
         lnrTitle.addView(txtNumber);
         lnrTitle.addView(txtTitle);
 
+
+        final SpannableString spannableString = new SpannableString(ex.getDescription());
+        int position = 0;
+        for (int i = 0, ei = ex.getDescription().length(); i < ei; i++) {
+            char c = ex.getDescription().charAt(i);
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+                position = i;
+                break;
+            }
+        }
+        spannableString.setSpan(new RelativeSizeSpan(2.0f), position, position + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         final TextView txtContent = new TextView(PrefUtils.getContext());
-        txtContent.setText(ex.getDescription());
-        txtContent.setPadding(10,10,10,10);
+        //txtContent.setText(ex.getDescription());
+        txtContent.setText(spannableString, TextView.BufferType.SPANNABLE);
+        txtContent.setPadding(10, 10, 10, 10);
         txtContent.setTypeface(FontManager.athelas);
+        txtContent.setTextColor(Color.BLACK);
         if(exhibit != 1){
             ImageView img = new ImageView(PrefUtils.getContext());
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));
