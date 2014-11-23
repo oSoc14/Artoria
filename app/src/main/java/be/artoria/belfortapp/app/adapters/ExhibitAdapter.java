@@ -27,6 +27,7 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
+import be.artoria.belfortapp.app.FontManager;
 import be.artoria.belfortapp.app.MuseumImageMapper;
 import be.artoria.belfortapp.app.PrefUtils;
 
@@ -37,15 +38,11 @@ public class ExhibitAdapter extends BaseAdapter {
     //private static final int MUSEUM_TITLE_SIZE = 32;
     private static final int MUSEUM_TITLE_SIZE = 24;
     private static final int IMAGE_HEIGHT = 350;
-    protected static Typeface uniSansThin;
-    protected static Typeface uniSansHeavy;
+
 
     public ExhibitAdapter(Context context, List<FloorExhibit> exhibits) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.exhibits = exhibits;
-        uniSansThin = Typeface.createFromAsset(context.getAssets(), "fonts/Uni Sans Thin.ttf");
-        uniSansHeavy = Typeface.createFromAsset(context.getAssets(), "fonts/Uni Sans Heavy.ttf");
-
     }
 
     @Override
@@ -117,7 +114,7 @@ public class ExhibitAdapter extends BaseAdapter {
         final TextView txtContent = new TextView(PrefUtils.getContext());
         txtContent.setText(ex.getDescription());
         txtContent.setPadding(10,10,10,10);
-        txtContent.setTypeface(uniSansThin);
+        txtContent.setTypeface(FontManager.athelas);
         if(exhibit != 1){
             ImageView img = new ImageView(PrefUtils.getContext());
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));

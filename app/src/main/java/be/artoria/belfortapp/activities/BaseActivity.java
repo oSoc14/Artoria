@@ -20,9 +20,6 @@ import be.artoria.belfortapp.app.PrefUtils;
 
 public class BaseActivity extends ActionBarActivity {
 
-    protected static Typeface athelas;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +29,6 @@ public class BaseActivity extends ActionBarActivity {
             ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.color2)));
         }
         PrefUtils.loadLanguage(this);
-        athelas     = Typeface.createFromAsset(getAssets(), "fonts/Athelas.ttc");
         }
 
 

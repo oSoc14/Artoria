@@ -18,6 +18,8 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.PrefUtils;
 
+import static be.artoria.belfortapp.app.FontManager.athelas;
+
 
 public class LanguageChoiceActivity extends BaseActivity {
 
