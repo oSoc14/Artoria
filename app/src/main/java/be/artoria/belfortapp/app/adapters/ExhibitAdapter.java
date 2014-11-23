@@ -110,7 +110,7 @@ public class ExhibitAdapter extends BaseAdapter {
         txtTitle.setTextSize(MUSEUM_TITLE_SIZE);
         txtTitle.setText(ex.getName());
         //txtTitle.setTextColor(Color.GRAY);
-        txtTitle.setTypeface(uniSansHeavy);
+        txtTitle.setTypeface(FontManager.uniSansHeavy);
 
         lnrTitle.addView(txtNumber);
         lnrTitle.addView(txtTitle);
