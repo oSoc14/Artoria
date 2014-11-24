@@ -5,15 +5,14 @@
     <string name="action_settings">Ajustes</string>
     <string name="lang">Idioma</string>
     <string name="dutch">holandés</string>
-    <string name="french">francés</string>
+    <string name="french">Francés</string>
     <string name="english">inglés</string>
-    <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">menú principal</string>
     <string name="settings">Ajustes</string>
     <string name="about">Acerca de Artoria</string>
     <string name="artoria_url">http://www.artoria.be</string>
-    <string name="calcRoute">calcular ruta</string>
+    <string name="calcRoute">Calcular ruta</string>
     <string name="view_route">Mi ruta</string>
     <string name="added_to_route">Añadido a mi ruta</string>
     <string name="route_planning">planificador de viajes</string>
@@ -28,10 +27,10 @@
     <string name="no_connection">Por favor, compruebe su conexión inalámbrica y vuelva a intentarlo .</string>
 
     <string-array name="lstMuseum">
-        <item>planta baja</item>
-        <item>primera planta</item>
-        <item>Segunda planta</item>
-        <item>3 ª planta</item>
+        <item>El campanario en Gante</item>
+        <item>La sala secreta &amp; Vigías</item>
+        <item>Museo del reloj &amp; campana Roeland</item>
+        <item>El reloj mecánico &amp; tambor</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -54,7 +53,7 @@
     <string name="title_activity_new_route">Ruta</string>
     <string name="unsupported">Este dispositivo no es compatible , ya que carece de un acelerómetro o sensor de campo magnético necesario para determinar el ángulo de la cámara. </string>
     <string name="calibrate">Por favor, asegúrese de que su dispositivo su brújula está calibrada.</string>
-    <string name="calibrate_title">calibración</string>
+    <string name="calibrate_title">Calibración</string>
     <string name="show_me_how">Muéstrame cómo</string>
     <string name="N">N</string>
     <string name="NE">NE</string>
@@ -70,6 +69,7 @@
     <string name="more_info">Más</string>
     <string name="swipe_left">Pase a la izquierda</string>
     <string name="next_chapter">Para ir al siguiente capítulo</string>
+    <string name="main">Menú Principal</string>
 
 </resources>
 

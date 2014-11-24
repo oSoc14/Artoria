@@ -5,9 +5,8 @@
     <string name="action_settings">Paramètres</string>
     <string name="lang">langue</string>
     <string name="dutch">néerlandais</string>
-    <string name="french">français</string>
+    <string name="french">Français</string>
     <string name="english">anglais</string>
-    <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Menu principal</string>
     <string name="settings">Paramètres</string>
@@ -28,10 +27,10 @@
     <string name="no_connection">S\'il vous plaît vérifier votre connexion sans fil et essayez à nouveau .</string>
 
     <string-array name="lstMuseum">
-        <item>Rez de chaussée</item>
-        <item>Premier étage</item>
-        <item>Deuxième étage</item>
-        <item>Troisième étage</item>
+        <item>Le beffroi de Gand</item>
+        <item>Le secret &amp; les guetteurs</item>
+        <item>Musée de l\'Horloge &amp; cloche Roeland</item>
+        <item>L’horloge mécanique &amp; tambour</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -50,7 +49,7 @@
     <string name="title_activity_map">Carte</string>
     <string name="route">Route</string>
     <string name="title_activity_panorama">panorama</string>
-    <string name="title_activity_mapp">carte</string>
+    <string name="title_activity_mapp">Carte</string>
     <string name="title_activity_new_route">route</string>
     <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un accéléromètre ou un capteur de champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo \\ . </string>
     <string name="calibrate">S\'il vous plaît assurez la boussole de votre appareil \\ est calibré .</string>
@@ -70,6 +69,7 @@
     <string name="more_info">Plus</string>
     <string name="swipe_left">Balayez vers la gauche</string>
     <string name="next_chapter">Pour aller au chapitre suivant</string>
+    <string name="main">Menu principal</string>
 
 </resources>
 

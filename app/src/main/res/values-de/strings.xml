@@ -7,7 +7,6 @@
     <string name="dutch">Holländisch</string>
     <string name="french">Französisch</string>
     <string name="english">Englisch</string>
-    <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Hauptmenü</string>
     <string name="settings">Einstellungen</string>
@@ -19,7 +18,7 @@
     <string name="route_planning">Routenplaner</string>
     <string name="route_desc">Routenbeschreibung</string>
     <string name="show_map">Karte anzeigen</string>
-    <string name="minutes">Protokoll</string>
+    <string name="minutes">Minuten</string>
     <string name="add_to_route">Zu Route hinzufügen</string>
     <string name="destination">Ziel</string>
     <string name="no_route">Es gibt keine Wegpunkte auf Ihrer Route , fügen Sie bitte einige Wegpunkte zu Ihrer Route durch Antippen Panorama oder Gebäude</string>
@@ -28,10 +27,10 @@
     <string name="no_connection">Bitte überprüfen Sie Ihre WLAN-Verbindung und versuchen Sie es erneut .</string>
 
     <string-array name="lstMuseum">
-        <item>Boden</item>
-        <item>Erdgeschoss</item>
-        <item>zweiter Stock</item>
-        <item>3. Stock</item>
+        <item>Der Glockenturm in Gent</item>
+        <item>Das Geheime Zimmer &amp; Turmwächters</item>
+        <item>Klokkenmuseum &amp; Klokke Roeland</item>
+        <item>Die Mechanische Uhr &amp; Die Spieltrommel</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -70,6 +69,7 @@
     <string name="more_info">Mehr</string>
     <string name="swipe_left">Streichen Sie nach links</string>
     <string name="next_chapter">Um zum nächsten Kapitel zu wechseln</string>
+    <string name="main">Hauptmenü</string>
 
 </resources>
 

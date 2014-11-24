@@ -7,7 +7,7 @@
     <string name="dutch">Dutch</string>
     <string name="french">French</string>
     <string name="english">English</string>
-    <string name="title_activity_launch">BelfortApp</string>
+    <string name="title_activity_launch" translatable="false">Belfort App</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Main menu</string>
     <string name="settings">Settings</string>
@@ -28,10 +28,10 @@
     <string name="no_connection">Please check your wireless connection and try again.</string>
 
     <string-array name="lstMuseum">
-        <item>Ground floor</item>
-        <item>First floor</item>
-        <item>Second floor</item>
-        <item>3th floor</item>
+        <item>The belfry in Ghent</item>
+        <item>The Secrecy room &amp; keepers</item>
+        <item>Clock Museum &amp; bell Roeland</item>
+        <item>The mechanical clockwork &amp; drum</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -70,5 +70,7 @@
     <string name="more_info">More</string>
     <string name="swipe_left">Swipe left</string>
     <string name="next_chapter">To go to the next chapter</string>
+    <string name="main">Main menu</string>
+    <string name="license" translatable="false"><![CDATA[Copyright © 2010- Peer internet solutions             \n\nThis program is free software: 	you can redistribute it and/or modify it under the terms of the             GNU General Public License as published by the Free Software Foundation, either version 3 of the License,             or at your option) any later version.             \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even             the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public             License for more details.             \n\n You should have received a copy of the GNU General Public License along with this program.             If not, see <http://www.gnu.org/licenses/>]]></string>
 
 </resources>

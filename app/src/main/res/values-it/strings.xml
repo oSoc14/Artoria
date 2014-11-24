@@ -7,7 +7,6 @@
     <string name="dutch">Olandese</string>
     <string name="french">Francese</string>
     <string name="english">Inglese</string>
-    <string name="title_activity_launch">BelfortApp</string>
     <string name="title_activity_base">Belfort</string>
     <string name="title_activity_main">Menù principale</string>
     <string name="settings">Impostazioni</string>
@@ -28,10 +27,10 @@
     <string name="no_connection">Controlla la tua connessione wireless e riprovare .</string> <!-- According to correction we need to remove the 're' ?? -->
 
     <string-array name="lstMuseum">
-        <item>Piano terra</item>
-        <item>Primo piano</item>
-        <item>Secondo piano</item>
-        <item>3 ° piano</item>
+        <item>Il campanile a Gand</item>
+        <item>La camera segreta &amp; guardiani</item>
+        <item>Museo dell\'Orologio &amp; campana Roeland</item>
+        <item>L\'orologio meccanico &amp; tamburo</item>
     </string-array>
 
     <string-array name="lstGent">
@@ -70,6 +69,7 @@
     <string name="more_info">Più</string>
     <string name="swipe_left">Scorri a sinistra</string>
     <string name="next_chapter">Per andare al capitolo successivo</string>
+    <string name="main">Menu principale</string>
 
 </resources>
 
