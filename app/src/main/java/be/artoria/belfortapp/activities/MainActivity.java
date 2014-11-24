@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,9 +32,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
+import be.artoria.belfortapp.app.FontManager;
 import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
+import be.artoria.belfortapp.app.adapters.MainAdapterNumber;
 import be.artoria.belfortapp.fragments.MapFragment;
 import be.artoria.belfortapp.mixare.MixView;
 
@@ -108,13 +111,16 @@ public class MainActivity extends BaseActivity {
         final ListView lstGent = (ListView)findViewById(R.id.lstgent);
         final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
 
+        //set font type for headings
+        TextView[] textViews  =
+                {(TextView)findViewById(R.id.txtMuseumTitle),
+                (TextView)findViewById(R.id.txtGhentTitle),
+                (TextView)findViewById(R.id.txtMoreTitle)};
+        for(TextView txt : textViews){
+            txt.setTypeface(FontManager.uniSansThin);
+        }
         //fill the museum list
-        lstMuseum.setAdapter(getAdapter(new Drawable[]{getResources().getDrawable(R.drawable.route),
-                getResources().getDrawable(R.drawable.route),
-                getResources().getDrawable(R.drawable.route),
-                getResources().getDrawable(R.drawable.route)}
-
-                ,getResources().getStringArray(R.array.lstMuseum)));
+        lstMuseum.setAdapter(new MainAdapterNumber(this,R.layout.main_list_item,getResources().getStringArray(R.array.lstMuseum)));
 
         //fill the Ghent list
         lstGent.setAdapter(getAdapter(new Drawable[]{
@@ -319,8 +325,6 @@ public class MainActivity extends BaseActivity {
         for(int i = 0; i < names.length; i++){
             descriptionRowList.add(new DescriptionRow(images[i],names[i]));
         }
-
         return new MainAdapter(this,R.layout.main_list_item,descriptionRowList);
     }
-
 }

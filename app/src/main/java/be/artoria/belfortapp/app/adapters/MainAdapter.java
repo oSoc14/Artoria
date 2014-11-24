@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.FontManager;
 
 /**
  * Created by Laurens on 22/07/2014.
@@ -48,6 +49,7 @@ public class MainAdapter extends ArrayAdapter<DescriptionRow> {
         }
 
         holder.txtDesc.setText(rowItem.description);
+        holder.txtDesc.setTypeface(FontManager.athelas);
         holder.imageView.setImageDrawable(rowItem.imageDescription);
 
         return convertView;
