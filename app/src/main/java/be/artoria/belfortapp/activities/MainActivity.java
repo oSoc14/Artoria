@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -121,6 +122,11 @@ public class MainActivity extends BaseActivity {
         }
         //fill the museum list
         lstMuseum.setAdapter(new MainAdapterNumber(this,R.layout.main_list_item,getResources().getStringArray(R.array.lstMuseum)));
+        int height = lstMuseum.getCount() * 130;
+        ViewGroup.LayoutParams params = lstMuseum.getLayoutParams();
+        params.height = height;
+        lstMuseum.setLayoutParams(params);
+        lstMuseum.requestLayout();
 
         //fill the Ghent list
         lstGent.setAdapter(getAdapter(new Drawable[]{

@@ -11,16 +11,18 @@
         android:layout_marginLeft="12dp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_centerVertical="true"/>
+        android:gravity="center_vertical|right"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textColor="@color/white"
         android:layout_marginLeft="25dp"
-        android:text = "/"/>
+        android:layout_centerVertical="true"
+        android:text = "/"
+        android:gravity="center_vertical|right"/>
 
     <TextView
         android:layout_weight="1"
@@ -34,16 +36,17 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="eerste verdiep"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:gravity="center_vertical"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text=">"
         android:textColor="@color/white"
+        android:layout_centerVertical="true"
         android:textSize="32dp"
-        android:layout_marginRight="12dp"/>
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical|right"/>
 
 
 </LinearLayout>
