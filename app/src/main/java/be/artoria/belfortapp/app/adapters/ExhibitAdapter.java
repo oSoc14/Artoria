@@ -77,7 +77,9 @@ public class ExhibitAdapter extends BaseAdapter {
         imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
 
         TextView txtTitle = (TextView)convertView.findViewById(R.id.txtChapterTitle);
-        txtTitle.setText(currentFloor.exhibits.get(0).getName());
+        //txtTitle.setText(currentFloor.exhibits.get(0).getName());
+        txtTitle.setText(PrefUtils.getContext().getResources().getStringArray(R.array.lstMuseum)[position]);
+        txtTitle.setTypeface(FontManager.athelas);
 
         for(int j = 0; j < currentFloor.exhibits.size();j++){
             addExhibit(currentFloor.exhibits.get(j),lnrMuseum,position,j+1);

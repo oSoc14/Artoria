@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.w3c.dom.Text;
 
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
@@ -108,9 +110,9 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        final ListView lstMuseum = (ListView)findViewById(R.id.lstMuseum);
         final ListView lstGent = (ListView)findViewById(R.id.lstgent);
         final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
+        initMuseumItems();
 
         //set font type for headings
         TextView[] textViews  =
@@ -120,14 +122,7 @@ public class MainActivity extends BaseActivity {
         for(TextView txt : textViews){
             txt.setTypeface(FontManager.uniSansThin);
         }
-        //fill the museum list
-        lstMuseum.setAdapter(new MainAdapterNumber(this,R.layout.main_list_item,getResources().getStringArray(R.array.lstMuseum)));
-        int height = lstMuseum.getCount() * 130;
-        ViewGroup.LayoutParams params = lstMuseum.getLayoutParams();
-        params.height = height;
-        lstMuseum.setLayoutParams(params);
-        lstMuseum.requestLayout();
-
+        
         //fill the Ghent list
         lstGent.setAdapter(getAdapter(new Drawable[]{
                 getResources().getDrawable(R.drawable.panorama),
@@ -141,14 +136,6 @@ public class MainActivity extends BaseActivity {
                 getResources().getDrawable(R.drawable.ic_draak_white),
                 getResources().getDrawable(R.drawable.menu)
         },getResources().getStringArray(R.array.lstAbout)));
-
-        //add clickhandlers
-        lstMuseum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        startMuseumView(i);
-            }
-        });
 
         lstGent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -323,6 +310,46 @@ public class MainActivity extends BaseActivity {
                 result.get(exhibit.floor).exhibits.add(exhibit);
             }
             return result;
+        }
+    }
+    
+    private void initMuseumItems(){
+
+        String[] textValues = getResources().getStringArray(R.array.lstMuseum);
+        final LinearLayout[] buttons = {
+                (LinearLayout)findViewById(R.id.btnFirstChapter),
+                (LinearLayout)findViewById(R.id.btnSecondChapter),
+                (LinearLayout)findViewById(R.id.btnThirdChapter),
+                (LinearLayout)findViewById(R.id.btnFourthChapter)
+        };
+
+        final TextView[] txtViews = {
+                (TextView)findViewById(R.id.txtFirstChapter),
+                (TextView)findViewById(R.id.txtSecondChapter),
+                (TextView)findViewById(R.id.txtThirdChapter),
+                (TextView)findViewById(R.id.txtFourthChapter),
+        };
+
+        final TextView[] nrViews = {
+                (TextView)findViewById(R.id.nmbrFirstChapter),
+                (TextView)findViewById(R.id.nmbrSecondChapter),
+                (TextView)findViewById(R.id.nmbrThirdChapter),
+                (TextView)findViewById(R.id.nmbrFourthChapter),
+        };
+
+        for(int i = 0; i < buttons.length; i++){
+            final int index = i;
+
+            buttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startMuseumView(index);
+                }
+            });
+            txtViews[i].setText(textValues[index]);
+            txtViews[i].setTypeface(FontManager.athelas);
+            nrViews[i].setTypeface(FontManager.athelas);
+
         }
     }
 
