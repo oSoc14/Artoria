@@ -44,7 +44,7 @@
         android:dividerHeight="5.0sp"/>
         -->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/btnFirstChapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
 
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/btnSecondChapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
 
 
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/btnThirdChapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
 
 
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/btnFourthChapter"
         android:layout_marginBottom="5dp"
         android:layout_width="match_parent"

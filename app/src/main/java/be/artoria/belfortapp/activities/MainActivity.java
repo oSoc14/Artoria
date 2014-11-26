@@ -272,7 +272,7 @@ public class MainActivity extends BaseActivity {
             final Gson gson = new Gson();
             final List<FloorExhibit> list = gson.fromJson(result, new TypeToken<List<FloorExhibit>>(){}.getType());
             downloadingMuseum = false;
-            System.out.println("size = " +list.size());
+            //System.out.println("size = " +list.size());
             if(list == null || list.isEmpty()){
                 Log.e(PrefUtils.TAG ,"Downloading failed");
             }
@@ -340,12 +340,14 @@ public class MainActivity extends BaseActivity {
         for(int i = 0; i < buttons.length; i++){
             final int index = i;
 
+
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startMuseumView(index);
                 }
             });
+            buttons[i].setClickable(true);
             txtViews[i].setText(textValues[index]);
             txtViews[i].setTypeface(FontManager.athelas);
             nrViews[i].setTypeface(FontManager.athelas);
