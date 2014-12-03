@@ -129,23 +129,10 @@ public class MainActivity extends BaseActivity {
                         (TextView)findViewById(R.id.gent_route),
                         (TextView)findViewById(R.id.more_desc),
                         (TextView)findViewById(R.id.more_parameters)};
-        for(TextView tv : textViews)
+        for(TextView tv : textViews_athelas)
             tv.setTypeface(FontManager.athelas);
-        /*
-        //fill the Ghent list
-        lstGent.setAdapter(getAdapter(new Drawable[]{
-                getResources().getDrawable(R.drawable.panorama),
-                getResources().getDrawable(R.drawable.route),
-                getResources().getDrawable(R.drawable.menu)
-        },getResources().getStringArray(R.array.lstGent)));
 
 
-        //fill the About list
-        lstAbout.setAdapter(getAdapter(new Drawable[]{
-                getResources().getDrawable(R.drawable.ic_draak_white),
-                getResources().getDrawable(R.drawable.menu)
-        },getResources().getStringArray(R.array.lstAbout)));
-*/
     }
 
     public void startMyRoute(View v){

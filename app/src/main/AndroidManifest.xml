@@ -17,6 +17,12 @@
     <uses-feature android:name="android.hardware.sensor.gyroscope" />
     <uses-feature android:name="android.hardware.sensor.compass" />
 
+    <supports-screens
+    android:smallScreens="false"
+    android:normalScreens="false"
+    android:largeScreens="true"
+    android:xlargeScreens="false"/>
+
     <application
         android:name=".app.ArtoriaApp"
         android:allowBackup="true"

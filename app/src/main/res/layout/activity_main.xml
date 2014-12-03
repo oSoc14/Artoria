@@ -32,18 +32,6 @@
             android:text="@string/title_activity_museum"/>
         </LinearLayout>
 
-    <!--
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:layout_gravity="center"
-        android:paddingTop="10sp"
-        android:id="@+id/lstMuseum"
-        android:clickable="true"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5.0sp"/>
-        -->
-
     <LinearLayout
         android:id="@+id/btnFirstChapter"
         android:layout_width="match_parent"

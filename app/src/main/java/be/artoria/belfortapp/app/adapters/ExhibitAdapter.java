@@ -38,7 +38,7 @@ public class ExhibitAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<FloorExhibit> exhibits;
-    //private static final int MUSEUM_TITLE_SIZE = 32;
+    private static final int MUSEUM_TEXT_SIZE = 17;
     private static final int MUSEUM_TITLE_SIZE = 24;
     private static final int IMAGE_HEIGHT = 350;
 
@@ -135,7 +135,7 @@ public class ExhibitAdapter extends BaseAdapter {
         txtContent.setPadding(10, 10, 10, 10);
         txtContent.setTypeface(FontManager.athelas);
         txtContent.setTextColor(Color.BLACK);
-        txtContent.setTextSize(1.2f);
+        txtContent.setTextSize(MUSEUM_TEXT_SIZE);
         if(exhibit != 1){
             ImageView img = new ImageView(PrefUtils.getContext());
             Drawable drwb = MuseumImageMapper.getDrawableForId(Integer.parseInt(ex.getImage()));

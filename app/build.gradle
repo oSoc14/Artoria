@@ -15,7 +15,12 @@ android {
         applicationId 'be.artoria.belfortapp'
         minSdkVersion 11
         targetSdkVersion 20
-        versionCode 1
+        // Versioning scheme, needed for the playstore.
+        // ab.cc
+        // a = Screen size, 1 ldpi, 2 mdpi, 3 hdpi, 4 xhdpi,5 xxhdpi, 6 xxxhdpi
+        // b = major version number
+        // c = minor version number 01 etc.
+        versionCode 3004
         versionName '1.0'
         signingConfig signingConfigs.config
     }
@@ -28,17 +33,14 @@ android {
     }
     productFlavors {
         mdpi {
-            packageName 'be.artoria.belfortapp.mdpi'
             resConfigs "mdpi"
             signingConfig signingConfigs.config
         }
         hdpi {
-            packageName 'be.artoria.belfortapp.hdpi'
             resConfigs "hdpi"
             signingConfig signingConfigs.config
         }
         xhdpi {
-            packageName 'be.artoria.belfortapp.xhdpi'
             resConfigs "xhdpi"
             signingConfig signingConfigs.config
         }
