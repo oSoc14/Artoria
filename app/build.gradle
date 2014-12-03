@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'Artoria'
-            keyPassword 'spooky21'
+            keyPassword 'password'
             storeFile file('C:\\Users\\Laurens\\artoriakeys.jks')
-            storePassword 'spooky21'
+            storePassword 'password'
         }
     }
     compileSdkVersion 20
