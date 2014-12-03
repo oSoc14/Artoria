@@ -38,7 +38,8 @@
         <item>Bâtiments</item>
         <item>Mon parcours</item>
     </string-array>
-
+    <string name="buildings" >Bâtiments</string>
+    <string name="my_route" >Mon parcours</string>
     <string-array name="lstAbout">
         <item>À propos de Artoria</item>
         <item>Paramètres</item>
@@ -48,7 +49,7 @@
     <string name="title_activity_route">Mon parcours</string>
     <string name="title_activity_map">Carte</string>
     <string name="route">Route</string>
-    <string name="title_activity_panorama">panorama</string>
+    <string name="title_activity_panorama">Panorama</string>
     <string name="title_activity_mapp">Carte</string>
     <string name="title_activity_new_route">route</string>
     <string name="unsupported">Cet appareil n\'est pas pris en charge car il manque un accéléromètre ou un capteur de champ magnétique nécessaire pour déterminer l\'angle de votre appareil photo \\ . </string>
@@ -70,6 +71,7 @@
     <string name="swipe_left">Balayez vers la gauche</string>
     <string name="next_chapter">Pour aller au chapitre suivant</string>
     <string name="main">Menu principal</string>
+
 
 </resources>
 

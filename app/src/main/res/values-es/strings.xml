@@ -39,6 +39,9 @@
         <item>Mi ruta</item>
     </string-array>
 
+    <string name="buildings" >Edificios</string>
+    <string name="my_route" >Mi ruta</string>
+
     <string-array name="lstAbout">
         <item>Acerca de Artoria</item>
         <item>Ajustes</item>

@@ -38,7 +38,8 @@
         <item>Gebäude</item>
         <item>Mein Weg</item>
     </string-array>
-
+    <string name="buildings" >Gebäude</string>
+    <string name="my_route" >Mein Weg</string>
     <string-array name="lstAbout">
         <item>Über Artoria</item>
         <item>Einstellungen</item>
@@ -70,6 +71,7 @@
     <string name="swipe_left">Streichen Sie nach links</string>
     <string name="next_chapter">Um zum nächsten Kapitel zu wechseln</string>
     <string name="main">Hauptmenü</string>
+
 
 </resources>
 

@@ -42,7 +42,8 @@
         <item>Здания</item>
         <item>Мой маршрут</item>
     </string-array>
-
+    <string name="buildings" >Панорама</string>
+    <string name="my_route" >Мой маршрут</string>
     <string name="title_activity_monument_detail">Детали</string>
     <string name="title_activity_route">Мой маршрут</string>
     <string name="title_activity_map">Карта</string>
@@ -69,4 +70,5 @@
     <string name="swipe_left">Проведите пальцем влево</string>
     <string name="next_chapter">чтобы перейти к следующей главе</string>
     <string name="main">Главное меню</string>
+
 </resources>

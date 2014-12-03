@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
             final long lastDownload = PrefUtils.getTimeStampDownloads();
             final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
             /* Either there is no last download ( case == 0)
-            *  or it is older than 12 hours, which is 43200000 milliseconds according to google */
+            *  or it is older than 6 hours */
             if (lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6 && !downloading ) {
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
@@ -110,19 +110,28 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui(){
-        final ListView lstGent = (ListView)findViewById(R.id.lstgent);
-        final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
+       // final ListView lstGent = (ListView)findViewById(R.id.lstgent);
+       // final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
         initMuseumItems();
 
         //set font type for headings
-        TextView[] textViews  =
+        final TextView[] textViews  =
                 {(TextView)findViewById(R.id.txtMuseumTitle),
                 (TextView)findViewById(R.id.txtGhentTitle),
                 (TextView)findViewById(R.id.txtMoreTitle)};
         for(TextView txt : textViews){
             txt.setTypeface(FontManager.uniSansThin);
         }
-        
+        //set font type for items
+        final TextView[] textViews_athelas  =
+                        {(TextView)findViewById(R.id.gent_desc),
+                        (TextView)findViewById(R.id.gent_museum),
+                        (TextView)findViewById(R.id.gent_route),
+                        (TextView)findViewById(R.id.more_desc),
+                        (TextView)findViewById(R.id.more_parameters)};
+        for(TextView tv : textViews)
+            tv.setTypeface(FontManager.athelas);
+        /*
         //fill the Ghent list
         lstGent.setAdapter(getAdapter(new Drawable[]{
                 getResources().getDrawable(R.drawable.panorama),
@@ -136,57 +145,40 @@ public class MainActivity extends BaseActivity {
                 getResources().getDrawable(R.drawable.ic_draak_white),
                 getResources().getDrawable(R.drawable.menu)
         },getResources().getStringArray(R.array.lstAbout)));
+*/
+    }
 
-        lstGent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Intent intent;
-                switch (i) {
-                    /* The first item is the be.artoria.belfortapp.mixare panorama */
-                    case 0:
-                        if (SupportManager.isDeviceSupported()) {
-                            intent = new Intent(MainActivity.this, MixView.class);
-                            startActivity(intent);
-                        }
-                        break;
-                    /* The second item are the buildings */
-                    case 1:
-                        if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
-                            intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
-                            intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
-                            startActivity(intent);
-                        }
-                        break;
-                    /* The third item is my route */
-                    case 2:
-                        intent = new Intent(MainActivity.this, NewRouteActivity.class);
-                        startActivity(intent);
-                        break;
-                }
-            }
-        });
+    public void startMyRoute(View v){
+        startActivity(new Intent(MainActivity.this, NewRouteActivity.class));
+    }
 
-        lstAbout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i == 0){
-                  /*Go to the Artoria website*/
-                    final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
-                    final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-                    startActivity(webIntent);
+    public void startArtoria(View v){
+        final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
+        final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+        startActivity(webIntent);
+    }
 
-                }else if(i == 1){
-                    /*go to settings*/
-                    final Intent intent = new Intent(MainActivity.this, LanguageChoiceActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+    public void startSettings(View v){
+        startActivity(new Intent(MainActivity.this, LanguageChoiceActivity.class));
     }
 
     private void startMuseumView(int floor){
         if(SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()){
             startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
+        }
+    }
+
+    public void startPanorama(View view) {
+        if (SupportManager.isDeviceSupported()) {
+            startActivity(new Intent(MainActivity.this, MixView.class));
+        }
+    }
+
+    public void startBuildings(View view) {
+        if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
+            final Intent intent = new Intent(MainActivity.this, MonumentDetailActivity.class);
+            intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
+            startActivity(intent);
         }
     }
 
@@ -272,7 +264,6 @@ public class MainActivity extends BaseActivity {
             final Gson gson = new Gson();
             final List<FloorExhibit> list = gson.fromJson(result, new TypeToken<List<FloorExhibit>>(){}.getType());
             downloadingMuseum = false;
-            //System.out.println("size = " +list.size());
             if(list == null || list.isEmpty()){
                 Log.e(PrefUtils.TAG ,"Downloading failed");
             }

@@ -260,6 +260,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/lnrGhent"
         android:background="@color/background_menu_header">
         <ImageView
@@ -279,7 +280,96 @@
             android:text="@string/gent"/>
     </LinearLayout>
 
-    <ListView
+    <RelativeLayout
+        android:clickable="true"
+        android:onClick="startPanorama"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11111111">
+
+        <TextView
+            android:id="@+id/gent_desc"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="@string/title_activity_panorama"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/panorama"
+            android:layout_toLeftOf="@id/gent_desc"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:clickable="true"
+        android:onClick="startBuildings"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11111111">
+
+        <TextView
+            android:id="@+id/gent_route"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="@string/buildings"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/route"
+            android:layout_toLeftOf="@id/gent_route"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:clickable="true"
+        android:onClick="startMyRoute"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11111111">
+
+        <TextView
+            android:id="@+id/gent_museum"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="@string/my_route"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu"
+            android:layout_toLeftOf="@id/gent_museum"
+            />
+    </RelativeLayout>
+    <!--<ListView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
@@ -287,12 +377,13 @@
         android:id="@+id/lstgent"
         android:clickable="true"
         android:divider="@android:color/transparent"
-        android:dividerHeight="5.0sp"/>
+        android:dividerHeight="5.0sp"/> -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:layout_marginBottom="5dp"
         android:background="@color/background_menu_header">
         <ImageView
             android:layout_width="wrap_content"
@@ -311,7 +402,69 @@
             android:text="@string/more_info"/>
     </LinearLayout>
 
-    <ListView
+
+    <RelativeLayout
+        android:clickable="true"
+        android:onClick="startArtoria"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11111111">
+
+        <TextView
+            android:id="@+id/more_desc"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="@string/about"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_draak_white"
+            android:layout_toLeftOf="@id/more_desc"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:clickable="true"
+        android:onClick="startSettings"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content"
+        android:background="#11111111">
+
+        <TextView
+            android:id="@+id/more_parameters"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:paddingLeft="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/more_parameters"
+            android:src="@drawable/menu"/>
+    </RelativeLayout>
+
+    </LinearLayout>
+
+  <!--  <ListView
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_gravity="center"
@@ -319,8 +472,8 @@
         android:id="@+id/lstAbout"
         android:clickable="true"
         android:divider="@android:color/transparent"
-        android:dividerHeight="5.0sp"/>
+        android:dividerHeight="5.0sp"/> -->
 
-</LinearLayout>
+
 </ScrollView>
 

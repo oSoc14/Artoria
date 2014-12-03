@@ -38,6 +38,8 @@
         <item>Edifici</item>
         <item>Il mio percorso</item>
     </string-array>
+    <string name="buildings" >Edifici</string>
+    <string name="my_route" >Il mio percorso</string>
 
     <string-array name="lstAbout">
         <item>Che cos\' è Artoria</item>

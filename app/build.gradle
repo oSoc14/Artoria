@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'Artoria'
+            keyPassword 'spooky21'
+            storeFile file('C:\\Users\\Laurens\\artoriakeys.jks')
+            storePassword 'spooky21'
+        }
+    }
     compileSdkVersion 20
     buildToolsVersion '20.0.0'
     defaultConfig {
@@ -9,14 +17,31 @@ android {
         targetSdkVersion 20
         versionCode 1
         versionName '1.0'
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
+            apply plugin: 'checkstyle'
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
+        mdpi {
+            packageName 'be.artoria.belfortapp.mdpi'
+            resConfigs "mdpi"
+            signingConfig signingConfigs.config
+        }
+        hdpi {
+            packageName 'be.artoria.belfortapp.hdpi'
+            resConfigs "hdpi"
+            signingConfig signingConfigs.config
+        }
+        xhdpi {
+            packageName 'be.artoria.belfortapp.xhdpi'
+            resConfigs "xhdpi"
+            signingConfig signingConfigs.config
+        }
     }
 }
 
