@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'Artoria'
-            keyPassword 'spooky21'
+            keyPassword 'password'
             storeFile file('C:\\Users\\Laurens\\artoriakeys.jks')
-            storePassword 'spooky21'
+            storePassword 'password'
         }
     }
     compileSdkVersion 20
@@ -20,7 +20,7 @@ android {
         // a = Screen size, 1 ldpi, 2 mdpi, 3 hdpi, 4 xhdpi,5 xxhdpi, 6 xxxhdpi
         // b = major version number
         // c = minor version number 01 etc.
-        versionCode 3004
+        versionCode 4004
         versionName '1.0'
         signingConfig signingConfigs.config
     }
