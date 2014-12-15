@@ -1,6 +1,7 @@
 
 package be.artoria.belfortapp.app.adapters;
 
+import android.app.ActionBar;
 import android.content.Context;
 
 import android.content.pm.ApplicationInfo;
@@ -73,8 +74,12 @@ public class ExhibitAdapter extends BaseAdapter {
         LinearLayout lnrMuseum = (LinearLayout)convertView.findViewById(R.id.lnrMuseum);
         lnrMuseum.removeAllViews();
 
+        final int imgId = Integer.parseInt(currentFloor.exhibits.get(0).getImage());
         ImageView imgHeader = (ImageView)convertView.findViewById(R.id.imgHeader);
-        imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(Integer.parseInt(currentFloor.exhibits.get(0).getImage())));
+        imgHeader.setImageDrawable(MuseumImageMapper.getDrawableForId(imgId));
+        imgHeader.setAlpha(100);
+
+
 
         TextView txtTitle = (TextView)convertView.findViewById(R.id.txtChapterTitle);
         //txtTitle.setText(currentFloor.exhibits.get(0).getName());

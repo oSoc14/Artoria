@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="32dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:fontFamily="Athelas"
                 android:id="@+id/txtChapterTitle"
                 android:text="Het Belfort van Gent"/>
