@@ -1,14 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'Artoria'
-            keyPassword 'password'
-            storeFile file('C:\\Users\\Laurens\\artoriakeys.jks')
-            storePassword 'password'
-        }
-    }
+
     compileSdkVersion 20
     buildToolsVersion '20.0.0'
     defaultConfig {
@@ -22,27 +15,12 @@ android {
         // c = minor version number 01 etc.
         versionCode 4004
         versionName '1.0'
-        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             apply plugin: 'checkstyle'
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    productFlavors {
-        mdpi {
-            resConfigs "mdpi"
-            signingConfig signingConfigs.config
-        }
-        hdpi {
-            resConfigs "hdpi"
-            signingConfig signingConfigs.config
-        }
-        xhdpi {
-            resConfigs "xhdpi"
-            signingConfig signingConfigs.config
         }
     }
 }

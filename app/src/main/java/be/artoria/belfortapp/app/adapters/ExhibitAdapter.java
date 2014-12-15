@@ -132,7 +132,11 @@ public class ExhibitAdapter extends BaseAdapter {
         final TextView txtContent = new TextView(PrefUtils.getContext());
         //txtContent.setText(ex.getDescription());
         txtContent.setText(spannableString, TextView.BufferType.SPANNABLE);
-        txtContent.setPadding(10, 10, 10, 10);
+        //txtContent.setPadding(10, 10, 10, 10);
+        final LinearLayout.LayoutParams lop = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int margin = (int)PrefUtils.getContext().getResources().getDimension(R.dimen.activity_horizontal_margin);
+        lop.setMargins(margin,0,margin,0);
+        txtContent.setLayoutParams(lop);
         txtContent.setTypeface(FontManager.athelas);
         txtContent.setTextColor(Color.BLACK);
         txtContent.setTextSize(MUSEUM_TEXT_SIZE);
