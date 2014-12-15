@@ -1,38 +1,15 @@
 package be.artoria.belfortapp.activities;
 
 import android.app.ActionBar;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
-import android.view.Display;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
-import java.util.ResourceBundle;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
-import be.artoria.belfortapp.app.Floor;
-import be.artoria.belfortapp.app.FloorExhibit;
-import be.artoria.belfortapp.app.MuseumImageMapper;
-import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.adapters.ExhibitAdapter;
 import be.artoria.belfortapp.viewflow.CircleFlowIndicator;
 import be.artoria.belfortapp.viewflow.ViewFlow;
@@ -48,7 +25,6 @@ public class MuseumActivity extends BaseActivity {
     }
     
     private void initGui(){
-
         ActionBar actionBar = getActionBar();
         actionBar.hide();
         Intent i = getIntent();
@@ -61,7 +37,6 @@ public class MuseumActivity extends BaseActivity {
         indic.setFillColor(Color.WHITE);
         indic.setStrokeColor(Color.WHITE);
         indic.setSoundEffectsEnabled(true);
-        
     }
 
     @Override

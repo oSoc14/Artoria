@@ -3,6 +3,7 @@ package be.artoria.belfortapp.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -151,6 +152,7 @@ public class MainActivity extends BaseActivity {
 
     private void startMuseumView(int floor){
         if(SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()){
+            setWaiting();
             startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
         }
     }
@@ -331,6 +333,10 @@ public class MainActivity extends BaseActivity {
             nrViews[i].setTypeface(FontManager.athelas);
 
         }
+    }
+
+    private void setWaiting(){
+        ProgressDialog.show(MainActivity.this,"",getResources().getString(R.string.wait));
     }
 
     private MainAdapter getAdapter(Drawable[] images,String[] names){

@@ -71,7 +71,7 @@
     <string name="swipe_left">Balayez vers la gauche</string>
     <string name="next_chapter">Pour aller au chapitre suivant</string>
     <string name="main">Menu principal</string>
-
+    <string name="wait">Attendre svp...</string>
 
 </resources>
 
