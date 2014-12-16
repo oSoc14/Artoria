@@ -1,6 +1,7 @@
 package be.artoria.belfortapp.activities;
 
 import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -17,6 +18,7 @@ import be.artoria.belfortapp.viewflow.ViewFlow;
 public class MuseumActivity extends BaseActivity {
     public static final String ARG_FLOOR = "be.artoria.MuseumActivity.floor";
     private ViewFlow viewFlow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

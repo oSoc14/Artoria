@@ -1,30 +1,20 @@
 package be.artoria.belfortapp.activities;
 
-
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.w3c.dom.Text;
+
 
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
@@ -40,8 +30,6 @@ import be.artoria.belfortapp.app.FontManager;
 import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
-import be.artoria.belfortapp.app.adapters.MainAdapterNumber;
-import be.artoria.belfortapp.fragments.MapFragment;
 import be.artoria.belfortapp.mixare.MixView;
 
 import java.io.BufferedReader;
@@ -51,7 +39,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.datatype.Duration;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
@@ -59,39 +46,35 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 
 public class MainActivity extends BaseActivity {
+    private static boolean downloading = false;
+    private static boolean downloadingMuseum = false;
+    private ProgressDialog plg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.stopWaiting();
         initGui();
     }
 
-    private static boolean downloading = false;
-    private static boolean downloadingMuseum = false;
-
     public static void downloadData() {
-        if(SupportManager.haveNetworkConnection()) {
+        if (SupportManager.haveNetworkConnection()) {
             final long lastDownload = PrefUtils.getTimeStampDownloads();
             final long timeSinceLastDownload = System.currentTimeMillis() - lastDownload;
             /* Either there is no last download ( case == 0)
             *  or it is older than 6 hours */
-            if (lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6 && !downloading ) {
+            if (lastDownload == 0 || timeSinceLastDownload > 1000 * 60 * 60 * 6 && !downloading) {
                 Log.i(PrefUtils.TAG, "Started downloading in the background");
                 new DownloadDataTask().execute(PrefUtils.DATASET_URL);
             }
             final long lastMuseumDownload = PrefUtils.getTimeStampMuseumDownload();
             final long timeSinceLastMuseumDownload = System.currentTimeMillis() - lastDownload;
-            if (lastMuseumDownload == 0 || timeSinceLastMuseumDownload > 1000 * 60 * 60 * 6 && ! downloadingMuseum) {
+            if (lastMuseumDownload == 0 || timeSinceLastMuseumDownload > 1000 * 60 * 60 * 6 && !downloadingMuseum) {
                 Log.i(PrefUtils.TAG, "Started museum download in the background");
                 new DownloadMuseumData().execute(PrefUtils.MUSEUM_URL);
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -109,51 +92,57 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.stopWaiting();
+    }
+
     /*initialize the GUI content and clickhandlers*/
-    private void initGui(){
-       // final ListView lstGent = (ListView)findViewById(R.id.lstgent);
-       // final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
+    private void initGui() {
+        // final ListView lstGent = (ListView)findViewById(R.id.lstgent);
+        // final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
         initMuseumItems();
 
         //set font type for headings
-        final TextView[] textViews  =
-                {(TextView)findViewById(R.id.txtMuseumTitle),
-                (TextView)findViewById(R.id.txtGhentTitle),
-                (TextView)findViewById(R.id.txtMoreTitle)};
-        for(TextView txt : textViews){
+        final TextView[] textViews =
+                {(TextView) findViewById(R.id.txtMuseumTitle),
+                        (TextView) findViewById(R.id.txtGhentTitle),
+                        (TextView) findViewById(R.id.txtMoreTitle)};
+        for (TextView txt : textViews) {
             txt.setTypeface(FontManager.uniSansThin);
         }
         //set font type for items
-        final TextView[] textViews_athelas  =
-                        {(TextView)findViewById(R.id.gent_desc),
-                        (TextView)findViewById(R.id.gent_museum),
-                        (TextView)findViewById(R.id.gent_route),
-                        (TextView)findViewById(R.id.more_desc),
-                        (TextView)findViewById(R.id.more_parameters)};
-        for(TextView tv : textViews_athelas)
+        final TextView[] textViews_athelas =
+                {(TextView) findViewById(R.id.gent_desc),
+                        (TextView) findViewById(R.id.gent_museum),
+                        (TextView) findViewById(R.id.gent_route),
+                        (TextView) findViewById(R.id.more_desc),
+                        (TextView) findViewById(R.id.more_parameters)};
+        for (TextView tv : textViews_athelas)
             tv.setTypeface(FontManager.athelas);
 
 
     }
 
-    public void startMyRoute(View v){
+    public void startMyRoute(View v) {
         startActivity(new Intent(MainActivity.this, NewRouteActivity.class));
     }
 
-    public void startArtoria(View v){
+    public void startArtoria(View v) {
         final Uri webpage = Uri.parse(getResources().getString(R.string.artoria_url));
         final Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
         startActivity(webIntent);
     }
 
-    public void startSettings(View v){
+    public void startSettings(View v) {
         startActivity(new Intent(MainActivity.this, LanguageChoiceActivity.class));
     }
 
-    private void startMuseumView(int floor){
-        if(SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()){
+    private void startMuseumView(int floor) {
+        if (SupportManager.hasMuseumDataInDatabase() || SupportManager.haveNetworkConnection()) {
             setWaiting();
-            startActivity(MuseumActivity.createIntent(MainActivity.this,floor));
+            startActivity(MuseumActivity.createIntent(MainActivity.this, floor));
         }
     }
 
@@ -199,31 +188,31 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
-            final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>(){}.getType());
+            final List<POI> list = gson.fromJson(result, new TypeToken<List<POI>>() {
+            }.getType());
             downloading = false;
-            if(list == null || list.isEmpty()){
-                Log.e(PrefUtils.TAG ,"Downloading failed");
-            }
-            else {
+            if (list == null || list.isEmpty()) {
+                Log.e(PrefUtils.TAG, "Downloading failed");
+            } else {
                 PrefUtils.saveTimeStampDownloads();
                 DataManager.clearpois();
                 try {
                     DataManager.poidao.open();
                     DataManager.poidao.clearTable();
 
-                for(POI poi : list){
-                    DataManager.poidao.savePOI(poi);
-                }
-                DataManager.addAll(list);
-                DataManager.poidao.close();
+                    for (POI poi : list) {
+                        DataManager.poidao.savePOI(poi);
+                    }
+                    DataManager.addAll(list);
+                    DataManager.poidao.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
-              }
+                }
             }
         }
     }
 
-    private static class DownloadMuseumData extends AsyncTask<String, Void, String>{
+    private static class DownloadMuseumData extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             downloadingMuseum = true;
@@ -251,12 +240,12 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute(String result) {
             final Gson gson = new Gson();
-            final List<FloorExhibit> list = gson.fromJson(result, new TypeToken<List<FloorExhibit>>(){}.getType());
+            final List<FloorExhibit> list = gson.fromJson(result, new TypeToken<List<FloorExhibit>>() {
+            }.getType());
             downloadingMuseum = false;
-            if(list == null || list.isEmpty()){
-                Log.e(PrefUtils.TAG ,"Downloading failed");
-            }
-            else {
+            if (list == null || list.isEmpty()) {
+                Log.e(PrefUtils.TAG, "Downloading failed");
+            } else {
                 PrefUtils.saveTimeStampMuseumDownloads();
                 DataManager.clearFloors();
                 DataManager.setFloors(exhibitsToFloors(list));
@@ -265,7 +254,7 @@ public class MainActivity extends BaseActivity {
                     DataManager.museumDAO.open();
                     DataManager.museumDAO.clearTable();
                     System.out.println("started saving to DB");
-                    for(FloorExhibit exhibit : list) {
+                    for (FloorExhibit exhibit : list) {
                         DataManager.museumDAO.saveFloorExhibit(exhibit);
                         System.out.println("saved " + exhibit.getName());
                     }
@@ -279,12 +268,12 @@ public class MainActivity extends BaseActivity {
 
         private List<Floor> exhibitsToFloors(List<FloorExhibit> list) {
             final List<Floor> result = new ArrayList<Floor>();
-            for(final FloorExhibit exhibit : list){
+            for (final FloorExhibit exhibit : list) {
                 // This exhibit is on a floor higher than the current highest floor.
-                int highestFloor =  result.size() - 1;
-                if(exhibit.floor > highestFloor){
+                int highestFloor = result.size() - 1;
+                if (exhibit.floor > highestFloor) {
                     // Deal with it.
-                    while(exhibit.floor > highestFloor )
+                    while (exhibit.floor > highestFloor)
                         result.add(new Floor(highestFloor++));
                 }
                 result.get(exhibit.floor).exhibits.add(exhibit);
@@ -292,32 +281,31 @@ public class MainActivity extends BaseActivity {
             return result;
         }
     }
-    
-    private void initMuseumItems(){
 
+    private void initMuseumItems() {
         String[] textValues = getResources().getStringArray(R.array.lstMuseum);
         final LinearLayout[] buttons = {
-                (LinearLayout)findViewById(R.id.btnFirstChapter),
-                (LinearLayout)findViewById(R.id.btnSecondChapter),
-                (LinearLayout)findViewById(R.id.btnThirdChapter),
-                (LinearLayout)findViewById(R.id.btnFourthChapter)
+                (LinearLayout) findViewById(R.id.btnFirstChapter),
+                (LinearLayout) findViewById(R.id.btnSecondChapter),
+                (LinearLayout) findViewById(R.id.btnThirdChapter),
+                (LinearLayout) findViewById(R.id.btnFourthChapter)
         };
 
         final TextView[] txtViews = {
-                (TextView)findViewById(R.id.txtFirstChapter),
-                (TextView)findViewById(R.id.txtSecondChapter),
-                (TextView)findViewById(R.id.txtThirdChapter),
-                (TextView)findViewById(R.id.txtFourthChapter),
+                (TextView) findViewById(R.id.txtFirstChapter),
+                (TextView) findViewById(R.id.txtSecondChapter),
+                (TextView) findViewById(R.id.txtThirdChapter),
+                (TextView) findViewById(R.id.txtFourthChapter),
         };
 
         final TextView[] nrViews = {
-                (TextView)findViewById(R.id.nmbrFirstChapter),
-                (TextView)findViewById(R.id.nmbrSecondChapter),
-                (TextView)findViewById(R.id.nmbrThirdChapter),
-                (TextView)findViewById(R.id.nmbrFourthChapter),
+                (TextView) findViewById(R.id.nmbrFirstChapter),
+                (TextView) findViewById(R.id.nmbrSecondChapter),
+                (TextView) findViewById(R.id.nmbrThirdChapter),
+                (TextView) findViewById(R.id.nmbrFourthChapter),
         };
 
-        for(int i = 0; i < buttons.length; i++){
+        for (int i = 0; i < buttons.length; i++) {
             final int index = i;
 
 
@@ -327,16 +315,54 @@ public class MainActivity extends BaseActivity {
                     startMuseumView(index);
                 }
             });
+
+
             buttons[i].setClickable(true);
             txtViews[i].setText(textValues[index]);
             txtViews[i].setTypeface(FontManager.athelas);
             nrViews[i].setTypeface(FontManager.athelas);
+            buttons[i].setOnTouchListener(new View.OnTouchListener() {
+                float x, y;
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    System.out.println("ontouch " + index + "event: " + event.getAction());
+                    switch(event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            System.out.println("ondown");
+                            this.x = event.getX();
+                            this.y = event.getY();
+                            return true;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            System.out.println("onup");
+                            this.decectMovement(event.getX(), event.getY());
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+
+                private void decectMovement(float lastX, float lastY){
+                    //swiped left?
+                    System.out.println("detect movement: " + lastX + ": " + this.x);
+                    if((lastX - this.x) <= 0 ){
+                        startMuseumView(index);
+                    }
+                }
+            });
 
         }
     }
 
     private void setWaiting(){
-        ProgressDialog.show(MainActivity.this,"",getResources().getString(R.string.wait));
+        this.plg = ProgressDialog.show(MainActivity.this,"",getResources().getString(R.string.wait));
+    }
+
+    private void stopWaiting(){
+        System.out.println("stop waiting");
+        if(this.plg != null){
+            this.plg.hide();
+        }
     }
 
     private MainAdapter getAdapter(Drawable[] images,String[] names){
