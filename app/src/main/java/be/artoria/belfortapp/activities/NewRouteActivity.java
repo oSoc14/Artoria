@@ -144,6 +144,15 @@ public class NewRouteActivity extends BaseActivity {
             }
         });
 
+        final Button btnRouteDesc = (Button)findViewById(R.id.btnRouteDesc);
+        btnRouteDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(NewRouteActivity.this, MapActivity.class);
+                startActivity(i);
+            }
+        });
+
         routeIsEmpty();
     }
 

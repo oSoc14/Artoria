@@ -325,16 +325,13 @@ public class MainActivity extends BaseActivity {
                 float x, y;
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    System.out.println("ontouch " + index + "event: " + event.getAction());
                     switch(event.getAction()){
                         case MotionEvent.ACTION_DOWN:
-                            System.out.println("ondown");
                             this.x = event.getX();
                             this.y = event.getY();
                             return true;
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
-                            System.out.println("onup");
                             this.decectMovement(event.getX(), event.getY());
                             return true;
                         default:
@@ -343,9 +340,12 @@ public class MainActivity extends BaseActivity {
                 }
 
                 private void decectMovement(float lastX, float lastY){
-                    //swiped left?
-                    System.out.println("detect movement: " + lastX + ": " + this.x);
-                    if((lastX - this.x) <= 0 ){
+
+                    final float verticalMovement = Math.abs(lastY - this.y);
+                    final   float horizontalMovement = Math.abs(lastX - this.x);
+                    System.out.println("vertical movement: " + verticalMovement + " Horizontal movement: " + horizontalMovement);
+                    //swiped left and it wasn't a scroll?
+                    if(((lastX - this.x) <= 0 ) && horizontalMovement > 75){
                         startMuseumView(index);
                     }
                 }
@@ -359,7 +359,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void stopWaiting(){
-        System.out.println("stop waiting");
         if(this.plg != null){
             this.plg.hide();
         }

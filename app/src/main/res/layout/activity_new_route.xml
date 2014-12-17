@@ -34,6 +34,8 @@
                 android:textColor="#FFFFFF"
                 android:background="@color/color2"
                 android:drawableLeft="@drawable/panorama"
+                android:textSize="13dp"
+                android:height="16dp"
                 android:id="@+id/btnPanorama"/>
 
             <Button
@@ -44,6 +46,8 @@
                 android:textColor="#FFFFFF"
                 android:background="@color/color2"
                 android:drawableLeft="@drawable/menu"
+                android:height="16dp"
+                android:textSize="13dp"
                 android:layout_marginLeft="2dp"
                 android:id="@+id/btnBuildings"/>
 
@@ -60,5 +64,13 @@
         dslv:remove_enabled="true"
         dslv:remove_mode="flingRemove"
         dslv:drag_start_mode="onMove"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/route_desc"
+            android:textColor="#FFFFFF"
+            android:background="@color/color2"
+            android:id="@+id/btnRouteDesc"/>
     </LinearLayout>
 </LinearLayout>
