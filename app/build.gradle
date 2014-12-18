@@ -1,26 +1,55 @@
 apply plugin: 'com.android.application'
 
-android {
+if(project.hasProperty("Artoria.properties")
+        && new File(project.property("Artoria.properties")).exists()) {
 
-    compileSdkVersion 20
-    buildToolsVersion '20.0.0'
-    defaultConfig {
-        applicationId 'be.artoria.belfortapp'
-        minSdkVersion 11
-        targetSdkVersion 20
-        // Versioning scheme, needed for the playstore.
-        // ab.cc
-        // a = Screen size, 1 ldpi, 2 mdpi, 3 hdpi, 4 xhdpi,5 xxhdpi, 6 xxxhdpi
-        // b = major version number
-        // c = minor version number 01 etc.
-        versionCode 4004
-        versionName '1.0'
-    }
-    buildTypes {
-        release {
-            apply plugin: 'checkstyle'
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.property("Artoria.properties"))))
+
+    android {
+        signingConfigs {
+            config {
+                keyAlias props['mykeyAlias']
+                keyPassword props['mykeyPassword']
+                storeFile file(props['mystoreFile'])
+                storePassword props['mystorePassword']
+            }
+        }
+        compileSdkVersion 20
+        buildToolsVersion '20.0.0'
+        defaultConfig {
+            applicationId 'be.artoria.belfortapp'
+            minSdkVersion 11
+            targetSdkVersion 20
+            // Versioning scheme, needed for the playstore.
+            // ab.cc
+            // a = Screen size, 1 ldpi, 2 mdpi, 3 hdpi, 4 xhdpi,5 xxhdpi, 6 xxxhdpi
+            // b = major version number
+            // c = minor version number 01 etc.
+            versionCode 4005
+            versionName '1.0'
+            signingConfig signingConfigs.config
+        }
+        buildTypes {
+            release {
+                apply plugin: 'checkstyle'
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+        productFlavors {
+            mdpi {
+                resConfigs "mdpi"
+                signingConfig signingConfigs.config
+            }
+            hdpi {
+                resConfigs "hdpi"
+                signingConfig signingConfigs.config
+            }
+            xhdpi {
+                resConfigs "xhdpi"
+                signingConfig signingConfigs.config
+            }
         }
     }
 }
