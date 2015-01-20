@@ -100,8 +100,6 @@ public class MainActivity extends BaseActivity {
 
     /*initialize the GUI content and clickhandlers*/
     private void initGui() {
-        // final ListView lstGent = (ListView)findViewById(R.id.lstgent);
-        // final ListView lstAbout = (ListView)findViewById(R.id.lstAbout);
         initMuseumItems();
 
         //set font type for headings
@@ -147,9 +145,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void startPanorama(View view) {
-        if (SupportManager.isDeviceSupported()) {
-            startActivity(new Intent(MainActivity.this, MixView.class));
-        }
+        startActivity(new Intent(MainActivity.this, PanoramaActivity.class));
     }
 
     public void startBuildings(View view) {
@@ -308,7 +304,7 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < buttons.length; i++) {
             final int index = i;
 
-
+            buttons[i].setClickable(true);
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -316,8 +312,6 @@ public class MainActivity extends BaseActivity {
                 }
             });
 
-
-            buttons[i].setClickable(true);
             txtViews[i].setText(textValues[index]);
             txtViews[i].setTypeface(FontManager.athelas);
             nrViews[i].setTypeface(FontManager.athelas);
@@ -332,18 +326,18 @@ public class MainActivity extends BaseActivity {
                             return true;
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
-                            this.decectMovement(event.getX(), event.getY());
+                            this.detectMovement(event.getX(), event.getY());
                             return true;
                         default:
                             return false;
                     }
                 }
 
-                private void decectMovement(float lastX, float lastY){
+                private void detectMovement(float lastX, float lastY){
 
                     final float verticalMovement = Math.abs(lastY - this.y);
-                    final   float horizontalMovement = Math.abs(lastX - this.x);
-                    System.out.println("vertical movement: " + verticalMovement + " Horizontal movement: " + horizontalMovement);
+                    final float horizontalMovement = Math.abs(lastX - this.x);
+                    //System.out.println("vertical movement: " + verticalMovement + " Horizontal movement: " + horizontalMovement);
                     //swiped left and it wasn't a scroll?
                     if(((lastX - this.x) <= 0 ) && horizontalMovement > 75){
                         startMuseumView(index);
