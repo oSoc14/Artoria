@@ -33,8 +33,7 @@ if(project.hasProperty("Artoria.properties")
         buildTypes {
             release {
                 apply plugin: 'checkstyle'
-                runProguard false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             }
         }
         productFlavors {
@@ -59,10 +58,11 @@ dependencies {
     compile files('libs/slf4j-android-1.5.8.jar')
     compile files('libs/osmdroid-android-4.2.jar')
     compile files('libs/osmbonuspack_v4.6.jar')
-    compile 'com.android.support:appcompat-v7:20.+'
-    compile 'com.google.code.gson:gson:2.2.+'
+    compile 'com.android.support:appcompat-v7:20.0'
+    compile 'com.google.code.gson:gson:2.2.0'
     //compile 'com.google.android.gms:play-services:5+'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'asia.ivity.android:drag-sort-listview:1.0'
     compile 'com.github.nirhart:parallaxscroll:1.0'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:2.3.0'
 }

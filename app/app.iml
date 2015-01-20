@@ -8,48 +8,49 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="xhdpiRelease" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleXhdpiRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileXhdpiReleaseJava" />
-        <option name="SOURCE_GEN_TASK_NAME" value="generateXhdpiReleaseSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="mdpiRelease" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleMdpiRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileMdpiReleaseSources" />
+        <option name="SOURCE_GEN_TASK_NAME" value="generateMdpiReleaseSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/xhdpi/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/mdpi/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/xhdpi/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/mdpi/release" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/xhdpi/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/xhdpi/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/xhdpi/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/xhdpi/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/xhdpi/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpiRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/xhdpi/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXhdpi/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/mdpi/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/mdpi/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/mdpi/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/mdpi/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/mdpi/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/mdpi/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpiRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mdpi/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestMdpi/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -91,18 +92,17 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
     <orderEntry type="library" exported="" name="parallaxscroll-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="slf4j-android-1.5.8" level="project" />
     <orderEntry type="library" exported="" name="osmbonuspack_v4.6" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="drag-sort-listview-1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="subsampling-scale-image-view-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="osmdroid-android-4.2" level="project" />
   </component>
 </module>
