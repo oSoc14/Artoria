@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <LinearLayout
@@ -357,15 +356,6 @@
             android:layout_toLeftOf="@id/gent_museum"
             />
     </RelativeLayout>
-    <!--<ListView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:paddingTop="10sp"
-        android:id="@+id/lstgent"
-        android:clickable="true"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5.0sp"/> -->
 
     <LinearLayout
         android:layout_width="match_parent"

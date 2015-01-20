@@ -66,7 +66,8 @@
         </activity>
         <activity
             android:name=".activities.PanoramaActivity"
-            android:label="@string/title_activity_panorama" >
+            android:label="@string/title_activity_panorama"
+            android:theme="@style/LaunchTheme">
         <!--android:screenOrientation="landscape" > -->
         </activity>
         <activity
