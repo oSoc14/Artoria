@@ -33,7 +33,8 @@ public class PanoramaActivity extends BaseActivity {
         SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)findViewById(R.id.PanoramaView);
         imageView.setImageResource(R.drawable.bangkokpanorama, imageViewState);
         // Center the panorama.
-        imageView.setScaleAndCenter(1f,new PointF(IMAGE_WIDTH/2, IMAGE_HEIGHT/2));
+        imageView.setScaleAndCenter(1f,imageView.getCenter());
+
     }
 
     /**
