@@ -1,5 +1,6 @@
 package be.artoria.belfortapp.activities;
 
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,6 +16,9 @@ import be.artoria.belfortapp.R;
 public class PanoramaActivity extends BaseActivity {
 
     private static final String BUNDLE_STATE = "ImageViewState";
+    private static final int IMAGE_WIDTH = 2500;
+    private static final int IMAGE_HEIGHT = 810;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,8 @@ public class PanoramaActivity extends BaseActivity {
 
         SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)findViewById(R.id.PanoramaView);
         imageView.setImageResource(R.drawable.bangkokpanorama, imageViewState);
+        // Center the panorama.
+        imageView.setScaleAndCenter(1f,new PointF(IMAGE_WIDTH/2, IMAGE_HEIGHT/2));
     }
 
     /**
