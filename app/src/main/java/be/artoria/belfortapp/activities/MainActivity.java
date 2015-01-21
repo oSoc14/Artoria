@@ -156,6 +156,12 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        /* Close the app when pressing back on the main menu */
+        finish();
+    }
+
     private static class DownloadDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {

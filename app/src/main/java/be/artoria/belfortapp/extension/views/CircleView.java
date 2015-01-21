@@ -27,9 +27,17 @@ import android.util.AttributeSet;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 public class CircleView extends SubsamplingScaleImageView {
 
     private int strokeWidth;
+    private Collection<CircledPOI> circles = Arrays.asList(
+            new CircledPOI(1, 0.1f, 500, 200),
+            new CircledPOI(2, 0.2f, 600, 300),
+            new CircledPOI(3, 0.3f, 1000, 400)
+    );
 
     public CircleView(Context context) {
         this(context, null);
@@ -45,6 +53,9 @@ public class CircleView extends SubsamplingScaleImageView {
         strokeWidth = (int)(density/60f);
     }
 
+    /* Pre allocated items*/
+
+    final Paint paint = new Paint();
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -54,20 +65,37 @@ public class CircleView extends SubsamplingScaleImageView {
             return;
         }
 
-        PointF sCenter = new PointF(getSWidth()/2, getSHeight()/2);
-        PointF vCenter = sourceToViewCoord(sCenter);
-        float radius = (getScale() * getSWidth()) * 0.25f;
+        paint.reset();
+        for(CircledPOI circle : circles) {
+            final PointF vCenter = sourceToViewCoord(circle.x, circle.y);
+            final float radius = (getScale() * getSWidth()) * circle.radius;
+            paint.setAntiAlias(true);
+            paint.setStyle(Style.STROKE);
+            paint.setStrokeCap(Cap.ROUND);
+            paint.setStrokeWidth(strokeWidth * 2);
+            paint.setColor(Color.BLACK);
+            canvas.drawCircle(vCenter.x, vCenter.y, radius, paint);
+            paint.setStrokeWidth(strokeWidth);
+            paint.setColor(Color.argb(255, 51, 181, 229));
+            canvas.drawCircle(vCenter.x, vCenter.y, radius, paint);
+        }
+    }
 
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStyle(Style.STROKE);
-        paint.setStrokeCap(Cap.ROUND);
-        paint.setStrokeWidth(strokeWidth * 2);
-        paint.setColor(Color.BLACK);
-        canvas.drawCircle(vCenter.x, vCenter.y, radius, paint);
-        paint.setStrokeWidth(strokeWidth);
-        paint.setColor(Color.argb(255, 51, 181, 229));
-        canvas.drawCircle(vCenter.x, vCenter.y, radius, paint);
+    private class CircledPOI{
+        // Used for responding to onclick events.
+        public final int poi;
+        // In percentage of screen, maybe? don't know yet.
+        public final float radius;
+        public final int x;
+        public final int y;
+
+        private CircledPOI(int poi, float radius, int x, int y) {
+            this.poi = poi;
+            this.radius = radius;
+            this.x = x;
+            this.y = y;
+
+        }
     }
 
 }

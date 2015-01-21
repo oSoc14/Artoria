@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.extension.views.CircleView;
 
 public class ViewPagerFragment extends Fragment {
 
@@ -49,7 +50,7 @@ public class ViewPagerFragment extends Fragment {
             }
         }
         if (resId != -1) {
-            SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)rootView.findViewById(R.id.imageView);
+            SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)rootView.findViewById(R.id.PanormaCirclePageView);
             imageView.setImageResource(resId);
         }
 

@@ -65,10 +65,9 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name=".activities.PanoramaActivity"
+            android:name=".viewpager.ViewPagerActivity"
             android:label="@string/title_activity_panorama"
             android:theme="@style/LaunchTheme">
-        <!--android:screenOrientation="landscape" > -->
         </activity>
         <activity
             android:name=".mixare.MixView"
