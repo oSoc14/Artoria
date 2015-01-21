@@ -44,6 +44,7 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
+import be.artoria.belfortapp.viewpager.ViewPagerActivity;
 
 public class MainActivity extends BaseActivity {
     private static boolean downloading = false;
@@ -120,7 +121,6 @@ public class MainActivity extends BaseActivity {
         for (TextView tv : textViews_athelas)
             tv.setTypeface(FontManager.athelas);
 
-
     }
 
     public void startMyRoute(View v) {
@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void startPanorama(View view) {
-        startActivity(new Intent(MainActivity.this, PanoramaActivity.class));
+        startActivity(new Intent(MainActivity.this, ViewPagerActivity.class));
     }
 
     public void startBuildings(View view) {
