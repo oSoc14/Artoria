@@ -29,7 +29,11 @@ import be.artoria.belfortapp.R;
 
 public class ViewPagerActivity extends FragmentActivity {
 
+    // TODO: is this frowned upon?
+    public static final String ARGS_IMAGE = "be.artoria.belfort.viewpager.ViewPagerActivity";
+
     private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal };
+
 
     private ViewPager page;
 
@@ -42,14 +46,6 @@ public class ViewPagerActivity extends FragmentActivity {
         page.setAdapter(pagerAdapter);
     }
 
-    /*@Override
-    public void onBackPressed() {
-        if (page.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            page.setCurrentItem(page.getCurrentItem() - 1);
-        }
-    } */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

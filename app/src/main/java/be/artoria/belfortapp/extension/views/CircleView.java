@@ -30,14 +30,12 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import java.util.Arrays;
 import java.util.Collection;
 
+import be.artoria.belfortapp.extension.CircledPOI;
+
 public class CircleView extends SubsamplingScaleImageView {
 
     private int strokeWidth;
-    private Collection<CircledPOI> circles = Arrays.asList(
-            new CircledPOI(1, 0.1f, 500, 200),
-            new CircledPOI(2, 0.2f, 600, 300),
-            new CircledPOI(3, 0.3f, 1000, 400)
-    );
+    private Collection<CircledPOI> circles;
 
     public CircleView(Context context) {
         this(context, null);
@@ -50,10 +48,14 @@ public class CircleView extends SubsamplingScaleImageView {
 
     private void initialise() {
         float density = getResources().getDisplayMetrics().densityDpi;
-        strokeWidth = (int)(density/60f);
+        strokeWidth = (int)(density/70f);
     }
 
-    /* Pre allocated items*/
+    public void addCircles(Collection<CircledPOI> circles){
+        this.circles = circles;
+    }
+
+    /* Pre allocated item, apperantly better for performance */
 
     final Paint paint = new Paint();
     @Override
@@ -81,21 +83,5 @@ public class CircleView extends SubsamplingScaleImageView {
         }
     }
 
-    private class CircledPOI{
-        // Used for responding to onclick events.
-        public final int poi;
-        // In percentage of screen, maybe? don't know yet.
-        public final float radius;
-        public final int x;
-        public final int y;
-
-        private CircledPOI(int poi, float radius, int x, int y) {
-            this.poi = poi;
-            this.radius = radius;
-            this.x = x;
-            this.y = y;
-
-        }
-    }
 
 }

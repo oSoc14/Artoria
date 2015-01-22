@@ -16,20 +16,32 @@ limitations under the License.
 
 package be.artoria.belfortapp.viewpager;
 
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.ImageViewState;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
+import java.util.Arrays;
+
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.app.PrefUtils;
+import be.artoria.belfortapp.extension.CircledPOI;
 import be.artoria.belfortapp.extension.views.CircleView;
 
-public class ViewPagerFragment extends Fragment {
+public class ViewPagerFragment extends Fragment implements View.OnTouchListener {
 
-    private static final String BUNDLE_ASSET = "asset";
+    private static final String BUNDLE_ASSET = "be.artoria.belfortapp.viewpager.ViewPagerFragment.asset";
+    private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
+    private static final int DEFAULT_RESID = R.drawable.bangkokpanorama;
 
     private int resId = -1;
 
@@ -38,32 +50,98 @@ public class ViewPagerFragment extends Fragment {
 
     public ViewPagerFragment(int resId) {
         this.resId = resId;
+            Bundle args = new Bundle();
+            args.putInt(BUNDLE_ASSET, resId);
+            setArguments(args);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.view_pager_page, container, false);
-
         if (savedInstanceState != null) {
             if (resId == -1 && savedInstanceState.containsKey(BUNDLE_ASSET)) {
                 resId = savedInstanceState.getInt(BUNDLE_ASSET);
             }
         }
-        if (resId != -1) {
-            SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)rootView.findViewById(R.id.PanormaCirclePageView);
-            imageView.setImageResource(resId);
+        if (resId == -1) {
+            return rootView;
         }
 
+        final CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
+        final GestureDetector gestureDetector = new GestureDetector(PrefUtils.getContext(), new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                if (imageView.isImageReady()) {
+                    PointF sCoord = imageView.viewToSourceCoord(e.getX(), e.getY());
+                    Toast.makeText(PrefUtils.getContext(), "Single tap: " + ((int)sCoord.x) + ", " + ((int)sCoord.y), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PrefUtils.getContext(), "Image not ready", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+            @Override
+            public void onLongPress(MotionEvent e) {
+                onSingleTapConfirmed(e);
+            }
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                return onSingleTapConfirmed(e);
+            }
+        });
+
+
+
+        imageView.setOnTouchListener(this);
+        imageView.addCircles(Arrays.asList(
+                new CircledPOI(1, 0.1f, 500, 200),
+                new CircledPOI(2, 0.2f, 600, 300),
+                new CircledPOI(3, 0.3f, 1000, 400)
+        ));
+        imageView.setImageResource(resId,imageViewState);
+        imageView.setScaleAndCenter(2.0f, imageView.getCenter());
+        imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
+        imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
+
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return gestureDetector.onTouchEvent(motionEvent);
+            }
+        });
+
         return rootView;
+
     }
 
+    /**
+     * Used to save the state when changing the orientation of the panorama view.
+     * @param outState
+     **/
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         View rootView = getView();
         if (rootView != null) {
+            SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)rootView.findViewById(R.id.PanormaCirclePageView);
             outState.putInt(BUNDLE_ASSET, resId);
+            outState.putSerializable(BUNDLE_STATE, imageView.getState());
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
+    }
+
+    private ImageViewState imageViewState = null;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Restoring when changing orientation.
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_STATE)) {
+            imageViewState = (ImageViewState)savedInstanceState.getSerializable(BUNDLE_STATE);
+        }
+    }
 }
