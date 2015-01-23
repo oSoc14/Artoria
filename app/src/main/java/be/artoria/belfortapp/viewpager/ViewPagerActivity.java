@@ -49,7 +49,7 @@ public class ViewPagerActivity extends FragmentActivity {
         finish();
         return true;
     }
-
+// TODO: Look into a circular pageradapter
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
