@@ -110,7 +110,7 @@ public class CircleView extends SubsamplingScaleImageView {
     public Collection<CircledPOI> getCircles() {
         return circles;
     }
-    /* Pre allocated item, apperantly better for performance */
+    /* Pre allocated item, apparently better for performance */
 
     final Paint paint = new Paint();
     @Override
