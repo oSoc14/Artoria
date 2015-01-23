@@ -17,6 +17,7 @@ limitations under the License.
 package be.artoria.belfortapp.extension.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -34,8 +35,10 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import java.util.Collection;
 
 import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.activities.MonumentDetailActivity;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.extension.CircledPOI;
+import be.artoria.belfortapp.viewpager.ViewPagerActivity;
 
 public class CircleView extends SubsamplingScaleImageView {
 
@@ -67,16 +70,12 @@ public class CircleView extends SubsamplingScaleImageView {
                         // Radius is probably right.
                         final float radius = (getScale() * getSWidth()) * cpoi.radius;
                         if ( distance < radius*radius){
-
-                           /* if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
-                                final Intent intent = new Intent(ViewPagerActivity.class, MonumentDetailActivity.class);
+                                final Intent intent = new Intent(getContext(), MonumentDetailActivity.class);
                                 intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
-                                startActivity(intent);
-                            } */
-                        }
-                            Toast.makeText(PrefUtils.getContext(), "Single tap: " + cpoi.poi + " distance" + distance +" Radius:" + radius*radius, Toast.LENGTH_SHORT).show();
+                                getContext().startActivity(intent);
+                            }
 
-
+                        Toast.makeText(PrefUtils.getContext(), "Single tap: " + cpoi.poi + " distance" + distance +" Radius:" + radius*radius, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(PrefUtils.getContext(), R.string.panormanotready, Toast.LENGTH_SHORT).show();
