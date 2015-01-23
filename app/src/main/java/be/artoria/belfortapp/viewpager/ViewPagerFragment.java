@@ -37,11 +37,10 @@ import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.extension.CircledPOI;
 import be.artoria.belfortapp.extension.views.CircleView;
 
-public class ViewPagerFragment extends Fragment implements View.OnTouchListener {
+public class ViewPagerFragment extends Fragment {
 
     private static final String BUNDLE_ASSET = "be.artoria.belfortapp.viewpager.ViewPagerFragment.asset";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
-    private static final int DEFAULT_RESID = R.drawable.bangkokpanorama;
 
     private int resId = -1;
 
@@ -68,46 +67,16 @@ public class ViewPagerFragment extends Fragment implements View.OnTouchListener 
         }
 
         final CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
-        final GestureDetector gestureDetector = new GestureDetector(PrefUtils.getContext(), new GestureDetector.SimpleOnGestureListener(){
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent e) {
-                if (imageView.isImageReady()) {
-                    PointF sCoord = imageView.viewToSourceCoord(e.getX(), e.getY());
-                    Toast.makeText(PrefUtils.getContext(), "Single tap: " + ((int)sCoord.x) + ", " + ((int)sCoord.y), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PrefUtils.getContext(), "Image not ready", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-            @Override
-            public void onLongPress(MotionEvent e) {
-                onSingleTapConfirmed(e);
-            }
-            @Override
-            public boolean onDoubleTap(MotionEvent e) {
-                return onSingleTapConfirmed(e);
-            }
-        });
 
-
-
-        imageView.setOnTouchListener(this);
         imageView.addCircles(Arrays.asList(
                 new CircledPOI(1, 0.1f, 500, 200),
                 new CircledPOI(2, 0.2f, 600, 300),
                 new CircledPOI(3, 0.3f, 1000, 400)
         ));
         imageView.setImageResource(resId,imageViewState);
-        imageView.setScaleAndCenter(2.0f, imageView.getCenter());
+        imageView.setScaleAndCenter(0.5f, imageView.getCenter());
         imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
-
-        imageView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return gestureDetector.onTouchEvent(motionEvent);
-            }
-        });
 
         return rootView;
 
@@ -127,11 +96,6 @@ public class ViewPagerFragment extends Fragment implements View.OnTouchListener 
             outState.putInt(BUNDLE_ASSET, resId);
             outState.putSerializable(BUNDLE_STATE, imageView.getState());
         }
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
     }
 
     private ImageViewState imageViewState = null;

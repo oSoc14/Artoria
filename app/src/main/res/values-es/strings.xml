@@ -74,6 +74,7 @@
     <string name="next_chapter">Para ir al siguiente capítulo</string>
     <string name="main">Menú Principal</string>
     <string name="wait">por favor espera</string>
+    <string name="panormanotready">Panorama not yet ready.</string>
 
 </resources>
 

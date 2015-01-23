@@ -72,6 +72,7 @@
     <string name="next_chapter">Um zum nächsten Kapitel zu wechseln</string>
     <string name="main">Hauptmenü</string>
     <string name="wait">Bitte warten...</string>
+    <string name="panormanotready">Panorama not yet ready.</string>
 
 </resources>
 

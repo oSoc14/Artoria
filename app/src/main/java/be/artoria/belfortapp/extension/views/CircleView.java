@@ -17,6 +17,7 @@ limitations under the License.
 package be.artoria.belfortapp.extension.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,13 +25,22 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import be.artoria.belfortapp.R;
+import be.artoria.belfortapp.activities.MonumentDetailActivity;
+import be.artoria.belfortapp.app.PrefUtils;
+import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.extension.CircledPOI;
+import be.artoria.belfortapp.viewpager.ViewPagerActivity;
 
 public class CircleView extends SubsamplingScaleImageView {
 
@@ -49,12 +59,59 @@ public class CircleView extends SubsamplingScaleImageView {
     private void initialise() {
         float density = getResources().getDisplayMetrics().densityDpi;
         strokeWidth = (int)(density/70f);
+        final GestureDetector gestureDetector = new GestureDetector(PrefUtils.getContext(), new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                if (isImageReady()) {
+                    PointF sCoord = viewToSourceCoord(e.getX(), e.getY());
+                    for(CircledPOI cpoi: circles){
+                        // Eucleadian distance, taking the square root is a waste of time.
+                        final PointF vCenter = sourceToViewCoord(cpoi.x, cpoi.y);
+                        final float distance = (vCenter.x - sCoord.x) * (vCenter.x - sCoord.x) + (vCenter.y - sCoord.y) * (vCenter.y - sCoord.y);
+                        final float radius = (getScale() * getSWidth()) * cpoi.radius;
+                        if ( distance < radius*radius){
+                            if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
+                                final Intent intent = new Intent(ViewPagerActivity.class, MonumentDetailActivity.class);
+                                intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
+                                startActivity(intent);
+                            }
+                        }
+                            Toast.makeText(PrefUtils.getContext(), "Single tap: " + cpoi.poi + " distance" + distance +" Radius:" + radius*radius, Toast.LENGTH_SHORT).show();
+
+
+                    }
+                } else {
+                    Toast.makeText(PrefUtils.getContext(), R.string.panormanotready, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+            @Override
+            public void onLongPress(MotionEvent e) {
+                onSingleTapConfirmed(e);
+            }
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                return onSingleTapConfirmed(e);
+            }
+        });
+
+
+
+        setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return gestureDetector.onTouchEvent(motionEvent);
+            }
+        });
     }
 
     public void addCircles(Collection<CircledPOI> circles){
         this.circles = circles;
     }
 
+    public Collection<CircledPOI> getCircles() {
+        return circles;
+    }
     /* Pre allocated item, apperantly better for performance */
 
     final Paint paint = new Paint();
@@ -82,6 +139,5 @@ public class CircleView extends SubsamplingScaleImageView {
             canvas.drawCircle(vCenter.x, vCenter.y, radius, paint);
         }
     }
-
 
 }
