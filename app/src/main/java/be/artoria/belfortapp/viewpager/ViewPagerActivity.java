@@ -29,11 +29,8 @@ import be.artoria.belfortapp.R;
 
 public class ViewPagerActivity extends FragmentActivity {
 
-    // TODO: is this frowned upon?
-    public static final String ARGS_IMAGE = "be.artoria.belfort.viewpager.ViewPagerActivity";
-
-    private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal };
-
+    // TODO: This should be in the viewPagerFragment
+    public static final int NUMBER_OF_SIDES = 4;
 
     private ViewPager page;
 
@@ -60,12 +57,12 @@ public class ViewPagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ViewPagerFragment(IMAGES[position]);
+            return new ViewPagerFragment(position);
         }
 
         @Override
         public int getCount() {
-            return IMAGES.length;
+            return NUMBER_OF_SIDES;
         }
     }
 

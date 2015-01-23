@@ -35,9 +35,12 @@ import be.artoria.belfortapp.extension.views.CircleView;
 
 public class ViewPagerFragment extends Fragment {
 
-    private static final String BUNDLE_ASSET = "be.artoria.belfortapp.viewpager.ViewPagerFragment.asset";
+    private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
+    private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal };
+
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
+
     static{
         Collection<CircledPOI> north_buildings =  Arrays.asList(
                 new CircledPOI(1,0.001f,100,300),
@@ -66,39 +69,33 @@ public class ViewPagerFragment extends Fragment {
 
         CIRCLES_TO_PANORAMA = Arrays.asList(north_buildings,east_buildings,south_buildings,west_buildings);
     }
-    private int resId = -1;
+    private int position = 0;
 
     public ViewPagerFragment() {
     }
 
-    public ViewPagerFragment(int resId) {
-        this.resId = resId;
-            Bundle args = new Bundle();
-            args.putInt(BUNDLE_ASSET, resId);
-            setArguments(args);
+    public ViewPagerFragment(int position) {
+        this.position = position;
+        Bundle args = new Bundle();
+        args.putInt(BUNDLE_POSITION, position);
+        setArguments(args);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.view_pager_page, container, false);
         if (savedInstanceState != null) {
-            if (resId == -1 && savedInstanceState.containsKey(BUNDLE_ASSET)) {
-                resId = savedInstanceState.getInt(BUNDLE_ASSET);
+            if (savedInstanceState.containsKey(BUNDLE_POSITION)) {
+                position = savedInstanceState.getInt(BUNDLE_POSITION);
             }
-        }
-        if (resId == -1) {
-            return rootView;
         }
 
         final CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
 
-        imageView.addCircles(Arrays.asList(
-                new CircledPOI(1, 0.1f, 500, 200),
-                new CircledPOI(2, 0.2f, 600, 300),
-                new CircledPOI(3, 0.3f, 1000, 400)
-        ));
-        imageView.setImageResource(resId,imageViewState);
-        imageView.setScaleAndCenter(0.5f, imageView.getCenter());
+        imageView.addCircles(CIRCLES_TO_PANORAMA.get(position));
+        imageView.setImageResource(IMAGES[position],imageViewState);
+        // TODO: center and fullscreen image here
+        //imageView.setScaleAndCenter(0.5f, imageView.getCenter());
         imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
 
@@ -117,7 +114,7 @@ public class ViewPagerFragment extends Fragment {
         View rootView = getView();
         if (rootView != null) {
             CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
-            outState.putInt(BUNDLE_ASSET, resId);
+            outState.putInt(BUNDLE_POSITION, position);
             outState.putSerializable(BUNDLE_STATE, imageView.getState());
         }
     }
