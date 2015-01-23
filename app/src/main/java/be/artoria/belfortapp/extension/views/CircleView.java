@@ -16,6 +16,7 @@ limitations under the License.
 
 package be.artoria.belfortapp.extension.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -56,6 +57,12 @@ public class CircleView extends SubsamplingScaleImageView {
         initialise();
     }
 
+
+
+
+    public interface OnPOISelectedListener {
+        public void onPOISelected(int poiId);
+    }
     private void initialise() {
         float density = getResources().getDisplayMetrics().densityDpi;
         strokeWidth = (int)(density/70f);
@@ -70,6 +77,7 @@ public class CircleView extends SubsamplingScaleImageView {
                         final float distance = (vCenter.x - sCoord.x) * (vCenter.x - sCoord.x) + (vCenter.y - sCoord.y) * (vCenter.y - sCoord.y);
                         final float radius = (getScale() * getSWidth()) * cpoi.radius;
                         if ( distance < radius*radius){
+
                             if (SupportManager.hasMonumentsInDatabase() || SupportManager.haveNetworkConnection()) {
                                 final Intent intent = new Intent(ViewPagerActivity.class, MonumentDetailActivity.class);
                                 intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
