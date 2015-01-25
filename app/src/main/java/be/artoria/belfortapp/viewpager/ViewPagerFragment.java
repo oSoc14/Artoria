@@ -37,7 +37,7 @@ public class ViewPagerFragment extends Fragment {
 
     private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
-    private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal };
+    private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal, R.drawable.bangkokpanorama, R.drawable.bangkokpanorama, };
 
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
 
@@ -48,6 +48,12 @@ public class ViewPagerFragment extends Fragment {
                 new CircledPOI(3,0.1f,200,100),
                 new CircledPOI(4,0.03f,1000,800),
                 new CircledPOI(5,0.02f,1600,200));
+        Collection<CircledPOI> east_buildings =  Arrays.asList(
+                new CircledPOI(1,1f,400,400),
+                new CircledPOI(2,2f,700,400),
+                new CircledPOI(3,3f,1000,400),
+                new CircledPOI(4,4f,1300,400),
+                new CircledPOI(5,5f,1600,400));
         Collection<CircledPOI> south_buildings =  Arrays.asList(
                 new CircledPOI(1,0.1f,100,200),
                 new CircledPOI(2,0.1f,200,1000),
@@ -56,16 +62,11 @@ public class ViewPagerFragment extends Fragment {
                 new CircledPOI(5,0.2f,500,600));
         Collection<CircledPOI> west_buildings =  Arrays.asList(
                 new CircledPOI(8,0.01f,500,700),
-                new CircledPOI(9,0.01f,500,700),
+                new CircledPOI(9,0.02f,500,700),
                 new CircledPOI(10,0.1f,200,100),
-                new CircledPOI(6,0.03f,1000,800),
-                new CircledPOI(5,0.02f,1600,200));
-        Collection<CircledPOI> east_buildings =  Arrays.asList(
-                new CircledPOI(1,1f,400,400),
-                new CircledPOI(2,2f,700,400),
-                new CircledPOI(3,3f,1000,400),
-                new CircledPOI(4,4f,1300,400),
-                new CircledPOI(5,5f,1600,400));
+                new CircledPOI(11,0.03f,1000,800),
+                new CircledPOI(12,0.02f,1600,200));
+
 
         CIRCLES_TO_PANORAMA = Arrays.asList(north_buildings,east_buildings,south_buildings,west_buildings);
     }
