@@ -75,7 +75,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             tools:text="THIS IS TOOLS:TEXT\n cool\n\n\t\they"
             android:id="@+id/monument_description"
             android:maxHeight="200dp"
@@ -88,7 +88,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp">
 
 
@@ -99,23 +98,10 @@
             android:id="@+id/prev"
             android:scaleType="centerCrop"
             style="@style/lightButtonStyle"
-            android:layout_marginLeft="10dp"
             android:onClick="prevDetail"/>
-        <!--
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/add_to_route"
-            android:id="@+id/add_to_route"
-            android:onClick="addToRoute"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            style="@style/ButtonStyle"
-            android:layout_weight="1"/>
 
-            -->
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -138,7 +124,7 @@
                 android:layout_centerInParent="true"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:textSize="16dp"/>
+                android:textSize="16sp"/>
 
         </RelativeLayout>
 
@@ -150,7 +136,7 @@
             style="@style/lightButtonStyle"
             android:scaleType="centerCrop"
             android:src="@drawable/right"
-            android:layout_marginRight="10dp"
+
             />
 
     </LinearLayout>
