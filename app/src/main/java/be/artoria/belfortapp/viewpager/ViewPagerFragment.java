@@ -37,7 +37,7 @@ public class ViewPagerFragment extends Fragment {
 
     private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
-    private static final int[] IMAGES = { R.drawable.north, R.drawable.east, R.drawable.west };
+    private static final int[] IMAGES = { R.drawable.north, R.drawable.east, R.drawable.west, R.drawable.west  };
 
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
 
@@ -96,12 +96,9 @@ public class ViewPagerFragment extends Fragment {
         imageView.addCircles(CIRCLES_TO_PANORAMA.get(position));
         imageView.setImageResource(IMAGES[position],imageViewState);
         // TODO: center and fullscreen image here
-        //imageView.setScaleAndCenter(0.5f, imageView.getCenter());
-        imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
-        imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
+        imageView.setScaleAndCenter(1f, imageView.getCenter());
 
         return rootView;
-
     }
 
     /**

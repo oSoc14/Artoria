@@ -60,22 +60,21 @@ public class CircleView extends SubsamplingScaleImageView {
         final GestureDetector gestureDetector = new GestureDetector(PrefUtils.getContext(), new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+                /* This handler opens the associated point of interest */
                 if (isImageReady()) {
                     PointF sCoord = viewToSourceCoord(e.getX(), e.getY());
+                    // Integer > float calculations.
+                    final int x = (int) sCoord.x;
+                    final int y = (int) sCoord.y;
+                    /* Linearly search all circles to see if any match.*/
                     for(CircledPOI cpoi: circles){
                         // Eucleadian distance, taking the square root is a waste of time.
-                        //FIXME: this doesn't work. Probably don't need the viewCOords but just the regular
-                        final PointF vCenter = sourceToViewCoord(cpoi.x, cpoi.y);
-                        final float distance = (vCenter.x - sCoord.x) * (vCenter.x - sCoord.x) + (vCenter.y - sCoord.y) * (vCenter.y - sCoord.y);
-                        // Radius is probably right.
-                        final float radius = (getScale() * getSWidth()) * cpoi.radius;
-                        if ( distance < radius*radius){
-                                final Intent intent = new Intent(getContext(), MonumentDetailActivity.class);
-                                intent.putExtra(MonumentDetailActivity.ARG_ID, 1);
-                                getContext().startActivity(intent);
+                        final int distance = (cpoi.x - x) * (cpoi.x - x) + (cpoi.y - y) * (cpoi.y - y);
+                        final int radius = (int) (getSWidth() * cpoi.radius);
+                        if (distance <= radius*radius){
+                            getContext().startActivity(MonumentDetailActivity.newIntent(getContext(),cpoi.poi,true));
+                            break;
                             }
-
-                        Toast.makeText(PrefUtils.getContext(), "Single tap: " + cpoi.poi + " distance" + distance +" Radius:" + radius*radius, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(PrefUtils.getContext(), R.string.panormanotready, Toast.LENGTH_SHORT).show();
