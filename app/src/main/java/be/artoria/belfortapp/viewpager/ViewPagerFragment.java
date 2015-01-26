@@ -37,7 +37,7 @@ public class ViewPagerFragment extends Fragment {
 
     private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
-    private static final int[] IMAGES = { R.drawable.bangkokpanorama, R.drawable.montreal, R.drawable.bangkokpanorama, R.drawable.bangkokpanorama, };
+    private static final int[] IMAGES = { R.drawable.north, R.drawable.east, R.drawable.west };
 
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
 
