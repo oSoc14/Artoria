@@ -43,29 +43,20 @@ public class ViewPagerFragment extends Fragment {
 
     static{
         Collection<CircledPOI> north_buildings =  Arrays.asList(
-                new CircledPOI(1,0.001f,100,300),
-                new CircledPOI(2,0.01f,500,700),
-                new CircledPOI(3,0.1f,200,100),
-                new CircledPOI(4,0.03f,1000,800),
-                new CircledPOI(5,0.02f,1600,200));
+                new CircledPOI(0,0.036f,7266,2514),
+                new CircledPOI(1,0.02f,1549,1286),
+                new CircledPOI(2,0.036f,7945,1350),
+                new CircledPOI(11,0.036f,7945,1350));
         Collection<CircledPOI> east_buildings =  Arrays.asList(
-                new CircledPOI(1,1f,400,400),
-                new CircledPOI(2,2f,700,400),
-                new CircledPOI(3,3f,1000,400),
-                new CircledPOI(4,4f,1300,400),
-                new CircledPOI(5,5f,1600,400));
-        Collection<CircledPOI> south_buildings =  Arrays.asList(
-                new CircledPOI(1,0.1f,100,200),
-                new CircledPOI(2,0.1f,200,1000),
-                new CircledPOI(3,0.1f,300,400),
-                new CircledPOI(4,0.3f,400,800),
-                new CircledPOI(5,0.2f,500,600));
+                new CircledPOI(3,0.085f,6941,1940),
+                new CircledPOI(6,0.019f,12201,1999),
+                new CircledPOI(7,0.01f,12554,1850));
+
+        Collection<CircledPOI> south_buildings =  Arrays.asList();
         Collection<CircledPOI> west_buildings =  Arrays.asList(
-                new CircledPOI(8,0.01f,500,700),
-                new CircledPOI(9,0.02f,500,700),
-                new CircledPOI(10,0.1f,200,100),
-                new CircledPOI(11,0.03f,1000,800),
-                new CircledPOI(12,0.02f,1600,200));
+                new CircledPOI(10,0.06f,5524,1800),
+                new CircledPOI(1,0.02f,9363,1356),
+                new CircledPOI(9,0.02f,8251,3732));
 
 
         CIRCLES_TO_PANORAMA = Arrays.asList(north_buildings,east_buildings,south_buildings,west_buildings);

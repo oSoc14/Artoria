@@ -66,6 +66,7 @@ public class CircleView extends SubsamplingScaleImageView {
                     // Integer > float calculations.
                     final int x = (int) sCoord.x;
                     final int y = (int) sCoord.y;
+                    System.out.println("x: " + x + " y: " + y);
                     /* Linearly search all circles to see if any match.*/
                     for(CircledPOI cpoi: circles){
                         // Eucleadian distance, taking the square root is a waste of time.

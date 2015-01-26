@@ -75,12 +75,6 @@ public class MonumentDetailActivity extends BaseActivity {
            viewRoute();
             return true;
         }
-        if(id == android.R.id.home){
-           if(fromPanorama){
-               backToPanorama();
-               return true;
-           }
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -89,9 +83,6 @@ public class MonumentDetailActivity extends BaseActivity {
         final DataManager dm = DataManager.getInstance();
         rm.addWayPoint(dm.getPOIbyID(id));
         Toast.makeText(this,getString(R.string.added_to_route),Toast.LENGTH_SHORT).show();
-        if(fromPanorama){
-           backToPanorama();
-        }
     }
 
     public void prevDetail(View view) {
@@ -207,10 +198,5 @@ public class MonumentDetailActivity extends BaseActivity {
         toReturn.putExtra(ARG_FROM_PANORAMA,fromPanorama);
         toReturn.putExtra(ARG_USER_INSTANTIATED,true);
         return toReturn;
-    }
-
-    private void backToPanorama(){
-        Intent i = new Intent(this, MixView.class);
-        startActivity(i);
     }
 }
