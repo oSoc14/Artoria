@@ -46,7 +46,9 @@ public class ViewPagerFragment extends Fragment {
                 new CircledPOI(0,0.036f,7266,2514),
                 new CircledPOI(1,0.02f,1549,1286),
                 new CircledPOI(2,0.036f,7945,1350),
-                new CircledPOI(11,0.036f,7945,1350));
+                new CircledPOI(11,0.036f,7945,1350),
+                new CircledPOI(4,0.052f,13764,2454),
+                new CircledPOI(11,0.038f,6717,1089));
         Collection<CircledPOI> east_buildings =  Arrays.asList(
                 new CircledPOI(3,0.085f,6941,1940),
                 new CircledPOI(6,0.019f,12201,1999),
