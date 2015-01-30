@@ -37,7 +37,6 @@ public class ViewPagerFragment extends Fragment {
 
     private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
-    //private static final int[] IMAGES = { R.drawable.north, R.drawable.east, R.drawable.west, R.drawable.west  };
     private static final int [] IMAGES = {R.drawable.south,R.drawable.east,R.drawable.north,R.drawable.west};
 
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
@@ -66,17 +65,29 @@ public class ViewPagerFragment extends Fragment {
 
         CIRCLES_TO_PANORAMA = Arrays.asList(south_buildings,east_buildings,north_buildings,west_buildings);
     }
+
     private int position = 0;
+    private ImageViewState imageViewState = null;
 
     public ViewPagerFragment() {
     }
 
-    public ViewPagerFragment(int position) {
+    public static ViewPagerFragment newInstance(int position)
+    {
+        ViewPagerFragment f = new ViewPagerFragment();
+        Bundle bdl = new Bundle(1);
+        bdl.putInt(BUNDLE_POSITION, position);
+        f.setArguments(bdl);
+        return f;
+    }
+
+   /* public ViewPagerFragment(int position) {
         this.position = position;
         Bundle args = new Bundle();
         args.putInt(BUNDLE_POSITION, position);
         setArguments(args);
-    }
+    } */
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,12 +124,12 @@ public class ViewPagerFragment extends Fragment {
         }
     }
 
-    private ImageViewState imageViewState = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Restoring when changing orientation.
 
+        position = getArguments().getInt(BUNDLE_POSITION);
+        // Restoring when changing orientation.
         if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_STATE)) {
             imageViewState = (ImageViewState)savedInstanceState.getSerializable(BUNDLE_STATE);
         }

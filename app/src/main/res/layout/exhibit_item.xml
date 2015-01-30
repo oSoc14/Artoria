@@ -17,7 +17,7 @@
             <ImageView
                 android:id="@+id/imgHeader"
                 android:layout_width="match_parent"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:layout_height="500dp"
                 android:src="@drawable/belfort"
                 />

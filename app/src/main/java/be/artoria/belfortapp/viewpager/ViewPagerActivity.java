@@ -32,14 +32,12 @@ public class ViewPagerActivity extends FragmentActivity {
     // TODO: This should be in the viewPagerFragment
     public static final int NUMBER_OF_SIDES = 4;
 
-    private ViewPager page;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pager);
-        PagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        page = (ViewPager)findViewById(R.id.pager);
+        final PagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        final ViewPager page = (ViewPager) findViewById(R.id.pager);
         page.setAdapter(pagerAdapter);
     }
 
@@ -57,7 +55,7 @@ public class ViewPagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ViewPagerFragment(position);
+            return ViewPagerFragment.newInstance(position);
         }
 
         @Override
