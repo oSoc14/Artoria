@@ -38,7 +38,7 @@ public class ViewPagerFragment extends Fragment {
     private static final String BUNDLE_POSITION = "be.artoria.belfortapp.viewpager.ViewPagerFragment.position";
     private static final String BUNDLE_STATE = "be.artoria.belfortapp.viewpager.ViewPagerFragment.state";
     //private static final int[] IMAGES = { R.drawable.north, R.drawable.east, R.drawable.west, R.drawable.west  };
-    private static final int [] IMAGES = {R.drawable.west/*has to be south !!*/,R.drawable.east,R.drawable.north,R.drawable.west};
+    private static final int [] IMAGES = {R.drawable.south,R.drawable.east,R.drawable.north,R.drawable.west};
 
     private static final List<Collection<CircledPOI>> CIRCLES_TO_PANORAMA ;
 
@@ -54,8 +54,10 @@ public class ViewPagerFragment extends Fragment {
                 new CircledPOI(3,0.085f,6941,1940),
                 new CircledPOI(6,0.019f,12201,1999),
                 new CircledPOI(7,0.01f,12554,1850));
-
-        Collection<CircledPOI> south_buildings =  Arrays.asList();
+        Collection<CircledPOI> south_buildings =  Arrays.asList(
+                new CircledPOI(7,0.012f,2085,835),
+                new CircledPOI(6,0.02f, 1725,955),
+                new CircledPOI(8,0.01f,6019,917));
         Collection<CircledPOI> west_buildings =  Arrays.asList(
                 new CircledPOI(10,0.06f,5524,1800),
                 new CircledPOI(1,0.02f,9363,1356),
