@@ -205,9 +205,11 @@ public class MapFragment extends android.support.v4.app.Fragment {
             final Polyline routeOverlay = RoadManager.buildRoadOverlay(road, getActivity());
             initRouteInstructions(road);
             final TextView lblDistance = (TextView)getView().findViewById(R.id.lblDistance);
-            lblDistance.setText(String.format("%.2f", road.mLength)  + "km");
+            if(lblDistance != null)
+                lblDistance.setText(String.format("%.2f", road.mLength)  + "km");
             final TextView lblTime = (TextView)getView().findViewById(R.id.lblTime);
-            lblTime.setText(String.format("%.0f",(road.mDuration / 60)) + " " + getResources().getString(R.string.minutes)); //set estimated time in minutes
+            if(lblTime != null)
+                lblTime.setText(String.format("%.0f",(road.mDuration / 60)) + " " + getResources().getString(R.string.minutes)); //set estimated time in minutes
             mapView.getOverlays().add(routeOverlay);
             mapView.invalidate();
         }

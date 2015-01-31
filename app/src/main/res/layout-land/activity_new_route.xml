@@ -57,6 +57,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/route_desc"
+            android:textColor="#FFFFFF"
+            android:background="@color/color2"
+            android:id="@+id/btnRouteDesc"/>
+
+
     </LinearLayout>
+
 
 </LinearLayout>

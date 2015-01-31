@@ -30,7 +30,6 @@ import be.artoria.belfortapp.app.FontManager;
 import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
-import be.artoria.belfortapp.mixare.MixView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -31,7 +31,7 @@ import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
-import be.artoria.belfortapp.mixare.MixView;
+
 
 public class MonumentDetailActivity extends BaseActivity {
     public final static String ARG_ID = "be.belfort.monumentid";

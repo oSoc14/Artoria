@@ -21,7 +21,8 @@ import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.app.RouteManager;
 import be.artoria.belfortapp.fragments.MapFragment;
-import be.artoria.belfortapp.mixare.MixView;
+import be.artoria.belfortapp.viewpager.ViewPagerActivity;
+
 
 public class NewRouteActivity extends BaseActivity {
 
@@ -138,7 +139,7 @@ public class NewRouteActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(SupportManager.isDeviceSupported()) {
-                    Intent i = new Intent(NewRouteActivity.this, MixView.class);
+                    Intent i = new Intent(NewRouteActivity.this, ViewPagerActivity.class);
                     startActivity(i);
                 }
             }
