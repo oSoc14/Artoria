@@ -26,8 +26,8 @@ if(project.hasProperty("Artoria.properties")
             // a = Screen size, 1 ldpi, 2 mdpi, 3 hdpi, 4 xhdpi,5 xxhdpi, 6 xxxhdpi
             // b = major version number
             // c = minor version number 01 etc.
-            versionCode 4005
-            versionName '1.0'
+            versionCode 4106
+            versionName '1.1'
             signingConfig signingConfigs.config
         }
         buildTypes {
