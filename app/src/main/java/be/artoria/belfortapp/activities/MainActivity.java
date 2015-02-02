@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -311,7 +312,6 @@ public class MainActivity extends BaseActivity {
 
         for (int i = 0; i < buttons.length; i++) {
             final int index = i;
-
             buttons[i].setClickable(true);
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -327,19 +327,20 @@ public class MainActivity extends BaseActivity {
                 float x, y;
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    switch(event.getAction()){
-                        case MotionEvent.ACTION_DOWN:
-                            this.x = event.getX();
-                            this.y = event.getY();
-                            return true;
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_CANCEL:
-                            this.detectMovement(event.getX(), event.getY());
-                            return true;
-                        default:
-                            return false;
+                    //was it a single tap or a swipe?
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                this.x = event.getX();
+                                this.y = event.getY();
+                                return true;
+                            case MotionEvent.ACTION_UP:
+                            //case MotionEvent.ACTION_CANCEL:
+                                this.detectMovement(event.getX(), event.getY());
+                                return true;
+                            default:
+                                return false;
+                        }
                     }
-                }
 
                 private void detectMovement(float lastX, float lastY){
 
@@ -347,9 +348,9 @@ public class MainActivity extends BaseActivity {
                     final float horizontalMovement = Math.abs(lastX - this.x);
                     //System.out.println("vertical movement: " + verticalMovement + " Horizontal movement: " + horizontalMovement);
                     //swiped left and it wasn't a scroll?
-                    if(((lastX - this.x) <= 0 ) && horizontalMovement > 75){
+                    //if(((lastX - this.x) <= 0 ) && horizontalMovement > 75){
                         startMuseumView(index);
-                    }
+                    //}
                 }
             });
 
