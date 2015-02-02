@@ -27,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import be.artoria.belfortapp.app.Floor;
 import be.artoria.belfortapp.app.FloorExhibit;
 import be.artoria.belfortapp.app.FontManager;
+import be.artoria.belfortapp.app.ImageCache;
 import be.artoria.belfortapp.app.SupportManager;
 import be.artoria.belfortapp.app.adapters.DescriptionRow;
 import be.artoria.belfortapp.app.adapters.MainAdapter;
@@ -206,6 +207,8 @@ public class MainActivity extends BaseActivity {
                     }
                     DataManager.addAll(list);
                     DataManager.poidao.close();
+                    //if all text is downloaded cache poi images
+                    new ImageCache().cachePoiImages();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

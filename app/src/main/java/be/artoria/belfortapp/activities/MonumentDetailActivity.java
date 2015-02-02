@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -27,8 +30,11 @@ import android.widget.Toast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.app.DataManager;
+import be.artoria.belfortapp.app.ImageCache;
 import be.artoria.belfortapp.app.POI;
 import be.artoria.belfortapp.app.RouteManager;
 
@@ -143,31 +149,39 @@ public class MonumentDetailActivity extends BaseActivity {
             }
         }
 
+        //#102 get images from cache first
+        File pic = new File(Environment.getExternalStorageDirectory() + ImageCache.getFilePathFromUrl(wp.image_link));
+        if(pic.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(pic.getAbsolutePath());
+            img.setImageBitmap(bitmap);
+            prgWait.setVisibility(View.GONE);
+            img.setVisibility(View.VISIBLE);
+            imgType.setVisibility(View.VISIBLE);
+        }else{
+            //FALLBACK if it's not stored locally get it online
+             Picasso.with(this).load(wp.image_link).into(img, new Callback() {
+                @Override
+                public void onSuccess() {
+                    switchImages();
+                }
 
-        /*if the device is a phone, the screen can't be tilted see #66 on GitHub*/
-        /*if(!ScreenUtils.isTablet(this)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        }*/
+                @Override
+                public void onError() {
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
+                    switchImages();
+                    System.out.println("Failed to load image");
+                }
 
-        Picasso.with(this).load(wp.image_link).into(img, new Callback() {
-            @Override
-            public void onSuccess() {
-                switchImages();
-            }
+                private void switchImages() {
+                    prgWait.setVisibility(View.GONE);
+                    img.setVisibility(View.VISIBLE);
+                    imgType.setVisibility(View.VISIBLE);
+                }
+            });
+        }
 
-            @Override
-            public void onError() {
-                img.setImageDrawable(getResources().getDrawable(R.drawable.img_not_found));
-                switchImages();
-                System.out.println("Failed to load image");
-            }
 
-            private void switchImages() {
-                prgWait.setVisibility(View.GONE);
-                img.setVisibility(View.VISIBLE);
-                imgType.setVisibility(View.VISIBLE);
-            }
-        });
+
 
         /*Add gesture listener so we can swipe left and right between POI's*/
        gDetect = new GestureDetectorCompat(this,new GestureListener());

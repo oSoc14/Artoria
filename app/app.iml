@@ -8,12 +8,12 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="hdpiDebug" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleHdpiDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileHdpiDebugSources" />
-        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleHdpiDebugTest" />
-        <option name="SOURCE_GEN_TASK_NAME" value="generateHdpiDebugSources" />
-        <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateHdpiDebugTestSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugTest" />
+        <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
+        <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDebugTestSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
@@ -23,42 +23,21 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/hdpi/debug" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/hdpi/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/hdpi/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/hdpi/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/hdpi/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/hdpi/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/hdpi/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpiDebug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/test/hdpi/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/test/hdpi/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/test/hdpi/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/test/hdpi/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/test/hdpi/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/test/hdpi/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hdpi/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestHdpi/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/test/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/test/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/test/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/test/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/test/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/test/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -105,8 +84,8 @@
     <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="parallaxscroll-1.0" level="project" />
-    <orderEntry type="library" exported="" name="slf4j-android-1.5.8" level="project" />
     <orderEntry type="library" exported="" name="osmbonuspack_v4.6" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-android-1.5.8" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="drag-sort-listview-1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
