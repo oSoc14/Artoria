@@ -224,10 +224,12 @@ public class MapFragment extends android.support.v4.app.Fragment {
                 final RoadNode node = road.mNodes.get(i);
                 String instructions = node.mInstructions;
                 if(node.mInstructions.toUpperCase().contains(getResources().getString(R.string.destination).toUpperCase())){
-                    instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
-                    waypoint++;
+                    if(waypoint < RouteManager.getInstance().getWaypoints().size()) {
+                        instructions = RouteManager.getInstance().getWaypoints().get(waypoint).getName();
+                        waypoint++;
+                    }
                 }
-                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType),instructions));
+                descriptions.add(new DescriptionRow(getIconForManeuver(node.mManeuverType), instructions));
             }
             lstRouteDesc.setAdapter(new RouteDescAdapter(getActivity(),android.R.layout.simple_list_item_1,descriptions));
         }
