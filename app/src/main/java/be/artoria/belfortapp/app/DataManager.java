@@ -65,7 +65,16 @@ public class DataManager {
     }
 
     public static POI getPOIbyID(int id){
-        return getAll().get(id);
+        List<POI> pois = getAll();
+        if(!pois.isEmpty()) {
+            return pois.get(id);
+        } else{
+            return null;
+        }
+    }
+
+    public static boolean hasPOIS(){
+        return !getAll().isEmpty();
     }
 
     public static DataManager getInstance() {

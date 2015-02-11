@@ -36,6 +36,7 @@ import java.util.Collection;
 
 import be.artoria.belfortapp.R;
 import be.artoria.belfortapp.activities.MonumentDetailActivity;
+import be.artoria.belfortapp.app.DataManager;
 import be.artoria.belfortapp.app.PrefUtils;
 import be.artoria.belfortapp.extension.CircledPOI;
 import be.artoria.belfortapp.viewpager.ViewPagerActivity;
@@ -60,25 +61,29 @@ public class CircleView extends SubsamplingScaleImageView {
         final GestureDetector gestureDetector = new GestureDetector(PrefUtils.getContext(), new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+                /* When there are no POIS stored */
+                if(DataManager.hasPOIS()) {
                 /* This handler opens the associated point of interest */
-                if (isImageReady()) {
-                    PointF sCoord = viewToSourceCoord(e.getX(), e.getY());
-                    // Integer > float calculations.
-                    final int x = (int) sCoord.x;
-                    final int y = (int) sCoord.y;
-                    System.out.println("x: " + x + " y: " + y);
+                    if (isImageReady()) {
+                        PointF sCoord = viewToSourceCoord(e.getX(), e.getY());
+                        // Integer > float calculations.
+                        final int x = (int) sCoord.x;
+                        final int y = (int) sCoord.y;
                     /* Linearly search all circles to see if any match.*/
-                    for(CircledPOI cpoi: circles){
-                        // Eucleadian distance, taking the square root is a waste of time.
-                        final int distance = (cpoi.x - x) * (cpoi.x - x) + (cpoi.y - y) * (cpoi.y - y);
-                        final int radius = (int) (getSWidth() * cpoi.radius);
-                        if (distance <= radius*radius){
-                            getContext().startActivity(MonumentDetailActivity.newIntent(getContext(),cpoi.poi,true));
-                            break;
+                        for (CircledPOI cpoi : circles) {
+                            // Eucleadian distance, taking the square root is a waste of time.
+                            final int distance = (cpoi.x - x) * (cpoi.x - x) + (cpoi.y - y) * (cpoi.y - y);
+                            final int radius = (int) (getSWidth() * cpoi.radius);
+                            if (distance <= radius * radius) {
+                                getContext().startActivity(MonumentDetailActivity.newIntent(getContext(), cpoi.poi, true));
+                                break;
                             }
+                        }
+                    } else {
+                        Toast.makeText(PrefUtils.getContext(), R.string.panormanotready, Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(PrefUtils.getContext(), R.string.panormanotready, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(PrefUtils.getContext(),R.string.no_connection,Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

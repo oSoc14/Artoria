@@ -1,20 +1,20 @@
 apply plugin: 'com.android.application'
 
-if(project.hasProperty("Artoria.properties")
+/*if(project.hasProperty("Artoria.properties")
         && new File(project.property("Artoria.properties")).exists()) {
 
     Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("Artoria.properties"))))
+    props.load(new FileInputStream(file(project.property("Artoria.properties"))))*/
 
     android {
-        signingConfigs {
+        /*signingConfigs {
             config {
                 keyAlias props['mykeyAlias']
                 keyPassword props['mykeyPassword']
                 storeFile file(props['mystoreFile'])
                 storePassword props['mystorePassword']
             }
-        }
+        }*/
         compileSdkVersion 20
         buildToolsVersion '20.0.0'
         defaultConfig {
@@ -28,7 +28,7 @@ if(project.hasProperty("Artoria.properties")
             // c = minor version number 01 etc.
             versionCode 4106
             versionName '1.1'
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
         }
         buildTypes {
             release {
@@ -37,7 +37,7 @@ if(project.hasProperty("Artoria.properties")
             }
         }
         productFlavors {
-            mdpi {
+           /* mdpi {
                 resConfigs "mdpi"
                 signingConfig signingConfigs.config
             }
@@ -49,7 +49,7 @@ if(project.hasProperty("Artoria.properties")
                 resConfigs "xhdpi"
                 signingConfig signingConfigs.config
             }
-        }
+        }*/
     }
 }
 
