@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.davemorrissey.labs.subscaleview.ImageViewState;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -98,8 +97,8 @@ public class ViewPagerFragment extends Fragment {
             }
         }
 
-        final CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
 
+        final CircleView imageView = (CircleView)rootView.findViewById(R.id.PanormaCirclePageView);
         imageView.addCircles(CIRCLES_TO_PANORAMA.get(position));
         imageView.setImageResource(IMAGES[position],imageViewState);
         // TODO: center and fullscreen image here
